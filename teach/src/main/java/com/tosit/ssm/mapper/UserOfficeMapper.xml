@@ -12,7 +12,7 @@
     <result column="remarks" jdbcType="VARCHAR" property="remarks" />
     <result column="is_del" jdbcType="INTEGER" property="isDel" />
   </resultMap>
-  <sql id="Example_Where_Clause">
+  <!--<sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
         <if test="criteria.valid">
@@ -73,8 +73,8 @@
   <sql id="Base_Column_List">
     ID, user_id, office_id, create_time, create_by, update_time, update_by, remarks, 
     is_del
-  </sql>
-  <select id="selectByExample" parameterType="com.tosit.ssm.entity.UserOfficeExample" resultMap="BaseResultMap">
+  </sql>-->
+  <!--<select id="selectByExample" parameterType="com.tosit.ssm.entity.UserOfficeExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -272,5 +272,68 @@
       remarks = #{remarks,jdbcType=VARCHAR},
       is_del = #{isDel,jdbcType=INTEGER}
     where ID = #{id,jdbcType=VARCHAR}
-  </update>
+  </update>-->
+
+
+  <insert id="insert" parameterType="com.tosit.ssm.entity.UserOffice">
+    insert into user_office
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="officeId != null">
+        office_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="officeId != null">
+        #{officeId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null">
+        #{isDel,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
 </mapper>
