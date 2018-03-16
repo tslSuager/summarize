@@ -20,6 +20,7 @@ import java.util.UUID;
 public class UserOfficeTest {
     @Autowired
     private UserOfficeMapper userOfficeMapper;
+
     @Test
     public void test1(){
         UserOffice userOffice = new UserOffice();
