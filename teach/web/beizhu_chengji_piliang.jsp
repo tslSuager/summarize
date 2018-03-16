@@ -5,6 +5,9 @@
     <title></title>
 </head>
 <style>
+    .btn{
+     margin-right: 10px;
+    }
 </style>
 <link rel="shortcut icon" href="favicon.ico">
 <link href="/static/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
@@ -16,7 +19,7 @@
 
 <body>
 <div class="btn-group" style="margin-left: 200px; margin-top: 10px;margin-bottom: 10px;width: 100%">
-    <h5 style="margin-left:-130px ;">批量评定成绩为:</h5>
+    <h5 style="margin-left:-110px ;">批量评定成绩为:</h5>
     <%--<button class="btn btn-primary " type="button" style="margin-left: -100px">优
     </button>--%>
 
