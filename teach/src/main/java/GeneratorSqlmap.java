@@ -28,15 +28,15 @@ public class GeneratorSqlmap {
 
 	} 
 	public static void main(String[] args) throws Exception {
-		String uuid = UUID.randomUUID().toString().replaceAll("-", "");
-		System.out.println(uuid);
-//		try {
-//			GeneratorSqlmap generatorSqlmap = new GeneratorSqlmap();
-//			generatorSqlmap.generator();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		System.out.println("代码生成-成功!");
+//		String uuid = UUID.randomUUID().toString().replaceAll("-", "");
+//		System.out.println(uuid);
+		try {
+			GeneratorSqlmap generatorSqlmap = new GeneratorSqlmap();
+			generatorSqlmap.generator();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println("代码生成-成功!");
 	}
 
 }
