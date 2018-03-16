@@ -105,6 +105,15 @@
     create_time, create_by, update_time, update_by, last_logintime, loat_longin_ip, remarks, 
     is_del, sort, grade, cut_grade, col_3
   </sql>
+  <select id="selectUserByOfficeId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT
+      u.id,u.name,u.password,u.ID,u.loginName,u.password,u.salt,u.name,u.niName,u.sex,u.personNo,u.daXue,u.daXue_address,u.home_address,u.stu_number,u.daxue_zhuanye,u.shixun_zhuanye,u.peixun_zhuanye,u.phone1,u.phone2,u.photo,u.QQ,u.weixin,u.email,u.user_type,u.kaoqin_code,u.kaoqin_ruleID,u.status,u.create_time,u.create_by,u.update_time,u.update_by,u.last_logintime,u.loat_longin_ip,u.remarks,u.is_del,u.sort,u.col_1,u.col_2,u.col_3
+    FROM user_office uo
+    LEFT JOIN `user` u
+    ON uo.user_id = u.ID
+    WHERE uo.office_id = #{id};
+  </select>
+
   <select id="selectByExample" parameterType="com.tosit.ssm.entity.UserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">

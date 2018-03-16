@@ -4,8 +4,13 @@ import com.tosit.ssm.entity.User;
 import com.tosit.ssm.entity.UserExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface UserMapper {
+    //获取某个组的人,获取某个班的人,
+    List<User> selectUserByOfficeId(@Param("id") String officeId);
+
     long countByExample(UserExample example);
 
     int deleteByExample(UserExample example);
