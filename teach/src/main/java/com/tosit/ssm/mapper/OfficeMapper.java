@@ -8,30 +8,28 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface OfficeMapper {
-//    long countByExample(OfficeExample example);
-//
-//    int deleteByExample(OfficeExample example);
-//
-//    int deleteByPrimaryKey(String id);
-//
-//    int insert(Office record);
-//
-//    int insertSelective(Office record);
-//
-//    List<Office> selectByExample(OfficeExample example);
-//
-//    Office selectByPrimaryKey(String id);
-//
-//    int updateByExampleSelective(@Param("record") Office record, @Param("example") OfficeExample example);
-//
-//    int updateByExample(@Param("record") Office record, @Param("example") OfficeExample example);
-//
-//    int updateByPrimaryKeySelective(Office record);
-//
+    long countByExample(OfficeExample example);
 
-    //通过id动态的改变该office的值
+    int deleteByExample(OfficeExample example);
+
+    int deleteByPrimaryKey(String id);
+
+    int insert(Office record);
+
+    int insertSelective(Office record);
+
+    List<Office> selectByExample(OfficeExample example);
+
+    Office selectByPrimaryKey(String id);
+
+    int updateByExampleSelective(@Param("record") Office record, @Param("example") OfficeExample example);
+
+    int updateByExample(@Param("record") Office record, @Param("example") OfficeExample example);
+
+    int updateByPrimaryKeySelective(Office record);
+
     int updateByPrimaryKey(Office record);
-    //动态的添加入office
+
     void insertOffice(Office office);
 
     List<Office> selectArea();
