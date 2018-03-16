@@ -360,92 +360,7 @@
       <include refid="Update_By_Example_Where_Clause"/>
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.tosit.ssm.entity.Office">
-    update office
-    <set>
-      <if test="parentId != null">
-        parent_id = #{parentId,jdbcType=VARCHAR},
-      </if>
-      <if test="parentIds != null">
-        parent_ids = #{parentIds,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null">
-        phone = #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="fileDir != null">
-        file_dir = #{fileDir,jdbcType=VARCHAR},
-      </if>
-      <if test="icon != null">
-        icon = #{icon,jdbcType=VARCHAR},
-      </if>
-      <if test="master != null">
-        master = #{master,jdbcType=VARCHAR},
-      </if>
-      <if test="officeType != null">
-        office_type = #{officeType,jdbcType=INTEGER},
-      </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createBy != null">
-        create_by = #{createBy,jdbcType=VARCHAR},
-      </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateBy != null">
-        update_by = #{updateBy,jdbcType=VARCHAR},
-      </if>
-      <if test="remarks != null">
-        remarks = #{remarks,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=INTEGER},
-      </if>
-      <if test="isDel != null">
-        is_del = #{isDel,jdbcType=INTEGER},
-      </if>
-      <if test="sort != null">
-        sort = #{sort,jdbcType=INTEGER},
-      </if>
-      <if test="col1 != null">
-        col_1 = #{col1,jdbcType=VARCHAR},
-      </if>
-      <if test="col2 != null">
-        col_2 = #{col2,jdbcType=VARCHAR},
-      </if>
-      <if test="col3 != null">
-        col_3 = #{col3,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where ID = #{id,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.tosit.ssm.entity.Office">
-    update office
-    set parent_id = #{parentId,jdbcType=VARCHAR},
-      parent_ids = #{parentIds,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=VARCHAR},
-      file_dir = #{fileDir,jdbcType=VARCHAR},
-      icon = #{icon,jdbcType=VARCHAR},
-      master = #{master,jdbcType=VARCHAR},
-      office_type = #{officeType,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      create_by = #{createBy,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      update_by = #{updateBy,jdbcType=VARCHAR},
-      remarks = #{remarks,jdbcType=VARCHAR},
-      status = #{status,jdbcType=INTEGER},
-      is_del = #{isDel,jdbcType=INTEGER},
-      sort = #{sort,jdbcType=INTEGER},
-      col_1 = #{col1,jdbcType=VARCHAR},
-      col_2 = #{col2,jdbcType=VARCHAR},
-      col_3 = #{col3,jdbcType=VARCHAR}
-    where ID = #{id,jdbcType=VARCHAR}
-  </update>
+
 
   <insert id="insertOffice" parameterType="com.tosit.ssm.entity.Office">
 
@@ -582,6 +497,68 @@
 
   </select>
 
-
+  <update id="updateByPrimaryKey" parameterType="com.tosit.shopping.entity.Office">
+    update office
+    <set>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="parentIds != null">
+        parent_ids = #{parentIds,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="fileDir != null">
+        file_dir = #{fileDir,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="master != null">
+        master = #{master,jdbcType=VARCHAR},
+      </if>
+      <if test="officeType != null">
+        office_type = #{officeType,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="isDel != null">
+        is_del = #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="col1 != null">
+        col_1 = #{col1,jdbcType=VARCHAR},
+      </if>
+      <if test="col2 != null">
+        col_2 = #{col2,jdbcType=VARCHAR},
+      </if>
+      <if test="col3 != null">
+        col_3 = #{col3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
 
 </mapper>

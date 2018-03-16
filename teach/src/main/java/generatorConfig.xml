@@ -23,7 +23,7 @@
 
 		<!-- targetProject:生成实体类的位置 -->
 		<javaModelGenerator targetPackage="com.tosit.ssm.entity"
-			targetProject="G:\test\learnlast\teach\src\main\java">
+			targetProject="G:\summarize\teach\src\main\java">
 			<!-- enableSubPackages:是否让schema作为包的后缀 -->
 			<property name="enableSubPackages" value="false" />
 			<!-- 从数据库返回的值被清理前后的空格 -->
@@ -31,20 +31,20 @@
 		</javaModelGenerator>
         <!-- targetProject:mapper.xml映射文件生成的位置 -->
 		<sqlMapGenerator targetPackage="com.tosit.ssm.mapper"
-			targetProject="G:\test\learnlast\teach\src\main\java">
+			targetProject="G:\summarize\teach\src\main\java">
 			<!-- enableSubPackages:是否让schema作为包的后缀 -->
 			<property name="enableSubPackages" value="false" />
 		</sqlMapGenerator>
 		<!-- targetPackage：mapper接口生成的位置 -->
 		<javaClientGenerator type="XMLMAPPER"
 			targetPackage="com.tosit.ssm.mapper"
-			targetProject="G:\test\learnlast\teach\src\main\java"
+			targetProject="G:\summarize\teach\src\main\java"
 		>
 			<!-- enableSubPackages:是否让schema作为包的后缀 -->
 			<property name="enableSubPackages" value="false" />
 		</javaClientGenerator>
 		<!-- 指定数据库表 -->
-		<table tableName="kaoqinRule_office" domainObjectName="User"/>
+		<table tableName="kaoqinRule_office" domainObjectName="KaoqinRuleOffice"/>
 
 		<table tableName="kaoqin_records" domainObjectName="KaoqinRecords"/>
 		<table tableName="kaoqin_result" domainObjectName="KaoqinResult"/>
