@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <!-- 1  -->
+    <context:component-scan base-package="com.tosit.ssm"></context:component-scan>
+
+    <!-- 2 注册mvc 核心注解的驱动:让spring IOC容器 处理 @RequestMapping @RequestParam 等注解-->
+    <mvc:annotation-driven>
+        <!-- 把 Spring默认的jackson 库换成 阿里巴巴 Fast -->
+        <mvc:message-converters register-defaults="true">
+            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>application/json;charset=UTF-8</value>
+                    </list>
+                </property>
+                <property name="fastJsonConfig">
+                    <bean class="com.alibaba.fastjson.support.config.FastJsonConfig">
+                        <!--  默认的日期类型格式  -->
+                        <!--
+                         <property name="dateFormat">
+                             <value>yyyy-MM-dd hh:mm:ss</value>
+                         </property>
+                         -->
+                        <property name="serializerFeatures">
+                            <list>
+                                <!-- <value>WriteNonStringValueAsString</value>-->
+                                <value>WriteNullListAsEmpty</value>
+                                <value>WriteMapNullValue</value>
+                                <!-- <value>WriteNullStringAsEmpty</value>-->
+                                <value>WriteNullBooleanAsFalse</value>
+                                <value>WriteNullNumberAsZero</value>
+                                <value>WriteDateUseDateFormat</value>
+                            </list>
+                        </property>
+
+                    </bean>
+
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <!--3 忽略静态资源:这种方式只能在  Tomcat, Jetty, JBoss, and GlassFish ,  如果 WebLogic,名字是 FileServlet,如果 WebSphere ,名字是SimpleFileServlet   -->
+    <mvc:default-servlet-handler default-servlet-name="default"/>
+    <!--    <mvc:default-servlet-handler default-servlet-name="FileServlet"/>
+        <mvc:default-servlet-handler default-servlet-name="SimpleFileServlet"/>-->
+    <!-- 4 视图解释器  -->
+    <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!-- 5 配置文件上传解析器 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="maxUploadSize" value="5242880"/>
+    </bean>
+
+</beans>
+
+
+

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tosit.ssm.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.tosit.ssm.entity.User">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="loginName" jdbcType="VARCHAR" property="loginname" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="salt" jdbcType="VARCHAR" property="salt" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="niName" jdbcType="VARCHAR" property="niname" />
+    <result column="sex" jdbcType="CHAR" property="sex" />
+    <result column="personNo" jdbcType="VARCHAR" property="personno" />
+    <result column="daXue" jdbcType="VARCHAR" property="daxue" />
+    <result column="daXue_address" jdbcType="VARCHAR" property="daxueAddress" />
+    <result column="home_address" jdbcType="VARCHAR" property="homeAddress" />
+    <result column="stu_number" jdbcType="VARCHAR" property="stuNumber" />
+    <result column="daxue_zhuanye" jdbcType="VARCHAR" property="daxueZhuanye" />
+    <result column="shixun_zhuanye" jdbcType="VARCHAR" property="shixunZhuanye" />
+    <result column="peixun_zhuanye" jdbcType="VARCHAR" property="peixunZhuanye" />
+    <result column="phone1" jdbcType="VARCHAR" property="phone1" />
+    <result column="phone2" jdbcType="VARCHAR" property="phone2" />
+    <result column="photo" jdbcType="VARCHAR" property="photo" />
+    <result column="QQ" jdbcType="VARCHAR" property="qq" />
+    <result column="weixin" jdbcType="VARCHAR" property="weixin" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="user_type" jdbcType="INTEGER" property="userType" />
+    <result column="kaoqin_code" jdbcType="VARCHAR" property="kaoqinCode" />
+    <result column="kaoqin_ruleID" jdbcType="VARCHAR" property="kaoqinRuleid" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="last_logintime" jdbcType="TIMESTAMP" property="lastLogintime" />
+    <result column="loat_longin_ip" jdbcType="VARCHAR" property="loatLonginIp" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="is_del" jdbcType="INTEGER" property="isDel" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="col_1" jdbcType="VARCHAR" property="col1" />
+    <result column="col_2" jdbcType="VARCHAR" property="col2" />
+    <result column="col_3" jdbcType="VARCHAR" property="col3" />
+  </resultMap>
+
+</mapper>

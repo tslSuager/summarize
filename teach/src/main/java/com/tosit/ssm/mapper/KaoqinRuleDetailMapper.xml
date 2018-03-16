@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tosit.ssm.mapper.KaoqinRuleDetailMapper">
+  <resultMap id="BaseResultMap" type="com.tosit.ssm.entity.KaoqinRuleDetail">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="kaoqin_rule_id" jdbcType="VARCHAR" property="kaoqinRuleId" />
+    <result column="week_day" jdbcType="INTEGER" property="weekDay" />
+    <result column="date" jdbcType="DATE" property="date" />
+    <result column="brush_startTime1" jdbcType="TIME" property="brushStarttime1" />
+    <result column="brush_endTime1" jdbcType="TIME" property="brushEndtime1" />
+    <result column="time1_wucha" jdbcType="INTEGER" property="time1Wucha" />
+    <result column="brush_startTime2" jdbcType="TIME" property="brushStarttime2" />
+    <result column="brush_endTime2" jdbcType="TIME" property="brushEndtime2" />
+    <result column="time1_wucha2" jdbcType="INTEGER" property="time1Wucha2" />
+    <result column="brush_startTime3" jdbcType="TIME" property="brushStarttime3" />
+    <result column="brush_endTime3" jdbcType="TIME" property="brushEndtime3" />
+    <result column="time1_wucha3" jdbcType="INTEGER" property="time1Wucha3" />
+    <result column="brush_startTime4" jdbcType="TIME" property="brushStarttime4" />
+    <result column="brush_endTime4" jdbcType="TIME" property="brushEndtime4" />
+    <result column="time1_wucha4" jdbcType="INTEGER" property="time1Wucha4" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="is_del" jdbcType="INTEGER" property="isDel" />
+    <result column="brush_count" jdbcType="INTEGER" property="brushCount" />
+    <result column="col_1" jdbcType="VARCHAR" property="col1" />
+    <result column="col_2" jdbcType="VARCHAR" property="col2" />
+    <result column="col_3" jdbcType="VARCHAR" property="col3" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, kaoqin_rule_id, week_day, date, brush_startTime1, brush_endTime1, time1_wucha, 
+    brush_startTime2, brush_endTime2, time1_wucha2, brush_startTime3, brush_endTime3, 
+    time1_wucha3, brush_startTime4, brush_endTime4, time1_wucha4, remarks, create_time, 
+    create_by, update_time, update_by, is_del, brush_count, col_1, col_2, col_3
+  </sql>
+  <select id="selectByExample" parameterType="com.tosit.ssm.entity.KaoqinRuleDetailExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from kaoqin_rule_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from kaoqin_rule_detail
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from kaoqin_rule_detail
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tosit.ssm.entity.KaoqinRuleDetailExample">
+    delete from kaoqin_rule_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tosit.ssm.entity.KaoqinRuleDetail">
+    insert into kaoqin_rule_detail (ID, kaoqin_rule_id, week_day, 
+      date, brush_startTime1, brush_endTime1, 
+      time1_wucha, brush_startTime2, brush_endTime2, 
+      time1_wucha2, brush_startTime3, brush_endTime3, 
+      time1_wucha3, brush_startTime4, brush_endTime4, 
+      time1_wucha4, remarks, create_time, 
+      create_by, update_time, update_by, 
+      is_del, brush_count, col_1, 
+      col_2, col_3)
+    values (#{id,jdbcType=VARCHAR}, #{kaoqinRuleId,jdbcType=VARCHAR}, #{weekDay,jdbcType=INTEGER}, 
+      #{date,jdbcType=DATE}, #{brushStarttime1,jdbcType=TIME}, #{brushEndtime1,jdbcType=TIME}, 
+      #{time1Wucha,jdbcType=INTEGER}, #{brushStarttime2,jdbcType=TIME}, #{brushEndtime2,jdbcType=TIME}, 
+      #{time1Wucha2,jdbcType=INTEGER}, #{brushStarttime3,jdbcType=TIME}, #{brushEndtime3,jdbcType=TIME}, 
+      #{time1Wucha3,jdbcType=INTEGER}, #{brushStarttime4,jdbcType=TIME}, #{brushEndtime4,jdbcType=TIME}, 
+      #{time1Wucha4,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, 
+      #{isDel,jdbcType=INTEGER}, #{brushCount,jdbcType=INTEGER}, #{col1,jdbcType=VARCHAR}, 
+      #{col2,jdbcType=VARCHAR}, #{col3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tosit.ssm.entity.KaoqinRuleDetail">
+    insert into kaoqin_rule_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="kaoqinRuleId != null">
+        kaoqin_rule_id,
+      </if>
+      <if test="weekDay != null">
+        week_day,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="brushStarttime1 != null">
+        brush_startTime1,
+      </if>
+      <if test="brushEndtime1 != null">
+        brush_endTime1,
+      </if>
+      <if test="time1Wucha != null">
+        time1_wucha,
+      </if>
+      <if test="brushStarttime2 != null">
+        brush_startTime2,
+      </if>
+      <if test="brushEndtime2 != null">
+        brush_endTime2,
+      </if>
+      <if test="time1Wucha2 != null">
+        time1_wucha2,
+      </if>
+      <if test="brushStarttime3 != null">
+        brush_startTime3,
+      </if>
+      <if test="brushEndtime3 != null">
+        brush_endTime3,
+      </if>
+      <if test="time1Wucha3 != null">
+        time1_wucha3,
+      </if>
+      <if test="brushStarttime4 != null">
+        brush_startTime4,
+      </if>
+      <if test="brushEndtime4 != null">
+        brush_endTime4,
+      </if>
+      <if test="time1Wucha4 != null">
+        time1_wucha4,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+      <if test="brushCount != null">
+        brush_count,
+      </if>
+      <if test="col1 != null">
+        col_1,
+      </if>
+      <if test="col2 != null">
+        col_2,
+      </if>
+      <if test="col3 != null">
+        col_3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="kaoqinRuleId != null">
+        #{kaoqinRuleId,jdbcType=VARCHAR},
+      </if>
+      <if test="weekDay != null">
+        #{weekDay,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="brushStarttime1 != null">
+        #{brushStarttime1,jdbcType=TIME},
+      </if>
+      <if test="brushEndtime1 != null">
+        #{brushEndtime1,jdbcType=TIME},
+      </if>
+      <if test="time1Wucha != null">
+        #{time1Wucha,jdbcType=INTEGER},
+      </if>
+      <if test="brushStarttime2 != null">
+        #{brushStarttime2,jdbcType=TIME},
+      </if>
+      <if test="brushEndtime2 != null">
+        #{brushEndtime2,jdbcType=TIME},
+      </if>
+      <if test="time1Wucha2 != null">
+        #{time1Wucha2,jdbcType=INTEGER},
+      </if>
+      <if test="brushStarttime3 != null">
+        #{brushStarttime3,jdbcType=TIME},
+      </if>
+      <if test="brushEndtime3 != null">
+        #{brushEndtime3,jdbcType=TIME},
+      </if>
+      <if test="time1Wucha3 != null">
+        #{time1Wucha3,jdbcType=INTEGER},
+      </if>
+      <if test="brushStarttime4 != null">
+        #{brushStarttime4,jdbcType=TIME},
+      </if>
+      <if test="brushEndtime4 != null">
+        #{brushEndtime4,jdbcType=TIME},
+      </if>
+      <if test="time1Wucha4 != null">
+        #{time1Wucha4,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null">
+        #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="brushCount != null">
+        #{brushCount,jdbcType=INTEGER},
+      </if>
+      <if test="col1 != null">
+        #{col1,jdbcType=VARCHAR},
+      </if>
+      <if test="col2 != null">
+        #{col2,jdbcType=VARCHAR},
+      </if>
+      <if test="col3 != null">
+        #{col3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tosit.ssm.entity.KaoqinRuleDetailExample" resultType="java.lang.Long">
+    select count(*) from kaoqin_rule_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update kaoqin_rule_detail
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.kaoqinRuleId != null">
+        kaoqin_rule_id = #{record.kaoqinRuleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weekDay != null">
+        week_day = #{record.weekDay,jdbcType=INTEGER},
+      </if>
+      <if test="record.date != null">
+        date = #{record.date,jdbcType=DATE},
+      </if>
+      <if test="record.brushStarttime1 != null">
+        brush_startTime1 = #{record.brushStarttime1,jdbcType=TIME},
+      </if>
+      <if test="record.brushEndtime1 != null">
+        brush_endTime1 = #{record.brushEndtime1,jdbcType=TIME},
+      </if>
+      <if test="record.time1Wucha != null">
+        time1_wucha = #{record.time1Wucha,jdbcType=INTEGER},
+      </if>
+      <if test="record.brushStarttime2 != null">
+        brush_startTime2 = #{record.brushStarttime2,jdbcType=TIME},
+      </if>
+      <if test="record.brushEndtime2 != null">
+        brush_endTime2 = #{record.brushEndtime2,jdbcType=TIME},
+      </if>
+      <if test="record.time1Wucha2 != null">
+        time1_wucha2 = #{record.time1Wucha2,jdbcType=INTEGER},
+      </if>
+      <if test="record.brushStarttime3 != null">
+        brush_startTime3 = #{record.brushStarttime3,jdbcType=TIME},
+      </if>
+      <if test="record.brushEndtime3 != null">
+        brush_endTime3 = #{record.brushEndtime3,jdbcType=TIME},
+      </if>
+      <if test="record.time1Wucha3 != null">
+        time1_wucha3 = #{record.time1Wucha3,jdbcType=INTEGER},
+      </if>
+      <if test="record.brushStarttime4 != null">
+        brush_startTime4 = #{record.brushStarttime4,jdbcType=TIME},
+      </if>
+      <if test="record.brushEndtime4 != null">
+        brush_endTime4 = #{record.brushEndtime4,jdbcType=TIME},
+      </if>
+      <if test="record.time1Wucha4 != null">
+        time1_wucha4 = #{record.time1Wucha4,jdbcType=INTEGER},
+      </if>
+      <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createBy != null">
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateBy != null">
+        update_by = #{record.updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDel != null">
+        is_del = #{record.isDel,jdbcType=INTEGER},
+      </if>
+      <if test="record.brushCount != null">
+        brush_count = #{record.brushCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.col1 != null">
+        col_1 = #{record.col1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.col2 != null">
+        col_2 = #{record.col2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.col3 != null">
+        col_3 = #{record.col3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update kaoqin_rule_detail
+    set ID = #{record.id,jdbcType=VARCHAR},
+      kaoqin_rule_id = #{record.kaoqinRuleId,jdbcType=VARCHAR},
+      week_day = #{record.weekDay,jdbcType=INTEGER},
+      date = #{record.date,jdbcType=DATE},
+      brush_startTime1 = #{record.brushStarttime1,jdbcType=TIME},
+      brush_endTime1 = #{record.brushEndtime1,jdbcType=TIME},
+      time1_wucha = #{record.time1Wucha,jdbcType=INTEGER},
+      brush_startTime2 = #{record.brushStarttime2,jdbcType=TIME},
+      brush_endTime2 = #{record.brushEndtime2,jdbcType=TIME},
+      time1_wucha2 = #{record.time1Wucha2,jdbcType=INTEGER},
+      brush_startTime3 = #{record.brushStarttime3,jdbcType=TIME},
+      brush_endTime3 = #{record.brushEndtime3,jdbcType=TIME},
+      time1_wucha3 = #{record.time1Wucha3,jdbcType=INTEGER},
+      brush_startTime4 = #{record.brushStarttime4,jdbcType=TIME},
+      brush_endTime4 = #{record.brushEndtime4,jdbcType=TIME},
+      time1_wucha4 = #{record.time1Wucha4,jdbcType=INTEGER},
+      remarks = #{record.remarks,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      update_by = #{record.updateBy,jdbcType=VARCHAR},
+      is_del = #{record.isDel,jdbcType=INTEGER},
+      brush_count = #{record.brushCount,jdbcType=INTEGER},
+      col_1 = #{record.col1,jdbcType=VARCHAR},
+      col_2 = #{record.col2,jdbcType=VARCHAR},
+      col_3 = #{record.col3,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tosit.ssm.entity.KaoqinRuleDetail">
+    update kaoqin_rule_detail
+    <set>
+      <if test="kaoqinRuleId != null">
+        kaoqin_rule_id = #{kaoqinRuleId,jdbcType=VARCHAR},
+      </if>
+      <if test="weekDay != null">
+        week_day = #{weekDay,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=DATE},
+      </if>
+      <if test="brushStarttime1 != null">
+        brush_startTime1 = #{brushStarttime1,jdbcType=TIME},
+      </if>
+      <if test="brushEndtime1 != null">
+        brush_endTime1 = #{brushEndtime1,jdbcType=TIME},
+      </if>
+      <if test="time1Wucha != null">
+        time1_wucha = #{time1Wucha,jdbcType=INTEGER},
+      </if>
+      <if test="brushStarttime2 != null">
+        brush_startTime2 = #{brushStarttime2,jdbcType=TIME},
+      </if>
+      <if test="brushEndtime2 != null">
+        brush_endTime2 = #{brushEndtime2,jdbcType=TIME},
+      </if>
+      <if test="time1Wucha2 != null">
+        time1_wucha2 = #{time1Wucha2,jdbcType=INTEGER},
+      </if>
+      <if test="brushStarttime3 != null">
+        brush_startTime3 = #{brushStarttime3,jdbcType=TIME},
+      </if>
+      <if test="brushEndtime3 != null">
+        brush_endTime3 = #{brushEndtime3,jdbcType=TIME},
+      </if>
+      <if test="time1Wucha3 != null">
+        time1_wucha3 = #{time1Wucha3,jdbcType=INTEGER},
+      </if>
+      <if test="brushStarttime4 != null">
+        brush_startTime4 = #{brushStarttime4,jdbcType=TIME},
+      </if>
+      <if test="brushEndtime4 != null">
+        brush_endTime4 = #{brushEndtime4,jdbcType=TIME},
+      </if>
+      <if test="time1Wucha4 != null">
+        time1_wucha4 = #{time1Wucha4,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null">
+        is_del = #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="brushCount != null">
+        brush_count = #{brushCount,jdbcType=INTEGER},
+      </if>
+      <if test="col1 != null">
+        col_1 = #{col1,jdbcType=VARCHAR},
+      </if>
+      <if test="col2 != null">
+        col_2 = #{col2,jdbcType=VARCHAR},
+      </if>
+      <if test="col3 != null">
+        col_3 = #{col3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tosit.ssm.entity.KaoqinRuleDetail">
+    update kaoqin_rule_detail
+    set kaoqin_rule_id = #{kaoqinRuleId,jdbcType=VARCHAR},
+      week_day = #{weekDay,jdbcType=INTEGER},
+      date = #{date,jdbcType=DATE},
+      brush_startTime1 = #{brushStarttime1,jdbcType=TIME},
+      brush_endTime1 = #{brushEndtime1,jdbcType=TIME},
+      time1_wucha = #{time1Wucha,jdbcType=INTEGER},
+      brush_startTime2 = #{brushStarttime2,jdbcType=TIME},
+      brush_endTime2 = #{brushEndtime2,jdbcType=TIME},
+      time1_wucha2 = #{time1Wucha2,jdbcType=INTEGER},
+      brush_startTime3 = #{brushStarttime3,jdbcType=TIME},
+      brush_endTime3 = #{brushEndtime3,jdbcType=TIME},
+      time1_wucha3 = #{time1Wucha3,jdbcType=INTEGER},
+      brush_startTime4 = #{brushStarttime4,jdbcType=TIME},
+      brush_endTime4 = #{brushEndtime4,jdbcType=TIME},
+      time1_wucha4 = #{time1Wucha4,jdbcType=INTEGER},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      is_del = #{isDel,jdbcType=INTEGER},
+      brush_count = #{brushCount,jdbcType=INTEGER},
+      col_1 = #{col1,jdbcType=VARCHAR},
+      col_2 = #{col2,jdbcType=VARCHAR},
+      col_3 = #{col3,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
