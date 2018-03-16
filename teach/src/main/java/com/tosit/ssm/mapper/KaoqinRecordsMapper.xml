@@ -16,7 +16,7 @@
     <result column="is_youxiao" jdbcType="INTEGER" property="isYouxiao" />
     <result column="user_id" jdbcType="VARCHAR" property="userId" />
   </resultMap>
-  <sql id="Example_Where_Clause">
+  <!--<sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
         <if test="criteria.valid">
@@ -98,19 +98,129 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
+-->
+<!--kaoqin_records表的插入-->
   <insert id="insert" parameterType="com.tosit.ssm.entity.KaoqinRecords">
-    insert into kaoqin_records (ID, key_number, name, 
-      sequence_number, brushTime, check_type, 
-      machine_number, machine_name, kaoqin_result_id, 
-      result, result_text, is_youxiao, 
-      user_id)
-    values (#{id,jdbcType=VARCHAR}, #{keyNumber,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{sequenceNumber,jdbcType=INTEGER}, #{brushtime,jdbcType=TIMESTAMP}, #{checkType,jdbcType=VARCHAR}, 
-      #{machineNumber,jdbcType=VARCHAR}, #{machineName,jdbcType=VARCHAR}, #{kaoqinResultId,jdbcType=VARCHAR}, 
-      #{result,jdbcType=INTEGER}, #{resultText,jdbcType=VARCHAR}, #{isYouxiao,jdbcType=INTEGER}, 
-      #{userId,jdbcType=VARCHAR})
+    INSERT INTO kaoqin_records(ID
+      <if test="keyNumber != null">
+        , key_number
+      </if>
+      <if test="name != null">
+        , name
+      </if>
+      <if test="sequenceNumber != null">
+        ,sequence_number
+      </if>
+      <if test="brushtime != null">
+        ,brushTime
+      </if>
+      <if test="checkType != null">
+        ,check_type
+      </if>
+      <if test="machineNumber != null">
+        ,machine_number
+      </if>
+      <if test="machineName != null">
+        ,machine_name
+      </if>
+      <if test="kaoqinResultId != null">
+        ,kaoqin_result_id
+      </if>
+      <if test="result != null">
+        ,result
+      </if>
+      <if test="resultText != null">
+        ,result_text
+      </if>
+      <if test="isYouxiao != null">
+        ,is_youxiao
+      </if>
+      <if test="userId != null">
+        ,user_id
+      </if>
+    )
+    VALUES ( #{id,jdbcType=VARCHAR}
+      <if test="keyNumber != null">
+        ,#{keyNumber}
+      </if>
+      <if test="name != null">
+        , #{name}
+      </if>
+      <if test="sequenceNumber != null">
+        ,#{sequenceNumber}
+      </if>
+      <if test="brushtime != null">
+        ,#{brushtime}
+      </if>
+      <if test="checkType != null">
+        ,#{checkType}
+      </if>
+      <if test="machineNumber != null">
+        ,#{machineNumber}
+      </if>
+      <if test="machineName != null">
+        ,#{machineName}
+      </if>
+      <if test="kaoqinResultId != null">
+        ,#{kaoqinResultId}
+      </if>
+      <if test="result != null">
+        ,#{result}
+      </if>
+      <if test="resultText != null">
+        ,#{resultText}
+      </if>
+      <if test="isYouxiao != null">
+        ,#{isYouxiao}
+      </if>
+      <if test="userId != null">
+        ,#{userId}
+      </if>
+    )
   </insert>
-  <insert id="insertSelective" parameterType="com.tosit.ssm.entity.KaoqinRecords">
+  <update id="update" parameterType="com.tosit.ssm.entity.KaoqinRecords">
+    UPDATE kaoqin_records
+    <trim prefix="SET" prefixOverrides=",">
+    <if test="keyNumber != null">
+      , key_number=#{keyNumber}
+    </if>
+    <if test="name != null">
+      , name=#{name}
+    </if>
+    <if test="sequenceNumber != null">
+      ,sequence_number=#{sequenceNumber}
+    </if>
+    <if test="brushtime != null">
+      ,brushTime=#{brushtime}
+    </if>
+    <if test="checkType != null">
+      ,check_type=#{checkType}
+    </if>
+    <if test="machineNumber != null">
+      ,machine_number=#{machineNumber}
+    </if>
+    <if test="machineName != null">
+      ,machine_name=#{machineName}
+    </if>
+    <if test="kaoqinResultId != null">
+      ,kaoqin_result_id=#{kaoqinResultId}
+    </if>
+    <if test="result != null">
+      ,result=#{result}
+    </if>
+    <if test="resultText != null">
+      ,result_text=#{resultText}
+    </if>
+    <if test="isYouxiao != null">
+      ,is_youxiao=#{isYouxiao}
+    </if>
+    <if test="userId != null">
+      ,user_id=#{userId}
+    </if>
+    </trim>
+    where ID=#{id}
+  </update>
+ <!-- <insert id="insertSelective" parameterType="com.tosit.ssm.entity.KaoqinRecords">
     insert into kaoqin_records
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -266,5 +376,5 @@
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
-  </update>
+  </update>-->
 </mapper>
