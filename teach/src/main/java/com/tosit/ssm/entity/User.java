@@ -71,9 +71,9 @@ public class User {
 
     private Integer sort;
 
-    private String col1;
+    private String grade;
 
-    private String col2;
+    private String cutGrade;
 
     private String col3;
 
@@ -349,20 +349,20 @@ public class User {
         this.sort = sort;
     }
 
-    public String getCol1() {
-        return col1;
+    public String getGrade() {
+        return grade;
     }
 
-    public void setCol1(String col1) {
-        this.col1 = col1 == null ? null : col1.trim();
+    public void setGrade(String grade) {
+        this.grade = grade == null ? null : grade.trim();
     }
 
-    public String getCol2() {
-        return col2;
+    public String getCutGrade() {
+        return cutGrade;
     }
 
-    public void setCol2(String col2) {
-        this.col2 = col2 == null ? null : col2.trim();
+    public void setCutGrade(String cutGrade) {
+        this.cutGrade = cutGrade == null ? null : cutGrade.trim();
     }
 
     public String getCol3() {

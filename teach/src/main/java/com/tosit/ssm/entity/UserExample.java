@@ -2415,143 +2415,143 @@ public class UserExample {
             return (Criteria) this;
         }
 
-        public Criteria andCol1IsNull() {
-            addCriterion("col_1 is null");
+        public Criteria andGradeIsNull() {
+            addCriterion("grade is null");
             return (Criteria) this;
         }
 
-        public Criteria andCol1IsNotNull() {
-            addCriterion("col_1 is not null");
+        public Criteria andGradeIsNotNull() {
+            addCriterion("grade is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCol1EqualTo(String value) {
-            addCriterion("col_1 =", value, "col1");
+        public Criteria andGradeEqualTo(String value) {
+            addCriterion("grade =", value, "grade");
             return (Criteria) this;
         }
 
-        public Criteria andCol1NotEqualTo(String value) {
-            addCriterion("col_1 <>", value, "col1");
+        public Criteria andGradeNotEqualTo(String value) {
+            addCriterion("grade <>", value, "grade");
             return (Criteria) this;
         }
 
-        public Criteria andCol1GreaterThan(String value) {
-            addCriterion("col_1 >", value, "col1");
+        public Criteria andGradeGreaterThan(String value) {
+            addCriterion("grade >", value, "grade");
             return (Criteria) this;
         }
 
-        public Criteria andCol1GreaterThanOrEqualTo(String value) {
-            addCriterion("col_1 >=", value, "col1");
+        public Criteria andGradeGreaterThanOrEqualTo(String value) {
+            addCriterion("grade >=", value, "grade");
             return (Criteria) this;
         }
 
-        public Criteria andCol1LessThan(String value) {
-            addCriterion("col_1 <", value, "col1");
+        public Criteria andGradeLessThan(String value) {
+            addCriterion("grade <", value, "grade");
             return (Criteria) this;
         }
 
-        public Criteria andCol1LessThanOrEqualTo(String value) {
-            addCriterion("col_1 <=", value, "col1");
+        public Criteria andGradeLessThanOrEqualTo(String value) {
+            addCriterion("grade <=", value, "grade");
             return (Criteria) this;
         }
 
-        public Criteria andCol1Like(String value) {
-            addCriterion("col_1 like", value, "col1");
+        public Criteria andGradeLike(String value) {
+            addCriterion("grade like", value, "grade");
             return (Criteria) this;
         }
 
-        public Criteria andCol1NotLike(String value) {
-            addCriterion("col_1 not like", value, "col1");
+        public Criteria andGradeNotLike(String value) {
+            addCriterion("grade not like", value, "grade");
             return (Criteria) this;
         }
 
-        public Criteria andCol1In(List<String> values) {
-            addCriterion("col_1 in", values, "col1");
+        public Criteria andGradeIn(List<String> values) {
+            addCriterion("grade in", values, "grade");
             return (Criteria) this;
         }
 
-        public Criteria andCol1NotIn(List<String> values) {
-            addCriterion("col_1 not in", values, "col1");
+        public Criteria andGradeNotIn(List<String> values) {
+            addCriterion("grade not in", values, "grade");
             return (Criteria) this;
         }
 
-        public Criteria andCol1Between(String value1, String value2) {
-            addCriterion("col_1 between", value1, value2, "col1");
+        public Criteria andGradeBetween(String value1, String value2) {
+            addCriterion("grade between", value1, value2, "grade");
             return (Criteria) this;
         }
 
-        public Criteria andCol1NotBetween(String value1, String value2) {
-            addCriterion("col_1 not between", value1, value2, "col1");
+        public Criteria andGradeNotBetween(String value1, String value2) {
+            addCriterion("grade not between", value1, value2, "grade");
             return (Criteria) this;
         }
 
-        public Criteria andCol2IsNull() {
-            addCriterion("col_2 is null");
+        public Criteria andCutGradeIsNull() {
+            addCriterion("cut_grade is null");
             return (Criteria) this;
         }
 
-        public Criteria andCol2IsNotNull() {
-            addCriterion("col_2 is not null");
+        public Criteria andCutGradeIsNotNull() {
+            addCriterion("cut_grade is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCol2EqualTo(String value) {
-            addCriterion("col_2 =", value, "col2");
+        public Criteria andCutGradeEqualTo(String value) {
+            addCriterion("cut_grade =", value, "cutGrade");
             return (Criteria) this;
         }
 
-        public Criteria andCol2NotEqualTo(String value) {
-            addCriterion("col_2 <>", value, "col2");
+        public Criteria andCutGradeNotEqualTo(String value) {
+            addCriterion("cut_grade <>", value, "cutGrade");
             return (Criteria) this;
         }
 
-        public Criteria andCol2GreaterThan(String value) {
-            addCriterion("col_2 >", value, "col2");
+        public Criteria andCutGradeGreaterThan(String value) {
+            addCriterion("cut_grade >", value, "cutGrade");
             return (Criteria) this;
         }
 
-        public Criteria andCol2GreaterThanOrEqualTo(String value) {
-            addCriterion("col_2 >=", value, "col2");
+        public Criteria andCutGradeGreaterThanOrEqualTo(String value) {
+            addCriterion("cut_grade >=", value, "cutGrade");
             return (Criteria) this;
         }
 
-        public Criteria andCol2LessThan(String value) {
-            addCriterion("col_2 <", value, "col2");
+        public Criteria andCutGradeLessThan(String value) {
+            addCriterion("cut_grade <", value, "cutGrade");
             return (Criteria) this;
         }
 
-        public Criteria andCol2LessThanOrEqualTo(String value) {
-            addCriterion("col_2 <=", value, "col2");
+        public Criteria andCutGradeLessThanOrEqualTo(String value) {
+            addCriterion("cut_grade <=", value, "cutGrade");
             return (Criteria) this;
         }
 
-        public Criteria andCol2Like(String value) {
-            addCriterion("col_2 like", value, "col2");
+        public Criteria andCutGradeLike(String value) {
+            addCriterion("cut_grade like", value, "cutGrade");
             return (Criteria) this;
         }
 
-        public Criteria andCol2NotLike(String value) {
-            addCriterion("col_2 not like", value, "col2");
+        public Criteria andCutGradeNotLike(String value) {
+            addCriterion("cut_grade not like", value, "cutGrade");
             return (Criteria) this;
         }
 
-        public Criteria andCol2In(List<String> values) {
-            addCriterion("col_2 in", values, "col2");
+        public Criteria andCutGradeIn(List<String> values) {
+            addCriterion("cut_grade in", values, "cutGrade");
             return (Criteria) this;
         }
 
-        public Criteria andCol2NotIn(List<String> values) {
-            addCriterion("col_2 not in", values, "col2");
+        public Criteria andCutGradeNotIn(List<String> values) {
+            addCriterion("cut_grade not in", values, "cutGrade");
             return (Criteria) this;
         }
 
-        public Criteria andCol2Between(String value1, String value2) {
-            addCriterion("col_2 between", value1, value2, "col2");
+        public Criteria andCutGradeBetween(String value1, String value2) {
+            addCriterion("cut_grade between", value1, value2, "cutGrade");
             return (Criteria) this;
         }
 
-        public Criteria andCol2NotBetween(String value1, String value2) {
-            addCriterion("col_2 not between", value1, value2, "col2");
+        public Criteria andCutGradeNotBetween(String value1, String value2) {
+            addCriterion("cut_grade not between", value1, value2, "cutGrade");
             return (Criteria) this;
         }
 

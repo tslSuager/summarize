@@ -116,19 +116,19 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.tosit.ssm.entity.Office">
-    insert into office (ID, parent_id, parent_ids, 
-      name, phone, file_dir, 
-      icon, master, office_type, 
-      create_time, create_by, update_time, 
-      update_by, remarks, status, 
-      is_del, sort, col_1, 
+    insert into office (ID, parent_id, parent_ids,
+      name, phone, file_dir,
+      icon, master, office_type,
+      create_time, create_by, update_time,
+      update_by, remarks, status,
+      is_del, sort, col_1,
       col_2, col_3)
-    values (#{id,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{parentIds,jdbcType=VARCHAR}, 
-      #{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{fileDir,jdbcType=VARCHAR}, 
-      #{icon,jdbcType=VARCHAR}, #{master,jdbcType=VARCHAR}, #{officeType,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{updateBy,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
-      #{isDel,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, #{col1,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{parentIds,jdbcType=VARCHAR},
+      #{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{fileDir,jdbcType=VARCHAR},
+      #{icon,jdbcType=VARCHAR}, #{master,jdbcType=VARCHAR}, #{officeType,jdbcType=INTEGER},
+      #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP},
+      #{updateBy,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
+      #{isDel,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, #{col1,jdbcType=VARCHAR},
       #{col2,jdbcType=VARCHAR}, #{col3,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.tosit.ssm.entity.Office">
