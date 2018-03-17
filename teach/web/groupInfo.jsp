@@ -59,52 +59,8 @@
                                 <div class="tabs-container">
                                     <div class="tabs-left">
                                         <ul class="nav nav-tabs" id="className">
-                                            <%--<li class="active"><a data-toggle="tab" href="#tab-1"> 第一组</a>
-                                            </li>
-                                            <li class=""><a data-toggle="tab" href="#tab-2"> 第二组</a>
-                                            </li>
-                                            <li class=""><a data-toggle="tab" href="#tab-3"> 第三组</a>
-                                            </li>--%>
                                         </ul>
                                         <div class="tab-content ">
-                                            <%--<div id="tab-1" class="tab-pane active">
-                                                <div class="panel-body" id="class1">
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                </div>
-                                            </div>
-                                            <div id="tab-2" class="tab-pane" >
-                                                <div class="panel-body" id="class2">
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                </div>
-                                            </div>
-                                            <div id="tab-3" class="tab-pane" >
-                                                <div class="panel-body" id="class3">
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                </div>
-                                            </div>--%>
                                         </div>
                                     </div>
                                 </div>
@@ -164,15 +120,6 @@
                         </div>
                     </div>
                 </div>
-                <%--<div class="row">
-                    <div class="col-sm-10"></div>
-                    <div  class="nav col-sm-2">
-                        <button id="addStu" class="btn btn-info navbar-fixed-bottom" type="button">
-                            <i class="fa fa-paste"></i>
-                            "添加"
-                        </button>
-                    </div>
-                </div>--%>
             </div>
         </div>
     </div>
@@ -184,37 +131,63 @@
 <script src="static/js/content.min.js"></script>
 <script src="static/js/welcome.min.js"></script>
 <script type="text/javascript">
-    $(".chooseStu").click(function () {
-        if ($(this).hasClass("btn-info")){
-            $(this).removeClass("btn-info").addClass("btn-warning").attr("id",Math.random());
-        }else if($(this).hasClass("btn-warning")){
-            $(this).removeClass("btn-warning").addClass("btn-info").removeAttr("id");
-        }
-    });
-    $("#addStu").click(function () {
-        $("#left").find(".btn-warning").removeClass("btn-warning").addClass("btn-info");
-        $("#right").find(".btn-warning").clone().appendTo($(".tab-content").find(".active").find(".panel-body"));
-        $("#left").find(".btn-warning").removeClass("btn-warning").addClass("btn-success");
-        $("#right").find(".btn-warning").remove();
-    });
-    $("#deleteStu").click(function () {
-        $("#right").find(".btn-warning").removeClass("btn-warning").addClass("btn-info");
-        $("#left").find(".btn-warning").clone().appendTo("#right");
-        $("#right").find(".btn-warning").removeClass("btn-warning").addClass("btn-success");
-        $("#left").find(".btn-warning").remove();
-    });
-    $("#grouping").click(function () {
-       var num =  $("#inputNum").val();
-       for (var i=1;i<=num;i++){
-           var ss="#tab-"+i;
-           if (i===1){
-               $('#className').append($("<li>").addClass("active").append($("<a>").attr("data-toggle","tab").attr("href",ss).text("第"+i+"组")));
-               $('.tab-content').append($("<div>").attr("id","tab-"+i).addClass("tab-pane active").append($("<div>").addClass("panel-body").attr("id","class"+i)));
-           }else {
-               $('#className').append($("<li>").addClass("").append($("<a>").attr("data-toggle","tab").attr("href",ss).text("第"+i+"组")));
-               $('.tab-content').append($("<div>").attr("id","tab-"+i).addClass("tab-pane").append($("<div>").addClass("panel-body").attr("id","class"+i)));
-           }
-       }
+    $(function () {
+        $(".chooseStu").click(function () {
+            if ($(this).hasClass("btn-info")){
+                $(this).removeClass("btn-info").addClass("btn-warning").attr("id",Math.random());
+            }else if($(this).hasClass("btn-warning")){
+                $(this).removeClass("btn-warning").addClass("btn-info").removeAttr("id");
+            }
+        });
+        $("#addStu").click(function () {
+            $("#left").find(".btn-warning").removeClass("btn-warning").addClass("btn-info");
+            $("#right").find(".btn-warning").clone().appendTo($(".tab-content").find(".active").find(".panel-body"));
+            $("#left").find(".btn-warning").removeClass("btn-warning").addClass("btn-success");
+            $("#right").find(".btn-warning").remove();
+        });
+        $("#deleteStu").click(function () {
+            $("#right").find(".btn-warning").removeClass("btn-warning").addClass("btn-info");
+            $("#left").find(".btn-warning").clone().appendTo("#right");
+            $("#right").find(".btn-warning").removeClass("btn-warning").addClass("btn-success");
+            $("#left").find(".btn-warning").remove();
+        });
+        $("#grouping").click(function () {
+            var num =  $("#inputNum").val();
+            var num2 = $(this).attr("text");
+            if (num2!=null){
+                for (var j=(parseInt(num)+parseInt(1));j<=(parseInt(num)+parseInt(num2));j++){
+                    var tt="#tab-"+j;
+                    if (j===1){
+                        $('#className').append($("<li>").addClass("active group1").append($("<a>").attr("data-toggle","tab").attr("href",tt).text("第"+j+"组"))
+                            .append($("<button>").addClass("btn btn-outline btn-danger btn-xs buttonCss deleteGroup").text("删除该组")));
+                        $('.tab-content').append($("<div>").attr("id","tab-"+j).addClass("tab-pane active").append($("<div>").addClass("panel-body").attr("id","group"+j)));
+                    }else {
+                        $('#className').append($("<li>").addClass("group"+j+"").append($("<a>").attr("data-toggle","tab").attr("href",tt).text("第"+j+"组"))
+                            .append($("<button>").addClass("btn btn-outline btn-danger btn-xs buttonCss deleteGroup").text("删除该组")));
+                        $('.tab-content').append($("<div>").attr("id","tab-"+j).addClass("tab-pane").append($("<div>").addClass("panel-body").attr("id","group"+j)));
+                    }
+                }
+            }
+            else {
+                for (var i=1;i<=num;i++){
+                    var ss="#tab-"+i;
+                    if (i===1){
+                        $('#className').append($("<li>").addClass("active group1").append($("<a>").attr("data-toggle","tab").attr("href",ss).text("第"+i+"组")));
+                        $('.tab-content').append($("<div>").attr("id","tab-"+i).addClass("tab-pane active").append($("<div>").addClass("panel-body").attr("id","group"+i)
+                            .append($("<div>").append($("<button>").addClass("btn btn-outline btn-danger btn-xs buttonCss deleteGroup").text("删除该组")))));
+                    }else {
+                        $('#className').append($("<li>").addClass("group"+i+"").append($("<a>").attr("data-toggle","tab").attr("href",ss).text("第"+i+"组")));
+                        $('.tab-content').append($("<div>").attr("id","tab-"+i).addClass("tab-pane").append($("<div>").addClass("panel-body").attr("id","group"+i)
+                            .append($("<div>").append($("<button>").addClass("btn btn-outline btn-danger btn-xs buttonCss deleteGroup").text("删除该组")))));
+                    }
+                }
+            }
+            $(this).attr("text",num);
+        });
+        $("body").on("click",".deleteGroup",function () {
+            var attr = "#"+$(this).parent().parent().parent().attr("id");
+            alert(attr);
+        });
     });
 </script>
 </body>

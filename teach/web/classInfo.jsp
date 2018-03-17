@@ -53,12 +53,6 @@
         <div class="ibox float-e-margins">
             <div class="ibox-content">
                 <h4>班级学生列表</h4>
-                <div class="input-group">
-                    <input type="text" class="form-control">
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-primary">搜索</button>
-                    </span>
-                </div>
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="ibox float-e-margins">
@@ -87,6 +81,10 @@
                                 <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
                                 <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
                                 <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
+                            </div>
+                            <div>
+                                <div class="col-sm-8"></div>
+                                <button class="btn btn-outline btn-warning btn-xs buttonCss" type="button" name="">扣他分</button>
                             </div>
                         </div>
                     </div>
@@ -144,7 +142,6 @@
                     </div>
                 </div>
                 <div class="input-group col-sm-2">
-                    <input type="text" class="form-control">
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-primary">搜索</button>
                     </span>

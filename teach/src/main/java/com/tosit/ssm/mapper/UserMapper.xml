@@ -723,4 +723,30 @@
       col_3 = #{col3,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=VARCHAR}
   </update>
+  <select id="selectNoKaoqinRuler" parameterType="com.tosit.ssm.entity.User" resultMap="BaseResultMap">
+    SELECT * FROM `user` WHERE ID IN
+    (SELECT u.ID FROM `user`  u
+    LEFT JOIN user_office uo
+    ON uo.user_id = u.ID
+    WHERE uo.office_id=#{id})
+    AND kaoqin_ruleID=NULL AND is_del = 1 ;
+  </select>
+  <select id="selectChidaoBeforToday" parameterType="com.tosit.ssm.entity.User" resultMap="BaseResultMap">
+    SELECT * FROM `user` WHERE ID IN (
+  SELECT uo.user_id FROM user_office uo
+    LEFT JOIN kaoqin_result kr
+      ON kr.user_id=uo.user_id
+  WHERE kr.status=0 AND uo.office_id = #{id} AND kr.is_del=1 )AND is_del=1 ;
+  </select>
+  <select id="seletShensuQingjia" parameterType="com.tosit.ssm.entity.User" resultMap="BaseResultMap">
+    SELECT * FROM `user` WHERE ID IN (
+  SELECT uo.user_id FROM user_office uo
+  LEFT JOIN kaoqin_result kr
+    ON kr.user_id = uo.user_id
+  WHERE (
+    (kr.kaoqin_remark_status='' AND kr.kaoqin_remark_status!='' )
+         OR (
+      kr.kaoqin_remark_status!='' AND kr.kaoqin_remark_status='')
+  )AND uo.office_id = #{id} AND kr.is_del=1) AND is_del=1;
+  </select>
 </mapper>
