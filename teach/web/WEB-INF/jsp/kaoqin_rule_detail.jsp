@@ -203,7 +203,6 @@
                                      </span></td>
                                     <td>
                                         <label class=" labelleft control-label" style="width: 120px;">
-
                                             第一次打卡时间：</label>
                                     </td>
                                     <td ><input style="width: 100px;" class="form-control layer-date labelright single-input"
@@ -211,12 +210,14 @@
                                     </td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第二次打卡时间：</label></td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
                                                value="" placeholder="起始时间">&nbsp;&nbsp;
                                     </td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                 </tr>
                                 <tr >
                                     <td><label class="col-sm-1 control-label labelleft" style="width: 100px;" >星期一：</label>
@@ -231,7 +232,6 @@
                                      </span></td>
                                     <td>
                                         <label class=" labelleft control-label" style="width: 120px;">
-
                                             第一次打卡时间：</label>
                                     </td>
                                     <td ><input style="width: 100px;" class="form-control layer-date labelright single-input"
@@ -239,12 +239,14 @@
                                     </td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第二次打卡时间：</label></td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
                                                value="" placeholder="起始时间">&nbsp;&nbsp;
                                     </td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                 </tr>
                                 <tr >
                                     <td><label class="col-sm-1 control-label labelleft" style="width: 100px;" >星期一：</label>
@@ -259,7 +261,6 @@
                                      </span></td>
                                     <td>
                                         <label class=" labelleft control-label" style="width: 120px;">
-
                                             第一次打卡时间：</label>
                                     </td>
                                     <td ><input style="width: 100px;" class="form-control layer-date labelright single-input"
@@ -267,12 +268,14 @@
                                     </td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第二次打卡时间：</label></td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
                                                value="" placeholder="起始时间">&nbsp;&nbsp;
                                     </td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                 </tr>
                                 <tr >
                                     <td><label class="col-sm-1 control-label labelleft" style="width: 100px;" >星期一：</label>
@@ -287,7 +290,6 @@
                                      </span></td>
                                     <td>
                                         <label class=" labelleft control-label" style="width: 120px;">
-
                                             第一次打卡时间：</label>
                                     </td>
                                     <td ><input style="width: 100px;" class="form-control layer-date labelright single-input"
@@ -295,12 +297,14 @@
                                     </td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第二次打卡时间：</label></td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
                                                value="" placeholder="起始时间">&nbsp;&nbsp;
                                     </td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                 </tr>
                                 <tr >
                                     <td><label class="col-sm-1 control-label labelleft" style="width: 100px;" >星期一：</label>
@@ -315,7 +319,6 @@
                                      </span></td>
                                     <td>
                                         <label class=" labelleft control-label" style="width: 120px;">
-
                                             第一次打卡时间：</label>
                                     </td>
                                     <td ><input style="width: 100px;" class="form-control layer-date labelright single-input"
@@ -323,12 +326,14 @@
                                     </td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第二次打卡时间：</label></td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
                                                value="" placeholder="起始时间">&nbsp;&nbsp;
                                     </td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                 </tr>
                                 <tr >
                                     <td><label class="col-sm-1 control-label labelleft" style="width: 100px;" >星期一：</label>
@@ -343,7 +348,6 @@
                                      </span></td>
                                     <td>
                                         <label class=" labelleft control-label" style="width: 120px;">
-
                                             第一次打卡时间：</label>
                                     </td>
                                     <td ><input style="width: 100px;" class="form-control layer-date labelright single-input"
@@ -351,12 +355,14 @@
                                     </td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第二次打卡时间：</label></td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
                                                value="" placeholder="起始时间">&nbsp;&nbsp;
                                     </td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                 </tr>
                                 <tr >
                                     <td><label class="col-sm-1 control-label labelleft" style="width: 100px;" >星期一：</label>
@@ -371,7 +377,6 @@
                                      </span></td>
                                     <td>
                                         <label class=" labelleft control-label" style="width: 120px;">
-
                                             第一次打卡时间：</label>
                                     </td>
                                     <td ><input style="width: 100px;" class="form-control layer-date labelright single-input"
@@ -379,16 +384,46 @@
                                     </td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第二次打卡时间：</label></td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
                                                value="" placeholder="起始时间">&nbsp;&nbsp;
                                     </td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                 </tr>
+                                <tr >
+                                <td><label class="col-sm-1 control-label labelleft" style="width: 100px;" >星期一：</label>
+                                </td>
+                                <td><span class="checkbox i-checks">
+                                        <label class="">
+                                        <div class="icheckbox_square-green " style="position: relative;"><input value=""
+                                                                                                                style="position: absolute; opacity: 0;"
+                                                                                                                type="checkbox"><ins
+                                                class="iCheck-helper"
+                                                style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255) none repeat scroll 0% 0%; border: 0px none; opacity: 0;"></ins></div> <i></i> 不打卡</label>
+                                     </span></td>
+                                <td>
+                                    <label class=" labelleft control-label" style="width: 120px;">
+                                        第一次打卡时间：</label>
+                                </td>
+                                <td ><input style="width: 100px;" class="form-control layer-date labelright single-input"
+                                            value="" placeholder="起始时间">&nbsp;&nbsp;
+                                </td>
+                                <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
+                                           value="" placeholder="结束时间"></td>
+                                <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                <td><label class=" labelleft control-label" style="width: 120px;">第二次打卡时间：</label></td>
+                                <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
+                                           value="" placeholder="起始时间">&nbsp;&nbsp;
+                                </td>
+                                <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
+                                           value="" placeholder="结束时间"></td>
+                                <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                            </tr>
                             </table>
                         </div>
-
                         <div class="hr-line-dashed col-sm-8 "></div>
                         <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-3">
@@ -446,7 +481,7 @@
                             </div>--%>
                         </div>
                         <div style="overflow-x: scroll">
-                            <table class="table-bordered " >
+                            <table class="table-bordered " style="width:2100px;">
                                 <tr>
                                     <td><label class="col-sm-1 control-label labelleft" style="width: 100px;">星期一：</label>
                                     </td>
@@ -464,24 +499,28 @@
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第二次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第三次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第四次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                 </tr>
                                 <tr>
                                     <td><label class="col-sm-1 control-label labelleft" style="width: 100px;">星期一：</label>
@@ -500,24 +539,28 @@
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第二次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第三次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第四次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                 </tr>
                                 <tr>
                                     <td><label class="col-sm-1 control-label labelleft" style="width: 100px;">星期一：</label>
@@ -536,24 +579,28 @@
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第二次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第三次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第四次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                 </tr>
                                 <tr>
                                     <td><label class="col-sm-1 control-label labelleft" style="width: 100px;">星期一：</label>
@@ -572,24 +619,28 @@
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第二次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第三次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第四次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                 </tr>
                                 <tr>
                                     <td><label class="col-sm-1 control-label labelleft" style="width: 100px;">星期一：</label>
@@ -608,24 +659,28 @@
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第二次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第三次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第四次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                 </tr>
                                 <tr>
                                     <td><label class="col-sm-1 control-label labelleft" style="width: 100px;">星期一：</label>
@@ -644,24 +699,28 @@
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第二次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第三次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第四次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                 </tr>
                                 <tr>
                                     <td><label class="col-sm-1 control-label labelleft" style="width: 100px;">星期一：</label>
@@ -680,24 +739,28 @@
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第二次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第三次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第四次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                 </tr>
                             </table>
                         </div>
@@ -793,12 +856,14 @@
                                     </td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第二次打卡时间：</label></td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
                                                value="" placeholder="起始时间">&nbsp;&nbsp;
                                     </td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                 </tr>
 
                                 <tr id="three_line" hidden></tr>
@@ -887,7 +952,7 @@
                             </div>--%>
                         </div>
                         <div style="overflow-x: scroll">
-                            <table class="table-bordered ">
+                            <table class="table-bordered " style="width: 2100px">
                                 <tr class="four" hidden>
                                     <td><label class="col-sm-1 control-label" <%--style="width: 100px;"--%>>日期</label>
                                     </td>
@@ -905,24 +970,28 @@
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第二次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第三次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第四次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
                                 </tr>
                                 <tr id="four_line" hidden></tr>
                             </table>
@@ -1152,7 +1221,6 @@
             }
         }
     }
-
     //修改未来元素
     function setdate(dates, form) {
         var $three = $(form);
