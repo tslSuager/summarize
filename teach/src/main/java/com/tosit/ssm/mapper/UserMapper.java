@@ -1,5 +1,6 @@
 package com.tosit.ssm.mapper;
 
+import com.tosit.ssm.entity.Office;
 import com.tosit.ssm.entity.User;
 import com.tosit.ssm.entity.UserExample;
 import java.util.List;
@@ -8,13 +9,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserMapper {
-    //获取某个组的人,获取某个班的人
-    /**
-     *
-     * @param officeId
-     * @return
-     */
-    List<User> selectUserByOfficeId(@Param("id") String officeId);
+
+
 
     long countByExample(UserExample example);
 
@@ -24,42 +20,57 @@ public interface UserMapper {
 
     int insert(User record);
 
-    int insertSelective(User record);
+//    int insertSelective(User record);
 
     List<User> selectByExample(UserExample example);
 
-    User selectByPrimaryKey(String id);
+
 
     int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
 
     int updateByExample(@Param("record") User record, @Param("example") UserExample example);
 
-    int updateByPrimaryKeySelective(User record);
+//    int updateByPrimaryKeySelective(User record);
 
-    int updateByPrimaryKey(User record);
+//    int updateByPrimaryKey(User record);
 
 
-    //获取某个班没有匹配考勤规则的人
+
     /**
-     *
+     *  获取某个组或者某个班的人
      * @param officeId
      * @return
      */
-    List<User> selectNoKaoqinRuler(@Param("id") String officeId);
+    List<User> selectUserByOfficeId(@Param("id") String officeId);
 
-    //获取某个班今天以前的迟到人员
     /**
-     *
-     * @param officeId
+     * 植入一个用户
+     * @param record 植入的用户的对象
      * @return
      */
-    List<User> selectChidaoBeforToday(@Param("id") String officeId);
+    int insertUser(User record);
 
-    //获取某个班申诉和请假的人
+
+
     /**
-     *
-     * @param officeId
+     * 修改任意用户的任意一个字段
+     * @param user 具有修改字段和修改id的用户对象
      * @return
      */
-    List<User> seletShensuQingjia(@Param("id") String officeId);
+    int updateByPrimaryKey(User user);
+
+
+    /**
+     * 通过user.id 获取一user
+     * @param id
+     * @return
+     */
+    User selectByPrimaryKey(String id);
+
+    /**
+     * 获取所有未分班和考勤规则未关联的人
+     * @return
+     */
+    List<User> selectByClassAndKRule();
+
 }
