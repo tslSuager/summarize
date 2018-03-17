@@ -29,22 +29,6 @@ public class KaoqinRecords {
 
     private String userId;
 
-    public KaoqinRecords(String id, String keyNumber, String name, Integer sequenceNumber, Date brushtime, String checkType, String machineNumber, String machineName, String kaoqinResultId, Integer result, String resultText, Integer isYouxiao, String userId) {
-        this.id = id;
-        this.keyNumber = keyNumber;
-        this.name = name;
-        this.sequenceNumber = sequenceNumber;
-        this.brushtime = brushtime;
-        this.checkType = checkType;
-        this.machineNumber = machineNumber;
-        this.machineName = machineName;
-        this.kaoqinResultId = kaoqinResultId;
-        this.result = result;
-        this.resultText = resultText;
-        this.isYouxiao = isYouxiao;
-        this.userId = userId;
-    }
-
     public String getId() {
         return id;
     }

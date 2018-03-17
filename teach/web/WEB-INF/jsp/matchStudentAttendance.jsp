@@ -187,7 +187,7 @@
             shadeClose: true,
             shade: 0.8,
             area: ['30%', '50%'],
-            content: 'matchClassAttendance.jsp',
+            content: '/matchClassAttendance.jsp',
             btn:['确认绑定','算了'],
             btn1:function (index,layero) {
                 layer.msg('绑定成功');

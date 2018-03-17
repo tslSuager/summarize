@@ -29,12 +29,6 @@ public class OfficecController {
             if (office.getParentId()==null) {
                 office.setOfficeType(1);
             }else {
-
-
-
-
-
-
                 office.setOfficeType(2);
             }
         }

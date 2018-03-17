@@ -333,7 +333,7 @@
             shadeClose: true,
             shade: 0.8,
             area: ['30%', '50%'],
-            content: '/addTeacher.jsp',
+            content: '/page/addTeacher',
             btn:['确认添加','算了'],
             btn1:function (index,layero) {
                 layer.msg('添加成功');

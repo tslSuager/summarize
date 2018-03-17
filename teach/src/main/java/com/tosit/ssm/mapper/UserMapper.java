@@ -8,7 +8,12 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserMapper {
-    //获取某个组的人,获取某个班的人,
+    //获取某个组的人,获取某个班的人
+    /**
+     *
+     * @param officeId
+     * @return
+     */
     List<User> selectUserByOfficeId(@Param("id") String officeId);
 
     long countByExample(UserExample example);

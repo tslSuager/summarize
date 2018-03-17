@@ -578,7 +578,7 @@
   <select id="selectArea" resultType="com.tosit.ssm.entity.Office" >
        select
     <include refid="Base_Column_List"/>
-    from office where parent_id is NULL
+    from office
 
   </select>
 

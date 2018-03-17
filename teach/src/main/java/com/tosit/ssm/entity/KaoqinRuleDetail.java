@@ -49,6 +49,8 @@ public class KaoqinRuleDetail {
 
     private Integer brushCount;
 
+    private Integer isYouxiao;
+
     private String col1;
 
     private String col2;
@@ -237,6 +239,14 @@ public class KaoqinRuleDetail {
 
     public void setBrushCount(Integer brushCount) {
         this.brushCount = brushCount;
+    }
+
+    public Integer getIsYouxiao() {
+        return isYouxiao;
+    }
+
+    public void setIsYouxiao(Integer isYouxiao) {
+        this.isYouxiao = isYouxiao;
     }
 
     public String getCol1() {

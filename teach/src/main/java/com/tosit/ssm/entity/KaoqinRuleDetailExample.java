@@ -1588,6 +1588,66 @@ public class KaoqinRuleDetailExample {
             return (Criteria) this;
         }
 
+        public Criteria andIsYouxiaoIsNull() {
+            addCriterion("is_youxiao is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsYouxiaoIsNotNull() {
+            addCriterion("is_youxiao is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsYouxiaoEqualTo(Integer value) {
+            addCriterion("is_youxiao =", value, "isYouxiao");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsYouxiaoNotEqualTo(Integer value) {
+            addCriterion("is_youxiao <>", value, "isYouxiao");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsYouxiaoGreaterThan(Integer value) {
+            addCriterion("is_youxiao >", value, "isYouxiao");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsYouxiaoGreaterThanOrEqualTo(Integer value) {
+            addCriterion("is_youxiao >=", value, "isYouxiao");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsYouxiaoLessThan(Integer value) {
+            addCriterion("is_youxiao <", value, "isYouxiao");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsYouxiaoLessThanOrEqualTo(Integer value) {
+            addCriterion("is_youxiao <=", value, "isYouxiao");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsYouxiaoIn(List<Integer> values) {
+            addCriterion("is_youxiao in", values, "isYouxiao");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsYouxiaoNotIn(List<Integer> values) {
+            addCriterion("is_youxiao not in", values, "isYouxiao");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsYouxiaoBetween(Integer value1, Integer value2) {
+            addCriterion("is_youxiao between", value1, value2, "isYouxiao");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsYouxiaoNotBetween(Integer value1, Integer value2) {
+            addCriterion("is_youxiao not between", value1, value2, "isYouxiao");
+            return (Criteria) this;
+        }
+
         public Criteria andCol1IsNull() {
             addCriterion("col_1 is null");
             return (Criteria) this;
