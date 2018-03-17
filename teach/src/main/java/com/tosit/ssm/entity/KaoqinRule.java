@@ -21,6 +21,21 @@ public class KaoqinRule {
 
     private String updateBy;
 
+    public KaoqinRule() {
+    }
+
+    public KaoqinRule(String id, String rulename, String remarks, Integer ruleType, Integer isDefault, Date createTime, String createBy, Date updateTime, String updateBy) {
+        this.id = id;
+        this.rulename = rulename;
+        this.remarks = remarks;
+        this.ruleType = ruleType;
+        this.isDefault = isDefault;
+        this.createTime = createTime;
+        this.createBy = createBy;
+        this.updateTime = updateTime;
+        this.updateBy = updateBy;
+    }
+
     public String getId() {
         return id;
     }
@@ -91,5 +106,10 @@ public class KaoqinRule {
 
     public void setUpdateBy(String updateBy) {
         this.updateBy = updateBy == null ? null : updateBy.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "KaoqinRule{" + "id='" + id + '\'' + ", rulename='" + rulename + '\'' + ", remarks='" + remarks + '\'' + ", ruleType=" + ruleType + ", isDefault=" + isDefault + ", createTime=" + createTime + ", createBy='" + createBy + '\'' + ", updateTime=" + updateTime + ", updateBy='" + updateBy + '\'' + '}';
     }
 }
