@@ -128,12 +128,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from user
-    where ID = #{id,jdbcType=VARCHAR}
-  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from user
     where ID = #{id,jdbcType=VARCHAR}
@@ -172,7 +167,304 @@
       #{sort,jdbcType=INTEGER}, #{grade,jdbcType=VARCHAR}, #{cutGrade,jdbcType=VARCHAR}, 
       #{col3,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.tosit.ssm.entity.User">
+
+  <select id="countByExample" parameterType="com.tosit.ssm.entity.UserExample" resultType="java.lang.Long">
+    select count(*) from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update user
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginname != null">
+        loginName = #{record.loginname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salt != null">
+        salt = #{record.salt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.niname != null">
+        niName = #{record.niname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=CHAR},
+      </if>
+      <if test="record.personno != null">
+        personNo = #{record.personno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.daxue != null">
+        daXue = #{record.daxue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.daxueAddress != null">
+        daXue_address = #{record.daxueAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.homeAddress != null">
+        home_address = #{record.homeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stuNumber != null">
+        stu_number = #{record.stuNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.daxueZhuanye != null">
+        daxue_zhuanye = #{record.daxueZhuanye,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shixunZhuanye != null">
+        shixun_zhuanye = #{record.shixunZhuanye,jdbcType=VARCHAR},
+      </if>
+      <if test="record.peixunZhuanye != null">
+        peixun_zhuanye = #{record.peixunZhuanye,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone1 != null">
+        phone1 = #{record.phone1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone2 != null">
+        phone2 = #{record.phone2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.photo != null">
+        photo = #{record.photo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qq != null">
+        QQ = #{record.qq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weixin != null">
+        weixin = #{record.weixin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userType != null">
+        user_type = #{record.userType,jdbcType=INTEGER},
+      </if>
+      <if test="record.kaoqinCode != null">
+        kaoqin_code = #{record.kaoqinCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.kaoqinRuleid != null">
+        kaoqin_ruleID = #{record.kaoqinRuleid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createBy != null">
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateBy != null">
+        update_by = #{record.updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastLogintime != null">
+        last_logintime = #{record.lastLogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.loatLonginIp != null">
+        loat_longin_ip = #{record.loatLonginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDel != null">
+        is_del = #{record.isDel,jdbcType=INTEGER},
+      </if>
+      <if test="record.sort != null">
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.grade != null">
+        grade = #{record.grade,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cutGrade != null">
+        cut_grade = #{record.cutGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="record.col3 != null">
+        col_3 = #{record.col3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update user
+    set ID = #{record.id,jdbcType=VARCHAR},
+      loginName = #{record.loginname,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      salt = #{record.salt,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      niName = #{record.niname,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=CHAR},
+      personNo = #{record.personno,jdbcType=VARCHAR},
+      daXue = #{record.daxue,jdbcType=VARCHAR},
+      daXue_address = #{record.daxueAddress,jdbcType=VARCHAR},
+      home_address = #{record.homeAddress,jdbcType=VARCHAR},
+      stu_number = #{record.stuNumber,jdbcType=VARCHAR},
+      daxue_zhuanye = #{record.daxueZhuanye,jdbcType=VARCHAR},
+      shixun_zhuanye = #{record.shixunZhuanye,jdbcType=VARCHAR},
+      peixun_zhuanye = #{record.peixunZhuanye,jdbcType=VARCHAR},
+      phone1 = #{record.phone1,jdbcType=VARCHAR},
+      phone2 = #{record.phone2,jdbcType=VARCHAR},
+      photo = #{record.photo,jdbcType=VARCHAR},
+      QQ = #{record.qq,jdbcType=VARCHAR},
+      weixin = #{record.weixin,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      user_type = #{record.userType,jdbcType=INTEGER},
+      kaoqin_code = #{record.kaoqinCode,jdbcType=VARCHAR},
+      kaoqin_ruleID = #{record.kaoqinRuleid,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      update_by = #{record.updateBy,jdbcType=VARCHAR},
+      last_logintime = #{record.lastLogintime,jdbcType=TIMESTAMP},
+      loat_longin_ip = #{record.loatLonginIp,jdbcType=VARCHAR},
+      remarks = #{record.remarks,jdbcType=VARCHAR},
+      is_del = #{record.isDel,jdbcType=INTEGER},
+      sort = #{record.sort,jdbcType=INTEGER},
+      grade = #{record.grade,jdbcType=VARCHAR},
+      cut_grade = #{record.cutGrade,jdbcType=VARCHAR},
+      col_3 = #{record.col3,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+
+
+
+
+
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <update id="updateByPrimaryKey" parameterType="com.tosit.ssm.entity.User">
+    update user
+    <set>
+      <if test="loginname != null">
+        loginName = #{loginname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null">
+        salt = #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="niname != null">
+        niName = #{niname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=CHAR},
+      </if>
+      <if test="personno != null">
+        personNo = #{personno,jdbcType=VARCHAR},
+      </if>
+      <if test="daxue != null">
+        daXue = #{daxue,jdbcType=VARCHAR},
+      </if>
+      <if test="daxueAddress != null">
+        daXue_address = #{daxueAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="homeAddress != null">
+        home_address = #{homeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="stuNumber != null">
+        stu_number = #{stuNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="daxueZhuanye != null">
+        daxue_zhuanye = #{daxueZhuanye,jdbcType=VARCHAR},
+      </if>
+      <if test="shixunZhuanye != null">
+        shixun_zhuanye = #{shixunZhuanye,jdbcType=VARCHAR},
+      </if>
+      <if test="peixunZhuanye != null">
+        peixun_zhuanye = #{peixunZhuanye,jdbcType=VARCHAR},
+      </if>
+      <if test="phone1 != null">
+        phone1 = #{phone1,jdbcType=VARCHAR},
+      </if>
+      <if test="phone2 != null">
+        phone2 = #{phone2,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null">
+        photo = #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null">
+        QQ = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="weixin != null">
+        weixin = #{weixin,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null">
+        user_type = #{userType,jdbcType=INTEGER},
+      </if>
+      <if test="kaoqinCode != null">
+        kaoqin_code = #{kaoqinCode,jdbcType=VARCHAR},
+      </if>
+      <if test="kaoqinRuleid != null">
+        kaoqin_ruleID = #{kaoqinRuleid,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLogintime != null">
+        last_logintime = #{lastLogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loatLonginIp != null">
+        loat_longin_ip = #{loatLonginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null">
+        is_del = #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="grade != null">
+        grade = #{grade,jdbcType=VARCHAR},
+      </if>
+      <if test="cutGrade != null">
+        cut_grade = #{cutGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="col3 != null">
+        col_3 = #{col3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <insert id="insertUser" parameterType="com.tosit.ssm.entity.User">
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -401,326 +693,20 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.tosit.ssm.entity.UserExample" resultType="java.lang.Long">
-    select count(*) from user
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
+
+
+
+  <select id="selectByClassAndKRule"  resultMap="BaseResultMap">
+SELECT
+    <include refid="Base_Column_List" />
+    from user us
+  WHERE us.id NOT in(
+   ( select u.id from user u
+    JOIN user_office uo
+    on u.id =uo.user_id
+    JOIN office f
+    on uo.office_id =f.id where f.office_type = 3 and u.is_del=1 and f.is_del= 1 and uo.is_del=1)) and us.kaoqin_ruleID is  null and
+    us.is_del=0
+    ;
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update user
-    <set>
-      <if test="record.id != null">
-        ID = #{record.id,jdbcType=VARCHAR},
-      </if>
-      <if test="record.loginname != null">
-        loginName = #{record.loginname,jdbcType=VARCHAR},
-      </if>
-      <if test="record.password != null">
-        password = #{record.password,jdbcType=VARCHAR},
-      </if>
-      <if test="record.salt != null">
-        salt = #{record.salt,jdbcType=VARCHAR},
-      </if>
-      <if test="record.name != null">
-        name = #{record.name,jdbcType=VARCHAR},
-      </if>
-      <if test="record.niname != null">
-        niName = #{record.niname,jdbcType=VARCHAR},
-      </if>
-      <if test="record.sex != null">
-        sex = #{record.sex,jdbcType=CHAR},
-      </if>
-      <if test="record.personno != null">
-        personNo = #{record.personno,jdbcType=VARCHAR},
-      </if>
-      <if test="record.daxue != null">
-        daXue = #{record.daxue,jdbcType=VARCHAR},
-      </if>
-      <if test="record.daxueAddress != null">
-        daXue_address = #{record.daxueAddress,jdbcType=VARCHAR},
-      </if>
-      <if test="record.homeAddress != null">
-        home_address = #{record.homeAddress,jdbcType=VARCHAR},
-      </if>
-      <if test="record.stuNumber != null">
-        stu_number = #{record.stuNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="record.daxueZhuanye != null">
-        daxue_zhuanye = #{record.daxueZhuanye,jdbcType=VARCHAR},
-      </if>
-      <if test="record.shixunZhuanye != null">
-        shixun_zhuanye = #{record.shixunZhuanye,jdbcType=VARCHAR},
-      </if>
-      <if test="record.peixunZhuanye != null">
-        peixun_zhuanye = #{record.peixunZhuanye,jdbcType=VARCHAR},
-      </if>
-      <if test="record.phone1 != null">
-        phone1 = #{record.phone1,jdbcType=VARCHAR},
-      </if>
-      <if test="record.phone2 != null">
-        phone2 = #{record.phone2,jdbcType=VARCHAR},
-      </if>
-      <if test="record.photo != null">
-        photo = #{record.photo,jdbcType=VARCHAR},
-      </if>
-      <if test="record.qq != null">
-        QQ = #{record.qq,jdbcType=VARCHAR},
-      </if>
-      <if test="record.weixin != null">
-        weixin = #{record.weixin,jdbcType=VARCHAR},
-      </if>
-      <if test="record.email != null">
-        email = #{record.email,jdbcType=VARCHAR},
-      </if>
-      <if test="record.userType != null">
-        user_type = #{record.userType,jdbcType=INTEGER},
-      </if>
-      <if test="record.kaoqinCode != null">
-        kaoqin_code = #{record.kaoqinCode,jdbcType=VARCHAR},
-      </if>
-      <if test="record.kaoqinRuleid != null">
-        kaoqin_ruleID = #{record.kaoqinRuleid,jdbcType=VARCHAR},
-      </if>
-      <if test="record.status != null">
-        status = #{record.status,jdbcType=INTEGER},
-      </if>
-      <if test="record.createTime != null">
-        create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.createBy != null">
-        create_by = #{record.createBy,jdbcType=VARCHAR},
-      </if>
-      <if test="record.updateTime != null">
-        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.updateBy != null">
-        update_by = #{record.updateBy,jdbcType=VARCHAR},
-      </if>
-      <if test="record.lastLogintime != null">
-        last_logintime = #{record.lastLogintime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.loatLonginIp != null">
-        loat_longin_ip = #{record.loatLonginIp,jdbcType=VARCHAR},
-      </if>
-      <if test="record.remarks != null">
-        remarks = #{record.remarks,jdbcType=VARCHAR},
-      </if>
-      <if test="record.isDel != null">
-        is_del = #{record.isDel,jdbcType=INTEGER},
-      </if>
-      <if test="record.sort != null">
-        sort = #{record.sort,jdbcType=INTEGER},
-      </if>
-      <if test="record.grade != null">
-        grade = #{record.grade,jdbcType=VARCHAR},
-      </if>
-      <if test="record.cutGrade != null">
-        cut_grade = #{record.cutGrade,jdbcType=VARCHAR},
-      </if>
-      <if test="record.col3 != null">
-        col_3 = #{record.col3,jdbcType=VARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update user
-    set ID = #{record.id,jdbcType=VARCHAR},
-      loginName = #{record.loginname,jdbcType=VARCHAR},
-      password = #{record.password,jdbcType=VARCHAR},
-      salt = #{record.salt,jdbcType=VARCHAR},
-      name = #{record.name,jdbcType=VARCHAR},
-      niName = #{record.niname,jdbcType=VARCHAR},
-      sex = #{record.sex,jdbcType=CHAR},
-      personNo = #{record.personno,jdbcType=VARCHAR},
-      daXue = #{record.daxue,jdbcType=VARCHAR},
-      daXue_address = #{record.daxueAddress,jdbcType=VARCHAR},
-      home_address = #{record.homeAddress,jdbcType=VARCHAR},
-      stu_number = #{record.stuNumber,jdbcType=VARCHAR},
-      daxue_zhuanye = #{record.daxueZhuanye,jdbcType=VARCHAR},
-      shixun_zhuanye = #{record.shixunZhuanye,jdbcType=VARCHAR},
-      peixun_zhuanye = #{record.peixunZhuanye,jdbcType=VARCHAR},
-      phone1 = #{record.phone1,jdbcType=VARCHAR},
-      phone2 = #{record.phone2,jdbcType=VARCHAR},
-      photo = #{record.photo,jdbcType=VARCHAR},
-      QQ = #{record.qq,jdbcType=VARCHAR},
-      weixin = #{record.weixin,jdbcType=VARCHAR},
-      email = #{record.email,jdbcType=VARCHAR},
-      user_type = #{record.userType,jdbcType=INTEGER},
-      kaoqin_code = #{record.kaoqinCode,jdbcType=VARCHAR},
-      kaoqin_ruleID = #{record.kaoqinRuleid,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=INTEGER},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      create_by = #{record.createBy,jdbcType=VARCHAR},
-      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-      update_by = #{record.updateBy,jdbcType=VARCHAR},
-      last_logintime = #{record.lastLogintime,jdbcType=TIMESTAMP},
-      loat_longin_ip = #{record.loatLonginIp,jdbcType=VARCHAR},
-      remarks = #{record.remarks,jdbcType=VARCHAR},
-      is_del = #{record.isDel,jdbcType=INTEGER},
-      sort = #{record.sort,jdbcType=INTEGER},
-      grade = #{record.grade,jdbcType=VARCHAR},
-      cut_grade = #{record.cutGrade,jdbcType=VARCHAR},
-      col_3 = #{record.col3,jdbcType=VARCHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.tosit.ssm.entity.User">
-    update user
-    <set>
-      <if test="loginname != null">
-        loginName = #{loginname,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        password = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="salt != null">
-        salt = #{salt,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="niname != null">
-        niName = #{niname,jdbcType=VARCHAR},
-      </if>
-      <if test="sex != null">
-        sex = #{sex,jdbcType=CHAR},
-      </if>
-      <if test="personno != null">
-        personNo = #{personno,jdbcType=VARCHAR},
-      </if>
-      <if test="daxue != null">
-        daXue = #{daxue,jdbcType=VARCHAR},
-      </if>
-      <if test="daxueAddress != null">
-        daXue_address = #{daxueAddress,jdbcType=VARCHAR},
-      </if>
-      <if test="homeAddress != null">
-        home_address = #{homeAddress,jdbcType=VARCHAR},
-      </if>
-      <if test="stuNumber != null">
-        stu_number = #{stuNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="daxueZhuanye != null">
-        daxue_zhuanye = #{daxueZhuanye,jdbcType=VARCHAR},
-      </if>
-      <if test="shixunZhuanye != null">
-        shixun_zhuanye = #{shixunZhuanye,jdbcType=VARCHAR},
-      </if>
-      <if test="peixunZhuanye != null">
-        peixun_zhuanye = #{peixunZhuanye,jdbcType=VARCHAR},
-      </if>
-      <if test="phone1 != null">
-        phone1 = #{phone1,jdbcType=VARCHAR},
-      </if>
-      <if test="phone2 != null">
-        phone2 = #{phone2,jdbcType=VARCHAR},
-      </if>
-      <if test="photo != null">
-        photo = #{photo,jdbcType=VARCHAR},
-      </if>
-      <if test="qq != null">
-        QQ = #{qq,jdbcType=VARCHAR},
-      </if>
-      <if test="weixin != null">
-        weixin = #{weixin,jdbcType=VARCHAR},
-      </if>
-      <if test="email != null">
-        email = #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="userType != null">
-        user_type = #{userType,jdbcType=INTEGER},
-      </if>
-      <if test="kaoqinCode != null">
-        kaoqin_code = #{kaoqinCode,jdbcType=VARCHAR},
-      </if>
-      <if test="kaoqinRuleid != null">
-        kaoqin_ruleID = #{kaoqinRuleid,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=INTEGER},
-      </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createBy != null">
-        create_by = #{createBy,jdbcType=VARCHAR},
-      </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateBy != null">
-        update_by = #{updateBy,jdbcType=VARCHAR},
-      </if>
-      <if test="lastLogintime != null">
-        last_logintime = #{lastLogintime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="loatLonginIp != null">
-        loat_longin_ip = #{loatLonginIp,jdbcType=VARCHAR},
-      </if>
-      <if test="remarks != null">
-        remarks = #{remarks,jdbcType=VARCHAR},
-      </if>
-      <if test="isDel != null">
-        is_del = #{isDel,jdbcType=INTEGER},
-      </if>
-      <if test="sort != null">
-        sort = #{sort,jdbcType=INTEGER},
-      </if>
-      <if test="grade != null">
-        grade = #{grade,jdbcType=VARCHAR},
-      </if>
-      <if test="cutGrade != null">
-        cut_grade = #{cutGrade,jdbcType=VARCHAR},
-      </if>
-      <if test="col3 != null">
-        col_3 = #{col3,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where ID = #{id,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.tosit.ssm.entity.User">
-    update user
-    set loginName = #{loginname,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      salt = #{salt,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
-      niName = #{niname,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=CHAR},
-      personNo = #{personno,jdbcType=VARCHAR},
-      daXue = #{daxue,jdbcType=VARCHAR},
-      daXue_address = #{daxueAddress,jdbcType=VARCHAR},
-      home_address = #{homeAddress,jdbcType=VARCHAR},
-      stu_number = #{stuNumber,jdbcType=VARCHAR},
-      daxue_zhuanye = #{daxueZhuanye,jdbcType=VARCHAR},
-      shixun_zhuanye = #{shixunZhuanye,jdbcType=VARCHAR},
-      peixun_zhuanye = #{peixunZhuanye,jdbcType=VARCHAR},
-      phone1 = #{phone1,jdbcType=VARCHAR},
-      phone2 = #{phone2,jdbcType=VARCHAR},
-      photo = #{photo,jdbcType=VARCHAR},
-      QQ = #{qq,jdbcType=VARCHAR},
-      weixin = #{weixin,jdbcType=VARCHAR},
-      email = #{email,jdbcType=VARCHAR},
-      user_type = #{userType,jdbcType=INTEGER},
-      kaoqin_code = #{kaoqinCode,jdbcType=VARCHAR},
-      kaoqin_ruleID = #{kaoqinRuleid,jdbcType=VARCHAR},
-      status = #{status,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      create_by = #{createBy,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      update_by = #{updateBy,jdbcType=VARCHAR},
-      last_logintime = #{lastLogintime,jdbcType=TIMESTAMP},
-      loat_longin_ip = #{loatLonginIp,jdbcType=VARCHAR},
-      remarks = #{remarks,jdbcType=VARCHAR},
-      is_del = #{isDel,jdbcType=INTEGER},
-      sort = #{sort,jdbcType=INTEGER},
-      grade = #{grade,jdbcType=VARCHAR},
-      cut_grade = #{cutGrade,jdbcType=VARCHAR},
-      col_3 = #{col3,jdbcType=VARCHAR}
-    where ID = #{id,jdbcType=VARCHAR}
-  </update>
 </mapper>
