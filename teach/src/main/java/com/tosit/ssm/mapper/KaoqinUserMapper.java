@@ -20,7 +20,6 @@ public interface KaoqinUserMapper {
 
     int updateByExample(@Param("record") KaoqinUser record, @Param("example") KaoqinUserExample example);
 
-
     /**
      *植入一个的考勤规则个人关联
      * @param record 植入的勤规则个人关联的对象

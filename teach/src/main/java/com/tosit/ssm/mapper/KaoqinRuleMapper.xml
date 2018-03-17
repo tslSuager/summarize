@@ -74,7 +74,16 @@
     ID, ruleName, remarks, rule_type, is_default, create_time, create_by, update_time, 
     update_by
   </sql>
-  <select id="selectByExample" parameterType="com.tosit.ssm.entity.KaoqinRuleExample" resultMap="BaseResultMap">
+  <select id="selectRule" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from kaoqin_rule
+    WHERE is_youxiao = 1
+    <if test="id != null">
+      AND ID = #{id}
+    </if>
+  </select>
+  <!--<select id="selectByExample" parameterType="com.tosit.ssm.entity.KaoqinRuleExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -272,5 +281,5 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       update_by = #{updateBy,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=VARCHAR}
-  </update>
+  </update>-->
 </mapper>
