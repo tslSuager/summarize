@@ -360,7 +360,7 @@
       <include refid="Update_By_Example_Where_Clause"/>
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.tosit.ssm.entity.Office">
+  <update id="updateByPrimaryKey" parameterType="com.tosit.ssm.entity.Office">
     update office
     <set>
       <if test="parentId != null">
@@ -421,29 +421,6 @@
         col_3 = #{col3,jdbcType=VARCHAR},
       </if>
     </set>
-    where ID = #{id,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.tosit.ssm.entity.Office">
-    update office
-    set parent_id = #{parentId,jdbcType=VARCHAR},
-      parent_ids = #{parentIds,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=VARCHAR},
-      file_dir = #{fileDir,jdbcType=VARCHAR},
-      icon = #{icon,jdbcType=VARCHAR},
-      master = #{master,jdbcType=VARCHAR},
-      office_type = #{officeType,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      create_by = #{createBy,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      update_by = #{updateBy,jdbcType=VARCHAR},
-      remarks = #{remarks,jdbcType=VARCHAR},
-      status = #{status,jdbcType=INTEGER},
-      is_del = #{isDel,jdbcType=INTEGER},
-      sort = #{sort,jdbcType=INTEGER},
-      col_1 = #{col1,jdbcType=VARCHAR},
-      col_2 = #{col2,jdbcType=VARCHAR},
-      col_3 = #{col3,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=VARCHAR}
   </update>
 

@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class kaoqinUserExample {
+public class KaoqinUserExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public kaoqinUserExample() {
+    public KaoqinUserExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 

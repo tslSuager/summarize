@@ -526,42 +526,6 @@
     </set>
     where ID = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.tosit.ssm.entity.KaoqinRuleDetail">
-    update kaoqin_rule_detail
-    set kaoqin_rule_id = #{kaoqinRuleId,jdbcType=VARCHAR},
-      week_day = #{weekDay,jdbcType=INTEGER},
-      date = #{date,jdbcType=DATE},
-      brush_startTime1 = #{brushStarttime1,jdbcType=TIME},
-      brush_endTime1 = #{brushEndtime1,jdbcType=TIME},
-      time1_wucha = #{time1Wucha,jdbcType=INTEGER},
-      brush_startTime2 = #{brushStarttime2,jdbcType=TIME},
-      brush_endTime2 = #{brushEndtime2,jdbcType=TIME},
-      time1_wucha2 = #{time1Wucha2,jdbcType=INTEGER},
-      brush_startTime3 = #{brushStarttime3,jdbcType=TIME},
-      brush_endTime3 = #{brushEndtime3,jdbcType=TIME},
-      time1_wucha3 = #{time1Wucha3,jdbcType=INTEGER},
-      brush_startTime4 = #{brushStarttime4,jdbcType=TIME},
-      brush_endTime4 = #{brushEndtime4,jdbcType=TIME},
-      time1_wucha4 = #{time1Wucha4,jdbcType=INTEGER},
-      remarks = #{remarks,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      create_by = #{createBy,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      update_by = #{updateBy,jdbcType=VARCHAR},
-      is_del = #{isDel,jdbcType=INTEGER},
-      brush_count = #{brushCount,jdbcType=INTEGER},
-      is_youxiao = #{isYouxiao,jdbcType=INTEGER},
-      col_1 = #{col1,jdbcType=VARCHAR},
-      col_2 = #{col2,jdbcType=VARCHAR},
-      col_3 = #{col3,jdbcType=VARCHAR}
-    where ID = #{id,jdbcType=VARCHAR}
-  </update>
-
-
-
-
-
-
 
 
   <insert id="insertKaoqinRuleDetail" parameterType="com.tosit.ssm.entity.KaoqinRuleDetail">

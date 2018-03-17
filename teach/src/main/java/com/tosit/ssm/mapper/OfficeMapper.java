@@ -26,10 +26,18 @@ public interface OfficeMapper {
 
     int updateByExample(@Param("record") Office record, @Param("example") OfficeExample example);
 
-    int updateByPrimaryKeySelective(Office record);
 
-    int updateByPrimaryKey(Office record);
-
+    /**
+     * 修改任意区域的任意一个字段
+     * @param office 具有修改字段和修改id的区域对象
+     * @return
+     */
+    int updateByPrimaryKey(Office office);
+    /**
+     *植入一个的区域
+     * @param office 植入的区域的对象
+     * @return
+     */
     void insertOffice(Office office);
 
     List<Office> selectArea();

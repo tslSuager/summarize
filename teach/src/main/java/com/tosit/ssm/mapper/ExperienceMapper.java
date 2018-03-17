@@ -19,4 +19,18 @@ public interface ExperienceMapper {
     int updateByExampleSelective(@Param("record") Experience record, @Param("example") ExperienceExample example);
 
     int updateByExample(@Param("record") Experience record, @Param("example") ExperienceExample example);
+
+    /**
+     *植入一个人一次的个人经历
+     * @param record 植入的个人经历的对象
+     * @return
+     */
+    int insertExperience(Experience record);
+    /**
+     * 修改任意一个个人经历的任意一个字段
+     * @param record 具有修改字段和修改id的个人经历对象
+     * @return
+     */
+    int updateByPrimaryKey(@Param("record") Experience record);
+
 }

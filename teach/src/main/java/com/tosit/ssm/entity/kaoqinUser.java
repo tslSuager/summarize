@@ -2,7 +2,7 @@ package com.tosit.ssm.entity;
 
 import java.util.Date;
 
-public class kaoqinUser {
+public class KaoqinUser {
     private String id;
 
     private String userId;
