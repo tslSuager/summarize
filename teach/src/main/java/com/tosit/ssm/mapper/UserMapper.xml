@@ -709,4 +709,37 @@ SELECT
     us.is_del=0
     ;
   </select>
+
+  <select id="selectNoGuize" parameterType="com.tosit.ssm.entity.User" resultMap="BaseResultMap">
+    SELECT
+      u.id,u.name,u.password,u.ID,u.loginName,u.password,u.salt,u.name,u.niName,u.sex,u.personNo,u.daXue,u.daXue_address,u.home_address,u.stu_number,u.daxue_zhuanye,u.shixun_zhuanye,u.peixun_zhuanye,u.phone1,u.phone2,u.photo,u.QQ,u.weixin,u.email,u.user_type,u.kaoqin_code,u.kaoqin_ruleID,u.status,u.create_time,u.create_by,u.update_time,u.update_by,u.last_logintime,u.loat_longin_ip,u.remarks,u.is_del,u.sort,u.col_1,u.col_2,u.col_3
+    FROM user_office uo
+  LEFT JOIN `user` u
+    ON uo.user_id = u.ID
+WHERE uo.office_id = #{id} AND kaoqin_ruleID!='';
+  </select>
+
+  <select id="selectChidaoBeforToday" parameterType="com.tosit.ssm.entity.User" resultMap="BaseResultMap">
+    SELECT
+    u.id,u.name,u.password,u.ID,u.loginName,u.password,u.salt,u.name,u.niName,u.sex,u.personNo,u.daXue,u.daXue_address,u.home_address,u.stu_number,u.daxue_zhuanye,u.shixun_zhuanye,u.peixun_zhuanye,u.phone1,u.phone2,u.photo,u.QQ,u.weixin,u.email,u.user_type,u.kaoqin_code,u.kaoqin_ruleID,u.status,u.create_time,u.create_by,u.update_time,u.update_by,u.last_logintime,u.loat_longin_ip,u.remarks,u.is_del,u.sort,u.col_1,u.col_2,u.col_3
+    FROM user WHERE ID IN (
+  SELECT uo.user_id FROM user_office uo
+    LEFT JOIN kaoqin_result kr
+      ON kr.user_id=uo.user_id
+  WHERE kr.status=0 AND uo.office_id = #{id} AND kr.is_del!=1 )AND is_del!=1 ;
+  </select>
+
+  <select id="selectKaoqinOrShensu" parameterType="com.tosit.ssm.entity.User" resultMap="BaseResultMap">
+    SELECT
+    u.id,u.name,u.password,u.ID,u.loginName,u.password,u.salt,u.name,u.niName,u.sex,u.personNo,u.daXue,u.daXue_address,u.home_address,u.stu_number,u.daxue_zhuanye,u.shixun_zhuanye,u.peixun_zhuanye,u.phone1,u.phone2,u.photo,u.QQ,u.weixin,u.email,u.user_type,u.kaoqin_code,u.kaoqin_ruleID,u.status,u.create_time,u.create_by,u.update_time,u.update_by,u.last_logintime,u.loat_longin_ip,u.remarks,u.is_del,u.sort,u.col_1,u.col_2,u.col_3
+    FROM user WHERE ID IN (
+  SELECT uo.user_id FROM user_office uo
+  LEFT JOIN kaoqin_result kr
+    ON kr.user_id = uo.user_id
+  WHERE (
+    (kr.kaoqin_remark_status='' AND kr.kaoqin_remark_status!='' )
+         OR (
+      kr.kaoqin_remark_status!='' AND kr.kaoqin_remark_status='')
+  )AND uo.office_id = #{id} AND kr.is_del!=TRUE) AND is_del!=TRUE;
+  </select>
 </mapper>
