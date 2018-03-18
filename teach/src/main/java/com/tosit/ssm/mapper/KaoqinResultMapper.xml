@@ -27,7 +27,109 @@
     <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
     <result column="is_del" jdbcType="INTEGER" property="isDel" />
   </resultMap>
-  <sql id="Example_Where_Clause">
+
+
+
+  <select id="selectByClass" parameterType="string" resultMap="BaseResultMap">
+    SELECT
+    kr.id,
+    kr.date,
+    kr.user_id,
+    kr.status,
+    kr.remark,
+    kr.last_time,
+    kr.createResultTime,
+    kr.kaoqin_remark_status,
+    kr.kaoqin_remark_type,
+    kr.kaoqin_remark_content,
+    kr.kaoqin_remark_disposeUser,
+    kr.kaoqin_remark_disposeTime,
+    kr.kaoqin_remark_dispose_Result,
+    kr.kaoqin_shenshu_status,
+    kr.kaoqin_shenshu_type,
+    kr.kaoqin_shenshu_content,
+    kr.kaoqin_shenshu_disposeUser,
+    kr.kaoqin_shenshu_disposeTime,
+    kr.kaoqin_shenshu_disposeResult,
+    kr.create_time,
+    kr.create_by,
+    kr.update_time,
+    kr.update_by
+    FROM
+    user_office uo LEFT JOIN kaoqin_result kr ON uo.user_id = kr.user_id
+    WHERE uo.office_id = #{officeId} AND kr.is_del = 1 AND uo.is_del=1 OR kr.kaoqin_remark_status!='' OR kr.kaoqin_shenshu_status!=''
+  </select>
+
+  <select id="countByClass" parameterType="string" resultMap="BaseResultMap">
+    SELECT
+    COUNT(*)
+    FROM
+    user_office uo LEFT JOIN kaoqin_result kr ON uo.user_id = kr.user_id
+    WHERE uo.office_id = #{officeId} AND kr.is_del = 1 AND uo.is_del=1 OR kr.kaoqin_remark_status!='' OR kr.kaoqin_shenshu_status!=''
+  </select>
+
+  <select id="countByOne" parameterType="string" resultMap="BaseResultMap">
+    SELECT
+    kr.id,
+    kr.date,
+    kr.user_id,
+    kr.status,
+    kr.remark,
+    kr.last_time,
+    kr.createResultTime,
+    kr.kaoqin_remark_status,
+    kr.kaoqin_remark_type,
+    kr.kaoqin_remark_content,
+    kr.kaoqin_remark_disposeUser,
+    kr.kaoqin_remark_disposeTime,
+    kr.kaoqin_remark_dispose_Result,
+    kr.kaoqin_shenshu_status,
+    kr.kaoqin_shenshu_type,
+    kr.kaoqin_shenshu_content,
+    kr.kaoqin_shenshu_disposeUser,
+    kr.kaoqin_shenshu_disposeTime,
+    kr.kaoqin_shenshu_disposeResult,
+    kr.create_time,
+    kr.create_by,
+    kr.update_time,
+    kr.update_by
+    FROM kaoqin_result kr
+    WHERE
+    kr.user_id=#{userId} AND
+    kr.is_del = 1
+  </select>
+
+  <select id="selectByClassLate" parameterType="string" resultMap="BaseResultMap">
+    SELECT
+    kr.id,
+    kr.date,
+    kr.user_id,
+    kr.status,
+    kr.remark,
+    kr.last_time,
+    kr.createResultTime,
+    kr.kaoqin_remark_status,
+    kr.kaoqin_remark_type,
+    kr.kaoqin_remark_content,
+    kr.kaoqin_remark_disposeUser,
+    kr.kaoqin_remark_disposeTime,
+    kr.kaoqin_remark_dispose_Result,
+    kr.kaoqin_shenshu_status,
+    kr.kaoqin_shenshu_type,
+    kr.kaoqin_shenshu_content,
+    kr.kaoqin_shenshu_disposeUser,
+    kr.kaoqin_shenshu_disposeTime,
+    kr.kaoqin_shenshu_disposeResult,
+    kr.create_time,
+    kr.create_by,
+    kr.update_time,
+    kr.update_by
+    FROM
+    user_office uo LEFT JOIN kaoqin_result kr ON uo.user_id = kr.user_id
+    WHERE uo.office_id = #{officeId} AND kr.status= 0 AND kr.is_del = 1 AND uo.is_del = 1
+  </select>
+
+  <!--<sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
         <if test="criteria.valid">
@@ -402,5 +504,5 @@
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
-  </update>
+  </update>-->
 </mapper>
