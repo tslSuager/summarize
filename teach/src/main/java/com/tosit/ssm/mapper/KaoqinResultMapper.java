@@ -1,5 +1,6 @@
 package com.tosit.ssm.mapper;
 
+import com.tosit.ssm.entity.Experience;
 import com.tosit.ssm.entity.KaoqinResult;
 import com.tosit.ssm.entity.KaoqinResultExample;
 import java.util.List;
@@ -16,13 +17,27 @@ public interface KaoqinResultMapper {
 
     int insert(KaoqinResult record);
 
-    int insertSelective(KaoqinResult record);
+
 
     List<KaoqinResult> selectByExample(KaoqinResultExample example);
 
-    int updateByExampleSelective(@Param("record") KaoqinResult record, @Param("example") KaoqinResultExample example);
+
 
     int updateByExample(@Param("record") KaoqinResult record, @Param("example") KaoqinResultExample example);*/
+
+
+    /**
+     * 修改任意考勤结果的任意一个字段
+     * @param record 具有修改字段和修改id的考勤结果对象
+     * @return
+     */
+    int updateByPrimaryKey(@Param("record") KaoqinResult record);
+    /**
+     * 植入次个考勤结果
+     * @param record
+     * @return
+     */
+    int insertKaoqinResult(KaoqinResult record);
 
     /**
      * 获取某个班的申述或请假记录的集合

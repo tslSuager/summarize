@@ -28,6 +28,9 @@ public interface KaoqinRuleMapper {
      */
     List<KaoqinRule>  selectRule(@Param("id") String id);
 
+
+
+
    /* long countByExample(KaoqinRuleExample example);
 
     int deleteByExample(KaoqinRuleExample example);
