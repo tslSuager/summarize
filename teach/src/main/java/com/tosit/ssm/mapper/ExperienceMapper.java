@@ -41,7 +41,7 @@ public interface ExperienceMapper {
     List<Experience> selectById(String userId);
 
     /**
-     * 获取某个人的所有经历
+     * 获取某个人跟表现成绩有关的所有经历
      * @param userId 用户的id
      * @return 返回该用户的type类型为1的Experience的集合
      */
