@@ -74,15 +74,7 @@
     ID, ruleName, remarks, rule_type, is_default, create_time, create_by, update_time, 
     update_by
   </sql>
-  <select id="selectRule" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from kaoqin_rule
-    WHERE is_youxiao = 1
-    <if test="id != null">
-      AND ID = #{id}
-    </if>
-  </select>
+
   <!--<select id="selectByExample" parameterType="com.tosit.ssm.entity.KaoqinRuleExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -113,16 +105,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.tosit.ssm.entity.KaoqinRule">
-    insert into kaoqin_rule (ID, ruleName, remarks, 
-      rule_type, is_default, create_time, 
-      create_by, update_time, update_by
-      )
-    values (#{id,jdbcType=VARCHAR}, #{rulename,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, 
-      #{ruleType,jdbcType=INTEGER}, #{isDefault,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}
-      )
-  </insert>
+
   <insert id="insertSelective" parameterType="com.tosit.ssm.entity.KaoqinRule">
     insert into kaoqin_rule
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -282,4 +265,108 @@
       update_by = #{updateBy,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=VARCHAR}
   </update>-->
+  <insert id="insert" parameterType="com.tosit.ssm.entity.KaoqinRule">
+    insert into kaoqin_rule (ID,
+    <if test="rulename != null">
+      ,ruleName
+    </if>
+    <if test="remarks != null">
+      , remarks
+    </if>
+    <if test="ruleType != null">
+      ,rule_type
+    </if>
+    <if test="isDefault != null">
+      , is_default
+    </if>
+    <if test="createTime != null">
+      , create_time
+    </if>
+    <if test="createBy != null">
+      ,create_by
+    </if>
+    <if test="updateTime != null">
+      , update_time
+    </if>
+    <if test="updateBy != null">
+      , update_by
+    </if>
+
+    )
+    values (#{id}
+    <if test="rulename != null">
+      , #{rulename}
+    </if>
+    <if test="remarks != null">
+      , #{remarks}
+    </if>
+    <if test="ruleType != null">
+      #{ruleType}
+    </if>
+    <if test="isDefault != null">
+      , #{isDefault}
+    </if>
+    <if test="createTime != null">, #{createTime}</if>
+    <if test="createBy != null">,#{createBy}</if>
+    <if test="updateTime != null">, #{updateTime}</if>
+    <if test="updateBy != null">, #{updateBy}</if>
+    )
+  </insert>
+  <update id="update" parameterType="com.tosit.ssm.entity.KaoqinRule">
+    <!--UPDATE kaoqin_rule SET (
+    <if test="rulename != null">
+      ,ruleName
+    </if>
+    <if test="remarks != null">
+      , remarks
+    </if>
+    <if test="ruleType != null">
+      ,rule_type
+    </if>
+    <if test="isDefault != null">
+      , is_default
+    </if>
+    <if test="createTime != null">
+      , create_time
+    </if>
+    <if test="createBy != null">
+      ,create_by
+    </if>
+    <if test="updateTime != null">
+      , update_time
+    </if>
+    <if test="updateBy != null">
+      , update_by
+    </if>
+    )
+    values (#{id}
+    <if test="rulename != null">
+      , #{rulename}
+    </if>
+    <if test="remarks != null">
+      , #{remarks}
+    </if>
+    <if test="ruleType != null">
+      #{ruleType}
+    </if>
+    <if test="isDefault != null">
+      , #{isDefault}
+    </if>
+    <if test="createTime != null">, #{createTime}</if>
+    <if test="createBy != null">,#{createBy}</if>
+    <if test="updateTime != null">, #{updateTime}</if>
+    <if test="updateBy != null">, #{updateBy}</if>
+    )-->
+
+
+  </update>
+  <select id="selectRule" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from kaoqin_rule
+    WHERE is_youxiao = 1
+    <if test="id != null">
+      AND ID = #{id}
+    </if>
+  </select>
 </mapper>
