@@ -33,7 +33,7 @@ public interface KaoqinResultMapper {
      */
     int updateByPrimaryKey(@Param("record") KaoqinResult record);
     /**
-     * 植入次个考勤结果
+     * 植入一次考勤结果
      * @param record
      * @return
      */

@@ -28,7 +28,7 @@
     <result column="is_del" jdbcType="INTEGER" property="isDel" />
   </resultMap>
 
-  <insert id="insertSelective" parameterType="com.tosit.ssm.entity.KaoqinResult">
+  <insert id="insertKaoqinResult" parameterType="com.tosit.ssm.entity.KaoqinResult">
     insert into kaoqin_result
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -344,7 +344,7 @@
     kaoqin_shenshu_disposeUser, kaoqin_shenshu_disposeTime, kaoqin_shenshu_disposeResult,
     create_time, create_by, update_time, update_by, is_del
   </sql>
-  <update id="updateByExampleSelective" parameterType="com.tosit.ssm.entity.KaoqinResult">
+  <update id="updateByPrimaryKey" parameterType="com.tosit.ssm.entity.KaoqinResult">
     update kaoqin_result
     <set>
       <if test="record.id != null">
