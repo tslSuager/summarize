@@ -22,7 +22,7 @@ public interface KaoqinRuleMapper {
      * @param record  参数的id属性必须不为空
      * @return 修改成功的行数
      */
-    int update(KaoqinRule record);
+    int updateByPrimaryKey(KaoqinRule record);
     /**
      * 查询规则
      * @param id  规则id号,如果id为空，则查询所有规则
