@@ -592,12 +592,20 @@
     AND  office_type = 4
     AND parent_id in (SELECT ID FROM office o WHERE o.office_type = 3 AND o.ID=#{classId})
   </select>
-  <select id="selectOfficeByOfficeType" resultType="com.tosit.ssm.entity.Office" parameterType="java.lang.String">
+  <select id="selectOfficeByOfficeType" resultType="com.tosit.ssm.entity.Office" parameterType="java.lang.Integer">
     SELECT
     <include refid="Base_Column_List"/>
     FROM office
     WHERE is_del = 1
     AND  office_type = #{officeType}
 
+  </select>
+  <select id="selectOfficeByMasterAndSchool" resultType="com.tosit.ssm.entity.Office" parameterType="com.tosit.ssm.entity.Office">
+    SELECT
+      o1.*
+    FROM office o1
+      LEFT JOIN office o2
+        ON o1.parent_id = o2.ID
+    WHERE o1.is_del=1 AND o1.office_type=3 AND o2.is_del =1 AND o2.office_type=2 AND o2.ID=#{id} AND o1.`master`=#{master}
   </select>
 </mapper>

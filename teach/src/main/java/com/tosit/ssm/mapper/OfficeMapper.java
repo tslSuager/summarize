@@ -81,5 +81,12 @@ public interface OfficeMapper {
      * @param officeType 区域或学校或班级的id
      * @return 满足条件的组织
      */
-    List<Office> selectOfficeByOfficeType(@Param("officeType") String officeType);
+    List<Office> selectOfficeByOfficeType(@Param("officeType") Integer officeType);
+
+    /**
+     * 查询某个教员某个学校的班
+     * @param office  其中建议只有master 和 学校id （提醒：这两个属性没有直接的关联，这里使用Office类只是暂存数据【id和master】）
+     * @return 返回满足条件的班级
+     */
+    List<Office> selectOfficeByMasterAndSchool(Office office);
 }
