@@ -275,4 +275,11 @@
     where ID = #{record.id,jdbcType=VARCHAR}
   </update>
 
+  <select id="selectById" parameterType="string" resultMap="BaseResultMap">
+    SELECT * FROM experience where user_id = #{value}
+  </select>
+  <select id="selectByIdToType" parameterType="string" resultMap="BaseResultMap">
+    SELECT * FROM experience where user_id = #{userId} and type = 1
+  </select>
+
 </mapper>
