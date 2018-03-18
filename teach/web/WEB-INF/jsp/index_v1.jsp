@@ -76,29 +76,46 @@
 <body class="gray-bg">
 <div class="row  border-bottom white-bg dashboard-header">
     <div class="row">
-        <div class="form-group col-sm-4">
-            <div class="form-group" id="data_5">
+        <div class="form-group col-sm-5">
+            <div class="form-group col-sm-7" id="data_5">
                 <div class="input-daterange input-group" id="datepicker">
                     <input type="text" class="input-sm form-control" name="start" value="2018-3-9" />
                     <span class="input-group-addon">到</span>
                     <input type="text" class="input-sm form-control" name="end" value="2018-3-9" />
                 </div>
             </div>
-        </div>
-        <div class="form-group draggable col-sm-6">
-            <div class="col-sm-6">
-                <select class="form-control" name="">
-                    <option>四川</option>
-                    <option>重庆</option>
-                    <option>新疆</option>
-                </select>
+            <div class="input-group col-sm-1">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-primary">搜索</button>
+                    </span>
             </div>
-            <div class="col-sm-6">
-                <select class="form-control" name="">
-                    <option>四川科技大学</option>
-                    <option>四川大学</option>
-                    <option>新疆大学</option>
-                </select>
+            <div class="col-sm-4"></div>
+        </div>
+        <div class="form-group draggable col-sm-5">
+            <div class="col-sm-5">
+                <label class="col-sm-3 control-label" style="margin-top: 8px">地区</label>
+                <div class="col-sm-9">
+                    <select class="form-control" name="">
+                        <option>四川</option>
+                        <option>重庆</option>
+                        <option>新疆</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <label class="col-sm-3 control-label" style="margin-top: 8px">学校</label>
+                <div class="col-sm-9">
+                    <select class="form-control" name="">
+                        <option>四川科技大学</option>
+                        <option>四川大学</option>
+                        <option>新疆大学</option>
+                    </select>
+                </div>
+            </div>
+            <div class="input-group col-sm-2">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-primary">搜索</button>
+                    </span>
             </div>
         </div>
         <div  class="nav navbar-right col-sm-2">
@@ -109,8 +126,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-1"></div>
-        <div class="col-sm-10">
+        <div class="col-sm-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-content">
                     <table class="table table-bordered table-hover">
@@ -139,14 +155,18 @@
                                 <button class="btn btn-outline btn-success createTeachingPlan" type="button" style="margin-right: 10px; "><a href="/page/jiaoan/show_plan">新建教学计划</a></button></td>
                             </td>
                             <td>
-                                <select class="form-control" name="select">
-                                    <option>按学号</option>
-                                    <option>按手机号</option>
-                                </select>
-                                <button class="btn btn-outline btn-info createNumber" type="button">生成账号</button>
+                                <div class="col-sm-6">
+                                    <select class="form-control" name="select">
+                                        <option>按学号</option>
+                                        <option>按手机号</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-2"><button class="btn btn-outline btn-info createNumber" type="button">生成账号</button></div>
+                                <div class="col-sm-4"></div>
                             </td>
                             <td>
-                                <button class="btn btn-outline btn-info addTeacher" type="button">添加教师</button>
+                                <button class="btn btn-outline btn-info addTeacher" type="button" style="margin-right: 10px; ">添加教师</button>
+                                <button class="btn btn-outline btn-success initialization " type="button" style="margin-right: 10px; ">初始成绩</button>
                                 <button class="btn btn-outline btn-warning reviseClass" type="button" style="margin-right: 10px; ">修改班级</button>
                                 <button class="btn btn-outline btn-danger deleteClass" type="button">删除班级</button>
                             </td>
@@ -156,7 +176,6 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-1"></div>
     </div>
 </div>
 
@@ -194,7 +213,7 @@
     });
     $('#addClass').click(function () {
         layer.prompt({title: '输入班级名称', formType: 2}, function(text, index){
-            $.get("/class/add",{text},function () {
+            $.get(/*"/class/add",{text},*/function () {
                 $('.table').append('<tr>\n' +
                     '                                <td>'+text+'</td>\n' +
                     '                                <td><button class="btn btn-outline btn-info checkClassInfo" type="button" >查看班级信息</button></td>\n' +
@@ -337,6 +356,24 @@
             btn:['确认添加','算了'],
             btn1:function (index,layero) {
                 layer.msg('添加成功');
+            },
+            btn2:function (index,layero) {
+                layer.close(index);
+            }
+        });
+    });
+
+    $("body").on("click",".initialization",function () {
+        layer.open({
+            type: 2,
+            title: '初始成绩',
+            shadeClose: true,
+            shade: 0.8,
+            area: ['30%', '50%'],
+            content: '/Initialization.jsp',
+            btn:['确认','算了'],
+            btn1:function (index,layero) {
+                layer.msg('初始成功');
             },
             btn2:function (index,layero) {
                 layer.close(index);

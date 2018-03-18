@@ -12,7 +12,7 @@
     <result column="remarks" jdbcType="VARCHAR" property="remarks" />
     <result column="is_del" jdbcType="INTEGER" property="isDel" />
   </resultMap>
-  <!--<sql id="Example_Where_Clause">
+  <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
         <if test="criteria.valid">
@@ -73,7 +73,7 @@
   <sql id="Base_Column_List">
     ID, user_id, office_id, create_time, create_by, update_time, update_by, remarks, 
     is_del
-  </sql>-->
+  </sql>
   <!--<select id="selectByExample" parameterType="com.tosit.ssm.entity.UserOfficeExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -181,41 +181,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update user_office
-    <set>
-      <if test="record.id != null">
-        ID = #{record.id,jdbcType=VARCHAR},
-      </if>
-      <if test="record.userId != null">
-        user_id = #{record.userId,jdbcType=VARCHAR},
-      </if>
-      <if test="record.officeId != null">
-        office_id = #{record.officeId,jdbcType=VARCHAR},
-      </if>
-      <if test="record.createTime != null">
-        create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.createBy != null">
-        create_by = #{record.createBy,jdbcType=VARCHAR},
-      </if>
-      <if test="record.updateTime != null">
-        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.updateBy != null">
-        update_by = #{record.updateBy,jdbcType=VARCHAR},
-      </if>
-      <if test="record.remarks != null">
-        remarks = #{record.remarks,jdbcType=VARCHAR},
-      </if>
-      <if test="record.isDel != null">
-        is_del = #{record.isDel,jdbcType=INTEGER},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
+
   <update id="updateByExample" parameterType="map">
     update user_office
     set ID = #{record.id,jdbcType=VARCHAR},
@@ -273,9 +239,41 @@
       is_del = #{isDel,jdbcType=INTEGER}
     where ID = #{id,jdbcType=VARCHAR}
   </update>-->
+  <update id="updateByExampleSelective" parameterType="com.tosit.ssm.entity.UserOffice">
+    update user_office
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.officeId != null">
+        office_id = #{record.officeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createBy != null">
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateBy != null">
+        update_by = #{record.updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDel != null">
+        is_del = #{record.isDel,jdbcType=INTEGER},
+      </if>
+    </set>
+    WHERE id =#{record.id}
+  </update>
 
-
-  <insert id="insert" parameterType="com.tosit.ssm.entity.UserOffice">
+  <insert id="insertUserOffice" parameterType="com.tosit.ssm.entity.UserOffice">
     insert into user_office
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

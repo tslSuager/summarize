@@ -34,5 +34,10 @@ public interface KaoqinRecordsMapper {
      */
     int updateByPrimaryKey(@Param("record") KaoqinRecords record);
 
-
+    /**
+     * 查询某人某天的考勤记录
+     * @param record 包含需要查询的日期字段 和 查询某人的id
+     * @return 返回某人该天的所有记录
+     */
+    List<KaoqinRecords> selectByIdByDate(@Param("record") KaoqinRecords record);
 }

@@ -33,4 +33,17 @@ public interface ExperienceMapper {
      */
     int updateByPrimaryKey(@Param("record") Experience record);
 
+    /**
+     * 获取某个人的所有经历
+     * @param userId 用户的id
+     * @return 返回该用户一个Experience的集合
+     */
+    List<Experience> selectById(String userId);
+
+    /**
+     * 获取某个人的所有经历
+     * @param userId 用户的id
+     * @return 返回该用户的type类型为1的Experience的集合
+     */
+    List<Experience> selectByIdToType(String userId);
 }

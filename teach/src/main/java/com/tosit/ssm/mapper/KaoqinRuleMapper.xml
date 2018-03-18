@@ -266,99 +266,100 @@
     where ID = #{id,jdbcType=VARCHAR}
   </update>-->
   <insert id="insert" parameterType="com.tosit.ssm.entity.KaoqinRule">
-    insert into kaoqin_rule (ID,
-    <if test="rulename != null">
-      ,ruleName
-    </if>
-    <if test="remarks != null">
-      , remarks
-    </if>
-    <if test="ruleType != null">
-      ,rule_type
-    </if>
-    <if test="isDefault != null">
-      , is_default
-    </if>
-    <if test="createTime != null">
-      , create_time
-    </if>
-    <if test="createBy != null">
-      ,create_by
-    </if>
-    <if test="updateTime != null">
-      , update_time
-    </if>
-    <if test="updateBy != null">
-      , update_by
-    </if>
-
-    )
-    values (#{id}
-    <if test="rulename != null">
-      , #{rulename}
-    </if>
-    <if test="remarks != null">
-      , #{remarks}
-    </if>
-    <if test="ruleType != null">
-      #{ruleType}
-    </if>
-    <if test="isDefault != null">
-      , #{isDefault}
-    </if>
-    <if test="createTime != null">, #{createTime}</if>
-    <if test="createBy != null">,#{createBy}</if>
-    <if test="updateTime != null">, #{updateTime}</if>
-    <if test="updateBy != null">, #{updateBy}</if>
-    )
+    insert into kaoqin_rule
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="rulename != null">
+        ruleName,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="ruleType != null">
+        rule_type,
+      </if>
+      <if test="isDefault != null">
+        is_default,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="rulename != null">
+        #{rulename,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleType != null">
+        #{ruleType,jdbcType=INTEGER},
+      </if>
+      <if test="isDefault != null">
+        #{isDefault,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </trim>
   </insert>
-  <update id="update" parameterType="com.tosit.ssm.entity.KaoqinRule">
-    <!--UPDATE kaoqin_rule SET (
-    <if test="rulename != null">
-      ,ruleName
+  <update id="updateByPrimaryKey" parameterType="com.tosit.ssm.entity.KaoqinRule">
+    update kaoqin_rule
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rulename != null">
+        ruleName = #{record.rulename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ruleType != null">
+        rule_type = #{record.ruleType,jdbcType=INTEGER},
+      </if>
+      <if test="record.isDefault != null">
+        is_default = #{record.isDefault,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createBy != null">
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateBy != null">
+        update_by = #{record.updateBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
     </if>
-    <if test="remarks != null">
-      , remarks
-    </if>
-    <if test="ruleType != null">
-      ,rule_type
-    </if>
-    <if test="isDefault != null">
-      , is_default
-    </if>
-    <if test="createTime != null">
-      , create_time
-    </if>
-    <if test="createBy != null">
-      ,create_by
-    </if>
-    <if test="updateTime != null">
-      , update_time
-    </if>
-    <if test="updateBy != null">
-      , update_by
-    </if>
-    )
-    values (#{id}
-    <if test="rulename != null">
-      , #{rulename}
-    </if>
-    <if test="remarks != null">
-      , #{remarks}
-    </if>
-    <if test="ruleType != null">
-      #{ruleType}
-    </if>
-    <if test="isDefault != null">
-      , #{isDefault}
-    </if>
-    <if test="createTime != null">, #{createTime}</if>
-    <if test="createBy != null">,#{createBy}</if>
-    <if test="updateTime != null">, #{updateTime}</if>
-    <if test="updateBy != null">, #{updateBy}</if>
-    )-->
-
-
   </update>
   <select id="selectRule" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
