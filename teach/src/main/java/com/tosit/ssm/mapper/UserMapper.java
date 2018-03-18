@@ -73,6 +73,7 @@ public interface UserMapper {
      */
     List<User> selectByClassAndKRule();
 
+
     /**
      * 获取某个班未关联考勤规则的人
      * @param officeId
@@ -94,4 +95,10 @@ public interface UserMapper {
      * @return
      */
     List<User> selectKaoqinOrShensu(@Param("id") String officeId);
+
+
+
+
+
+
 }
