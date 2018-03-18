@@ -362,6 +362,24 @@
             }
         });
     });
+
+    $("body").on("click",".initialization",function () {
+        layer.open({
+            type: 2,
+            title: '初始成绩',
+            shadeClose: true,
+            shade: 0.8,
+            area: ['30%', '50%'],
+            content: '/Initialization.jsp',
+            btn:['确认','算了'],
+            btn1:function (index,layero) {
+                layer.msg('初始成功');
+            },
+            btn2:function (index,layero) {
+                layer.close(index);
+            }
+        });
+    });
 </script>
 </body>
 

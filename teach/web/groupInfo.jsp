@@ -172,21 +172,21 @@
                 for (var i=1;i<=num;i++){
                     var ss="#tab-"+i;
                     if (i===1){
-                        $('#className').append($("<li>").addClass("active group1").append($("<a>").attr("data-toggle","tab").attr("href",ss).text("第"+i+"组")));
+                        $('#className').append($("<li>").addClass("active group1").append($("<a>").attr("data-toggle","tab").attr("href",ss).text("第"+i+"组"))
+                            .append($("<button>").addClass("btn btn-outline btn-danger btn-xs buttonCss deleteGroup").text("删除该组")));
                         $('.tab-content').append($("<div>").attr("id","tab-"+i).addClass("tab-pane active").append($("<div>").addClass("panel-body").attr("id","group"+i)
-                            .append($("<div>").append($("<button>").addClass("btn btn-outline btn-danger btn-xs buttonCss deleteGroup").text("删除该组")))));
+                            ));
                     }else {
-                        $('#className').append($("<li>").addClass("group"+i+"").append($("<a>").attr("data-toggle","tab").attr("href",ss).text("第"+i+"组")));
-                        $('.tab-content').append($("<div>").attr("id","tab-"+i).addClass("tab-pane").append($("<div>").addClass("panel-body").attr("id","group"+i)
-                            .append($("<div>").append($("<button>").addClass("btn btn-outline btn-danger btn-xs buttonCss deleteGroup").text("删除该组")))));
+                        $('#className').append($("<li>").addClass("group"+i+"").append($("<a>").attr("data-toggle","tab").attr("href",ss).text("第"+i+"组"))
+                            .append($("<button>").addClass("btn btn-outline btn-danger btn-xs buttonCss deleteGroup").text("删除该组")));
+                        $('.tab-content').append($("<div>").attr("id","tab-"+i).addClass("tab-pane").append($("<div>").addClass("panel-body").attr("id","group"+i)));
                     }
                 }
             }
             $(this).attr("text",num);
         });
         $("body").on("click",".deleteGroup",function () {
-            var attr = "#"+$(this).parent().parent().parent().attr("id");
-            alert(attr);
+            $(this).parent().remove();
         });
     });
 </script>

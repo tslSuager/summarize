@@ -31,125 +31,104 @@
 </head>
 <body class="gray-bg">
 <div class="wrapper wrapper-content animated fadeInRight">
-    <!-- End Panel Basic -->
-    <!-- Panel Style -->
-    <!-- End Panel Style -->
-    <!-- Panel Sort & Hideheader -->
-    <!-- End Panel Sort & Hideheader -->
-    <!-- Panel Columns & Select -->
-    <!-- End Panel Columns & Select -->
-    <!-- Panel Other -->
     <div class="col-sm-12">
-        <!-- Example Events -->
         <div class="example-wrap">
-            <h4 class="example-title">事件</h4>
             <div class="example">
-                <%--<div class="btn-group hidden-xs" id="exampleTableEventsToolbar" role="group">
-                    <button type="button" class="btn btn-outline btn-default">
-                        <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
-                    </button>
-                    <button type="button" class="btn btn-outline btn-default">
-                        <i class="glyphicon glyphicon-heart" aria-hidden="true"></i>
-                    </button>
-                    <button type="button" class="btn btn-outline btn-default">
-                        <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
-                    </button>
-                </div>--%>
                 <table id="exampleTableEvents" data-height="400" data-mobile-responsive="true">
                     <thead>
                     <tr>
-                        <th data-field="state" data-checkbox="true"></th>
+                        <%--<th data-field="state" data-checkbox="true"></th>--%>
                         <th data-field="id">学号</th>
-                        <th data-field="word">班级</th>
+                        <th data-field="sex">性别</th>
                         <th data-field="name">姓名</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
-                        <td></td>
+
                         <td>1</td>
                         <td>Java</td>
                         <td>小明</td>
                     </tr>
                     <tr>
-                        <td></td>
+
                         <td>1</td>
                         <td>Java</td>
                         <td>小明</td>
                     </tr>
                     <tr>
-                        <td></td>
+
                         <td>1</td>
                         <td>Java</td>
                         <td>小明</td>
                     </tr>
                     <tr>
-                        <td></td>
+
                         <td>1</td>
                         <td>Java</td>
                         <td>小明</td>
                     </tr>
                     <tr>
-                        <td></td>
+
                         <td>1</td>
                         <td>Java</td>
                         <td>小明</td>
                     </tr>
                     <tr>
-                        <td></td>
+
                         <td>1</td>
                         <td>Java</td>
                         <td>小明</td>
                     </tr><tr>
-                        <td></td>
+
                         <td>1</td>
                         <td>Java</td>
                         <td>小明</td>
                     </tr>
                     <tr>
-                        <td></td>
+
                         <td>1</td>
                         <td>Java</td>
                         <td>小明</td>
                     </tr>
                     <tr>
-                        <td></td>
+
                         <td>1</td>
                         <td>Java</td>
                         <td>小明</td>
                     </tr>
                     <tr>
-                        <td></td>
+
                         <td>1</td>
                         <td>Java</td>
                         <td>小明</td>
                     </tr>
                     <tr>
-                        <td></td>
+
                         <td>1</td>
                         <td>Java</td>
                         <td>小明</td>
                     </tr>
                     <tr>
-                        <td></td>
+
                         <td>2</td>
                         <td>Java</td>
                         <td>小明</td>
                     </tr>
                     <tr>
-                        <td></td>
+
                         <td>2</td>
                         <td>Java</td>
                         <td>小明</td>
                     </tr>
                     <tr>
-                        <td></td>
+
                         <td>2</td>
                         <td>Java</td>
                         <td>小刚</td>
                     </tr>
                     <tr>
-                        <td></td>
+
                         <td>3</td>
                         <td>Java</td>
                         <td>小刚</td>
@@ -161,14 +140,10 @@
         <div class="row">
             <div class="col-sm-11"></div>
             <div class="col-sm-1">
-                <button class="btn btn-primary submitMsg">提交</button>
+                <button class="btn btn-primary submitMsg">关联</button>
             </div>
         </div>
-
-        <!-- End Example Events -->
     </div>
-</div>
-    <!-- End Panel Other -->
 </div>
 <script src="/static/js/jquery.min.js?v=2.1.4"></script>
 <script src="/static/js/bootstrap.min.js?v=3.3.6"></script>
@@ -186,7 +161,7 @@
             title: '考勤规则',
             shadeClose: true,
             shade: 0.8,
-            area: ['30%', '50%'],
+            area: ['100%', '100%'],
             content: '/matchClassAttendance.jsp',
             btn:['确认绑定','算了'],
             btn1:function (index,layero) {
