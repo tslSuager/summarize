@@ -608,4 +608,10 @@
         ON o1.parent_id = o2.ID
     WHERE o1.is_del=1 AND o1.office_type=3 AND o2.is_del =1 AND o2.office_type=2 AND o2.ID=#{id} AND o1.`master`=#{master}
   </select>
+  <select id="selectOfficeByMasterAndDate" resultType="com.tosit.ssm.entity.Office" parameterType="com.tosit.ssm.entity.Office">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM office
+    WHERE is_del =1 AND `master` =#{master} AND office_type = 3 AND (create_time BETWEEN DATE_FORMAT(#{createTime},'%Y-%m-%d %H:%i:%s') AND DATE_FORMAT(#{uploadTime},'%Y-%m-%d %H:%i:%s') )
+  </select>
 </mapper>
