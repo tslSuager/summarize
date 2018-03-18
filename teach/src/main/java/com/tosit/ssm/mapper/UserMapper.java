@@ -73,4 +73,32 @@ public interface UserMapper {
      */
     List<User> selectByClassAndKRule();
 
+
+    /**
+     * 获取某个班未关联考勤规则的人
+     * @param officeId
+     * @return
+     */
+    List<User> selectNoGuize(@Param("id") String officeId);
+
+
+    /**
+     * 获取某个班今天之前迟到的人
+     * @param officeId
+     * @return
+     */
+    List<User> selectChidaoBeforToday(@Param("id") String officeId);
+
+    /**
+     * 获取某个班今申诉或考勤的人
+     * @param officeId
+     * @return
+     */
+    List<User> selectKaoqinOrShensu(@Param("id") String officeId);
+
+
+
+
+
+
 }
