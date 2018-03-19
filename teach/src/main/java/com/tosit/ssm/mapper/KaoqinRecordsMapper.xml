@@ -401,6 +401,7 @@
   </update>
 
   <select id="selectByIdByDate"  resultMap="BaseResultMap">
-    SELECT * FROM kaoqin_records WHERE (DATE_FORMAT(brushTime, '%Y-%m-%d') = DATE_FORMAT(#{record.brushtime}, '%Y-%m-%d')) AND User_id=#{record.userId}
+    SELECT * FROM kaoqin_records WHERE (DATE_FORMAT(brushTime, '%Y-%m-%d') = DATE_FORMAT(#{record.brushtime}, '%Y-%m-%d'))
+     AND User_id=#{record.userId} and  isYouxiao=1
   </select>
 </mapper>
