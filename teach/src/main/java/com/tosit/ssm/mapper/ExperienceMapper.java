@@ -46,4 +46,8 @@ public interface ExperienceMapper {
      * @return 返回该用户的type类型为1的Experience的集合
      */
     List<Experience> selectByIdToType(String userId);
+
+
+
+
 }

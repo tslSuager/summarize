@@ -35,14 +35,19 @@ public class OfficecController {
         office.setId(UUID.randomUUID().toString().replaceAll("-",""));
         officeService.createOffice(office);
     }
-    @GetMapping("/getArea")
+
+    /**
+     *  获取所有区域
+     * @return
+     */
+    @GetMapping("/getAllArea")
     @ResponseBody
-    public Object getArea() {
+    public Object getAllArea() {
         System.out.println("我执行了");
-        List<Office> area = officeService.getArea();
-        System.out.println(area.size());
+        List<Office> area = officeService.getAllArea();
+
         JSONModel.put("allArea",area);
-       return JSONModel.put();
+        return JSONModel.put();
     }
 
 

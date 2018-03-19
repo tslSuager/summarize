@@ -16,7 +16,9 @@ public class OfficeServiceImpl {
         officeMapper.insertOffice(office);
     }
 
-    public List<Office> getArea() {
+    public List<Office> getAllArea() {
         return  officeMapper.selectArea();
     }
+
+
 }
