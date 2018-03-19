@@ -51,6 +51,14 @@ public class KaoqinResult {
 
     private Integer isDel;
 
+    private String kaoqinShenshuReply;
+
+    private String kaoqinRemarkReply;
+
+    private Date kaoqinShenshuReqtime;
+
+    private Date kaoqinRemarkReqtime;
+
     public String getId() {
         return id;
     }
@@ -241,5 +249,37 @@ public class KaoqinResult {
 
     public void setIsDel(Integer isDel) {
         this.isDel = isDel;
+    }
+
+    public String getKaoqinShenshuReply() {
+        return kaoqinShenshuReply;
+    }
+
+    public void setKaoqinShenshuReply(String kaoqinShenshuReply) {
+        this.kaoqinShenshuReply = kaoqinShenshuReply == null ? null : kaoqinShenshuReply.trim();
+    }
+
+    public String getKaoqinRemarkReply() {
+        return kaoqinRemarkReply;
+    }
+
+    public void setKaoqinRemarkReply(String kaoqinRemarkReply) {
+        this.kaoqinRemarkReply = kaoqinRemarkReply == null ? null : kaoqinRemarkReply.trim();
+    }
+
+    public Date getKaoqinShenshuReqtime() {
+        return kaoqinShenshuReqtime;
+    }
+
+    public void setKaoqinShenshuReqtime(Date kaoqinShenshuReqtime) {
+        this.kaoqinShenshuReqtime = kaoqinShenshuReqtime;
+    }
+
+    public Date getKaoqinRemarkReqtime() {
+        return kaoqinRemarkReqtime;
+    }
+
+    public void setKaoqinRemarkReqtime(Date kaoqinRemarkReqtime) {
+        this.kaoqinRemarkReqtime = kaoqinRemarkReqtime;
     }
 }
