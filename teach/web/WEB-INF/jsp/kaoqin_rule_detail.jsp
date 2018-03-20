@@ -140,58 +140,21 @@
                         </div>
                     </form>
                     <%--方案一--%>
-                    <form class="form-horizontal m-t form_bb">
+                    <form class="form-horizontal m-t form_bb" action="/checking/addKaoQinRule" >
                         <div class="form-group" style="margin-left:5px;">
                             <label class=" " style="">规则名称：</label>
-                            <input placeholder="请输入规则名称" class="form-control" type="email" style="width: 200px; display: inline;">
+                            <input placeholder="请输入规则名称" class="form-control" name="rulename"  style="width: 200px; display: inline;">
                             <label class="" style="">规则备注：</label>
-                            <input placeholder="请输入规则备注" class="form-control" type="email" style="width: 400px;display: inline;">
-                            <%--<div class="col-sm-4">
-                               &lt;%&ndash; <div class="radio i-checks" >
-                                    <label>
-                                        <div class="iradio_square-green" style="position: relative;"><input checked=""
-                                                                                                            value="option1"
-                                                                                                            name="a"
-                                                                                                            style="position: absolute; opacity: 0;"
-                                                                                                            type="radio">
-                                            <ins class="iCheck-helper"
-                                                 style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255) none repeat scroll 0% 0%; border: 0px none; opacity: 0;"></ins>
-                                        </div>
-                                        <i></i> 方案一
-                                    </label>
-                                    <label class="">
-                                        <div class="iradio_square-green " style="position: relative;"><input
-                                                value="option2"
-                                                name="a"
-                                                style="position: absolute; opacity: 0;"
-                                                type="radio">
-                                            <ins class="iCheck-helper"
-                                                 style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255) none repeat scroll 0% 0%; border: 0px none; opacity: 0;"></ins>
-                                        </div>
-                                        <i></i> 方案二</label>
-                                    <label>
-                                        <div class="iradio_square-green" style="position: relative;"><input
-                                                value="option1" name="a" style="position: absolute; opacity: 0;"
-                                                type="radio">
-                                            <ins class="iCheck-helper"
-                                                 style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255) none repeat scroll 0% 0%; border: 0px none; opacity: 0;"></ins>
-                                        </div>
-                                        <i></i> 方案三</label>
-                                    <label>
-                                        <div class="iradio_square-green" style="position: relative;"><input
-                                                value="option1" name="a" style="position: absolute; opacity: 0;"
-                                                type="radio">
-                                            <ins class="iCheck-helper"
-                                                 style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255) none repeat scroll 0% 0%; border: 0px none; opacity: 0;"></ins>
-                                        </div>
-                                        <i></i> 方案四</label>
-                                </div>&ndash;%&gt;
-                            </div>--%>
+                            <input placeholder="请输入规则备注" class="form-control" name="remarks" style="width: 400px;display: inline;">
+
+                            <input type="text" hidden name="ruleType" value="1">
                         </div>
+
                         <div style="overflow-x: scroll ;">
                             <table class="table-bordered " >
                                 <tr >
                                     <td><label class="col-sm-1 control-label labelleft" style="width: 100px;" >星期一：</label>
+                                        <input type="text" name="krd[0].weekDay" hidden value="1">
                                     </td>
                                     <td><span class="checkbox i-checks">
                                         <label class="">
@@ -205,22 +168,24 @@
                                         <label class=" labelleft control-label" style="width: 120px;">
                                             第一次打卡时间：</label>
                                     </td>
-                                    <td ><input style="width: 100px;" class="form-control layer-date labelright single-input"
+                                    <td ><input style="width: 100px;" class="form-control layer-date labelright single-input" name="krd[0].brushStarttime1"
                                                 value="" placeholder="起始时间">&nbsp;&nbsp;
                                     </td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               value="" name="krd[0].brushEndtime1" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " name="krd[0].time1Wucha" value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第二次打卡时间：</label></td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
-                                               value="" placeholder="起始时间">&nbsp;&nbsp;
+                                               value="" name="krd[0].brushStarttime2" placeholder="起始时间">&nbsp;&nbsp;
                                     </td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               value="" name="krd[0].brushEndtime2" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " name="krd[0].time1Wucha2" value="" placeholder="矿工标准"></td>
                                 </tr>
                                 <tr >
-                                    <td><label class="col-sm-1 control-label labelleft" style="width: 100px;" >星期一：</label>
+                                    <td>
+                                        <label class="col-sm-1 control-label labelleft" style="width: 100px;" >星期二：</label>
+                                        <input type="text" name="krd[1].weekDay" hidden value="2">
                                     </td>
                                     <td><span class="checkbox i-checks">
                                         <label class="">
@@ -234,22 +199,23 @@
                                         <label class=" labelleft control-label" style="width: 120px;">
                                             第一次打卡时间：</label>
                                     </td>
-                                    <td ><input style="width: 100px;" class="form-control layer-date labelright single-input"
+                                    <td ><input style="width: 100px;" class="form-control layer-date labelright single-input" name="krd[1].brushStarttime1"
                                                 value="" placeholder="起始时间">&nbsp;&nbsp;
                                     </td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               value="" name="krd[1].brushEndtime1" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " name="krd[1].time1Wucha" value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第二次打卡时间：</label></td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
-                                               value="" placeholder="起始时间">&nbsp;&nbsp;
+                                               value="" name="krd[1].brushStarttime2" placeholder="起始时间">&nbsp;&nbsp;
                                     </td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               value="" name="krd[1].brushEndtime2" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " name="krd[1].time1Wucha2" value="" placeholder="矿工标准"></td>
                                 </tr>
                                 <tr >
-                                    <td><label class="col-sm-1 control-label labelleft" style="width: 100px;" >星期一：</label>
+                                    <td><label class="col-sm-1 control-label labelleft" style="width: 100px;" >星期三：</label>
+                                        <input type="text" name="krd[2].weekDay" hidden value="3">
                                     </td>
                                     <td><span class="checkbox i-checks">
                                         <label class="">
@@ -263,22 +229,23 @@
                                         <label class=" labelleft control-label" style="width: 120px;">
                                             第一次打卡时间：</label>
                                     </td>
-                                    <td ><input style="width: 100px;" class="form-control layer-date labelright single-input"
+                                    <td ><input style="width: 100px;" class="form-control layer-date labelright single-input" name="krd[2].brushStarttime1"
                                                 value="" placeholder="起始时间">&nbsp;&nbsp;
                                     </td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               value="" name="krd[2].brushEndtime1" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " name="krd[2].time1Wucha" value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第二次打卡时间：</label></td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
-                                               value="" placeholder="起始时间">&nbsp;&nbsp;
+                                               value="" name="krd[2].brushStarttime2" placeholder="起始时间">&nbsp;&nbsp;
                                     </td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               value="" name="krd[2].brushEndtime2" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " name="krd[2].time1Wucha2" value="" placeholder="矿工标准"></td>
                                 </tr>
                                 <tr >
-                                    <td><label class="col-sm-1 control-label labelleft" style="width: 100px;" >星期一：</label>
+                                    <td><label class="col-sm-1 control-label labelleft" style="width: 100px;" >星期四：</label>
+                                        <input type="text" name="krd[3].weekDay" hidden value="4">
                                     </td>
                                     <td><span class="checkbox i-checks">
                                         <label class="">
@@ -292,22 +259,23 @@
                                         <label class=" labelleft control-label" style="width: 120px;">
                                             第一次打卡时间：</label>
                                     </td>
-                                    <td ><input style="width: 100px;" class="form-control layer-date labelright single-input"
+                                    <td ><input style="width: 100px;" class="form-control layer-date labelright single-input" name="krd[3].brushStarttime1"
                                                 value="" placeholder="起始时间">&nbsp;&nbsp;
                                     </td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               value="" name="krd[3].brushEndtime1" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " name="krd[3].time1Wucha" value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第二次打卡时间：</label></td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
-                                               value="" placeholder="起始时间">&nbsp;&nbsp;
+                                               value="" name="krd[3].brushStarttime2" placeholder="起始时间">&nbsp;&nbsp;
                                     </td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               value="" name="krd[3].brushEndtime2" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " name="krd[3].time1Wucha2" value="" placeholder="矿工标准"></td>
                                 </tr>
                                 <tr >
-                                    <td><label class="col-sm-1 control-label labelleft" style="width: 100px;" >星期一：</label>
+                                    <td><label class="col-sm-1 control-label labelleft" style="width: 100px;" >星期五：</label>
+                                        <input type="text" name="krd[4].weekDay" hidden value="5">
                                     </td>
                                     <td><span class="checkbox i-checks">
                                         <label class="">
@@ -321,22 +289,23 @@
                                         <label class=" labelleft control-label" style="width: 120px;">
                                             第一次打卡时间：</label>
                                     </td>
-                                    <td ><input style="width: 100px;" class="form-control layer-date labelright single-input"
+                                    <td ><input style="width: 100px;" class="form-control layer-date labelright single-input" name="krd[4].brushStarttime1"
                                                 value="" placeholder="起始时间">&nbsp;&nbsp;
                                     </td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               value="" name="krd[4].brushEndtime1" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " name="krd[4].time1Wucha" value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第二次打卡时间：</label></td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
-                                               value="" placeholder="起始时间">&nbsp;&nbsp;
+                                               value="" name="krd[4].brushStarttime2" placeholder="起始时间">&nbsp;&nbsp;
                                     </td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               value="" name="krd[4].brushEndtime2" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " name="krd[4].time1Wucha2" value="" placeholder="矿工标准"></td>
                                 </tr>
                                 <tr >
-                                    <td><label class="col-sm-1 control-label labelleft" style="width: 100px;" >星期一：</label>
+                                    <td><label class="col-sm-1 control-label labelleft" style="width: 100px;" >星期六：</label>
+                                        <input type="text" name="krd[5].weekDay" hidden value="6">
                                     </td>
                                     <td><span class="checkbox i-checks">
                                         <label class="">
@@ -350,22 +319,23 @@
                                         <label class=" labelleft control-label" style="width: 120px;">
                                             第一次打卡时间：</label>
                                     </td>
-                                    <td ><input style="width: 100px;" class="form-control layer-date labelright single-input"
+                                    <td ><input style="width: 100px;" class="form-control layer-date labelright single-input" name="krd[5].brushStarttime1"
                                                 value="" placeholder="起始时间">&nbsp;&nbsp;
                                     </td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               value="" name="krd[5].brushEndtime1" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " name="krd[5].time1Wucha" value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第二次打卡时间：</label></td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
-                                               value="" placeholder="起始时间">&nbsp;&nbsp;
+                                               value="" name="krd[5].brushStarttime2" placeholder="起始时间">&nbsp;&nbsp;
                                     </td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               value="" name="krd[5].brushEndtime2" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " name="krd[5].time1Wucha2" value="" placeholder="矿工标准"></td>
                                 </tr>
                                 <tr >
-                                    <td><label class="col-sm-1 control-label labelleft" style="width: 100px;" >星期一：</label>
+                                    <td><label class="col-sm-1 control-label labelleft" style="width: 100px;" >星期日：</label>
+                                        <input type="text" name="krd[6].weekDay" hidden value="7">
                                     </td>
                                     <td><span class="checkbox i-checks">
                                         <label class="">
@@ -379,49 +349,20 @@
                                         <label class=" labelleft control-label" style="width: 120px;">
                                             第一次打卡时间：</label>
                                     </td>
-                                    <td ><input style="width: 100px;" class="form-control layer-date labelright single-input"
+                                    <td ><input style="width: 100px;" class="form-control layer-date labelright single-input" name="krd[6].brushStarttime1"
                                                 value="" placeholder="起始时间">&nbsp;&nbsp;
                                     </td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               value="" name="krd[6].brushEndtime1" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " name="krd[6].time1Wucha" value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第二次打卡时间：</label></td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
-                                               value="" placeholder="起始时间">&nbsp;&nbsp;
+                                               value="" name="krd[6].brushStarttime2" placeholder="起始时间">&nbsp;&nbsp;
                                     </td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               value="" name="krd[6].brushEndtime2" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " name="krd[6].time1Wucha2" value="" placeholder="矿工标准"></td>
                                 </tr>
-                                <tr >
-                                <td><label class="col-sm-1 control-label labelleft" style="width: 100px;" >星期一：</label>
-                                </td>
-                                <td><span class="checkbox i-checks">
-                                        <label class="">
-                                        <div class="icheckbox_square-green " style="position: relative;"><input value=""
-                                                                                                                style="position: absolute; opacity: 0;"
-                                                                                                                type="checkbox"><ins
-                                                class="iCheck-helper"
-                                                style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255) none repeat scroll 0% 0%; border: 0px none; opacity: 0;"></ins></div> <i></i> 不打卡</label>
-                                     </span></td>
-                                <td>
-                                    <label class=" labelleft control-label" style="width: 120px;">
-                                        第一次打卡时间：</label>
-                                </td>
-                                <td ><input style="width: 100px;" class="form-control layer-date labelright single-input"
-                                            value="" placeholder="起始时间">&nbsp;&nbsp;
-                                </td>
-                                <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
-                                           value="" placeholder="结束时间"></td>
-                                <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
-                                <td><label class=" labelleft control-label" style="width: 120px;">第二次打卡时间：</label></td>
-                                <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
-                                           value="" placeholder="起始时间">&nbsp;&nbsp;
-                                </td>
-                                <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
-                                           value="" placeholder="结束时间"></td>
-                                <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
-                            </tr>
                             </table>
                         </div>
                         <div class="hr-line-dashed col-sm-8 "></div>
@@ -432,12 +373,12 @@
                         </div>
                     </form>
                     <%--方案二--%>
-                    <form class="form-horizontal m-t form_bb" style="display: none;">
+                    <form action="/checking/addKaoQinRule" class="form-horizontal m-t form_bb" style="display: none;">
                         <div class="form-group" style="margin-left:5px;">
                             <label class=" " style="">规则名称：</label>
-                            <input placeholder="请输入规则名称" class="form-control" type="email" style="width: 200px; display: inline;">
+                            <input placeholder="请输入规则名称" class="form-control" name="rulename"  style="width: 200px; display: inline;">
                             <label class="" style="">规则备注：</label>
-                            <input placeholder="请输入规则备注" class="form-control" type="email" style="width: 400px;display: inline;">
+                            <input placeholder="请输入规则备注" class="form-control" name="remarks" style="width: 400px;display: inline;">
                             <%--<div class="col-sm-4">
                                &lt;%&ndash; <div class="radio i-checks" >
                                     <label>
@@ -479,11 +420,13 @@
                                         <i></i> 方案四</label>
                                 </div>&ndash;%&gt;
                             </div>--%>
+                            <input type="text" hidden name="ruleType" value="2">
                         </div>
                         <div style="overflow-x: scroll">
                             <table class="table-bordered " style="width:2100px;">
                                 <tr>
                                     <td><label class="col-sm-1 control-label labelleft" style="width: 100px;">星期一：</label>
+                                        <input type="text" name="krd[0].weekDay" hidden value="1">
                                     </td>
                                     <td><span class="checkbox i-checks">
                                         <label class="">
@@ -495,35 +438,36 @@
                                      </span></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第一次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="起始时间">
+                                               name="krd[0].brushStarttime1" value=""  placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               name="krd[0].brushEndtime1" value=""  placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" name="krd[0].time1Wucha" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第二次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="起始时间">
+                                               name="krd[0].brushStarttime2" value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               name="krd[0].brushEndtime2" value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright "  name="krd[0].time1Wucha2" value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第三次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="起始时间">
+                                               name="krd[0].brushStarttime3" value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               name="krd[0].brushEndtime3" value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright "  name="krd[0].time1Wucha3"  value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第四次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="起始时间">
+                                               name="krd[0].brushStarttime4" value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               name="krd[0].brushEndtime4" value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright "  name="krd[0].time1Wucha4"  value="" placeholder="矿工标准"></td>
                                 </tr>
                                 <tr>
-                                    <td><label class="col-sm-1 control-label labelleft" style="width: 100px;">星期一：</label>
+                                    <td><label class="col-sm-1 control-label labelleft" style="width: 100px;">星期二：</label>
+                                        <input type="text" name="krd[1].weekDay" hidden value="2">
                                     </td>
                                     <td><span class="checkbox i-checks">
                                         <label class="">
@@ -535,35 +479,36 @@
                                      </span></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第一次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="起始时间">
+                                               name="krd[1].brushStarttime1" value=""  placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               name="krd[1].brushEndtime1" value=""  placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" name="krd[1].time1Wucha" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第二次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="起始时间">
+                                               name="krd[1].brushStarttime2" value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               name="krd[1].brushEndtime2" value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright "  name="krd[1].time1Wucha2" value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第三次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="起始时间">
+                                               name="krd[1].brushStarttime3" value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               name="krd[1].brushEndtime3" value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright "  name="krd[1].time1Wucha3"  value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第四次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="起始时间">
+                                               name="krd[1].brushStarttime4" value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               name="krd[1].brushEndtime4" value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright "  name="krd[1].time1Wucha4"  value="" placeholder="矿工标准"></td>
                                 </tr>
                                 <tr>
-                                    <td><label class="col-sm-1 control-label labelleft" style="width: 100px;">星期一：</label>
+                                    <td><label class="col-sm-1 control-label labelleft" style="width: 100px;">星期三：</label>
+                                        <input type="text" name="krd[2].weekDay" hidden value="3">
                                     </td>
                                     <td><span class="checkbox i-checks">
                                         <label class="">
@@ -575,35 +520,36 @@
                                      </span></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第一次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="起始时间">
+                                               name="krd[2].brushStarttime1" value=""  placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               name="krd[2].brushEndtime1" value=""  placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" name="krd[2].time1Wucha" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第二次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="起始时间">
+                                               name="krd[2].brushStarttime2" value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               name="krd[2].brushEndtime2" value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright "  name="krd[2].time1Wucha2" value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第三次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="起始时间">
+                                               name="krd[2].brushStarttime3" value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               name="krd[2].brushEndtime3" value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright "  name="krd[2].time1Wucha3"  value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第四次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="起始时间">
+                                               name="krd[2].brushStarttime4" value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               name="krd[2].brushEndtime4" value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright "  name="krd[2].time1Wucha4"  value="" placeholder="矿工标准"></td>
                                 </tr>
                                 <tr>
-                                    <td><label class="col-sm-1 control-label labelleft" style="width: 100px;">星期一：</label>
+                                    <td><label class="col-sm-1 control-label labelleft" style="width: 100px;">星期四：</label>
+                                        <input type="text" name="krd[3].weekDay" hidden value="4">
                                     </td>
                                     <td><span class="checkbox i-checks">
                                         <label class="">
@@ -615,35 +561,36 @@
                                      </span></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第一次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="起始时间">
+                                               name="krd[3].brushStarttime1" value=""  placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               name="krd[3].brushEndtime1" value=""  placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" name="krd[3].time1Wucha" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第二次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="起始时间">
+                                               name="krd[3].brushStarttime2" value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               name="krd[3].brushEndtime2" value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright "  name="krd[3].time1Wucha2" value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第三次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="起始时间">
+                                               name="krd[3].brushStarttime3" value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               name="krd[3].brushEndtime3" value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright "  name="krd[3].time1Wucha3"  value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第四次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="起始时间">
+                                               name="krd[3].brushStarttime4" value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               name="krd[3].brushEndtime4" value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright "  name="krd[3].time1Wucha4"  value="" placeholder="矿工标准"></td>
                                 </tr>
                                 <tr>
-                                    <td><label class="col-sm-1 control-label labelleft" style="width: 100px;">星期一：</label>
+                                    <td><label class="col-sm-1 control-label labelleft" style="width: 100px;">星期五：</label>
+                                        <input type="text" name="krd[4].weekDay" hidden value="5">
                                     </td>
                                     <td><span class="checkbox i-checks">
                                         <label class="">
@@ -655,35 +602,36 @@
                                      </span></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第一次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="起始时间">
+                                               name="krd[4].brushStarttime1" value=""  placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               name="krd[4].brushEndtime1" value=""  placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" name="krd[4].time1Wucha" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第二次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="起始时间">
+                                               name="krd[4].brushStarttime2" value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               name="krd[4].brushEndtime2" value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright "  name="krd[4].time1Wucha2" value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第三次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="起始时间">
+                                               name="krd[4].brushStarttime3" value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               name="krd[4].brushEndtime3" value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright "  name="krd[4].time1Wucha3"  value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第四次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="起始时间">
+                                               name="krd[4].brushStarttime4" value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               name="krd[4].brushEndtime4" value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright "  name="krd[4].time1Wucha4"  value="" placeholder="矿工标准"></td>
                                 </tr>
                                 <tr>
-                                    <td><label class="col-sm-1 control-label labelleft" style="width: 100px;">星期一：</label>
+                                    <td><label class="col-sm-1 control-label labelleft" style="width: 100px;">星期六：</label>
+                                        <input type="text" name="krd[5].weekDay" hidden value="6">
                                     </td>
                                     <td><span class="checkbox i-checks">
                                         <label class="">
@@ -695,35 +643,36 @@
                                      </span></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第一次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="起始时间">
+                                               name="krd[5].brushStarttime1" value=""  placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               name="krd[5].brushEndtime1" value=""  placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" name="krd[5].time1Wucha" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第二次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="起始时间">
+                                               name="krd[5].brushStarttime2" value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               name="krd[5].brushEndtime2" value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright "  name="krd[5].time1Wucha2" value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第三次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="起始时间">
+                                               name="krd[5].brushStarttime3" value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               name="krd[5].brushEndtime3" value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright "  name="krd[5].time1Wucha3"  value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第四次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="起始时间">
+                                               name="krd[5].brushStarttime4" value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               name="krd[5].brushEndtime4" value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright "  name="krd[5].time1Wucha4"  value="" placeholder="矿工标准"></td>
                                 </tr>
                                 <tr>
-                                    <td><label class="col-sm-1 control-label labelleft" style="width: 100px;">星期一：</label>
+                                    <td><label class="col-sm-1 control-label labelleft" style="width: 100px;">星期日：</label>
+                                        <input type="text" name="krd[6].weekDay" hidden value="7">
                                     </td>
                                     <td><span class="checkbox i-checks">
                                         <label class="">
@@ -735,32 +684,32 @@
                                      </span></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第一次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="起始时间">
+                                               name="krd[6].brushStarttime1" value=""  placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               name="krd[6].brushEndtime1" value=""  placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " value="" name="krd[6].time1Wucha" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第二次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="起始时间">
+                                               name="krd[6].brushStarttime2" value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               name="krd[6].brushEndtime2" value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright "  name="krd[6].time1Wucha2" value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第三次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="起始时间">
+                                               name="krd[6].brushStarttime3" value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               name="krd[6].brushEndtime3" value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright "  name="krd[6].time1Wucha3"  value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第四次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="起始时间">
+                                               name="krd[6].brushStarttime4" value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               name="krd[6].brushEndtime4" value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright "  name="krd[6].time1Wucha4"  value="" placeholder="矿工标准"></td>
                                 </tr>
                             </table>
                         </div>
@@ -772,8 +721,7 @@
                         </div>
                     </form>
                     <%--方案三--%>
-                    <form class="form-horizontal m-t form_bb" style="display: none;">
-
+                    <form action="/checking/addKaoQinRule" class="form-horizontal m-t form_bb" style="display: none;">
                         <div class="form-group" style="margin-left: 350px">
                             <label class="col-sm-2 control-label">开始日期：</label>
                             <input readonly="" placeholder="请选择开始日期" class="form-control layer-date" id="hello1">
@@ -786,55 +734,17 @@
                         </div>
                         <div class="form-group hi" hidden style="margin-left:5px;">
                             <label class=" " style="">规则名称：</label>
-                            <input placeholder="请输入规则名称" class="form-control" type="email" style="width: 200px; display: inline;">
+                            <input placeholder="请输入规则名称" class="form-control" name="rulename"  style="width: 200px; display: inline;">
                             <label class="" style="">规则备注：</label>
-                            <input placeholder="请输入规则备注" class="form-control" type="email" style="width: 400px;display: inline;">
-                            <%--<div class="col-sm-4">
-                               &lt;%&ndash; <div class="radio i-checks" >
-                                    <label>
-                                        <div class="iradio_square-green" style="position: relative;"><input checked=""
-                                                                                                            value="option1"
-                                                                                                            name="a"
-                                                                                                            style="position: absolute; opacity: 0;"
-                                                                                                            type="radio">
-                                            <ins class="iCheck-helper"
-                                                 style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255) none repeat scroll 0% 0%; border: 0px none; opacity: 0;"></ins>
-                                        </div>
-                                        <i></i> 方案一
-                                    </label>
-                                    <label class="">
-                                        <div class="iradio_square-green " style="position: relative;"><input
-                                                value="option2"
-                                                name="a"
-                                                style="position: absolute; opacity: 0;"
-                                                type="radio">
-                                            <ins class="iCheck-helper"
-                                                 style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255) none repeat scroll 0% 0%; border: 0px none; opacity: 0;"></ins>
-                                        </div>
-                                        <i></i> 方案二</label>
-                                    <label>
-                                        <div class="iradio_square-green" style="position: relative;"><input
-                                                value="option1" name="a" style="position: absolute; opacity: 0;"
-                                                type="radio">
-                                            <ins class="iCheck-helper"
-                                                 style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255) none repeat scroll 0% 0%; border: 0px none; opacity: 0;"></ins>
-                                        </div>
-                                        <i></i> 方案三</label>
-                                    <label>
-                                        <div class="iradio_square-green" style="position: relative;"><input
-                                                value="option1" name="a" style="position: absolute; opacity: 0;"
-                                                type="radio">
-                                            <ins class="iCheck-helper"
-                                                 style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255) none repeat scroll 0% 0%; border: 0px none; opacity: 0;"></ins>
-                                        </div>
-                                        <i></i> 方案四</label>
-                                </div>&ndash;%&gt;
-                            </div>--%>
+                            <input placeholder="请输入规则备注" class="form-control" name="remarks" style="width: 400px;display: inline;">
+                            <input type="text" hidden name="ruleType" value="3">
                         </div>
                         <div style="overflow-x: scroll">
                             <table class="table-bordered ">
                                 <tr class="three"  hidden>
-                                    <td><label class="col-sm-1 control-label labelleft" style="width: 100px;">日期</label>
+                                    <td>
+                                        <label class="col-sm-1 control-label labelleft" style="width: 100px;">日期:</label>
+                                        <input type="text" name="date" hidden value="">
                                     </td>
                                     <td>
                                     <span class="checkbox i-checks">
@@ -852,37 +762,23 @@
                                                                       style="width: 120px;">第一次打卡时间：</label></div>
                                     </td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
-                                               value="" placeholder="起始时间">&nbsp;&nbsp;
+                                               name="brushStarttime1" value="" placeholder="起始时间">&nbsp;&nbsp;
                                     </td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               name="brushEndtime1" value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " name="time1Wucha" value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第二次打卡时间：</label></td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
-                                               value="" placeholder="起始时间">&nbsp;&nbsp;
+                                               name="brushStarttime2" value="" placeholder="起始时间">&nbsp;&nbsp;
                                     </td>
                                     <td><input style="width: 100px;" class="form-control layer-date labelright single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               name="brushEndtime2" value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " name="time1Wucha2" value="" placeholder="矿工标准"></td>
                                 </tr>
 
                                 <tr id="three_line" hidden></tr>
                             </table>
                         </div>
-                        <%--<div class=" three form-group" hidden>
-                            <label class="col-sm-1 control-label">2018年3月8日：</label>
-                            &lt;%&ndash;一行&ndash;%&gt;
-                            <span class="spanleft"><label class=" labelleft control-label">第一次打卡时间：</label>  <input
-                                    style="width: 200px;"
-                                    class="form-control layer-date" placeholder="YYYY-MM-DD hh:mm:ss"
-                                    onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
-                                <label class="laydate-icon labelright"></label>
-                                <label class="labelleft control-label">第二次打卡时间：</label>  <input style="width: 200px;"
-                                                                                                class="form-control layer-date"
-                                                                                                placeholder="YYYY-MM-DD hh:mm:ss"
-                                                                                                onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
-                                </span>
-                        </div>--%>
                         <div style="margin-left: 400px">
                             <div class="hr-line-dashed col-sm-8 "></div>
                             <div class="form-group">
@@ -893,7 +789,7 @@
                         </div>
                     </form>
                     <%--方案四--%>
-                    <form class="form-horizontal m-t form_bb" style="display: none;">
+                    <form action="/checking/addKaoQinRule" class="form-horizontal m-t form_bb" style="display: none;">
                         <div class="form-group" style="margin-left: 350px">
                             <label class="col-sm-2 control-label">开始日期：</label>
                             <input readonly="" placeholder="请选择开始日期" class="form-control layer-date" id="hello4">
@@ -906,55 +802,17 @@
                         </div>
                         <div class="form-group hi" hidden style="margin-left:5px;">
                             <label class=" " style="">规则名称：</label>
-                            <input placeholder="请输入规则名称" class="form-control" type="email" style="width: 200px; display: inline;">
+                            <input placeholder="请输入规则名称" class="form-control" name="rulename"  style="width: 200px; display: inline;">
                             <label class="" style="">规则备注：</label>
-                            <input placeholder="请输入规则备注" class="form-control" type="email" style="width: 400px;display: inline;">
-                            <%--<div class="col-sm-4">
-                               &lt;%&ndash; <div class="radio i-checks" >
-                                    <label>
-                                        <div class="iradio_square-green" style="position: relative;"><input checked=""
-                                                                                                            value="option1"
-                                                                                                            name="a"
-                                                                                                            style="position: absolute; opacity: 0;"
-                                                                                                            type="radio">
-                                            <ins class="iCheck-helper"
-                                                 style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255) none repeat scroll 0% 0%; border: 0px none; opacity: 0;"></ins>
-                                        </div>
-                                        <i></i> 方案一
-                                    </label>
-                                    <label class="">
-                                        <div class="iradio_square-green " style="position: relative;"><input
-                                                value="option2"
-                                                name="a"
-                                                style="position: absolute; opacity: 0;"
-                                                type="radio">
-                                            <ins class="iCheck-helper"
-                                                 style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255) none repeat scroll 0% 0%; border: 0px none; opacity: 0;"></ins>
-                                        </div>
-                                        <i></i> 方案二</label>
-                                    <label>
-                                        <div class="iradio_square-green" style="position: relative;"><input
-                                                value="option1" name="a" style="position: absolute; opacity: 0;"
-                                                type="radio">
-                                            <ins class="iCheck-helper"
-                                                 style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255) none repeat scroll 0% 0%; border: 0px none; opacity: 0;"></ins>
-                                        </div>
-                                        <i></i> 方案三</label>
-                                    <label>
-                                        <div class="iradio_square-green" style="position: relative;"><input
-                                                value="option1" name="a" style="position: absolute; opacity: 0;"
-                                                type="radio">
-                                            <ins class="iCheck-helper"
-                                                 style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255) none repeat scroll 0% 0%; border: 0px none; opacity: 0;"></ins>
-                                        </div>
-                                        <i></i> 方案四</label>
-                                </div>&ndash;%&gt;
-                            </div>--%>
+                            <input placeholder="请输入规则备注" class="form-control" name="remarks" style="width: 400px;display: inline;">
+
+                            <input type="text" hidden name="ruleType" value="4">
                         </div>
                         <div style="overflow-x: scroll">
                             <table class="table-bordered " style="width: 2100px">
                                 <tr class="four" hidden>
                                     <td><label class="col-sm-1 control-label" <%--style="width: 100px;"--%>>日期</label>
+                                        <input type="text" hidden name="date" value="">
                                     </td>
                                     <td><span class="checkbox i-checks">
                                         <label class="">
@@ -966,32 +824,32 @@
                                      </span></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第一次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="起始时间">
+                                               name="brushStarttime1" value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               name="brushEndtime1"  value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " name="time1Wucha" value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第二次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="起始时间">
+                                               name="brushStarttime2" value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               name="brushEndtime2"  value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " name="time1Wucha2" value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第三次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="起始时间">
+                                               name="brushStarttime3" value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               name="brushEndtime3"  value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " name="time1Wucha3" value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第四次打卡时间：</label></td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="起始时间">
+                                               name="brushStarttime4" value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;" class="form-control layer-date  single-input"
-                                               value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " value="" placeholder="矿工标准"></td>
+                                               name="brushEndtime4" value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright " name="time1Wucha4" value="" placeholder="矿工标准"></td>
                                 </tr>
                                 <tr id="four_line" hidden></tr>
                             </table>
@@ -1091,37 +949,18 @@
                 var st = $("#hello1").val().replace(/-/g, '');
                 var startnum = parseInt(st);
                 var arr = new Array();
-                for (var i = 0; i < day; i++) {
+                for (var i = 0; i <=day; i++) {
                     var edate = toString(startnum.toString());//得到每个日期
                     arr.push(edate);
                     ($("#three_line").before($(".three:eq(0)").clone().show()));
                     startnum++;
                 }
-                setdate(arr, ".three");
+                setDateAndName(arr, ".three");
                 var icheckboxSquares = $(".test3");
                 for (var i = 0; i < icheckboxSquares.length; i++) {
                     (function (i) {
                         $(icheckboxSquares[i]).data("isChecked", false);
-                        $(icheckboxSquares[i])/*.off("click")*/.on("click", function () {
-                            var tds = $(this).parents("tr:eq(0)").find("td");
-                            if (!$(this).data("isChecked")) {
-                                $(this).addClass("checked");
-                                $(this).data("isChecked", true);
-                                for (var i = 2; i < tds.length; i++) {
-                                    $(tds[i]).hide();
-                                    console.info("1first"+i)
-                                }
-                                return false;
-                            }else if($(this).data("isChecked")){
-                                $(this).removeClass("checked");
-                                $(this).data("isChecked", false);
-                                for (var i = 2; i < tds.length; i++) {
-                                    $(tds[i]).show();
-                                    console.info("1second"+i)
-                                }
-                                return false;
-                            }
-                        });
+                        $(icheckboxSquares[i])/*.off("click")*/.on("click", check);
                     })(i)
                 }
                 $(".hi:eq(0)").show();
@@ -1144,38 +983,19 @@
                 var st = $("#hello4").val().replace(/-/g, '');
                 var startnum = parseInt(st);
                 var arr = new Array();
-                for (var i = 0; i < day; i++) {
+                for (var i = 0; i <= day; i++) {
                     var edate = toString(startnum.toString());//得到每个日期
                     arr.push(edate);
                     ($("#four_line").before($(".four:eq(0)").clone().show()));
                     startnum++;
                 }
-                setdate(arr, ".four");
+                setDateAndName(arr, ".four");
 
                 var icheckboxSquares = $(".test4");
                 for (var i = 0; i < icheckboxSquares.length; i++) {
                     (function (i) {
                         $(icheckboxSquares[i]).data("isChecked", false);
-                        $(icheckboxSquares[i])/*.off("click")*/.on("click", function () {
-                            var tds = $(this).parents("tr:eq(0)").find("td");
-                            if (!$(this).data("isChecked")) {
-                                $(this).addClass("checked");
-                                $(this).data("isChecked", true);
-                                for (var i = 2; i < tds.length; i++) {
-                                    $(tds[i]).hide();
-                                    console.info("1first"+i)
-                                }
-                                return false;
-                            }else if($(this).data("isChecked")){
-                                $(this).removeClass("checked");
-                                $(this).data("isChecked", false);
-                                for (var i = 2; i < tds.length; i++) {
-                                    $(tds[i]).show();
-                                    console.info("1second"+i)
-                                }
-                                return false;
-                            }
-                        });
+                        $(icheckboxSquares[i])/*.off("click")*/.on("click", check);
                     })(i)
                 }
                 $(".hi:eq(1)").show();
@@ -1195,37 +1015,60 @@
             (function (i) {
                 $(icheckboxSquares[i]).data("isChecked", false);
                 $(icheckboxSquares[i]).on("click", check);
-
             })(i);
         }
     }
 
     function check() {
         var tds = $(this).parents("tr:eq(0)").find("td");
-//        alert(tds.length)
-//        console.info(this)
-        console.info($(tds[2]).html())
+        var input = $(this).parents("tr").find("td:eq(0)").find("input:eq(0)");
         if (!$(this).data("isChecked")) {
             $(this).addClass("checked");
             $(this).data("isChecked", true);
+            $(this).data("input",input.attr("name"));
+            input.attr("name","")
             for (var i = 2; i < tds.length; i++) {
                 $(tds[i]).hide();
-
+                var tdInputName = $(tds[i]).find("input:eq(0)").attr("name");
+                $(this).data("tds["+i+"]",tdInputName);
+                $(tds[i]).find("input:eq(0)").attr("name","");
             }
-//                        $(this).data("node",);
         } else {
             $(this).removeClass("checked");
             $(this).data("isChecked", false);
+            input.attr("name",$(this).data("input"));
             for (var i = 2; i < tds.length; i++) {
                 $(tds[i]).show();
+                var tdInputName = $(this).data("tds["+i+"]");
+                $(tds[i]).find("input:eq(0)").attr("name",tdInputName);
             }
         }
+        return false;
     }
-    //修改未来元素
-    function setdate(dates, form) {
+    //修改未来元素,设置日期和name属性
+    function setDateAndName(dates, form) {
         var $three = $(form);
+        //设置日期
         for (var i = 1; i < $three.length; i++) {
-            $($three[i]).find("label").eq(0).html(dates[i - 1]);
+            $($three[i]).find("label").eq(0).html(dates[i - 1]);//设置展示的日期
+            $($three[i]).find("input").eq(0).attr("name","krd["+i+"].date");//这是设置日期name属性
+
+
+            $($three[i]).find("input").eq(2).attr("name","krd["+i+"].brushStarttime1");//设置第一次打卡开始时间
+            $($three[i]).find("input").eq(3).attr("name","krd["+i+"].brushEndtime1");//设置第一次打卡开始时间
+            $($three[i]).find("input").eq(4).attr("name","krd["+i+"].time1Wucha");//设置第一次打卡开始时间
+
+            $($three[i]).find("input").eq(5).attr("name","krd["+i+"].brushStarttime2");
+            $($three[i]).find("input").eq(6).attr("name","krd["+i+"].brushEndtime2");
+            $($three[i]).find("input").eq(7).attr("name","krd["+i+"].time1Wucha2");
+
+            $($three[i]).find("input").eq(8).attr("name","krd["+i+"].brushStarttime3");
+            $($three[i]).find("input").eq(9).attr("name","krd["+i+"].brushEndtime3");
+            $($three[i]).find("input").eq(10).attr("name","krd["+i+"].time1Wucha3");
+
+            $($three[i]).find("input").eq(11).attr("name","krd["+i+"].brushStarttime4");
+            $($three[i]).find("input").eq(12).attr("name","krd["+i+"].brushEndtime4");
+            $($three[i]).find("input").eq(13).attr("name","krd["+i+"].time1Wucha4");
         }
         var $single = $(".single-input");
         for (var i = 0; i < $single.length; i++) {
@@ -1254,7 +1097,6 @@
         var e = parseInt(end.replace(/-/g, ''));
         return e - s;
     }
-
     function setForm(ii) {
 //        console.info(ii);
         var forms = $(".form_bb");
