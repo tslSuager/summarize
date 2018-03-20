@@ -2,7 +2,7 @@ package com.tosit.ssm.entity;
 
 import java.util.List;
 
-public class KaoqindetailList {
+public class KaoqindetailVO {
     private List<KaoqinRuleDetail> krd;
 
     public List<KaoqinRuleDetail> getKrd() {

@@ -15,12 +15,12 @@ public class KaoqinRule {
 
     private Integer isDefault;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
-    private Date createTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date createTime=new Date();
 
     private String createBy;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
     private String updateBy;
