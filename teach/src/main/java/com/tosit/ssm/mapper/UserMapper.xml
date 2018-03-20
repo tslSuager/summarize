@@ -99,7 +99,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    ID, loginName, password, salt, name, niName, sex, personNo, daXue, daXue_address, 
+    u.ID, loginName, password, salt, name, niName, sex, personNo, daXue, daXue_address,
     home_address, stu_number, daxue_zhuanye, shixun_zhuanye, peixun_zhuanye, phone1, 
     phone2, photo, QQ, weixin, email, user_type, kaoqin_code, kaoqin_ruleID, status, 
     create_time, create_by, update_time, update_by, last_logintime, loat_longin_ip, remarks, 
@@ -107,7 +107,7 @@
   </sql>
   <select id="selectUserByOfficeId" parameterType="java.lang.String" resultMap="BaseResultMap">
     SELECT
-      u.id,u.name,u.password,u.ID,u.loginName,u.password,u.salt,u.name,u.niName,u.sex,u.personNo,u.daXue,u.daXue_address,u.home_address,u.stu_number,u.daxue_zhuanye,u.shixun_zhuanye,u.peixun_zhuanye,u.phone1,u.phone2,u.photo,u.QQ,u.weixin,u.email,u.user_type,u.kaoqin_code,u.kaoqin_ruleID,u.status,u.create_time,u.create_by,u.update_time,u.update_by,u.last_logintime,u.loat_longin_ip,u.remarks,u.is_del,u.sort,u.col_1,u.col_2,u.col_3
+       <include refid="Base_Column_List"/>
     FROM user_office uo
     LEFT JOIN `user` u
     ON uo.user_id = u.ID
@@ -734,7 +734,7 @@ SELECT
 
   <select id="selectKaoqinOrShensu" parameterType="string" resultMap="BaseResultMap">
     SELECT
-    u.id,u.name,u.password,u.ID,u.loginName,u.password,u.salt,u.name,u.niName,u.sex,u.personNo,u.daXue,u.daXue_address,u.home_address,u.stu_number,u.daxue_zhuanye,u.shixun_zhuanye,u.peixun_zhuanye,u.phone1,u.phone2,u.photo,u.QQ,u.weixin,u.email,u.user_type,u.kaoqin_code,u.kaoqin_ruleID,u.status,u.create_time,u.create_by,u.update_time,u.update_by,u.last_logintime,u.loat_longin_ip,u.remarks,u.is_del,u.sort,u.col_1,u.col_2,u.col_3
+     <include refid="Base_Column_List"/>
     FROM user WHERE ID IN (
     SELECT uo.user_id FROM user_office uo
     LEFT JOIN kaoqin_result kr
@@ -749,31 +749,31 @@ SELECT
 
   <select id="selectByClassGroup" parameterType="com.tosit.ssm.entity.Office" resultMap="BaseResultMap">
     SELECT
-    u.id,u.name,u.password,u.ID,u.loginName,u.password,u.salt,u.name,u.niName,u.sex,u.personNo,u.daXue,u.daXue_address,u.home_address,u.stu_number,u.daxue_zhuanye,u.shixun_zhuanye,u.peixun_zhuanye,u.phone1,u.phone2,u.photo,u.QQ,u.weixin,u.email,u.user_type,u.kaoqin_code,u.kaoqin_ruleID,u.status,u.create_time,u.create_by,u.update_time,u.update_by,u.last_logintime,u.loat_longin_ip,u.remarks,u.is_del,u.sort,u.col_1,u.col_2,u.col_3
+     <include refid="Base_Column_List"/>
     FROM user u join user_office uo on u.id=uo.user_id
     join   office f on uo.office_id=f.id where f.id=#{office.id} and f.is_del=1 and u.is_del=1 and uo.is_del=1 and f.id not in
      (SELECT
-    uu.id   FROM user uu join user_office uoo on u.id=uoo.user_id
+    uu.id   FROM user uu join user_office uoo on uu.id=uoo.user_id
     join   office ff on uoo.office_id=ff.id where ff.parent_id=#{office.id} and ff.is_del=1 and uu.is_del=1 and uoo.is_del=1)
   </select>
 
   <select id="selectByClass" parameterType="com.tosit.ssm.entity.Office" resultMap="BaseResultMap">
     SELECT
-    u.id,u.name,u.password,u.ID,u.loginName,u.password,u.salt,u.name,u.niName,u.sex,u.personNo,u.daXue,u.daXue_address,u.home_address,u.stu_number,u.daxue_zhuanye,u.shixun_zhuanye,u.peixun_zhuanye,u.phone1,u.phone2,u.photo,u.QQ,u.weixin,u.email,u.user_type,u.kaoqin_code,u.kaoqin_ruleID,u.status,u.create_time,u.create_by,u.update_time,u.update_by,u.last_logintime,u.loat_longin_ip,u.remarks,u.is_del,u.sort,u.col_1,u.col_2,u.col_3
+     <include refid="Base_Column_List"/>
     FROM user u join user_office uo on u.id=uo.user_id
     join   office f on uo.office_id=f.id where f.id=#{office.id} and f.is_del=1 and u.is_del=1 and uo.is_del=1
   </select>
 
   <select id="selectByGroup" parameterType="com.tosit.ssm.entity.Office" resultMap="BaseResultMap">
     SELECT
-    u.id,u.name,u.password,u.ID,u.loginName,u.password,u.salt,u.name,u.niName,u.sex,u.personNo,u.daXue,u.daXue_address,u.home_address,u.stu_number,u.daxue_zhuanye,u.shixun_zhuanye,u.peixun_zhuanye,u.phone1,u.phone2,u.photo,u.QQ,u.weixin,u.email,u.user_type,u.kaoqin_code,u.kaoqin_ruleID,u.status,u.create_time,u.create_by,u.update_time,u.update_by,u.last_logintime,u.loat_longin_ip,u.remarks,u.is_del,u.sort,u.col_1,u.col_2,u.col_3
+     <include refid="Base_Column_List"/>
     FROM user u join user_office uo on u.id=uo.user_id
     join   office f on uo.office_id=f.id where f.id=#{office.id} and f.is_del=1 and u.is_del=1 and uo.is_del=1
   </select>
 
   <select id="selectByTimeAreaNClass" parameterType="map" resultMap="BaseResultMap">
     SELECT
-    u.id,u.name,u.password,u.ID,u.loginName,u.password,u.salt,u.name,u.niName,u.sex,u.personNo,u.daXue,u.daXue_address,u.home_address,u.stu_number,u.daxue_zhuanye,u.shixun_zhuanye,u.peixun_zhuanye,u.phone1,u.phone2,u.photo,u.QQ,u.weixin,u.email,u.user_type,u.kaoqin_code,u.kaoqin_ruleID,u.status,u.create_time,u.create_by,u.update_time,u.update_by,u.last_logintime,u.loat_longin_ip,u.remarks,u.is_del,u.sort,u.col_1,u.col_2,u.col_3
+     <include refid="Base_Column_List"/>
     FROM user u join user_office uo on u.id=uo.user_id
     join   office f on uo.office_id=f.id where f.id=#{office.id}
     and f.is_del=1 and u.is_del=1 and uo.is_del=1
@@ -781,18 +781,18 @@ SELECT
        and DATE_FORMAT(#{endDate},'%Y:%c:%e')  >= DATE_FORMAT(u.create_time,'%Y:%c:%e')
      and u.id not in(
     SELECT
-    uu.id   FROM user uu join user_office uoo on u.id=uoo.user_id
+    uu.id   FROM user uu join user_office uoo on uu.id=uoo.user_id
     join   office ff on uoo.office_id=ff.id where ff.office_type=3 and ff.is_del=1 and uu.is_del=1 and uoo.is_del=1
     )
      </select>
 
   <select id="selectByAreaNClass" parameterType="com.tosit.ssm.entity.Office" resultMap="BaseResultMap">
      SELECT
-    u.id,u.name,u.password,u.ID,u.loginName,u.password,u.salt,u.name,u.niName,u.sex,u.personNo,u.daXue,u.daXue_address,u.home_address,u.stu_number,u.daxue_zhuanye,u.shixun_zhuanye,u.peixun_zhuanye,u.phone1,u.phone2,u.photo,u.QQ,u.weixin,u.email,u.user_type,u.kaoqin_code,u.kaoqin_ruleID,u.status,u.create_time,u.create_by,u.update_time,u.update_by,u.last_logintime,u.loat_longin_ip,u.remarks,u.is_del,u.sort,u.col_1,u.col_2,u.col_3
+     <include refid="Base_Column_List"/>
     FROM user u join user_office uo on u.id=uo.user_id
     join   office f on uo.office_id=f.id where f.id=#{office.id} and f.is_del=1 and u.is_del=1 and uo.is_del=1 and u.id not in(
     SELECT
-    uu.id   FROM user uu join user_office uoo on u.id=uoo.user_id
+    uu.id   FROM user uu join user_office uoo on uu.id=uoo.user_id
     join   office ff on uoo.office_id=ff.id where ff.office_type=3 and ff.is_del=1 and uu.is_del=1 and uoo.is_del=1
     )
   </select>
@@ -800,7 +800,7 @@ SELECT
 
   <select id="selectByClassNGH" parameterType="com.tosit.ssm.entity.Office" resultMap="BaseResultMap">
     SELECT
-    u.id,u.name,u.password,u.ID,u.loginName,u.password,u.salt,u.name,u.niName,u.sex,u.personNo,u.daXue,u.daXue_address,u.home_address,u.stu_number,u.daxue_zhuanye,u.shixun_zhuanye,u.peixun_zhuanye,u.phone1,u.phone2,u.photo,u.QQ,u.weixin,u.email,u.user_type,u.kaoqin_code,u.kaoqin_ruleID,u.status,u.create_time,u.create_by,u.update_time,u.update_by,u.last_logintime,u.loat_longin_ip,u.remarks,u.is_del,u.sort,u.col_1,u.col_2,u.col_3
+     <include refid="Base_Column_List"/>
     FROM user u join user_office uo on u.id=uo.user_id
     join   office f on uo.office_id=f.id where f.id=#{office.id}
     and f.is_del=1 and u.is_del=1 and uo.is_del=1
@@ -809,7 +809,7 @@ SELECT
 
   <select id="selectByClassChecking" parameterType="com.tosit.ssm.entity.Office" resultMap="BaseResultMap">
     SELECT
-    u.id,u.name,u.password,u.ID,u.loginName,u.password,u.salt,u.name,u.niName,u.sex,u.personNo,u.daXue,u.daXue_address,u.home_address,u.stu_number,u.daxue_zhuanye,u.shixun_zhuanye,u.peixun_zhuanye,u.phone1,u.phone2,u.photo,u.QQ,u.weixin,u.email,u.user_type,u.kaoqin_code,u.kaoqin_ruleID,u.status,u.create_time,u.create_by,u.update_time,u.update_by,u.last_logintime,u.loat_longin_ip,u.remarks,u.is_del,u.sort,u.col_1,u.col_2,u.col_3
+     <include refid="Base_Column_List"/>
     FROM user u join user_office uo on u.id=uo.user_id
     join   office f on uo.office_id=f.id where f.id=#{office.id}
     and f.is_del=1 and u.is_del=1 and uo.is_del=1
@@ -818,14 +818,14 @@ SELECT
 
   <select id="selectByNClassChecking" parameterType="com.tosit.ssm.entity.KaoqinRule" resultMap="BaseResultMap">
     SELECT
-    u.id,u.name,u.password,u.ID,u.loginName,u.password,u.salt,u.name,u.niName,u.sex,u.personNo,u.daXue,u.daXue_address,u.home_address,u.stu_number,u.daxue_zhuanye,u.shixun_zhuanye,u.peixun_zhuanye,u.phone1,u.phone2,u.photo,u.QQ,u.weixin,u.email,u.user_type,u.kaoqin_code,u.kaoqin_ruleID,u.status,u.create_time,u.create_by,u.update_time,u.update_by,u.last_logintime,u.loat_longin_ip,u.remarks,u.is_del,u.sort,u.col_1,u.col_2,u.col_3
+     <include refid="Base_Column_List"/>
     FROM user u join user_office uo on u.id=uo.user_id
     join   office f on uo.office_id=f.id where u.kaoqin_ruleID=#{kaoqinRule.id}
     and f.is_del=1 and u.is_del=1 and uo.is_del=1
     and u.id  not in
     (
     SELECT
-    uu.id   FROM user uu join user_office uoo on u.id=uoo.user_id
+    uu.id   FROM user uu join user_office uoo on uu.id=uoo.user_id
     join   office ff on uoo.office_id=ff.id where ff.office_type=3 and ff.is_del=1 and uu.is_del=1 and uoo.is_del=1
     )
   </select>
