@@ -69,19 +69,6 @@
                 </div>
                 <div class="ibox-content">
 
-                   <%-- <table id="exampleTableToolbar" class="table table-striped table-bordered table-hover dataTables-example">
-                        <thead>
-                        <tr>
-                            <th>用户ID</th>
-                            <th>姓名</th>
-                            <th>昵称</th>
-                            <th>考勤工号(双击修改)</th>
-                        </tr>
-                        </thead>
-                        <tbody >
-
-                        </tbody>
-                    </table>--%>
                        <div class="btn-group hidden-xs" id="exampleToolbar" role="group">
                            <button type="button" id="btn-add" class="btn btn-outline btn-default">
                                <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
@@ -92,6 +79,9 @@
                            <button type="button" id="btn-del" class="btn btn-outline btn-default">
                                <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
                            </button>
+                           <select id="class" class=" form-control input-s-sm inline text-center">
+
+                           </select>
                            <i class="iconfont icon-xiazai" style="font-size: 30px;margin-left: 10px;"></i>
                            <span class="icon-name" title="下载" p-id="1019"><span p-id="1020"><i class="iconfont icon-shangchuan" style="font-size: 34px"></i></span></span>
                        </div>
@@ -158,8 +148,18 @@
 //        $("#DataTables_Table_0_filter > label").eq(0).before("<button class='btn btn-sm btn-primary pull-right m-t-n-xs' style='margin-top: 0px;margin-left: 10px'>一键关联</button>");
     }
     function fnClickAddRow(){$("#editable").dataTable().fnAddData(["Custom row","New row","New row","New row","New row"])};
+    function initpage() {
+        $.ajax({
+            url: "some.php",
+            data: "name=John&location=Boston",
+            success: function(msg){
+                alert( "Data Saved: " + msg );
+            }
+        });
+    }
     $(function () {
         modify();
+        initpage()
     })
 
 </script>

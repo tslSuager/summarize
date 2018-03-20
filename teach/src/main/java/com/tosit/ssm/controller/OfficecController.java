@@ -52,6 +52,16 @@ public class OfficecController {
         return JSONModel.put();
     }
 
+    /**
+     *  获取所有区域
+     * @return
+     */
+    @GetMapping("/getClass")
+    @ResponseBody
+    public Object getOfficeClass() {
+
+        return null;
+    }
 
 
 }
