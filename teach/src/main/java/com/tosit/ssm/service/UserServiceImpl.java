@@ -45,4 +45,14 @@ public class UserServiceImpl implements UserService {
     public List<User> findUserByClassIdNoKaoqinNum(String id) {
         return null;
     }
+
+    /**
+     * 查询所有班级中的学生
+     * @param officeId 班级id
+     * @return 返回该班学生集合
+     */
+    @Override
+    public List<User> findClassUser(String officeId) {
+        return userMapper.selectUserByOfficeId(officeId);
+    }
 }

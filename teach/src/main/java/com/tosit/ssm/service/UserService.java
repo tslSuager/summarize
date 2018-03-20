@@ -12,4 +12,11 @@ public interface UserService {
     int modifyUser(User user);
 
     List<User> findUserByClassIdNoKaoqinNum(String id);
+
+    /**
+     * 查询所有班级中的学生
+     * @param officeId 班级id
+     * @return 返回该班学生集合
+     */
+    List<User> findClassUser(String officeId);
 }
