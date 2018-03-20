@@ -12,12 +12,7 @@ import java.util.Date;
 
 @Service
 public class CheckingTest {
-    @Autowired
+//    @Autowired
 //    private KaoqinRecordsMapper kaoqinRecordsMapper ;
-    @Test
-    public void test1(){
-        String[] strings = new String[100];
-        System.out.println(strings[0]);
-    }
 
 }

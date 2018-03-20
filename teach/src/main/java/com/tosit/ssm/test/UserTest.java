@@ -17,15 +17,4 @@ public class UserTest {
     @Autowired
     private UserMapper userMapper;
 
-    ///////////////////////////////////////////////////////////////////////////
-    // 测试获取某个组的人
-    ///////////////////////////////////////////////////////////////////////////
-    @Test
-    public void test1() {
-        List<User> users = userMapper.selectUserByOfficeId("613");
-        for (User u:
-             users) {
-            System.out.println(u);
-        }
-    }
 }
