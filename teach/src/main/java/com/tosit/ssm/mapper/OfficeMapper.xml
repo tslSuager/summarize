@@ -612,7 +612,7 @@
     SELECT
     <include refid="Base_Column_List"/>
     FROM office
-    WHERE is_del =1 AND `master` =#{master} AND office_type = 3 AND (create_time BETWEEN DATE_FORMAT(#{createTime},'%Y-%m-%d %H:%i:%s') AND DATE_FORMAT(#{uploadTime},'%Y-%m-%d %H:%i:%s') )
+    WHERE is_del =1 AND `master` =#{master} AND office_type = 2 AND (create_time BETWEEN DATE_FORMAT(#{createTime},'%Y-%m-%d %H:%i:%s') AND DATE_FORMAT(#{updateTime},'%Y-%m-%d %H:%i:%s') )
   </select>
 
   <select id="selectAllArea" resultType="com.tosit.ssm.entity.Office" >

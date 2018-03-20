@@ -38,32 +38,38 @@
 
     <script>
         $(function () {
-            $.get("/class/findAll",{},function (msg) {
+            $.get("/office/getAllClassByTeacherAndDate",function (msg) {
                 var classes =msg['classes'];
                 $.each(classes,function (i,each) {
                     $('.table').append('<tr>\n' +
-                        '                                <td>'+each['name']+'</td>\n' +
-                        '                                <td><button class="btn btn-outline btn-info checkClassInfo" type="button" >查看班级信息</button></td>\n' +
-                        '                                <td><button class="btn btn-outline btn-info checkGroupInfo" type="button">查看小组信息</button></td>\n' +
+                        '                                <td>'+asd+'</td>\n' +
+                        '                                <td>'+dd+'</td>\n' +
+                        '                                <td>'+ss+'</td>'+
+                        '                                <td><button class="btn btn-outline btn-info checkClassInfo btn-xs" type="button" >查看班级信息</button></td>\n' +
+                        '                                <td><button class="btn btn-outline btn-info checkGroupInfo btn-xs" type="button">查看小组信息</button></td>\n' +
                         '                                <td>\n' +
-                        '                                    <button class="btn btn-outline btn-success matchAttendance" type="button" style="margin-right: 10px; ">匹配考勤规则</button>\n' +
-                        '                                    <button class="btn btn-outline btn-success createAttendance" type="button" style="margin-right: 10px; "><a href="/page/kaoqin_rule_detail">新建考勤规则</a></button>\n' +
+                        '                                    <button class="btn btn-outline btn-success matchAttendance btn-xs" type="button" style="margin-right: 10px; ">匹配考勤规则</button>\n' +
+                        '                                    <button class="btn btn-outline btn-success createAttendance btn-xs" type="button"><a href="/page/kaoqin_rule_detail">新建考勤规则</a></button>\n' +
                         '                                </td>\n' +
                         '                                <td>\n' +
-                        '                                    <button class="btn btn-outline btn-success matchTeachingPlan" type="button" style="margin-right: 10px; ">匹配教学计划</button>\n' +
-                        '                                    <button class="btn btn-outline btn-success createTeachingPlan" type="button" style="margin-right: 10px; "><a href="/page/jiaoan/show_plan">新建教学计划</a></button></td>\n' +
+                        '                                    <button class="btn btn-outline btn-success matchTeachingPlan btn-xs" type="button" style="margin-right: 10px; ">匹配教学计划</button>\n' +
+                        '                                    <button class="btn btn-outline btn-success createTeachingPlan btn-xs" type="button"><a href="/page/jiaoan/show_plan">新建教学计划</a></button></td>\n' +
                         '                                </td>\n' +
                         '                                <td>\n' +
-                        '                                    <select class="form-control" name="select">\n' +
-                        '                                        <option>按学号</option>\n' +
-                        '                                        <option>按手机号</option>\n' +
-                        '                                    </select>\n' +
-                        '                                    <button class="btn btn-outline btn-info createNumber" type="button">生成账号</button>\n' +
+                        '                                    <div class="col-sm-6">\n' +
+                        '                                       <select class="form-control" name="select">\n' +
+                        '                                           <option>按学号</option>\n' +
+                        '                                           <option>按手机号</option>\n' +
+                        '                                       </select>\n' +
+                        '                                   </div>\n' +
+                        '                                   <div class="col-sm-2"><button class="btn btn-outline btn-info createNumber btn-xs" type="button" style="margin-top: 4px">生成账号</button></div>\n' +
+                        '                                <div class="col-sm-4"></div>\n'+
                         '                                </td>\n'+
                         '                                <td>\n' +
-                        '                                    <button class="btn btn-outline btn-info addTeacher" type="button">添加教师</button>\n' +
-                        '                                    <button class="btn btn-outline btn-warning reviseClass" type="button" style="margin-right: 10px; ">修改班级</button>\n' +
-                        '                                    <button class="btn btn-outline btn-danger deleteClass" type="button">删除班级</button>\n' +
+                        '                                    <button class="btn btn-outline btn-info addTeacher btn-xs" type="button" style="margin-right: 10px; ">添加教师</button>\n' +
+                        '                                    <button class="btn btn-outline btn-success initialization btn-xs" type="button" style="margin-right: 10px; ">初始成绩</button>'+
+                        '                                    <button class="btn btn-outline btn-warning reviseClass btn-xs" type="button" style="margin-right: 10px; ">修改班级</button>\n' +
+                        '                                    <button class="btn btn-outline btn-danger deleteClass btn-xs" type="button">删除班级</button>\n' +
                         '                                </td>\n' +
                         '                            </tr>');
                 });
@@ -133,6 +139,8 @@
                         <thead>
                         <tr>
                             <th>班级名称</th>
+                            <th>创建时间</th>
+                            <th>学校</th>
                             <th>查看本班信息</th>
                             <th>查看本班小组信息</th>
                             <th>考勤规则</th>
@@ -142,17 +150,19 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr id="1">
+                        <%--<tr id="1">
                             <td>Java</td>
-                            <td><button class="btn btn-outline btn-info checkClassInfo" type="button" id="button">查看班级信息</button></td>
-                            <td><button class="btn btn-outline btn-info checkGroupInfo" type="button">查看小组信息</button></td>
+                            <td>2018-3-19</td>
+                            <td>四川理工学院</td>
+                            <td><button class="btn btn-outline btn-info checkClassInfo btn-xs" type="button" id="button">查看班级信息</button></td>
+                            <td><button class="btn btn-outline btn-info checkGroupInfo btn-xs" type="button">查看小组信息</button></td>
                             <td>
-                                <button class="btn btn-outline btn-success matchAttendance" type="button" style="margin-right: 10px; ">匹配考勤规则</button>
-                                <button class="btn btn-outline btn-success createAttendance" type="button" style="margin-right: 10px; "><a href="/page/kaoqin_rule_detail">新建考勤规则</a></button>
+                                <button class="btn btn-outline btn-success matchAttendance btn-xs" type="button" style="margin-right: 10px; ">匹配考勤规则</button>
+                                <button class="btn btn-outline btn-success createAttendance btn-xs" type="button"><a href="/page/kaoqin_rule_detail">新建考勤规则</a></button>
                             </td>
                             <td>
-                                <button class="btn btn-outline btn-success matchTeachingPlan" type="button" style="margin-right: 10px; ">匹配教学计划</button>
-                                <button class="btn btn-outline btn-success createTeachingPlan" type="button" style="margin-right: 10px; "><a href="/page/jiaoan/show_plan">新建教学计划</a></button></td>
+                                <button class="btn btn-outline btn-success matchTeachingPlan btn-xs" type="button" style="margin-right: 10px; ">匹配教学计划</button>
+                                <button class="btn btn-outline btn-success createTeachingPlan btn-xs" type="button" ><a href="/page/jiaoan/show_plan">新建教学计划</a></button></td>
                             </td>
                             <td>
                                 <div class="col-sm-6">
@@ -161,16 +171,16 @@
                                         <option>按手机号</option>
                                     </select>
                                 </div>
-                                <div class="col-sm-2"><button class="btn btn-outline btn-info createNumber" type="button">生成账号</button></div>
+                                <div class="col-sm-2"><button class="btn btn-outline btn-info createNumber btn-xs" type="button" style="margin-top: 4px">生成账号</button></div>
                                 <div class="col-sm-4"></div>
                             </td>
                             <td>
-                                <button class="btn btn-outline btn-info addTeacher" type="button" style="margin-right: 10px; ">添加教师</button>
-                                <button class="btn btn-outline btn-success initialization " type="button" style="margin-right: 10px; ">初始成绩</button>
-                                <button class="btn btn-outline btn-warning reviseClass" type="button" style="margin-right: 10px; ">修改班级</button>
-                                <button class="btn btn-outline btn-danger deleteClass" type="button">删除班级</button>
+                                <button class="btn btn-outline btn-info addTeacher btn-xs" type="button" style="margin-right: 10px; ">添加教师</button>
+                                <button class="btn btn-outline btn-success initialization btn-xs" type="button" style="margin-right: 10px; ">初始成绩</button>
+                                <button class="btn btn-outline btn-warning reviseClass btn-xs" type="button" style="margin-right: 10px; ">修改班级</button>
+                                <button class="btn btn-outline btn-danger deleteClass btn-xs" type="button">删除班级</button>
                             </td>
-                        </tr>
+                        </tr>--%>
                         </tbody>
                     </table>
                 </div>
@@ -212,55 +222,54 @@
         });
     });
     $('#addClass').click(function () {
-        layer.prompt({title: '输入班级名称', formType: 2}, function(text, index){
-            $.get(/*"/class/add",{text},*/function () {
-                $('.table').append('<tr>\n' +
-                    '                                <td>'+text+'</td>\n' +
-                    '                                <td><button class="btn btn-outline btn-info checkClassInfo" type="button" >查看班级信息</button></td>\n' +
-                    '                                <td><button class="btn btn-outline btn-info checkGroupInfo" type="button">查看小组信息</button></td>\n' +
-                    '                                <td>\n' +
-                    '                                    <button class="btn btn-outline btn-success matchAttendance" type="button" style="margin-right: 10px; ">匹配考勤规则</button>\n' +
-                    '                                    <button class="btn btn-outline btn-success createAttendance" type="button" style="margin-right: 10px; "><a href="/page/kaoqin_rule_detail">新建考勤规则</a></button>\n' +
-                    '                                </td>\n' +
-                    '                                <td>\n' +
-                    '                                    <button class="btn btn-outline btn-success matchTeachingPlan" type="button" style="margin-right: 10px; ">匹配教学计划</button>\n' +
-                    '                                    <button class="btn btn-outline btn-success createTeachingPlan" type="button" style="margin-right: 10px; "><a href="/page/jiaoan/show_plan">新建教学计划</a></button></td>\n' +
-                    '                                </td>\n' +
-                    '                                <td>\n' +
-                    '                                    <select class="form-control" name="select">\n' +
-                    '                                        <option>按学号</option>\n' +
-                    '                                        <option>按手机号</option>\n' +
-                    '                                    </select>\n' +
-                    '                                    <button class="btn btn-outline btn-info createNumber" type="button">生成账号</button>\n' +
-                    '                                </td>\n'+
-                    '                                <td>\n' +
-                    '                                    <button class="btn btn-outline btn-info addTeacher" type="button">添加教师</button>\n' +
-                    '                                    <button class="btn btn-outline btn-warning reviseClass" type="button" style="margin-right: 10px; ">修改班级</button>\n' +
-                    '                                    <button class="btn btn-outline btn-danger deleteClass" type="button">删除班级</button>\n' +
-                    '                                </td>\n' +
-                    '                            </tr>');
-            });
-            layer.msg('班级'+ text +'添加成功');
-        });
-    });
-    $("body").on("click",".checkClassInfo",function () {
         layer.open({
             type: 2,
-            title: '班级信息',
+            title: '添加班级',
             shadeClose: true,
-            shade: 0,
-            area: ['100%', '100%'],
-            content: '/classInfo.jsp',
+            shade: 0.8,
+            area: ['30%', '70%'],
+            content: '/addClass.jsp',
             btn:['完成','算了'],
             yes:function (index,layero) {
-                layer.confirm('确定修改吗',{
-                    btn:['确定','再想想']
-                },function () {
-                    layer.close(index);
-                    layer.msg('修改成功');
-                },function () {
-                    layer.msg('好好想想');
+                var body = layer.getChildFrame('body', index);
+                var area = body.find("#area").val();
+                var school = body.find("#school").val();
+                var name = body.find("#name").val();
+                $.get("/office/addClass",{school,name},function () {
+                    $('.table').append('<tr>\n' +
+                        '                                <td>'+name+'</td>\n' +
+                        '                                <td>2018-3-20</td>\n' +
+                        '                                <td>'+school+'</td>'+
+                        '                                <td><button class="btn btn-outline btn-info checkClassInfo btn-xs" type="button" >查看班级信息</button></td>\n' +
+                        '                                <td><button class="btn btn-outline btn-info checkGroupInfo btn-xs" type="button">查看小组信息</button></td>\n' +
+                        '                                <td>\n' +
+                        '                                    <button class="btn btn-outline btn-success matchAttendance btn-xs" type="button" style="margin-right: 10px; ">匹配考勤规则</button>\n' +
+                        '                                    <button class="btn btn-outline btn-success createAttendance btn-xs" type="button"><a href="/page/kaoqin_rule_detail">新建考勤规则</a></button>\n' +
+                        '                                </td>\n' +
+                        '                                <td>\n' +
+                        '                                    <button class="btn btn-outline btn-success matchTeachingPlan btn-xs" type="button" style="margin-right: 10px; ">匹配教学计划</button>\n' +
+                        '                                    <button class="btn btn-outline btn-success createTeachingPlan btn-xs" type="button"><a href="/page/jiaoan/show_plan">新建教学计划</a></button></td>\n' +
+                        '                                </td>\n' +
+                        '                                <td>\n' +
+                        '                                    <div class="col-sm-6">\n' +
+                        '                                       <select class="form-control" name="select">\n' +
+                        '                                           <option>按学号</option>\n' +
+                        '                                           <option>按手机号</option>\n' +
+                        '                                       </select>\n' +
+                        '                                   </div>\n' +
+                        '                                   <div class="col-sm-2"><button class="btn btn-outline btn-info createNumber btn-xs" type="button" style="margin-top: 4px">生成账号</button></div>\n' +
+                        '                                <div class="col-sm-4"></div>\n'+
+                        '                                </td>\n'+
+                        '                                <td>\n' +
+                        '                                    <button class="btn btn-outline btn-info addTeacher btn-xs" type="button" style="margin-right: 10px; ">添加教师</button>\n' +
+                        '                                    <button class="btn btn-outline btn-success initialization btn-xs" type="button" style="margin-right: 10px; ">初始成绩</button>'+
+                        '                                    <button class="btn btn-outline btn-warning reviseClass btn-xs" type="button" style="margin-right: 10px; ">修改班级</button>\n' +
+                        '                                    <button class="btn btn-outline btn-danger deleteClass btn-xs" type="button">删除班级</button>\n' +
+                        '                                </td>\n' +
+                        '                            </tr>');
                 });
+                layer.close(index);
+                layer.msg('添加成功');
             },
             btn2:function (index,layero) {
                 layer.close(index);

@@ -1,10 +1,12 @@
 package com.tosit.ssm.service;
 
+import com.tosit.ssm.entity.Office;
 import com.tosit.ssm.entity.User;
 import com.tosit.ssm.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -44,5 +46,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findUserByClassIdNoKaoqinNum(String id) {
         return null;
+    }
+
+    @Override
+    public List<User> findUserByOfficeId(String id) {
+        return userMapper.selectUserByOfficeId(id);
+    }
+
+    @Override
+    public List<User> findUserByDateAreaNoClass(Date startDate, Date endDate, Office office) {
+        return userMapper.selectByTimeAreaNClass(startDate,endDate,office);
+    }
+
+    @Override
+    public List<User> findUserWithClassNotInGroup(Office office) {
+        return userMapper.selectByClassGroup(office);
     }
 }
