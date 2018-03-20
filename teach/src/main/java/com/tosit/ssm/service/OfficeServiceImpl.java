@@ -20,6 +20,7 @@ public class OfficeServiceImpl implements OfficeService{
         return null;
     }
 
+
     public List<Office> getAllArea() {
         return  officeMapper.selectAllArea();
     }

@@ -28,4 +28,5 @@ public interface OfficeService {
      * @param office
      */
     void addOffice(Office office);
+    List<Office> getAllArea();
 }

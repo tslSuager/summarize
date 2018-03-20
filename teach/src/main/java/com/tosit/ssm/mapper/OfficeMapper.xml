@@ -552,14 +552,14 @@
       </if>
     </trim>
   </insert>
-  <select id="selectArea" resultType="com.tosit.ssm.entity.Office" >
+  <select id="selectArea" resultMap="BaseResultMap" >
     select
       <include refid="Base_Column_List"/>
     from office
     WHERE is_del = 1
     AND (office_type = 1 OR  office_type = 2)
   </select>
-  <select id="selectClassByDate" resultType="com.tosit.ssm.entity.Office" parameterType="java.util.Date">
+  <select id="selectClassByDate" resultMap="BaseResultMap" parameterType="java.util.Date">
     SELECT
       <include refid="Base_Column_List"/>
     FROM office
@@ -568,7 +568,7 @@
     AND (create_time = #{createTime})
 
   </select>
-  <select id="selectClassBySchool" resultType="com.tosit.ssm.entity.Office" parameterType="java.lang.String">
+  <select id="selectClassBySchool" resultMap="BaseResultMap" parameterType="java.lang.String">
     SELECT
     <include refid="Base_Column_List"/>
     FROM office o1
@@ -576,7 +576,7 @@
           AND  o1.office_type = 3
           AND o1.parent_id in (SELECT ID FROM office o WHERE o.office_type = 2 AND o.ID=#{schoolId})
   </select>
-  <select id="selectClassByAreaId" resultType="com.tosit.ssm.entity.Office" parameterType="java.lang.String">
+  <select id="selectClassByAreaId" resultMap="BaseResultMap" parameterType="java.lang.String">
     SELECT
       <include refid="Base_Column_List"/>
     FROM office
@@ -584,7 +584,7 @@
           AND  office_type = 3
           AND parent_id in ( SELECT ID FROM office WHERE is_del=1 AND office_type=2 AND parent_id in (SELECT ID FROM office  WHERE is_del =1 AND office_type = 1 AND ID=#{areaId}))
   </select>
-  <select id="selectGroupByClassId" resultType="com.tosit.ssm.entity.Office" parameterType="java.lang.String">
+  <select id="selectGroupByClassId" resultMap="BaseResultMap" parameterType="java.lang.String">
     SELECT
     <include refid="Base_Column_List"/>
     FROM office
@@ -592,7 +592,7 @@
     AND  office_type = 4
     AND parent_id in (SELECT ID FROM office o WHERE o.office_type = 3 AND o.ID=#{classId})
   </select>
-  <select id="selectOfficeByOfficeType" resultType="com.tosit.ssm.entity.Office" parameterType="java.lang.Integer">
+  <select id="selectOfficeByOfficeType" resultMap="BaseResultMap" parameterType="java.lang.Integer">
     SELECT
     <include refid="Base_Column_List"/>
     FROM office
@@ -600,7 +600,7 @@
     AND  office_type = #{officeType}
 
   </select>
-  <select id="selectOfficeByMasterAndSchool" resultType="com.tosit.ssm.entity.Office" parameterType="com.tosit.ssm.entity.Office">
+  <select id="selectOfficeByMasterAndSchool" resultMap="BaseResultMap" parameterType="com.tosit.ssm.entity.Office">
     SELECT
       o1.*
     FROM office o1
@@ -608,14 +608,14 @@
         ON o1.parent_id = o2.ID
     WHERE o1.is_del=1 AND o1.office_type=3 AND o2.is_del =1 AND o2.office_type=2 AND o2.ID=#{id} AND o1.`master`=#{master}
   </select>
-  <select id="selectOfficeByMasterAndDate" resultType="com.tosit.ssm.entity.Office" parameterType="com.tosit.ssm.entity.Office">
+  <select id="selectOfficeByMasterAndDate" resultMap="BaseResultMap" parameterType="com.tosit.ssm.entity.Office">
     SELECT
     <include refid="Base_Column_List"/>
     FROM office
     WHERE is_del =1 AND `master` =#{master} AND office_type = 2 AND (create_time BETWEEN DATE_FORMAT(#{createTime},'%Y-%m-%d %H:%i:%s') AND DATE_FORMAT(#{updateTime},'%Y-%m-%d %H:%i:%s') )
   </select>
 
-  <select id="selectAllArea" resultType="com.tosit.ssm.entity.Office" >
+  <select id="selectAllArea" resultMap="BaseResultMap" >
     select
     <include refid="Base_Column_List"/>
     from office
