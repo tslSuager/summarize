@@ -28,7 +28,11 @@ public interface OfficeMapper {
 
     int updateByExample(@Param("record") Office record, @Param("example") OfficeExample example);
 
-
+    /**
+     *  查询所有的区域
+     * @return
+     */
+    List<Office> selectAllArea();
 
     /**
      * 修改任意区域的任意一个字段

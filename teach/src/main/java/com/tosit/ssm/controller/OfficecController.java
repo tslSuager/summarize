@@ -45,7 +45,9 @@ public class OfficecController {
     public Object getAllArea() {
         System.out.println("我执行了");
         List<Office> area = officeService.getAllArea();
-
+        for (int i = 0; i < area.size(); i++) {
+            System.out.println(area.get(i));
+        }
         JSONModel.put("allArea",area);
         return JSONModel.put();
     }
