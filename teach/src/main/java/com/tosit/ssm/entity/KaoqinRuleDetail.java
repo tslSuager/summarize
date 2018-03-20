@@ -1,5 +1,7 @@
 package com.tosit.ssm.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class KaoqinRuleDetail {
@@ -8,39 +10,39 @@ public class KaoqinRuleDetail {
     private String kaoqinRuleId;
 
     private Integer weekDay;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date date;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date brushStarttime1;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date brushEndtime1;
 
     private Integer time1Wucha;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date brushStarttime2;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date brushEndtime2;
 
     private Integer time1Wucha2;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date brushStarttime3;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date brushEndtime3;
 
     private Integer time1Wucha3;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date brushStarttime4;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date brushEndtime4;
 
     private Integer time1Wucha4;
 
     private String remarks;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date createTime;
 
     private String createBy;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date updateTime;
 
     private String updateBy;

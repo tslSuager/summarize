@@ -47,13 +47,13 @@
 		<!--<table tableName="kaoqinRule_office" domainObjectName="KaoqinRuleOffice"/>-->
 
 		<!--<table tableName="kaoqin_records" domainObjectName="KaoqinRecords"/>-->
-		<!--<table tableName="kaoqin_result" domainObjectName="KaoqinResult"/>-->
+		<table tableName="kaoqin_result" domainObjectName="KaoqinResult"/>
 		<!--<table tableName="kaoqin_rule" domainObjectName="KaoqinRule"/>-->
 		<!--<table tableName="kaoqin_rule_detail" domainObjectName="KaoqinRuleDetail"/>-->
 		<!--<table tableName="office" domainObjectName="Office"/>-->
 		<!--<table tableName="user" domainObjectName="User"/>-->
 		<!--<table tableName="user_office" domainObjectName="UserOffice"/>-->
-		<table tableName="kaoqin_user" domainObjectName="KaoqinUser"/>
+		<!--<table tableName="kaoqin_user" domainObjectName="KaoqinUser"/>-->
 		<!--<table tableName="experience" domainObjectName="Experience"/>-->
 		<!-- 有些表的字段需要指定java类型
 		 <table schema="" tableName="">

@@ -26,7 +26,432 @@
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
     <result column="is_del" jdbcType="INTEGER" property="isDel" />
+    <result column="kaoqin_shenshu_reply" jdbcType="VARCHAR" property="kaoqinShenshuReply" />
+    <result column="kaoqin_remark_reply" jdbcType="VARCHAR" property="kaoqinRemarkReply" />
+    <result column="kaoqin_shenshu_reqtime" jdbcType="TIMESTAMP" property="kaoqinShenshuReqtime" />
+    <result column="kaoqin_remark_reqtime" jdbcType="TIMESTAMP" property="kaoqinRemarkReqtime" />
   </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    date, user_id, status, remark, last_time, createResultTime, kaoqin_remark_status,
+    kaoqin_remark_type, kaoqin_remark_content, kaoqin_remark_disposeUser, kaoqin_remark_disposeTime, 
+    kaoqin_remark_dispose_Result, kaoqin_shenshu_status, kaoqin_shenshu_type, kaoqin_shenshu_content, 
+    kaoqin_shenshu_disposeUser, kaoqin_shenshu_disposeTime, kaoqin_shenshu_disposeResult, 
+    create_time, create_by, update_time, update_by, is_del, kaoqin_shenshu_reply, kaoqin_remark_reply, 
+    kaoqin_shenshu_reqtime, kaoqin_remark_reqtime
+  </sql>
+  <select id="selectByExample" parameterType="com.tosit.ssm.entity.KaoqinResultExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from kaoqin_result
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.tosit.ssm.entity.KaoqinResultExample">
+    delete from kaoqin_result
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tosit.ssm.entity.KaoqinResult">
+    insert into kaoqin_result (id, date, user_id, 
+      status, remark, last_time, 
+      createResultTime, kaoqin_remark_status, 
+      kaoqin_remark_type, kaoqin_remark_content, 
+      kaoqin_remark_disposeUser, kaoqin_remark_disposeTime, 
+      kaoqin_remark_dispose_Result, kaoqin_shenshu_status, 
+      kaoqin_shenshu_type, kaoqin_shenshu_content, 
+      kaoqin_shenshu_disposeUser, kaoqin_shenshu_disposeTime, 
+      kaoqin_shenshu_disposeResult, create_time, 
+      create_by, update_time, update_by, 
+      is_del, kaoqin_shenshu_reply, kaoqin_remark_reply, 
+      kaoqin_shenshu_reqtime, kaoqin_remark_reqtime
+      )
+    values (#{id,jdbcType=VARCHAR}, #{date,jdbcType=DATE}, #{userId,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{lastTime,jdbcType=TIMESTAMP}, 
+      #{createresulttime,jdbcType=TIMESTAMP}, #{kaoqinRemarkStatus,jdbcType=INTEGER}, 
+      #{kaoqinRemarkType,jdbcType=INTEGER}, #{kaoqinRemarkContent,jdbcType=VARCHAR}, 
+      #{kaoqinRemarkDisposeuser,jdbcType=VARCHAR}, #{kaoqinRemarkDisposetime,jdbcType=TIMESTAMP}, 
+      #{kaoqinRemarkDisposeResult,jdbcType=INTEGER}, #{kaoqinShenshuStatus,jdbcType=INTEGER}, 
+      #{kaoqinShenshuType,jdbcType=INTEGER}, #{kaoqinShenshuContent,jdbcType=VARCHAR}, 
+      #{kaoqinShenshuDisposeuser,jdbcType=VARCHAR}, #{kaoqinShenshuDisposetime,jdbcType=TIMESTAMP}, 
+      #{kaoqinShenshuDisposeresult,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, 
+      #{isDel,jdbcType=INTEGER}, #{kaoqinShenshuReply,jdbcType=VARCHAR}, #{kaoqinRemarkReply,jdbcType=VARCHAR}, 
+      #{kaoqinShenshuReqtime,jdbcType=TIMESTAMP}, #{kaoqinRemarkReqtime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tosit.ssm.entity.KaoqinResult">
+    insert into kaoqin_result
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="lastTime != null">
+        last_time,
+      </if>
+      <if test="createresulttime != null">
+        createResultTime,
+      </if>
+      <if test="kaoqinRemarkStatus != null">
+        kaoqin_remark_status,
+      </if>
+      <if test="kaoqinRemarkType != null">
+        kaoqin_remark_type,
+      </if>
+      <if test="kaoqinRemarkContent != null">
+        kaoqin_remark_content,
+      </if>
+      <if test="kaoqinRemarkDisposeuser != null">
+        kaoqin_remark_disposeUser,
+      </if>
+      <if test="kaoqinRemarkDisposetime != null">
+        kaoqin_remark_disposeTime,
+      </if>
+      <if test="kaoqinRemarkDisposeResult != null">
+        kaoqin_remark_dispose_Result,
+      </if>
+      <if test="kaoqinShenshuStatus != null">
+        kaoqin_shenshu_status,
+      </if>
+      <if test="kaoqinShenshuType != null">
+        kaoqin_shenshu_type,
+      </if>
+      <if test="kaoqinShenshuContent != null">
+        kaoqin_shenshu_content,
+      </if>
+      <if test="kaoqinShenshuDisposeuser != null">
+        kaoqin_shenshu_disposeUser,
+      </if>
+      <if test="kaoqinShenshuDisposetime != null">
+        kaoqin_shenshu_disposeTime,
+      </if>
+      <if test="kaoqinShenshuDisposeresult != null">
+        kaoqin_shenshu_disposeResult,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+      <if test="kaoqinShenshuReply != null">
+        kaoqin_shenshu_reply,
+      </if>
+      <if test="kaoqinRemarkReply != null">
+        kaoqin_remark_reply,
+      </if>
+      <if test="kaoqinShenshuReqtime != null">
+        kaoqin_shenshu_reqtime,
+      </if>
+      <if test="kaoqinRemarkReqtime != null">
+        kaoqin_remark_reqtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="lastTime != null">
+        #{lastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createresulttime != null">
+        #{createresulttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="kaoqinRemarkStatus != null">
+        #{kaoqinRemarkStatus,jdbcType=INTEGER},
+      </if>
+      <if test="kaoqinRemarkType != null">
+        #{kaoqinRemarkType,jdbcType=INTEGER},
+      </if>
+      <if test="kaoqinRemarkContent != null">
+        #{kaoqinRemarkContent,jdbcType=VARCHAR},
+      </if>
+      <if test="kaoqinRemarkDisposeuser != null">
+        #{kaoqinRemarkDisposeuser,jdbcType=VARCHAR},
+      </if>
+      <if test="kaoqinRemarkDisposetime != null">
+        #{kaoqinRemarkDisposetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="kaoqinRemarkDisposeResult != null">
+        #{kaoqinRemarkDisposeResult,jdbcType=INTEGER},
+      </if>
+      <if test="kaoqinShenshuStatus != null">
+        #{kaoqinShenshuStatus,jdbcType=INTEGER},
+      </if>
+      <if test="kaoqinShenshuType != null">
+        #{kaoqinShenshuType,jdbcType=INTEGER},
+      </if>
+      <if test="kaoqinShenshuContent != null">
+        #{kaoqinShenshuContent,jdbcType=VARCHAR},
+      </if>
+      <if test="kaoqinShenshuDisposeuser != null">
+        #{kaoqinShenshuDisposeuser,jdbcType=VARCHAR},
+      </if>
+      <if test="kaoqinShenshuDisposetime != null">
+        #{kaoqinShenshuDisposetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="kaoqinShenshuDisposeresult != null">
+        #{kaoqinShenshuDisposeresult,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null">
+        #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="kaoqinShenshuReply != null">
+        #{kaoqinShenshuReply,jdbcType=VARCHAR},
+      </if>
+      <if test="kaoqinRemarkReply != null">
+        #{kaoqinRemarkReply,jdbcType=VARCHAR},
+      </if>
+      <if test="kaoqinShenshuReqtime != null">
+        #{kaoqinShenshuReqtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="kaoqinRemarkReqtime != null">
+        #{kaoqinRemarkReqtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tosit.ssm.entity.KaoqinResultExample" resultType="java.lang.Long">
+    select count(*) from kaoqin_result
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update kaoqin_result
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.date != null">
+        date = #{record.date,jdbcType=DATE},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastTime != null">
+        last_time = #{record.lastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createresulttime != null">
+        createResultTime = #{record.createresulttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.kaoqinRemarkStatus != null">
+        kaoqin_remark_status = #{record.kaoqinRemarkStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.kaoqinRemarkType != null">
+        kaoqin_remark_type = #{record.kaoqinRemarkType,jdbcType=INTEGER},
+      </if>
+      <if test="record.kaoqinRemarkContent != null">
+        kaoqin_remark_content = #{record.kaoqinRemarkContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.kaoqinRemarkDisposeuser != null">
+        kaoqin_remark_disposeUser = #{record.kaoqinRemarkDisposeuser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.kaoqinRemarkDisposetime != null">
+        kaoqin_remark_disposeTime = #{record.kaoqinRemarkDisposetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.kaoqinRemarkDisposeResult != null">
+        kaoqin_remark_dispose_Result = #{record.kaoqinRemarkDisposeResult,jdbcType=INTEGER},
+      </if>
+      <if test="record.kaoqinShenshuStatus != null">
+        kaoqin_shenshu_status = #{record.kaoqinShenshuStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.kaoqinShenshuType != null">
+        kaoqin_shenshu_type = #{record.kaoqinShenshuType,jdbcType=INTEGER},
+      </if>
+      <if test="record.kaoqinShenshuContent != null">
+        kaoqin_shenshu_content = #{record.kaoqinShenshuContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.kaoqinShenshuDisposeuser != null">
+        kaoqin_shenshu_disposeUser = #{record.kaoqinShenshuDisposeuser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.kaoqinShenshuDisposetime != null">
+        kaoqin_shenshu_disposeTime = #{record.kaoqinShenshuDisposetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.kaoqinShenshuDisposeresult != null">
+        kaoqin_shenshu_disposeResult = #{record.kaoqinShenshuDisposeresult,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createBy != null">
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateBy != null">
+        update_by = #{record.updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDel != null">
+        is_del = #{record.isDel,jdbcType=INTEGER},
+      </if>
+      <if test="record.kaoqinShenshuReply != null">
+        kaoqin_shenshu_reply = #{record.kaoqinShenshuReply,jdbcType=VARCHAR},
+      </if>
+      <if test="record.kaoqinRemarkReply != null">
+        kaoqin_remark_reply = #{record.kaoqinRemarkReply,jdbcType=VARCHAR},
+      </if>
+      <if test="record.kaoqinShenshuReqtime != null">
+        kaoqin_shenshu_reqtime = #{record.kaoqinShenshuReqtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.kaoqinRemarkReqtime != null">
+        kaoqin_remark_reqtime = #{record.kaoqinRemarkReqtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update kaoqin_result
+    set id = #{record.id,jdbcType=VARCHAR},
+      date = #{record.date,jdbcType=DATE},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      last_time = #{record.lastTime,jdbcType=TIMESTAMP},
+      createResultTime = #{record.createresulttime,jdbcType=TIMESTAMP},
+      kaoqin_remark_status = #{record.kaoqinRemarkStatus,jdbcType=INTEGER},
+      kaoqin_remark_type = #{record.kaoqinRemarkType,jdbcType=INTEGER},
+      kaoqin_remark_content = #{record.kaoqinRemarkContent,jdbcType=VARCHAR},
+      kaoqin_remark_disposeUser = #{record.kaoqinRemarkDisposeuser,jdbcType=VARCHAR},
+      kaoqin_remark_disposeTime = #{record.kaoqinRemarkDisposetime,jdbcType=TIMESTAMP},
+      kaoqin_remark_dispose_Result = #{record.kaoqinRemarkDisposeResult,jdbcType=INTEGER},
+      kaoqin_shenshu_status = #{record.kaoqinShenshuStatus,jdbcType=INTEGER},
+      kaoqin_shenshu_type = #{record.kaoqinShenshuType,jdbcType=INTEGER},
+      kaoqin_shenshu_content = #{record.kaoqinShenshuContent,jdbcType=VARCHAR},
+      kaoqin_shenshu_disposeUser = #{record.kaoqinShenshuDisposeuser,jdbcType=VARCHAR},
+      kaoqin_shenshu_disposeTime = #{record.kaoqinShenshuDisposetime,jdbcType=TIMESTAMP},
+      kaoqin_shenshu_disposeResult = #{record.kaoqinShenshuDisposeresult,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      update_by = #{record.updateBy,jdbcType=VARCHAR},
+      is_del = #{record.isDel,jdbcType=INTEGER},
+      kaoqin_shenshu_reply = #{record.kaoqinShenshuReply,jdbcType=VARCHAR},
+      kaoqin_remark_reply = #{record.kaoqinRemarkReply,jdbcType=VARCHAR},
+      kaoqin_shenshu_reqtime = #{record.kaoqinShenshuReqtime,jdbcType=TIMESTAMP},
+      kaoqin_remark_reqtime = #{record.kaoqinRemarkReqtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
 
 
 
@@ -262,29 +687,7 @@
 
   <select id="selectByClass" parameterType="string" resultMap="BaseResultMap">
     SELECT
-    kr.id,
-    kr.date,
-    kr.user_id,
-    kr.status,
-    kr.remark,
-    kr.last_time,
-    kr.createResultTime,
-    kr.kaoqin_remark_status,
-    kr.kaoqin_remark_type,
-    kr.kaoqin_remark_content,
-    kr.kaoqin_remark_disposeUser,
-    kr.kaoqin_remark_disposeTime,
-    kr.kaoqin_remark_dispose_Result,
-    kr.kaoqin_shenshu_status,
-    kr.kaoqin_shenshu_type,
-    kr.kaoqin_shenshu_content,
-    kr.kaoqin_shenshu_disposeUser,
-    kr.kaoqin_shenshu_disposeTime,
-    kr.kaoqin_shenshu_disposeResult,
-    kr.create_time,
-    kr.create_by,
-    kr.update_time,
-    kr.update_by
+     kr.id,<include refid="Base_Column_List" />
     FROM
     user_office uo LEFT JOIN kaoqin_result kr ON uo.user_id = kr.user_id
     WHERE uo.office_id = #{officeId} AND kr.is_del = 1 AND uo.is_del=1 OR kr.kaoqin_remark_status!='' OR kr.kaoqin_shenshu_status!=''
@@ -300,29 +703,7 @@
 
   <select id="selectByOne" parameterType="string" resultMap="BaseResultMap">
     SELECT
-    kr.id,
-    kr.date,
-    kr.user_id,
-    kr.status,
-    kr.remark,
-    kr.last_time,
-    kr.createResultTime,
-    kr.kaoqin_remark_status,
-    kr.kaoqin_remark_type,
-    kr.kaoqin_remark_content,
-    kr.kaoqin_remark_disposeUser,
-    kr.kaoqin_remark_disposeTime,
-    kr.kaoqin_remark_dispose_Result,
-    kr.kaoqin_shenshu_status,
-    kr.kaoqin_shenshu_type,
-    kr.kaoqin_shenshu_content,
-    kr.kaoqin_shenshu_disposeUser,
-    kr.kaoqin_shenshu_disposeTime,
-    kr.kaoqin_shenshu_disposeResult,
-    kr.create_time,
-    kr.create_by,
-    kr.update_time,
-    kr.update_by
+     kr.id,<include refid="Base_Column_List" />
     FROM kaoqin_result kr
     WHERE
     kr.user_id=#{userId} AND
@@ -331,100 +712,11 @@
 
   <select id="selectByClassLate" parameterType="string" resultMap="BaseResultMap">
     SELECT
-    kr.id,
-    kr.date,
-    kr.user_id,
-    kr.status,
-    kr.remark,
-    kr.last_time,
-    kr.createResultTime,
-    kr.kaoqin_remark_status,
-    kr.kaoqin_remark_type,
-    kr.kaoqin_remark_content,
-    kr.kaoqin_remark_disposeUser,
-    kr.kaoqin_remark_disposeTime,
-    kr.kaoqin_remark_dispose_Result,
-    kr.kaoqin_shenshu_status,
-    kr.kaoqin_shenshu_type,
-    kr.kaoqin_shenshu_content,
-    kr.kaoqin_shenshu_disposeUser,
-    kr.kaoqin_shenshu_disposeTime,
-    kr.kaoqin_shenshu_disposeResult,
-    kr.create_time,
-    kr.create_by,
-    kr.update_time,
-    kr.update_by
+     kr.id,<include refid="Base_Column_List" />
     FROM
     user_office uo LEFT JOIN kaoqin_result kr ON uo.user_id = kr.user_id
     WHERE uo.office_id = #{officeId} AND kr.status= 0 AND kr.is_del = 1 AND uo.is_del = 1
   </select>
-
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    id, date, user_id, status, remark, last_time, createResultTime, kaoqin_remark_status,
-    kaoqin_remark_type, kaoqin_remark_content, kaoqin_remark_disposeUser, kaoqin_remark_disposeTime,
-    kaoqin_remark_dispose_Result, kaoqin_shenshu_status, kaoqin_shenshu_type, kaoqin_shenshu_content,
-    kaoqin_shenshu_disposeUser, kaoqin_shenshu_disposeTime, kaoqin_shenshu_disposeResult,
-    create_time, create_by, update_time, update_by, is_del
-  </sql>
-
 
 
 
