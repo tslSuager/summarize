@@ -1,12 +1,14 @@
 package com.tosit.ssm.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Experience {
     private String id;
 
     private String event;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date occurTime;
 
     private String remark;

@@ -1,5 +1,7 @@
 package com.tosit.ssm.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class KaoqinRecords {
@@ -10,7 +12,7 @@ public class KaoqinRecords {
     private String name;
 
     private Integer sequenceNumber;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date brushtime;
 
     private String checkType;

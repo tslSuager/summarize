@@ -1,10 +1,12 @@
 package com.tosit.ssm.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class KaoqinResult {
     private String id;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date date;
 
     private String userId;
@@ -12,9 +14,9 @@ public class KaoqinResult {
     private Integer status;
 
     private String remark;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date lastTime;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date createresulttime;
 
     private Integer kaoqinRemarkStatus;
@@ -24,7 +26,7 @@ public class KaoqinResult {
     private String kaoqinRemarkContent;
 
     private String kaoqinRemarkDisposeuser;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date kaoqinRemarkDisposetime;
 
     private Integer kaoqinRemarkDisposeResult;
@@ -36,15 +38,15 @@ public class KaoqinResult {
     private String kaoqinShenshuContent;
 
     private String kaoqinShenshuDisposeuser;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date kaoqinShenshuDisposetime;
 
     private Integer kaoqinShenshuDisposeresult;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date createTime;
 
     private String createBy;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date updateTime;
 
     private String updateBy;
@@ -54,9 +56,9 @@ public class KaoqinResult {
     private String kaoqinShenshuReply;
 
     private String kaoqinRemarkReply;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date kaoqinShenshuReqtime;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date kaoqinRemarkReqtime;
 
     public String getId() {
