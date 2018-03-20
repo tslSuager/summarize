@@ -85,6 +85,12 @@
     ID, parent_id, parent_ids, name, phone, file_dir, icon, master, office_type, create_time, 
     create_by, update_time, update_by, remarks, status, is_del, sort, col_1, col_2, col_3
   </sql>
+
+  <select id="selectOfficeByManage" parameterType="string" resultMap="BaseResultMap">
+    SELECT name FROM office
+    WHERE master = #{master} AND office_type = 3 AND is_del = 1
+  </select>
+
   <select id="selectByExample" parameterType="com.tosit.ssm.entity.OfficeExample" resultMap="BaseResultMap">
     select
     <if test="distinct">

@@ -276,10 +276,10 @@
   </update>
 
   <select id="selectById" parameterType="string" resultMap="BaseResultMap">
-    SELECT * FROM experience where user_id = #{value}
+    SELECT * FROM experience where user_id = #{value} AND is_del =1
   </select>
   <select id="selectByIdToType" parameterType="string" resultMap="BaseResultMap">
-    SELECT * FROM experience where user_id = #{userId} and type = 1
+    SELECT * FROM experience where user_id = #{userId} and type = 1 AND is_del =1
   </select>
 
 </mapper>

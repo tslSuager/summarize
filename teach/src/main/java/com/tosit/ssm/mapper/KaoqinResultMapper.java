@@ -47,7 +47,7 @@ public interface KaoqinResultMapper {
     List<KaoqinResult> selectByClass(@Param("officeId") String officeId);
 
     /**
-     * 获取某个班的申述或请假总人数
+     * 获取某个班的申述或请假总条数
      * @param officeId
      * @return 返回值是一个数字
      */

@@ -82,4 +82,11 @@ public interface OfficeMapper {
      * @return 满足条件的组织
      */
     List<Office> selectOfficeByOfficeType(@Param("officeType") String officeType);
+
+    /**
+     * 查找某个教员管理的某个班级
+     * @param name
+     * @return
+     */
+    List<Office> selectOfficeByManage(@Param("name")String name);
 }

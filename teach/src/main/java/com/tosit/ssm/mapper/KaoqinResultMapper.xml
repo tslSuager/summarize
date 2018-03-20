@@ -261,7 +261,7 @@
   </insert>
 
   <select id="selectByClass" parameterType="string" resultMap="BaseResultMap">
-    SELECT
+    SELECT DISTINCT
     kr.id,
     kr.date,
     kr.user_id,
