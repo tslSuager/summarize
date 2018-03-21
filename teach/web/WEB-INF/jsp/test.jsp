@@ -40,12 +40,12 @@
 
 <script>
     $(function () {
-        initPullListTree("/office/getAllArea",1, 3,function (oneself) {
+        initPullListTree("/office/getAllArea",2, 1,function (oneself) {
 
         });//一个参数 开始的级别  第二参数 有几个下拉框
 //        $("#pullListTree").data("selectAreaId")
         $("#dddd").click(function () {
-            alert($("#pullListTree").data("selectAreaText"));
+            alert($("#pullListTree").data("selectArea"));
 
         });
 

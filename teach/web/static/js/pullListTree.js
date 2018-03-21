@@ -53,7 +53,7 @@ var initPullListTree = function (url,startlevel, count,fn) {
                 aaa = 0;
             });
         }
-        $("#pullListTree").find("select").eq(startlevel+count-2).change(function () {
+        $("#pullListTree").find("select").eq(count-1).change(function () {
             $("#pullListTree").data("selectAreaId",$(this).val());
             $("#pullListTree").data("selectAreaText",$(this).find("option:selected").text());
             fn($(this));
