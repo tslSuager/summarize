@@ -10,39 +10,39 @@ public class KaoqinRuleDetail {
     private String kaoqinRuleId;
 
     private Integer weekDay;
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date date;
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @DateTimeFormat(pattern = "HH:mm")
     private Date brushStarttime1;
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @DateTimeFormat(pattern = "HH:mm")
     private Date brushEndtime1;
 
     private Integer time1Wucha;
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @DateTimeFormat(pattern = "HH:mm")
     private Date brushStarttime2;
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @DateTimeFormat(pattern = "HH:mm")
     private Date brushEndtime2;
 
     private Integer time1Wucha2;
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @DateTimeFormat(pattern = "HH:mm")
     private Date brushStarttime3;
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @DateTimeFormat(pattern = "HH:mm")
     private Date brushEndtime3;
 
     private Integer time1Wucha3;
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @DateTimeFormat(pattern = "HH:mm")
     private Date brushStarttime4;
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @DateTimeFormat(pattern = "HH:mm")
     private Date brushEndtime4;
 
     private Integer time1Wucha4;
 
     private String remarks;
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     private String createBy;
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
     private String updateBy;
@@ -273,5 +273,10 @@ public class KaoqinRuleDetail {
 
     public void setCol3(String col3) {
         this.col3 = col3 == null ? null : col3.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "KaoqinRuleDetail{" + "id='" + id + '\'' + ", kaoqinRuleId='" + kaoqinRuleId + '\'' + ", weekDay=" + weekDay + ", date=" + date + ", brushStarttime1=" + brushStarttime1 + ", brushEndtime1=" + brushEndtime1 + ", time1Wucha=" + time1Wucha + ", brushStarttime2=" + brushStarttime2 + ", brushEndtime2=" + brushEndtime2 + ", time1Wucha2=" + time1Wucha2 + ", brushStarttime3=" + brushStarttime3 + ", brushEndtime3=" + brushEndtime3 + ", time1Wucha3=" + time1Wucha3 + ", brushStarttime4=" + brushStarttime4 + ", brushEndtime4=" + brushEndtime4 + ", time1Wucha4=" + time1Wucha4 + ", remarks='" + remarks + '\'' + ", createTime=" + createTime + ", createBy='" + createBy + '\'' + ", updateTime=" + updateTime + ", updateBy='" + updateBy + '\'' + ", isDel=" + isDel + ", brushCount=" + brushCount + ", isYouxiao=" + isYouxiao + ", col1='" + col1 + '\'' + ", col2='" + col2 + '\'' + ", col3='" + col3 + '\'' + '}';
     }
 }
