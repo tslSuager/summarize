@@ -10,7 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -34,20 +36,22 @@ public class CheckingController {
 
 
     /**
-     * 获取某人当天的考勤记录，和以前的考勤的结果（包括请假和备注）
+     * 获取某人某天的考勤记录，和以前的考勤的结果（包括请假和备注）
      * @return
      */
     @RequestMapping("/ShowAllRecordsByIdByDate")
     @ResponseBody
     public Object ShowRecords(String user_id,Timestamp brushTime){
-        //某个人的所有考勤记录
-        KaoqinRecords kaoqinRecords = new KaoqinRecords();
-        kaoqinRecords.setUserId(user_id);
-        kaoqinRecords.setBrushtime(brushTime);
+        //某个人的表现分的经历
+        List<Experience> experiences = userService.selectByIdToType("u001");
+        JSONModel.put("experiences",experiences);
+        //某个人某天的所有考勤记录
+        /*KaoqinRecords kaoqinRecords = new KaoqinRecords();
+        kaoqinRecords.setUserId("u001");
+        kaoqinRecords.setBrushtime();
         System.out.println(checkingService.toString());
         List<KaoqinRecords> kaoqinRecordsByIdByDate = checkingService.findKaoqinRecordsByIdByDate(kaoqinRecords);
-        System.out.println(kaoqinRecordsByIdByDate.toString());
-        JSONModel.put("records",kaoqinRecordsByIdByDate);
+        JSONModel.put("records",kaoqinRecordsByIdByDate);*/
 
         //某个人的所有考勤结果
         List<KaoqinResult> kaoqinresults = checkingService.findOneById("u001");
@@ -58,11 +62,6 @@ public class CheckingController {
         //某个人的所有信息
         User user = userService.selectByPrimaryKey("u001");
         JSONModel.put("user",user);
-
-        //某个人的表现分的经历
-        List<Experience> experiences = userService.selectByIdToType("u001");
-        JSONModel.put("experiences",experiences);
-
 
         return JSONModel.getMap();
     }

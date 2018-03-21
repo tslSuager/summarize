@@ -29,11 +29,8 @@
         <div class="col-sm-9" style="width:80%;float:none;margin:0 auto">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>查看<select id="pullListTree">
-                        <option class="">01班</option>
-                        <option class="">02班</option>
-                    </select>考勤
-                    </h5>
+                    查看<div id="pullListTree" style="width: 200px;display: inline"></div>
+
 
                     <div class="ibox-tools">
                         <a class="dropdown-toggle count-info" href="/page/table_bootstrap" style="text-decoration:none">
@@ -57,12 +54,10 @@
 <script src="/static/js/plugins/iCheck/icheck.min.js"></script>
 <script src="/static/js/plugins/fullcalendar/fullcalendar.min.js"></script>
 <script src="/static/js/plugins/layer/layer.min.js"></script>
-<script src="/static/js/pullListTree.js"/>
+<script src="/static/js/pullListTree.js"></script>
 <script>
-
     $(document).ready(function () {
         initPullListTree(3,1);
-
         $(".fa-envelope").mousemove(function () {
             $("#chulixinxi").show();
         })
