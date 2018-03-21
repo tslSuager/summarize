@@ -68,9 +68,12 @@
                     </div>
                 </div>
                 <div class="ibox-content">
-
-                       <div class="btn-group hidden-xs" id="exampleToolbar" role="group">
-                           <button type="button" id="btn-add" class="btn btn-outline btn-default">
+                       <div id="exampleToolbar" role="group" >
+                           <%--<div id="pullListTree" style="display: inline"></div>--%>
+                               <label for="class">班级：</label>
+                           <select id="class" class="form-control" style="display: inline;width: 150px">
+                           </select>
+                           <%--<button type="button" id="btn-add" class="btn btn-outline btn-default">
                                <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
                            </button>
                            <button type="button" id="btn-update" class="btn btn-outline btn-default">
@@ -78,12 +81,12 @@
                            </button>
                            <button type="button" id="btn-del" class="btn btn-outline btn-default">
                                <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
-                           </button>
-                           <select id="class" class=" form-control input-s-sm inline text-center">
+                           </button>--%>
+                               <span style=" margin-top: 100px;display: inline">
+                                   <i class="iconfont icon-xiazai" style="font-size: 30px;margin-left: 10px;"></i>
+                                   <span class="icon-name" title="下载" p-id="1019"><span p-id="1020"><i class="iconfont icon-shangchuan" style="font-size: 34px"></i></span></span>
+                               </span>
 
-                           </select>
-                           <i class="iconfont icon-xiazai" style="font-size: 30px;margin-left: 10px;"></i>
-                           <span class="icon-name" title="下载" p-id="1019"><span p-id="1020"><i class="iconfont icon-shangchuan" style="font-size: 34px"></i></span></span>
                        </div>
                        <table id="exampleTableToolbar" data-mobile-responsive="true">
                            <thead>
@@ -91,19 +94,18 @@
                                <th>用户ID</th>
                                <th>姓名</th>
                                <th>昵称</th>
-                               <th>考勤工号(双击修改)</th>
+                               <th>考勤工号</th>
                            </tr>
                            <tbody id="table_data">
-                                <tr class="gradeA odd"><td>测试2</td><td>测试2</td><td>计科1班</td><td>测试2</td></tr>
-                                <tr class="gradeA odd"><td>测试2</td><td>测试2</td><td>计科2班</td><td>测试2</td></tr>
-                                <tr class="gradeA odd"><td>测试2</td><td>测试2</td><td>计科3班</td><td>测试2</td></tr>
+                                <tr class="gradeA odd" hidden="hidden"><td>测试2</td><td>测试2</td><td>计科1班</td><td>测试2</td></tr>
+                                <%--<tr class="gradeA odd"><td>测试2</td><td>测试2</td><td>计科2班</td><td>测试2</td></tr>
+                                <tr class="gradeA odd"><td>测试2</td><td>测试2</td><td>计科3班</td><td>测试2</td></tr>--%>
                            </tbody>
                        </table>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
 <script src="/static/js/jquery.min.js?v=2.1.4"></script>
 <script>
@@ -172,14 +174,51 @@
 <script src="/static/js/plugins/iCheck/icheck.min.js"></script>
 <script src="/static/js/content.min.js?v=1.0.0"></script>
 <%--<script src="/static/js/demo/layer-demo.min.js"></script>--%>
+<%--<script src="/static/js/pullListTree.js"></script>--%>
 <script>
     $(document).ready(function () {
-        $(".i-checks").iCheck({checkboxClass: "icheckbox_square-green", radioClass: "iradio_square-green",})
+        $(".i-checks").iCheck({checkboxClass: "icheckbox_square-green", radioClass: "iradio_square-green",});
+        initData();
+        //    选中某个班未关联考勤工号的人
     });
+    function initData(){
+        $.ajax({
+            url: "/office/getClass",
+            dataType: "json",
+            success: function(json){
+                //解析json数据
+                var allClass = json["allClass"];
+                var $class = $("#class");
+                for(var i=0;i<allClass.length;i++){
+                    var id = allClass[i].id;
+                    var name = allClass[i].name;
+                    $class.append($("<option>").attr("value",id).html(name) )
+                }
+                //设置选择班级时候的事件
+                $class.change(function () {
+                    $.ajax({
+                        url: "/user/getUserByClassIdNoKaoqinNum?id="+$(this).val(),
+                        dataType: "json",
+                        success: function(json){
+                            //解析每个班未关联考勤工号的人
+                            var tableData = $("#table_data");
+                            tableData.html("").var;//
+                            for (var i=0;i<json.length;i++){
+                                var id = json[i].id;
+                                var name = json[i].name;
+                                var niname = json[i].niname;
+                                var kaoqinCode = json[i].kaoqinCode;
+                                tableData.append($("<tr>").append($("<td>").html(id)).append($("<td>").html(name)).append($("<td>").html(niname)).append($("<td>").html(kaoqinCode)) )
+                            }
+                        }
+                    });
+                })
+            }
+        });
+    }
 </script>
 <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
 </body>
-
 <!-- Mirrored from www.zi-han.net/theme/hplus/table_data_tables.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:02 GMT -->
 </html>
 <script src="/static/high_layer/layer.js"></script>
@@ -192,6 +231,9 @@
                 layer.close(index);
         });
         $(".layui-layer-title:eq(0)").html("请输入班级");
+//        $("#table_data").find("tr:eq(0)").hide();
     }));
 
+
 </script>
+

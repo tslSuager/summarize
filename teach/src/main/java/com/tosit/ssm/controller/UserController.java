@@ -46,7 +46,12 @@ public class UserController {
         return user ;
     }
 
-    @RequestMapping(value = "/getUserByClassIdNoKaoqinNum",method = RequestMethod.POST)
+    /**
+     * 得到某个班为关联考勤工号的人
+     * @param id 班级id
+     * @return
+     */
+    @RequestMapping(value = "/getUserByClassIdNoKaoqinNum")
     @ResponseBody
     public Object getUserByClassIdNoKaoqinNum(String id){
         List<User> users= userService.findUserByClassIdNoKaoqinNum(id);

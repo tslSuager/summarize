@@ -800,9 +800,13 @@ SELECT
 
   <select id="selectByClassNGH" parameterType="com.tosit.ssm.entity.Office" resultMap="BaseResultMap">
     SELECT
-     <include refid="Base_Column_List"/>
+      u.ID, loginName, u.password, u.salt, u.name, u.niName, u.sex, u.personNo, u.daXue, u.daXue_address,
+      u.home_address, u.stu_number, u.daxue_zhuanye, u.shixun_zhuanye, u.peixun_zhuanye, u.phone1,
+      u.phone2, u.photo, u.QQ, u.weixin, u.email, u.user_type, u.kaoqin_code, u.kaoqin_ruleID,u.status,
+      u.create_time, u.create_by, u.update_time, u.update_by, u.last_logintime, u.loat_longin_ip, u.remarks,
+      u.is_del, u.sort, u.grade, u.cut_grade, u.col_3
     FROM user u join user_office uo on u.id=uo.user_id
-    join   office f on uo.office_id=f.id where f.id=#{office.id}
+    join   office f on uo.office_id=f.id where f.id=#{id}
     and f.is_del=1 and u.is_del=1 and uo.is_del=1
     and u.kaoqin_code is null
   </select>
