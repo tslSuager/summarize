@@ -28,54 +28,18 @@
 </head>
 <body>
 
-<div id="pullListTree" />
+<div id="pullListTree"/>
 </body>
 <script src="/static/js/jquery.min.js?v=2.1.4"></script>
 <script src="/static/js/jquery.min.js"></script>
 <script id="welcome-template" type="text/x-handlebars-template"/>
 <script src="/static/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/static/js/pullListTree.js"></script>
 
 
 <script>
     $(function () {
-        initPullListTree(1,3);
+        initPullListTree(1, 3);//一个参数 开始的级别  第二参数 有几个下拉框
     });
-    var initPullListTree=function (startlevel,count) {
-//        var message;
-//        var levels = level;
-//        var counts = count;
-        $.get("/office/getAllArea",{},function (msg) {
-//            message = msg;
-            console.info(msg);
-                for(var i=startlevel;(count+startlevel)>i;i++) {
-                    switch (i) {
-                        case (1):
-                            $("#pullListTree").append($("<span>").html("区域："));
-                            $("#pullListTree").append($("<select>").addClass("form-control").css("name","areaId").append($("<option>").css("value","")));
-                            break;
-                        case (2):
-                            $("#pullListTree").append($("<span>").html("学校："));
-                            $("#pullListTree").append($("<select>").addClass("form-control").css("name","areaId").append($("<option>").css("value","")));
-                            break;
-                        case (3):
-                            $("#pullListTree").append($("<span>").html("班级："));
-                            $("#pullListTree").append($("<select>").addClass("form-control").css("name","areaId").append($("<option>").css("value","")));
-                            break;
-                        case (4):
-                            $("#pullListTree").append($("<span>").html("组："));
-                            $("#pullListTree").append($("<select>").addClass("form-control").css("name","areaId").append($("<option>").css("value","")));
-                            break;
-                    }
-                }
-            $.each(msg.allArea, function (i,e) {
-                console.info(e.officeType);
-
-            });
-
-        },"json");
-
-    }
-
-
 </script>
 </html>
