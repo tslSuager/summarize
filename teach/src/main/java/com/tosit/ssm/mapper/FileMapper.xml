@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tosit.ssm.mapper.FileMapper">
+  <resultMap id="BaseResultMap" type="com.tosit.ssm.entity.File">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="upload_file_type" jdbcType="INTEGER" property="uploadFileType" />
+    <result column="file_catalogue" jdbcType="VARCHAR" property="fileCatalogue" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="saveName" jdbcType="VARCHAR" property="savename" />
+    <result column="file_pah" jdbcType="VARCHAR" property="filePah" />
+    <result column="fileType" jdbcType="VARCHAR" property="filetype" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="submit_time" jdbcType="TIMESTAMP" property="submitTime" />
+    <result column="submi_remarks" jdbcType="VARCHAR" property="submiRemarks" />
+    <result column="is_del" jdbcType="INTEGER" property="isDel" />
+    <result column="download_time" jdbcType="TIMESTAMP" property="downloadTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, upload_file_type, file_catalogue, name, saveName, file_pah, fileType, icon, submit_time, 
+    submi_remarks, is_del, download_time
+  </sql>
+  <select id="selectByExample" parameterType="com.tosit.ssm.entity.FileExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from file
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from file
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from file
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tosit.ssm.entity.FileExample">
+    delete from file
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tosit.ssm.entity.File">
+    insert into file (id, upload_file_type, file_catalogue, 
+      name, saveName, file_pah, 
+      fileType, icon, submit_time, 
+      submi_remarks, is_del, download_time
+      )
+    values (#{id,jdbcType=VARCHAR}, #{uploadFileType,jdbcType=INTEGER}, #{fileCatalogue,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{savename,jdbcType=VARCHAR}, #{filePah,jdbcType=VARCHAR}, 
+      #{filetype,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{submitTime,jdbcType=TIMESTAMP}, 
+      #{submiRemarks,jdbcType=VARCHAR}, #{isDel,jdbcType=INTEGER}, #{downloadTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tosit.ssm.entity.File">
+    insert into file
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="uploadFileType != null">
+        upload_file_type,
+      </if>
+      <if test="fileCatalogue != null">
+        file_catalogue,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="savename != null">
+        saveName,
+      </if>
+      <if test="filePah != null">
+        file_pah,
+      </if>
+      <if test="filetype != null">
+        fileType,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="submitTime != null">
+        submit_time,
+      </if>
+      <if test="submiRemarks != null">
+        submi_remarks,
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+      <if test="downloadTime != null">
+        download_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadFileType != null">
+        #{uploadFileType,jdbcType=INTEGER},
+      </if>
+      <if test="fileCatalogue != null">
+        #{fileCatalogue,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="savename != null">
+        #{savename,jdbcType=VARCHAR},
+      </if>
+      <if test="filePah != null">
+        #{filePah,jdbcType=VARCHAR},
+      </if>
+      <if test="filetype != null">
+        #{filetype,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="submitTime != null">
+        #{submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="submiRemarks != null">
+        #{submiRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null">
+        #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="downloadTime != null">
+        #{downloadTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tosit.ssm.entity.FileExample" resultType="java.lang.Long">
+    select count(*) from file
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update file
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uploadFileType != null">
+        upload_file_type = #{record.uploadFileType,jdbcType=INTEGER},
+      </if>
+      <if test="record.fileCatalogue != null">
+        file_catalogue = #{record.fileCatalogue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.savename != null">
+        saveName = #{record.savename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filePah != null">
+        file_pah = #{record.filePah,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filetype != null">
+        fileType = #{record.filetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.icon != null">
+        icon = #{record.icon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.submitTime != null">
+        submit_time = #{record.submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.submiRemarks != null">
+        submi_remarks = #{record.submiRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDel != null">
+        is_del = #{record.isDel,jdbcType=INTEGER},
+      </if>
+      <if test="record.downloadTime != null">
+        download_time = #{record.downloadTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update file
+    set id = #{record.id,jdbcType=VARCHAR},
+      upload_file_type = #{record.uploadFileType,jdbcType=INTEGER},
+      file_catalogue = #{record.fileCatalogue,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      saveName = #{record.savename,jdbcType=VARCHAR},
+      file_pah = #{record.filePah,jdbcType=VARCHAR},
+      fileType = #{record.filetype,jdbcType=VARCHAR},
+      icon = #{record.icon,jdbcType=VARCHAR},
+      submit_time = #{record.submitTime,jdbcType=TIMESTAMP},
+      submi_remarks = #{record.submiRemarks,jdbcType=VARCHAR},
+      is_del = #{record.isDel,jdbcType=INTEGER},
+      download_time = #{record.downloadTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tosit.ssm.entity.File">
+    update file
+    <set>
+      <if test="uploadFileType != null">
+        upload_file_type = #{uploadFileType,jdbcType=INTEGER},
+      </if>
+      <if test="fileCatalogue != null">
+        file_catalogue = #{fileCatalogue,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="savename != null">
+        saveName = #{savename,jdbcType=VARCHAR},
+      </if>
+      <if test="filePah != null">
+        file_pah = #{filePah,jdbcType=VARCHAR},
+      </if>
+      <if test="filetype != null">
+        fileType = #{filetype,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="submitTime != null">
+        submit_time = #{submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="submiRemarks != null">
+        submi_remarks = #{submiRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null">
+        is_del = #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="downloadTime != null">
+        download_time = #{downloadTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tosit.ssm.entity.File">
+    update file
+    set upload_file_type = #{uploadFileType,jdbcType=INTEGER},
+      file_catalogue = #{fileCatalogue,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      saveName = #{savename,jdbcType=VARCHAR},
+      file_pah = #{filePah,jdbcType=VARCHAR},
+      fileType = #{filetype,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      submit_time = #{submitTime,jdbcType=TIMESTAMP},
+      submi_remarks = #{submiRemarks,jdbcType=VARCHAR},
+      is_del = #{isDel,jdbcType=INTEGER},
+      download_time = #{downloadTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
