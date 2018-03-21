@@ -102,8 +102,8 @@
     u.ID, loginName, password, salt, name, niName, sex, personNo, daXue, daXue_address,
     home_address, stu_number, daxue_zhuanye, shixun_zhuanye, peixun_zhuanye, phone1, 
     phone2, photo, QQ, weixin, email, user_type, kaoqin_code, kaoqin_ruleID, status, 
-    create_time, create_by, update_time, update_by, last_logintime, loat_longin_ip, remarks, 
-    is_del, sort, grade, cut_grade, col_3
+    u.create_time, u.create_by, u.update_time, u.update_by, last_logintime, loat_longin_ip, u.remarks,
+    u.is_del, u.sort, u.grade, u.cut_grade, u.col_3
   </sql>
   <select id="selectUserByOfficeId" parameterType="java.lang.String" resultMap="BaseResultMap">
     SELECT

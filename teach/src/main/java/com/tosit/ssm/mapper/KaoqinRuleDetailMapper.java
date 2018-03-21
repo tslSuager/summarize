@@ -45,3 +45,8 @@ public interface KaoqinRuleDetailMapper {
     int updateByPrimaryKey(KaoqinRuleDetail record);
 
 }
+
+
+
+
+

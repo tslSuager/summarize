@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,28 +23,18 @@
         <table class="table table-bordered text-center">
             <thead>
             <tr>
-                <th class="text-center">呵呵呵</th>
-                <th class="text-center">事件</th>
                 <th class="text-center">时间</th>
+                <th class="text-center">事件</th>
+                <th class="text-center">备注</th>
             </tr>
             </thead>
-            <tbody>
+            <c:forEach var="experience" items="${allExperience}" >
             <tr>
-                <td>10001</td>
-                <td>拉多了</td>
-                <td>2018-1-1</td>
+                <td >${experience.occurTime}</td>
+                <td >${experience.event}</td>
+                <td >${experience.remark}</td>
             </tr>
-            <tr>
-                <td>10001</td>
-                <td>吃多了</td>
-                <td>2018-1-1</td>
-            </tr>
-            <tr>
-                <td>10001</td>
-                <td>吐没了</td>
-                <td>2018-1-1</td>
-            </tr>
-            </tbody>
+            </c:forEach>
         </table>
     </div>
 </div>
@@ -62,7 +53,7 @@
 <script>
     $(function () {
         $("#reset1").click(function () {
-            window.location.href = "page/student_find_jingli";
+            window.location.href = "/page/student_find_jingli";
         })
     })
 </script>
