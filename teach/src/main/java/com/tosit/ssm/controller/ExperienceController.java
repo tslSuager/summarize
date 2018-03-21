@@ -1,5 +1,6 @@
 package com.tosit.ssm.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.tosit.ssm.entity.Experience;
 import com.tosit.ssm.service.ExperienceService;
 import org.apache.ibatis.annotations.Param;
@@ -30,7 +31,7 @@ public class ExperienceController {
     public String userExperience( String userId, HttpServletRequest request){
         System.out.println(userId);
         List<Experience> experiences = experienceService.allUserExperience(userId);
-        request.setAttribute("allExperience",experiences);
+        request.setAttribute("allExperience",JSON.toJSON(experiences));
         return "student_jingli";
     }
 }
