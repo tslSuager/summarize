@@ -7,8 +7,8 @@
     <result column="occur_time" jdbcType="TIMESTAMP" property="occurTime" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="user_id" jdbcType="VARCHAR" property="userId" />
-    <result column="is_del" jdbcType="CHAR" property="isDel" />
-    <result column="type" jdbcType="CHAR" property="type" />
+    <result column="is_del" jdbcType="INTEGER" property="isDel" />
+    <result column="type" jdbcType="INTEGER" property="type" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -96,8 +96,8 @@
       remark, user_id, is_del, 
       type)
     values (#{id,jdbcType=VARCHAR}, #{event,jdbcType=VARCHAR}, #{occurTime,jdbcType=TIMESTAMP}, 
-      #{remark,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{isDel,jdbcType=CHAR}, 
-      #{type,jdbcType=CHAR})
+      #{remark,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{isDel,jdbcType=INTEGER}, 
+      #{type,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.tosit.ssm.entity.Experience">
     insert into experience
@@ -141,10 +141,10 @@
         #{userId,jdbcType=VARCHAR},
       </if>
       <if test="isDel != null">
-        #{isDel,jdbcType=CHAR},
+        #{isDel,jdbcType=INTEGER},
       </if>
       <if test="type != null">
-        #{type,jdbcType=CHAR},
+        #{type,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -173,10 +173,10 @@
         user_id = #{record.userId,jdbcType=VARCHAR},
       </if>
       <if test="record.isDel != null">
-        is_del = #{record.isDel,jdbcType=CHAR},
+        is_del = #{record.isDel,jdbcType=INTEGER},
       </if>
       <if test="record.type != null">
-        type = #{record.type,jdbcType=CHAR},
+        type = #{record.type,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null">
@@ -190,12 +190,13 @@
       occur_time = #{record.occurTime,jdbcType=TIMESTAMP},
       remark = #{record.remark,jdbcType=VARCHAR},
       user_id = #{record.userId,jdbcType=VARCHAR},
-      is_del = #{record.isDel,jdbcType=CHAR},
-      type = #{record.type,jdbcType=CHAR}
+      is_del = #{record.isDel,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
+
 
 
   <insert id="insertExperience" parameterType="com.tosit.ssm.entity.Experience">
@@ -281,5 +282,6 @@
   <select id="selectByIdToType" parameterType="string" resultMap="BaseResultMap">
     SELECT * FROM experience where user_id = #{userId} and type = 1 AND is_del =1
   </select>
+
 
 </mapper>

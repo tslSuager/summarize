@@ -1,5 +1,7 @@
 package com.tosit.ssm.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class KaoqinRule {
@@ -13,10 +15,12 @@ public class KaoqinRule {
 
     private Integer isDefault;
 
-    private Date createTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date createTime=new Date();
 
     private String createBy;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
     private String updateBy;

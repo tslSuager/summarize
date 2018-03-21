@@ -6,6 +6,10 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+import com.tosit.ssm.entity.User;
+
+import java.util.List;
+
 public interface UserService {
     /**
      * 通过user.id 获取一user
@@ -27,4 +31,11 @@ public interface UserService {
      * @return
      */
     List<User> selectChidaoBeforToday(String officeId);
+    /*List<User> getUsers();*/
+
+    User getUserById(String id);
+
+    int modifyUser(User user);
+
+    List<User> findUserByClassIdNoKaoqinNum(String id);
 }

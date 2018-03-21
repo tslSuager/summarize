@@ -7,5 +7,5 @@ import java.util.List;
 public interface OfficeService {
      void createOffice(Office office);
 
-    List<Office> getArea();
+    List<Office> getAllArea();
 }

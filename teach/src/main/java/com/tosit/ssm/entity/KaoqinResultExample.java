@@ -1661,6 +1661,266 @@ public class KaoqinResultExample {
             addCriterion("is_del not between", value1, value2, "isDel");
             return (Criteria) this;
         }
+
+        public Criteria andKaoqinShenshuReplyIsNull() {
+            addCriterion("kaoqin_shenshu_reply is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinShenshuReplyIsNotNull() {
+            addCriterion("kaoqin_shenshu_reply is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinShenshuReplyEqualTo(String value) {
+            addCriterion("kaoqin_shenshu_reply =", value, "kaoqinShenshuReply");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinShenshuReplyNotEqualTo(String value) {
+            addCriterion("kaoqin_shenshu_reply <>", value, "kaoqinShenshuReply");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinShenshuReplyGreaterThan(String value) {
+            addCriterion("kaoqin_shenshu_reply >", value, "kaoqinShenshuReply");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinShenshuReplyGreaterThanOrEqualTo(String value) {
+            addCriterion("kaoqin_shenshu_reply >=", value, "kaoqinShenshuReply");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinShenshuReplyLessThan(String value) {
+            addCriterion("kaoqin_shenshu_reply <", value, "kaoqinShenshuReply");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinShenshuReplyLessThanOrEqualTo(String value) {
+            addCriterion("kaoqin_shenshu_reply <=", value, "kaoqinShenshuReply");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinShenshuReplyLike(String value) {
+            addCriterion("kaoqin_shenshu_reply like", value, "kaoqinShenshuReply");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinShenshuReplyNotLike(String value) {
+            addCriterion("kaoqin_shenshu_reply not like", value, "kaoqinShenshuReply");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinShenshuReplyIn(List<String> values) {
+            addCriterion("kaoqin_shenshu_reply in", values, "kaoqinShenshuReply");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinShenshuReplyNotIn(List<String> values) {
+            addCriterion("kaoqin_shenshu_reply not in", values, "kaoqinShenshuReply");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinShenshuReplyBetween(String value1, String value2) {
+            addCriterion("kaoqin_shenshu_reply between", value1, value2, "kaoqinShenshuReply");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinShenshuReplyNotBetween(String value1, String value2) {
+            addCriterion("kaoqin_shenshu_reply not between", value1, value2, "kaoqinShenshuReply");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinRemarkReplyIsNull() {
+            addCriterion("kaoqin_remark_reply is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinRemarkReplyIsNotNull() {
+            addCriterion("kaoqin_remark_reply is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinRemarkReplyEqualTo(String value) {
+            addCriterion("kaoqin_remark_reply =", value, "kaoqinRemarkReply");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinRemarkReplyNotEqualTo(String value) {
+            addCriterion("kaoqin_remark_reply <>", value, "kaoqinRemarkReply");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinRemarkReplyGreaterThan(String value) {
+            addCriterion("kaoqin_remark_reply >", value, "kaoqinRemarkReply");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinRemarkReplyGreaterThanOrEqualTo(String value) {
+            addCriterion("kaoqin_remark_reply >=", value, "kaoqinRemarkReply");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinRemarkReplyLessThan(String value) {
+            addCriterion("kaoqin_remark_reply <", value, "kaoqinRemarkReply");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinRemarkReplyLessThanOrEqualTo(String value) {
+            addCriterion("kaoqin_remark_reply <=", value, "kaoqinRemarkReply");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinRemarkReplyLike(String value) {
+            addCriterion("kaoqin_remark_reply like", value, "kaoqinRemarkReply");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinRemarkReplyNotLike(String value) {
+            addCriterion("kaoqin_remark_reply not like", value, "kaoqinRemarkReply");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinRemarkReplyIn(List<String> values) {
+            addCriterion("kaoqin_remark_reply in", values, "kaoqinRemarkReply");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinRemarkReplyNotIn(List<String> values) {
+            addCriterion("kaoqin_remark_reply not in", values, "kaoqinRemarkReply");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinRemarkReplyBetween(String value1, String value2) {
+            addCriterion("kaoqin_remark_reply between", value1, value2, "kaoqinRemarkReply");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinRemarkReplyNotBetween(String value1, String value2) {
+            addCriterion("kaoqin_remark_reply not between", value1, value2, "kaoqinRemarkReply");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinShenshuReqtimeIsNull() {
+            addCriterion("kaoqin_shenshu_reqtime is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinShenshuReqtimeIsNotNull() {
+            addCriterion("kaoqin_shenshu_reqtime is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinShenshuReqtimeEqualTo(Date value) {
+            addCriterion("kaoqin_shenshu_reqtime =", value, "kaoqinShenshuReqtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinShenshuReqtimeNotEqualTo(Date value) {
+            addCriterion("kaoqin_shenshu_reqtime <>", value, "kaoqinShenshuReqtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinShenshuReqtimeGreaterThan(Date value) {
+            addCriterion("kaoqin_shenshu_reqtime >", value, "kaoqinShenshuReqtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinShenshuReqtimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("kaoqin_shenshu_reqtime >=", value, "kaoqinShenshuReqtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinShenshuReqtimeLessThan(Date value) {
+            addCriterion("kaoqin_shenshu_reqtime <", value, "kaoqinShenshuReqtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinShenshuReqtimeLessThanOrEqualTo(Date value) {
+            addCriterion("kaoqin_shenshu_reqtime <=", value, "kaoqinShenshuReqtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinShenshuReqtimeIn(List<Date> values) {
+            addCriterion("kaoqin_shenshu_reqtime in", values, "kaoqinShenshuReqtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinShenshuReqtimeNotIn(List<Date> values) {
+            addCriterion("kaoqin_shenshu_reqtime not in", values, "kaoqinShenshuReqtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinShenshuReqtimeBetween(Date value1, Date value2) {
+            addCriterion("kaoqin_shenshu_reqtime between", value1, value2, "kaoqinShenshuReqtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinShenshuReqtimeNotBetween(Date value1, Date value2) {
+            addCriterion("kaoqin_shenshu_reqtime not between", value1, value2, "kaoqinShenshuReqtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinRemarkReqtimeIsNull() {
+            addCriterion("kaoqin_remark_reqtime is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinRemarkReqtimeIsNotNull() {
+            addCriterion("kaoqin_remark_reqtime is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinRemarkReqtimeEqualTo(Date value) {
+            addCriterion("kaoqin_remark_reqtime =", value, "kaoqinRemarkReqtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinRemarkReqtimeNotEqualTo(Date value) {
+            addCriterion("kaoqin_remark_reqtime <>", value, "kaoqinRemarkReqtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinRemarkReqtimeGreaterThan(Date value) {
+            addCriterion("kaoqin_remark_reqtime >", value, "kaoqinRemarkReqtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinRemarkReqtimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("kaoqin_remark_reqtime >=", value, "kaoqinRemarkReqtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinRemarkReqtimeLessThan(Date value) {
+            addCriterion("kaoqin_remark_reqtime <", value, "kaoqinRemarkReqtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinRemarkReqtimeLessThanOrEqualTo(Date value) {
+            addCriterion("kaoqin_remark_reqtime <=", value, "kaoqinRemarkReqtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinRemarkReqtimeIn(List<Date> values) {
+            addCriterion("kaoqin_remark_reqtime in", values, "kaoqinRemarkReqtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinRemarkReqtimeNotIn(List<Date> values) {
+            addCriterion("kaoqin_remark_reqtime not in", values, "kaoqinRemarkReqtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinRemarkReqtimeBetween(Date value1, Date value2) {
+            addCriterion("kaoqin_remark_reqtime between", value1, value2, "kaoqinRemarkReqtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andKaoqinRemarkReqtimeNotBetween(Date value1, Date value2) {
+            addCriterion("kaoqin_remark_reqtime not between", value1, value2, "kaoqinRemarkReqtime");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

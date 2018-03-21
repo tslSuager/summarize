@@ -1,5 +1,7 @@
 package com.tosit.ssm.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class User {
@@ -52,15 +54,17 @@ public class User {
     private String kaoqinRuleid;
 
     private Integer status;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date createTime;
 
     private String createBy;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date updateTime;
 
     private String updateBy;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date lastLogintime;
 
     private String loatLonginIp;

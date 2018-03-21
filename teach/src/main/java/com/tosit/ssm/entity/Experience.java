@@ -1,24 +1,23 @@
 package com.tosit.ssm.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Experience {
     private String id;
 
     private String event;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date occurTime;
 
     private String remark;
 
     private String userId;
 
-    private String isDel;
+    private Integer isDel;
 
-    private String type;
-
-
-
+    private Integer type;
 
     public String getId() {
         return id;
@@ -60,19 +59,19 @@ public class Experience {
         this.userId = userId == null ? null : userId.trim();
     }
 
-    public String getIsDel() {
+    public Integer getIsDel() {
         return isDel;
     }
 
-    public void setIsDel(String isDel) {
-        this.isDel = isDel == null ? null : isDel.trim();
+    public void setIsDel(Integer isDel) {
+        this.isDel = isDel;
     }
 
-    public String getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type == null ? null : type.trim();
+    public void setType(Integer type) {
+        this.type = type;
     }
 }

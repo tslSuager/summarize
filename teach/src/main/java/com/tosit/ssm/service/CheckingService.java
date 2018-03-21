@@ -7,6 +7,10 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+import com.tosit.ssm.entity.KaoqinRule;
+import com.tosit.ssm.entity.KaoqinRuleDetail;
+import com.tosit.ssm.entity.KaoqindetailVO;
+
 public interface CheckingService {
     /**
      * 获取某个人某天的所有考勤记录
@@ -63,4 +67,5 @@ public interface CheckingService {
      * @return
      */
     int updateByPrimaryKey(KaoqinResult record);
+    public void addKaoQinRule(KaoqinRule kaoqinRule, KaoqindetailVO kaoqindetailVO);
 }
