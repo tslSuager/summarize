@@ -28,7 +28,8 @@
 </head>
 <body>
 
-<div id="pullListTree"/>
+<div id="pullListTree"></div>
+<button  id="dddd">test</button>
 </body>
 <script src="/static/js/jquery.min.js?v=2.1.4"></script>
 <script src="/static/js/jquery.min.js"></script>
@@ -39,7 +40,15 @@
 
 <script>
     $(function () {
-        initPullListTree(1, 3);//一个参数 开始的级别  第二参数 有几个下拉框
+        initPullListTree("/office/getAllArea",2, 1,function (oneself) {
+
+        });//一个参数 开始的级别  第二参数 有几个下拉框
+//        $("#pullListTree").data("selectAreaId")
+        $("#dddd").click(function () {
+            alert($("#pullListTree").data("selectArea"));
+
+        });
+
     });
 </script>
 </html>

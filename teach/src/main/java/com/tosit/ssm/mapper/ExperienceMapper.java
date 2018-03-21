@@ -4,7 +4,10 @@ import com.tosit.ssm.entity.Experience;
 import com.tosit.ssm.entity.ExperienceExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface ExperienceMapper {
     long countByExample(ExperienceExample example);
 

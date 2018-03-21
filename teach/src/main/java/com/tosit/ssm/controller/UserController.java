@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -50,6 +51,23 @@ public class UserController {
     public Object modifyUser(User user){
         userService.modifyUser(user);
         return user ;
+    }
+
+    /**
+     * 通过班级id查询一个班的学生,通过request传值到jsp页面
+     *
+     * @param request 用于传递参数
+     * @return 返回jspyemian
+     */
+    @RequestMapping("/getClassUser")
+    public String getClassUser(HttpServletRequest request){
+        //获取班级id  -----未实现
+        String officeId;
+        officeId="001001001";//-------模拟一个班级数据
+        List<User> classUser = userService.findClassUser(officeId);
+        System.out.println(classUser.size());
+        request.setAttribute("users",classUser);
+        return "student_find_jingli";
     }
 
     @RequestMapping(value = "/getUserByClassIdNoKaoqinNum",method = RequestMethod.POST)

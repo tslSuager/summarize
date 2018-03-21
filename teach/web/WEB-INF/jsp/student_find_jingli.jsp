@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -27,7 +27,7 @@
                 <div class="input-group">
                     <input type="text" placeholder="请输入关键词" class="input-sm form-control"> <span
                         class="input-group-btn">
-                                        <button type="button" class="btn btn-sm btn-primary"> 搜索</button> </span>
+                                        <button type="button" class="btn btn-sm btn-primary" id="soushuo"> 搜索</button> </span>
                 </div>
             </div>
             <div class="col-sm-1"></div>
@@ -35,7 +35,7 @@
         <div class="row">
             <div class="col-sm-1"></div>
             <div class="col-sm-10">
-            <table class="table table-bordered table-hover">
+            <table class="table table-bordered table-hover text-center">
                 <thead>
                 <tr>
                     <th class="text-center">学号</th>
@@ -44,26 +44,14 @@
                     <th class="text-center">专业</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr class="">
-                    <td>1</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
+                <c:forEach items="${users}" var="u">
+                <tr class="" name="${u.id}">
+                    <td>${u.stuNumber}</td>
+                    <td>${u.name}</td>
+                    <td>${u.shixunZhuanye}</td>
+                    <td>${u.daxueZhuanye}</td>
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-                </tbody>
+                </c:forEach>
             </table>
             </div>
             <div class="col-sm-1"></div>
@@ -84,8 +72,15 @@
     $(function () {
         $.each($("tr:not(':first')"), function () {
             $(this).click(function () {
-                window.location.href = "/student_jingli.html";
+                var id = $(this).attr("name");
+                window.location.href="${pageContext.request.contextPath}/experience/userExperience?userId="+id;
             })
         })
+
+        $("#soushuo").click(function () {
+            window.location.href="${pageContext.request.contextPath}/user/getClassUser";
+        })
     })
+
+
 </script>

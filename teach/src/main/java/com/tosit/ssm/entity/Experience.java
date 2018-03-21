@@ -1,5 +1,6 @@
 package com.tosit.ssm.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -8,7 +9,8 @@ public class Experience {
     private String id;
 
     private String event;
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @DateTimeFormat(pattern ="yyyy-MM-dd hh:mm:ss" )
+    @JSONField(format ="yyyy-MM-dd hh:mm:ss")
     private Date occurTime;
 
     private String remark;
@@ -73,5 +75,18 @@ public class Experience {
 
     public void setType(Integer type) {
         this.type = type;
+    }
+
+    @Override
+    public String toString() {
+        return "Experience{" +
+                "id='" + id + '\'' +
+                ", event='" + event + '\'' +
+                ", occurTime=" + occurTime +
+                ", remark='" + remark + '\'' +
+                ", userId='" + userId + '\'' +
+                ", isDel=" + isDel +
+                ", type=" + type +
+                '}';
     }
 }

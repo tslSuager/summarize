@@ -102,8 +102,8 @@
     u.ID, loginName, password, salt, name, niName, sex, personNo, daXue, daXue_address,
     home_address, stu_number, daxue_zhuanye, shixun_zhuanye, peixun_zhuanye, phone1, 
     phone2, photo, QQ, weixin, email, user_type, kaoqin_code, kaoqin_ruleID, status, 
-    create_time, create_by, update_time, update_by, last_logintime, loat_longin_ip, remarks, 
-    is_del, sort, grade, cut_grade, col_3
+    u.create_time, u.create_by, u.update_time, u.update_by, last_logintime, loat_longin_ip, u.remarks,
+    u.is_del, u.sort, u.grade, u.cut_grade, u.col_3
   </sql>
   <select id="selectUserByOfficeId" parameterType="java.lang.String" resultMap="BaseResultMap">
     SELECT
@@ -345,7 +345,7 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from user
+    from user u
     where ID = #{id,jdbcType=VARCHAR}
   </select>
 
@@ -699,14 +699,14 @@
   <select id="selectByClassAndKRule"  resultMap="BaseResultMap">
 SELECT
     <include refid="Base_Column_List" />
-    from user us
-  WHERE us.id NOT in(
-   ( select u.id from user u
+    from user u
+  WHERE u.id NOT in(
+   ( select us.id from user us
     JOIN user_office uo
-    on u.id =uo.user_id
+    on us.id =uo.user_id
     JOIN office f
-    on uo.office_id =f.id where f.office_type = 3 and u.is_del=1 and f.is_del= 1 and uo.is_del=1)) and us.kaoqin_ruleID is  null and
-    us.is_del=0
+    on uo.office_id =f.id where f.office_type = 3 and us.is_del=1 and f.is_del= 1 and uo.is_del=1)) and us.kaoqin_ruleID is  null and
+    u.is_del=0
     ;
   </select>
 
@@ -725,7 +725,7 @@ SELECT
   <select id="selectChidaoBeforToday" parameterType="com.tosit.ssm.entity.User" resultMap="BaseResultMap">
   SELECT
   <include refid="Base_Column_List"/>
-  FROM user WHERE ID IN (
+  FROM user u WHERE ID IN (
   SELECT uo.user_id FROM user_office uo
   LEFT JOIN kaoqin_result kr
   ON kr.user_id=uo.user_id
@@ -735,7 +735,7 @@ SELECT
   <select id="selectKaoqinOrShensu" parameterType="string" resultMap="BaseResultMap">
     SELECT
      <include refid="Base_Column_List"/>
-    FROM user WHERE ID IN (
+    FROM user u WHERE ID IN (
     SELECT uo.user_id FROM user_office uo
     LEFT JOIN kaoqin_result kr
     ON kr.user_id = uo.user_id
