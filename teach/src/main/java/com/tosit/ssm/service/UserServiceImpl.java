@@ -5,9 +5,6 @@ import com.tosit.ssm.entity.User;
 import com.tosit.ssm.mapper.ExperienceMapper;
 import com.tosit.ssm.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.tosit.ssm.entity.User;
-import com.tosit.ssm.mapper.UserMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,8 +30,7 @@ public class UserServiceImpl implements UserService {
     public List<User> selectChidaoBeforToday(String officeId) {
         return userMapper.selectChidaoBeforToday(officeId);
     }
-    @Autowired
-    private UserMapper userMapper;
+
     /*@Override
     public List<User> getUsers() {
         return userMapper.selectUsers();
@@ -57,7 +53,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public int modifyUser(User user) {
-       return userMapper.updateByPrimaryKey(user);
+        return userMapper.updateByPrimaryKey(user);
     }
 
     /**

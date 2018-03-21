@@ -1,21 +1,9 @@
 package com.tosit.ssm.service;
 
-import com.tosit.ssm.entity.KaoqinRecords;
-import com.tosit.ssm.entity.KaoqinResult;
-import com.tosit.ssm.entity.Office;
-import com.tosit.ssm.mapper.KaoqinRecordsMapper;
-import com.tosit.ssm.mapper.KaoqinResultMapper;
-import com.tosit.ssm.mapper.OfficeMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import com.tosit.ssm.entity.KaoqinRule;
-import com.tosit.ssm.entity.KaoqinRuleDetail;
-import com.tosit.ssm.entity.KaoqindetailVO;
-import com.tosit.ssm.mapper.KaoqinRuleDetailMapper;
-import com.tosit.ssm.mapper.KaoqinRuleMapper;
+import com.tosit.ssm.entity.*;
+import com.tosit.ssm.mapper.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 import java.util.List;
 import java.util.UUID;
@@ -31,7 +19,6 @@ public class CheckingServicelmpl implements CheckingService{
 
     @Override
     public List<KaoqinRecords> findKaoqinRecordsByIdByDate(KaoqinRecords kaoqinRecords) {
-
         return kaoqinRecordsMapper.selectByIdByDate(kaoqinRecords);
     }
 

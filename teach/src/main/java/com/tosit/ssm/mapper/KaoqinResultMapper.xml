@@ -29,6 +29,17 @@
   </resultMap>
 
 
+  <sql id="Base_Column_List">
+    date, user_id, status, remark, last_time, createResultTime, kaoqin_remark_status,
+    kaoqin_remark_type, kaoqin_remark_content, kaoqin_remark_disposeUser, kaoqin_remark_disposeTime,
+    kaoqin_remark_dispose_Result, kaoqin_shenshu_status, kaoqin_shenshu_type, kaoqin_shenshu_content,
+    kaoqin_shenshu_disposeUser, kaoqin_shenshu_disposeTime, kaoqin_shenshu_disposeResult,
+    create_time, create_by, update_time, update_by, is_del, kaoqin_shenshu_reply, kaoqin_remark_reply,
+    kaoqin_shenshu_reqtime, kaoqin_remark_reqtime
+  </sql>
+
+
+
 
   <update id="updateByPrimaryKey" parameterType="com.tosit.ssm.entity.KaoqinResult">
     update kaoqin_result
@@ -261,7 +272,7 @@
   </insert>
 
   <select id="selectByClass" parameterType="string" resultMap="BaseResultMap">
-    SELECT DISTINCT
+    SELECT
      kr.id,<include refid="Base_Column_List" />
     FROM
     user_office uo LEFT JOIN kaoqin_result kr ON uo.user_id = kr.user_id

@@ -1,8 +1,9 @@
 package com.tosit.ssm.controller;
 
-import com.tosit.ssm.entity.KaoqinRule;
-import com.tosit.ssm.entity.KaoqindetailVO;
+import com.tosit.ssm.common.util.json.JSONModel;
+import com.tosit.ssm.entity.*;
 import com.tosit.ssm.service.CheckingService;
+import com.tosit.ssm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,15 +12,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.sql.Timestamp;
 import java.util.List;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/checking")
 public class CheckingController {
     @Autowired
-    private CheckingServicelmpl checkingServicelmpl;
-    @Autowired
     private CheckingService checkingService;
+    @Autowired
+    private UserService userService;
 
     /**
      * 添加考勤规则  当为方案三方案四的时候第一条记录不要
@@ -32,8 +32,6 @@ public class CheckingController {
         return "success";
     }
 
-    @Autowired
-    private UserServiceImpl userServiceImpl;
 
     /**
      * 获取某人当天的考勤记录，和以前的考勤的结果（包括请假和备注）
@@ -46,20 +44,23 @@ public class CheckingController {
         KaoqinRecords kaoqinRecords = new KaoqinRecords();
         kaoqinRecords.setUserId(user_id);
         kaoqinRecords.setBrushtime(brushTime);
-        List<KaoqinRecords> kaoqinRecordsByIdByDate = checkingServicelmpl.findKaoqinRecordsByIdByDate(kaoqinRecords);
+        System.out.println(checkingService.toString());
+        List<KaoqinRecords> kaoqinRecordsByIdByDate = checkingService.findKaoqinRecordsByIdByDate(kaoqinRecords);
+        System.out.println(kaoqinRecordsByIdByDate.toString());
         JSONModel.put("records",kaoqinRecordsByIdByDate);
 
         //某个人的所有考勤结果
-        List<KaoqinResult> kaoqinresults = checkingServicelmpl.findOneById("u001");
+        List<KaoqinResult> kaoqinresults = checkingService.findOneById("u001");
         JSONModel.put("result",kaoqinresults);
 
 
+
         //某个人的所有信息
-        User user = userServiceImpl.selectByPrimaryKey("u001");
+        User user = userService.selectByPrimaryKey("u001");
         JSONModel.put("user",user);
 
         //某个人的表现分的经历
-        List<Experience> experiences = userServiceImpl.selectByIdToType("u001");
+        List<Experience> experiences = userService.selectByIdToType("u001");
         JSONModel.put("experiences",experiences);
 
 
@@ -82,7 +83,7 @@ public class CheckingController {
         kaoqinResult.setKaoqinRemarkType(kaoqin_remark_type);
         kaoqinResult.setKaoqinRemarkContent(kaoqin_remark_content);
         kaoqinResult.setKaoqinShenshuContent(kaoqin_shenshu_content);
-        checkingServicelmpl.addKaoqinResultById(kaoqinResult);
+        checkingService.addKaoqinResultById(kaoqinResult);
         return null;
     }
 
@@ -96,19 +97,19 @@ public class CheckingController {
     @ResponseBody
     public Object ViewKaoqin(String officeId, String name, Model model){
         //老师查看某个班的考勤迟到人员
-        List<User> users = userServiceImpl.selectChidaoBeforToday(officeId);
+        List<User> users = userService.selectChidaoBeforToday(officeId);
         JSONModel.put("users",users);
 
         //查看某个班迟到的考勤结果
-        List<KaoqinResult> kaoqinResults = checkingServicelmpl.selectByClassLate(officeId);
+        List<KaoqinResult> kaoqinResults = checkingService.selectByClassLate(officeId);
         JSONModel.put("kaoqinResults",kaoqinResults);
 
         //查找某个教员管理的某个班级
-        List<Office> offices = checkingServicelmpl.selectOfficeByManage(name);
+        List<Office> offices = checkingService.selectOfficeByManage(name);
         JSONModel.put("offices",offices);
 
         //获取某个班的申诉或请假的考勤结果的数量
-        Integer counts = checkingServicelmpl.countByClass(officeId);
+        Integer counts = checkingService.countByClass(officeId);
         model.addAttribute("counts",counts);
 
         return JSONModel.getMap();
@@ -124,7 +125,7 @@ public class CheckingController {
         KaoqinResult kaoqinResult = new KaoqinResult();
         kaoqinResult.setUserId(user_Id);
         kaoqinResult.setStatus(1);
-        checkingServicelmpl.updateByPrimaryKey(kaoqinResult);
+        checkingService.updateByPrimaryKey(kaoqinResult);
 
         return null;
     }
@@ -140,7 +141,7 @@ public class CheckingController {
     @ResponseBody
     public Object DealKaoqin(String officeId,String user_Id,Integer stauts,String kaoqin_remark_content,Integer kaoqin_remark_dispose_Result,Integer kaoqin_remark_type){
         //获取某个班的申诉或请假的考勤结果
-        List<KaoqinResult> kaoqinResults = checkingServicelmpl.selectByClass(officeId);
+        List<KaoqinResult> kaoqinResults = checkingService.selectByClass(officeId);
         JSONModel.put("kaoqinResults",kaoqinResults);
 
         //修改某人申述请假的状态和回复的字段
@@ -151,7 +152,7 @@ public class CheckingController {
         }
         kaoqinResult.setKaoqinRemarkDisposeResult(kaoqin_remark_dispose_Result);
         kaoqinResult.setKaoqinRemarkContent(kaoqin_remark_content);
-        checkingServicelmpl.updateByPrimaryKey(kaoqinResult);
+        checkingService.updateByPrimaryKey(kaoqinResult);
 
         return JSONModel.getMap();
     }

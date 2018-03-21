@@ -5,7 +5,9 @@ import com.tosit.ssm.entity.KaoqinRuleOffice;
 import com.tosit.ssm.entity.KaoqinRuleOfficeExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface KaoqinRuleOfficeMapper {
     long countByExample(KaoqinRuleOfficeExample example);
 

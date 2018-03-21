@@ -1,15 +1,8 @@
 package com.tosit.ssm.service;
 
-import com.tosit.ssm.entity.KaoqinRecords;
-import com.tosit.ssm.entity.KaoqinResult;
-import com.tosit.ssm.entity.Office;
-import org.apache.ibatis.annotations.Param;
+import com.tosit.ssm.entity.*;
 
 import java.util.List;
-
-import com.tosit.ssm.entity.KaoqinRule;
-import com.tosit.ssm.entity.KaoqinRuleDetail;
-import com.tosit.ssm.entity.KaoqindetailVO;
 
 public interface CheckingService {
     /**
