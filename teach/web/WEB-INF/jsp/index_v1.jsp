@@ -31,20 +31,20 @@
     <link href="/static/css/plugins/clockpicker/clockpicker.css" rel="stylesheet">
     <link href="/static/css/animate.min.css" rel="stylesheet">
     <link href="/static/css/style.min862f.css?v=4.1.0" rel="stylesheet">
-
-
     <script src="/static/js/jquery.min.js?v=2.1.4"></script>
     <script src="/static/js/jquery.min.js"></script>
-
+    <script src="/static/js/pullListTree.js"></script>
     <script>
+
         $(function () {
+            initPullListTree(1, 2);//一个参数 开始的级别  第二参数 有几个下拉框
             $.get("/office/getAllClassByTeacherAndDate",function (msg) {
                 var classes =msg['classes'];
                 $.each(classes,function (i,each) {
-                    $('.table').append('<tr>\n' +
-                        '                                <td>'+asd+'</td>\n' +
-                        '                                <td>'+dd+'</td>\n' +
-                        '                                <td>'+ss+'</td>'+
+                    $('.table').append('<tr>' +
+                        '                                <td>'+each['name']+'</td>\n' +
+                        '                                <td>'+each['createTime']+'</td>\n' +
+                        '                                <td>'+each['parentId']+'</td>'+
                         '                                <td><button class="btn btn-outline btn-info checkClassInfo btn-xs" type="button" >查看班级信息</button></td>\n' +
                         '                                <td><button class="btn btn-outline btn-info checkGroupInfo btn-xs" type="button">查看小组信息</button></td>\n' +
                         '                                <td>\n' +
@@ -74,6 +74,294 @@
                         '                            </tr>');
                 });
             },"json");
+
+            $("#selectByDate").click(function () {
+                $(".table").find("tbody").find("tr").remove();
+                var date1 = $("#startDate").val();
+                var date2 = $("#endDate").val();
+                $.get("/office/getAllClassByTeacherByDate",{date1,date2},function (msg) {
+                    var classes = msg['classes'];
+                    $.each(classes,function (i,each) {
+                        $('.table').append('<tr>' +
+                            '                                <td>'+each['name']+'</td>\n' +
+                            '                                <td>'+each['createTime']+'</td>\n' +
+                            '                                <td>'+each['parentId']+'</td>'+
+                            '                                <td><button class="btn btn-outline btn-info checkClassInfo btn-xs" type="button" >查看班级信息</button></td>\n' +
+                            '                                <td><button class="btn btn-outline btn-info checkGroupInfo btn-xs" type="button">查看小组信息</button></td>\n' +
+                            '                                <td>\n' +
+                            '                                    <button class="btn btn-outline btn-success matchAttendance btn-xs" type="button" style="margin-right: 10px; ">匹配考勤规则</button>\n' +
+                            '                                    <button class="btn btn-outline btn-success createAttendance btn-xs" type="button"><a href="/page/kaoqin_rule_detail">新建考勤规则</a></button>\n' +
+                            '                                </td>\n' +
+                            '                                <td>\n' +
+                            '                                    <button class="btn btn-outline btn-success matchTeachingPlan btn-xs" type="button" style="margin-right: 10px; ">匹配教学计划</button>\n' +
+                            '                                    <button class="btn btn-outline btn-success createTeachingPlan btn-xs" type="button"><a href="/page/jiaoan/show_plan">新建教学计划</a></button></td>\n' +
+                            '                                </td>\n' +
+                            '                                <td>\n' +
+                            '                                    <div class="col-sm-6">\n' +
+                            '                                       <select class="form-control" name="select">\n' +
+                            '                                           <option>按学号</option>\n' +
+                            '                                           <option>按手机号</option>\n' +
+                            '                                       </select>\n' +
+                            '                                   </div>\n' +
+                            '                                   <div class="col-sm-2"><button class="btn btn-outline btn-info createNumber btn-xs" type="button" style="margin-top: 4px">生成账号</button></div>\n' +
+                            '                                <div class="col-sm-4"></div>\n'+
+                            '                                </td>\n'+
+                            '                                <td>\n' +
+                            '                                    <button class="btn btn-outline btn-info addTeacher btn-xs" type="button" style="margin-right: 10px; ">添加教师</button>\n' +
+                            '                                    <button class="btn btn-outline btn-success initialization btn-xs" type="button" style="margin-right: 10px; ">初始成绩</button>'+
+                            '                                    <button class="btn btn-outline btn-warning reviseClass btn-xs" type="button" style="margin-right: 10px; ">修改班级</button>\n' +
+                            '                                    <button class="btn btn-outline btn-danger deleteClass btn-xs" type="button">删除班级</button>\n' +
+                            '                                </td>\n' +
+                            '                            </tr>');
+                    });
+                },"json");
+            });
+
+            $("#selectByArea").click(function () {
+                $(".table").find("tbody").find("tr").remove();
+                var pId = $("#pullListTree").data("selectAreaId");
+               $.get("/office/getClassByTeacherByArea",{pId},function (msg) {
+                   var classes = msg['classes'];
+                   $.each(classes,function (i,each) {
+                       $('.table').append('<tr>' +
+                           '                                <td>'+each['name']+'</td>\n' +
+                           '                                <td>'+each['createTime']+'</td>\n' +
+                           '                                <td>'+each['parentId']+'</td>'+
+                           '                                <td><button class="btn btn-outline btn-info checkClassInfo btn-xs" type="button" >查看班级信息</button></td>\n' +
+                           '                                <td><button class="btn btn-outline btn-info checkGroupInfo btn-xs" type="button">查看小组信息</button></td>\n' +
+                           '                                <td>\n' +
+                           '                                    <button class="btn btn-outline btn-success matchAttendance btn-xs" type="button" style="margin-right: 10px; ">匹配考勤规则</button>\n' +
+                           '                                    <button class="btn btn-outline btn-success createAttendance btn-xs" type="button"><a href="/page/kaoqin_rule_detail">新建考勤规则</a></button>\n' +
+                           '                                </td>\n' +
+                           '                                <td>\n' +
+                           '                                    <button class="btn btn-outline btn-success matchTeachingPlan btn-xs" type="button" style="margin-right: 10px; ">匹配教学计划</button>\n' +
+                           '                                    <button class="btn btn-outline btn-success createTeachingPlan btn-xs" type="button"><a href="/page/jiaoan/show_plan">新建教学计划</a></button></td>\n' +
+                           '                                </td>\n' +
+                           '                                <td>\n' +
+                           '                                    <div class="col-sm-6">\n' +
+                           '                                       <select class="form-control" name="select">\n' +
+                           '                                           <option>按学号</option>\n' +
+                           '                                           <option>按手机号</option>\n' +
+                           '                                       </select>\n' +
+                           '                                   </div>\n' +
+                           '                                   <div class="col-sm-2"><button class="btn btn-outline btn-info createNumber btn-xs" type="button" style="margin-top: 4px">生成账号</button></div>\n' +
+                           '                                <div class="col-sm-4"></div>\n'+
+                           '                                </td>\n'+
+                           '                                <td>\n' +
+                           '                                    <button class="btn btn-outline btn-info addTeacher btn-xs" type="button" style="margin-right: 10px; ">添加教师</button>\n' +
+                           '                                    <button class="btn btn-outline btn-success initialization btn-xs" type="button" style="margin-right: 10px; ">初始成绩</button>'+
+                           '                                    <button class="btn btn-outline btn-warning reviseClass btn-xs" type="button" style="margin-right: 10px; ">修改班级</button>\n' +
+                           '                                    <button class="btn btn-outline btn-danger deleteClass btn-xs" type="button">删除班级</button>\n' +
+                           '                                </td>\n' +
+                           '                            </tr>');
+                   });
+               },"json") ;
+            });
+
+            $('body').on("click",".deleteClass",function () {
+                layer.confirm('您确认要删除吗？', {
+                    btn: ['是滴','再想想'] //按钮
+                }, function(){
+                    layer.msg('删除成功', {icon: 1});
+                }, function(){
+                    layer.msg('也可以这样', {
+                        time: 1000
+                    });
+                });
+            });
+            $('#addClass').click(function () {
+                layer.open({
+                    type: 2,
+                    title: '添加班级',
+                    shadeClose: true,
+                    shade: 0.8,
+                    area: ['30%', '50%'],
+                    content: '/addClass.jsp',
+                    btn:['完成','算了'],
+                    yes:function (index,layero) {
+                        var body = layer.getChildFrame('body', index);
+                        var school = body.find("#pullListTree").data("selectAreaId");
+                        //var schoolId = school.date("selectAreaId");
+                        console.info(school);
+                        var name = body.find("#name").val();
+                        $.get("/office/addClass",{school,name},function () {
+                            $('.table').append('<tr>\n' +
+                                '                                <td>'+name+'</td>\n' +
+                                '                                <td>2018-3-20</td>\n' +
+                                '                                <td>'+school+'</td>'+
+                                '                                <td><button class="btn btn-outline btn-info checkClassInfo btn-xs" type="button" >查看班级信息</button></td>\n' +
+                                '                                <td><button class="btn btn-outline btn-info checkGroupInfo btn-xs" type="button">查看小组信息</button></td>\n' +
+                                '                                <td>\n' +
+                                '                                    <button class="btn btn-outline btn-success matchAttendance btn-xs" type="button" style="margin-right: 10px; ">匹配考勤规则</button>\n' +
+                                '                                    <button class="btn btn-outline btn-success createAttendance btn-xs" type="button"><a href="/page/kaoqin_rule_detail">新建考勤规则</a></button>\n' +
+                                '                                </td>\n' +
+                                '                                <td>\n' +
+                                '                                    <button class="btn btn-outline btn-success matchTeachingPlan btn-xs" type="button" style="margin-right: 10px; ">匹配教学计划</button>\n' +
+                                '                                    <button class="btn btn-outline btn-success createTeachingPlan btn-xs" type="button"><a href="/page/jiaoan/show_plan">新建教学计划</a></button></td>\n' +
+                                '                                </td>\n' +
+                                '                                <td>\n' +
+                                '                                    <div class="col-sm-6">\n' +
+                                '                                       <select class="form-control" name="select">\n' +
+                                '                                           <option>按学号</option>\n' +
+                                '                                           <option>按手机号</option>\n' +
+                                '                                       </select>\n' +
+                                '                                   </div>\n' +
+                                '                                   <div class="col-sm-2"><button class="btn btn-outline btn-info createNumber btn-xs" type="button" style="margin-top: 4px">生成账号</button></div>\n' +
+                                '                                <div class="col-sm-4"></div>\n'+
+                                '                                </td>\n'+
+                                '                                <td>\n' +
+                                '                                    <button class="btn btn-outline btn-info addTeacher btn-xs" type="button" style="margin-right: 10px; ">添加教师</button>\n' +
+                                '                                    <button class="btn btn-outline btn-success initialization btn-xs" type="button" style="margin-right: 10px; ">初始成绩</button>'+
+                                '                                    <button class="btn btn-outline btn-warning reviseClass btn-xs" type="button" style="margin-right: 10px; ">修改班级</button>\n' +
+                                '                                    <button class="btn btn-outline btn-danger deleteClass btn-xs" type="button">删除班级</button>\n' +
+                                '                                </td>\n' +
+                                '                            </tr>');
+                        });
+                        layer.close(index);
+                        layer.msg('添加成功');
+                    },
+                    btn2:function (index,layero) {
+                        layer.close(index);
+                    }
+                });
+            });
+
+            $("body").on("click",".checkClassInfo",function () {
+                layer.open({
+                    type: 2,
+                    title: '班级信息',
+                    shadeClose: true,
+                    shade: 0,
+                    area: ['100%', '100%'],
+                    content: '/classInfo.jsp',
+                    btn:['完成','算了'],
+                    yes:function (index,layero) {
+                        layer.confirm('确定修改吗',{
+                            btn:['确定','再想想']
+                        },function () {
+                            layer.close(index);
+                            layer.msg('修改成功');
+                        },function () {
+                            layer.msg('好好想想');
+                        });
+                    },
+                    btn2:function (index,layero) {
+                        layer.close(index);
+                    }
+                });
+            });
+
+            $("body").on("click",".checkGroupInfo",function () {
+                layer.open({
+                    type: 2,
+                    title: '班级信息',
+                    shadeClose: true,
+                    shade: 0,
+                    area: ['100%', '100%'],
+                    content: '/groupInfo.jsp',
+                    btn:['完成','算了'],
+                    yes:function (index,layero) {
+                        layer.confirm('确定修改吗',{
+                            btn:['确定','再想想']
+                        },function () {
+                            layer.close(index);
+                            layer.msg('修改成功');
+                        },function () {
+                            layer.msg('好好想想');
+                        });
+                    },
+                    btn2:function (index,layero) {
+                        layer.close(index);
+                    }
+                });
+            });
+            $("body").on("click",".matchAttendance",function () {
+                layer.open({
+                    type: 2,
+                    title: '匹配考勤规则',
+                    shadeClose: true,
+                    shade: 0.8,
+                    area: ['100%', '100%'],
+                    content: '/matchClassAttendance.jsp',
+                    btn:['完成','算了'],
+                    btn1:function (index,layero) {
+                        layer.msg('添加成功');
+                    },
+                    btn2:function (index,layero) {
+                        layer.close(index);
+                    }
+                });
+            });
+            $("body").on("click",".reviseClass",function () {
+                layer.open({
+                    type: 2,
+                    title: '修改班级',
+                    shadeClose: true,
+                    shade: 0.8,
+                    area: ['30%', '50%'],
+                    content: '/reviseClass.jsp',
+                    btn:['确认绑定','算了'],
+                    btn1:function (index,layero) {
+                        layer.msg('绑定成功');
+                    },
+                    btn2:function (index,layero) {
+                        layer.close(index);
+                    }
+                });
+            });
+            $("body").on("click",".matchTeachingPlan",function () {
+                layer.open({
+                    type: 2,
+                    title: '教学计划',
+                    shadeClose: true,
+                    shade: 0.8,
+                    area: ['30%', '50%'],
+                    content: '/mathcTeachingPlan.jsp',
+                    btn:['确认绑定','算了'],
+                    btn1:function (index,layero) {
+                        layer.msg('绑定成功');
+                    },
+                    btn2:function (index,layero) {
+                        layer.close(index);
+                    }
+                });
+            });
+            $("body").on("click",".addTeacher",function () {
+                layer.open({
+                    type: 2,
+                    title: '添加教师',
+                    shadeClose: true,
+                    shade: 0.8,
+                    area: ['30%', '50%'],
+                    content: '/page/addTeacher',
+                    btn:['确认添加','算了'],
+                    btn1:function (index,layero) {
+                        layer.msg('添加成功');
+                    },
+                    btn2:function (index,layero) {
+                        layer.close(index);
+                    }
+                });
+            });
+            $("body").on("click",".initialization",function () {
+                layer.open({
+                    type: 2,
+                    title: '初始成绩',
+                    shadeClose: true,
+                    shade: 0.8,
+                    area: ['30%', '50%'],
+                    content: '/Initialization.jsp',
+                    btn:['确认','算了'],
+                    btn1:function (index,layero) {
+                        layer.msg('初始成功');
+                    },
+                    btn2:function (index,layero) {
+                        layer.close(index);
+                    }
+                });
+            });
+
+
         });
     </script>
 
@@ -85,44 +373,28 @@
         <div class="form-group col-sm-5">
             <div class="form-group col-sm-7" id="data_5">
                 <div class="input-daterange input-group" id="datepicker">
-                    <input type="text" class="input-sm form-control" name="start" value="2018-3-9" />
+                    <input type="text" class="input-sm form-control" name="start" value="2018-3-9" id="startDate"/>
                     <span class="input-group-addon">到</span>
-                    <input type="text" class="input-sm form-control" name="end" value="2018-3-9" />
+                    <input type="text" class="input-sm form-control" name="end" value="2018-3-9" id="endDate"/>
                 </div>
             </div>
             <div class="input-group col-sm-1">
                     <span class="input-group-btn">
-                        <button type="button" class="btn btn-primary">搜索</button>
+                        <button type="button" class="btn btn-primary" id="selectByDate">搜索</button>
                     </span>
             </div>
             <div class="col-sm-4"></div>
         </div>
         <div class="form-group draggable col-sm-5">
-            <div class="col-sm-5">
-                <label class="col-sm-3 control-label" style="margin-top: 8px">地区</label>
-                <div class="col-sm-9">
-                    <select class="form-control" name="">
-                        <option>四川</option>
-                        <option>重庆</option>
-                        <option>新疆</option>
-                    </select>
-                </div>
+            <div class="col-sm-9">
+                <div id="pullListTree"></div>
             </div>
-            <div class="col-sm-5">
-                <label class="col-sm-3 control-label" style="margin-top: 8px">学校</label>
-                <div class="col-sm-9">
-                    <select class="form-control" name="">
-                        <option>四川科技大学</option>
-                        <option>四川大学</option>
-                        <option>新疆大学</option>
-                    </select>
-                </div>
+            <div class="input-group col-sm-1">
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-primary" id="selectByArea">搜索</button>
+                </span>
             </div>
-            <div class="input-group col-sm-2">
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-primary">搜索</button>
-                    </span>
-            </div>
+            <div class="col-sm-2"></div>
         </div>
         <div  class="nav navbar-right col-sm-2">
             <button id="addClass" class="btn btn-info" type="button">
@@ -150,37 +422,6 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <%--<tr id="1">
-                            <td>Java</td>
-                            <td>2018-3-19</td>
-                            <td>四川理工学院</td>
-                            <td><button class="btn btn-outline btn-info checkClassInfo btn-xs" type="button" id="button">查看班级信息</button></td>
-                            <td><button class="btn btn-outline btn-info checkGroupInfo btn-xs" type="button">查看小组信息</button></td>
-                            <td>
-                                <button class="btn btn-outline btn-success matchAttendance btn-xs" type="button" style="margin-right: 10px; ">匹配考勤规则</button>
-                                <button class="btn btn-outline btn-success createAttendance btn-xs" type="button"><a href="/page/kaoqin_rule_detail">新建考勤规则</a></button>
-                            </td>
-                            <td>
-                                <button class="btn btn-outline btn-success matchTeachingPlan btn-xs" type="button" style="margin-right: 10px; ">匹配教学计划</button>
-                                <button class="btn btn-outline btn-success createTeachingPlan btn-xs" type="button" ><a href="/page/jiaoan/show_plan">新建教学计划</a></button></td>
-                            </td>
-                            <td>
-                                <div class="col-sm-6">
-                                    <select class="form-control" name="select">
-                                        <option>按学号</option>
-                                        <option>按手机号</option>
-                                    </select>
-                                </div>
-                                <div class="col-sm-2"><button class="btn btn-outline btn-info createNumber btn-xs" type="button" style="margin-top: 4px">生成账号</button></div>
-                                <div class="col-sm-4"></div>
-                            </td>
-                            <td>
-                                <button class="btn btn-outline btn-info addTeacher btn-xs" type="button" style="margin-right: 10px; ">添加教师</button>
-                                <button class="btn btn-outline btn-success initialization btn-xs" type="button" style="margin-right: 10px; ">初始成绩</button>
-                                <button class="btn btn-outline btn-warning reviseClass btn-xs" type="button" style="margin-right: 10px; ">修改班级</button>
-                                <button class="btn btn-outline btn-danger deleteClass btn-xs" type="button">删除班级</button>
-                            </td>
-                        </tr>--%>
                         </tbody>
                     </table>
                 </div>
@@ -188,6 +429,7 @@
         </div>
     </div>
 </div>
+
 
 <script id="welcome-template" type="text/x-handlebars-template">
     </script>
@@ -209,187 +451,7 @@
 <script src="/static/js/plugins/cropper/cropper.min.js"></script>
 <script src="/static/js/demo/form-advanced-demo.min.js"></script>
 <script src="/static/js/welcome.min.js"></script>
-<script type="text/javascript">
-    $('body').on("click",".deleteClass",function () {
-        layer.confirm('您确认要删除吗？', {
-            btn: ['是滴','再想想'] //按钮
-        }, function(){
-            layer.msg('删除成功', {icon: 1});
-        }, function(){
-            layer.msg('也可以这样', {
-                time: 1000
-            });
-        });
-    });
-    $('#addClass').click(function () {
-        layer.open({
-            type: 2,
-            title: '添加班级',
-            shadeClose: true,
-            shade: 0.8,
-            area: ['30%', '70%'],
-            content: '/addClass.jsp',
-            btn:['完成','算了'],
-            yes:function (index,layero) {
-                var body = layer.getChildFrame('body', index);
-                var area = body.find("#area").val();
-                var school = body.find("#school").val();
-                var name = body.find("#name").val();
-                $.get("/office/addClass",{school,name},function () {
-                    $('.table').append('<tr>\n' +
-                        '                                <td>'+name+'</td>\n' +
-                        '                                <td>2018-3-20</td>\n' +
-                        '                                <td>'+school+'</td>'+
-                        '                                <td><button class="btn btn-outline btn-info checkClassInfo btn-xs" type="button" >查看班级信息</button></td>\n' +
-                        '                                <td><button class="btn btn-outline btn-info checkGroupInfo btn-xs" type="button">查看小组信息</button></td>\n' +
-                        '                                <td>\n' +
-                        '                                    <button class="btn btn-outline btn-success matchAttendance btn-xs" type="button" style="margin-right: 10px; ">匹配考勤规则</button>\n' +
-                        '                                    <button class="btn btn-outline btn-success createAttendance btn-xs" type="button"><a href="/page/kaoqin_rule_detail">新建考勤规则</a></button>\n' +
-                        '                                </td>\n' +
-                        '                                <td>\n' +
-                        '                                    <button class="btn btn-outline btn-success matchTeachingPlan btn-xs" type="button" style="margin-right: 10px; ">匹配教学计划</button>\n' +
-                        '                                    <button class="btn btn-outline btn-success createTeachingPlan btn-xs" type="button"><a href="/page/jiaoan/show_plan">新建教学计划</a></button></td>\n' +
-                        '                                </td>\n' +
-                        '                                <td>\n' +
-                        '                                    <div class="col-sm-6">\n' +
-                        '                                       <select class="form-control" name="select">\n' +
-                        '                                           <option>按学号</option>\n' +
-                        '                                           <option>按手机号</option>\n' +
-                        '                                       </select>\n' +
-                        '                                   </div>\n' +
-                        '                                   <div class="col-sm-2"><button class="btn btn-outline btn-info createNumber btn-xs" type="button" style="margin-top: 4px">生成账号</button></div>\n' +
-                        '                                <div class="col-sm-4"></div>\n'+
-                        '                                </td>\n'+
-                        '                                <td>\n' +
-                        '                                    <button class="btn btn-outline btn-info addTeacher btn-xs" type="button" style="margin-right: 10px; ">添加教师</button>\n' +
-                        '                                    <button class="btn btn-outline btn-success initialization btn-xs" type="button" style="margin-right: 10px; ">初始成绩</button>'+
-                        '                                    <button class="btn btn-outline btn-warning reviseClass btn-xs" type="button" style="margin-right: 10px; ">修改班级</button>\n' +
-                        '                                    <button class="btn btn-outline btn-danger deleteClass btn-xs" type="button">删除班级</button>\n' +
-                        '                                </td>\n' +
-                        '                            </tr>');
-                });
-                layer.close(index);
-                layer.msg('添加成功');
-            },
-            btn2:function (index,layero) {
-                layer.close(index);
-            }
-        });
-    });
-    $("body").on("click",".checkGroupInfo",function () {
-        layer.open({
-            type: 2,
-            title: '班级信息',
-            shadeClose: true,
-            shade: 0,
-            area: ['100%', '100%'],
-            content: '/groupInfo.jsp',
-            btn:['完成','算了'],
-            yes:function (index,layero) {
-                layer.confirm('确定修改吗',{
-                    btn:['确定','再想想']
-                },function () {
-                    layer.close(index);
-                    layer.msg('修改成功');
-                },function () {
-                    layer.msg('好好想想');
-                });
-            },
-            btn2:function (index,layero) {
-                layer.close(index);
-            }
-        });
-    });
-    $("body").on("click",".matchAttendance",function () {
-        layer.open({
-            type: 2,
-            title: '匹配考勤规则',
-            shadeClose: true,
-            shade: 0.8,
-            area: ['100%', '100%'],
-            content: '/matchClassAttendance.jsp',
-            btn:['完成','算了'],
-            btn1:function (index,layero) {
-                layer.msg('添加成功');
-            },
-            btn2:function (index,layero) {
-                layer.close(index);
-            }
-        });
-    });
 
-    $("body").on("click",".reviseClass",function () {
-        layer.open({
-            type: 2,
-            title: '修改班级',
-            shadeClose: true,
-            shade: 0.8,
-            area: ['30%', '50%'],
-            content: '/reviseClass.jsp',
-            btn:['确认绑定','算了'],
-            btn1:function (index,layero) {
-                layer.msg('绑定成功');
-            },
-            btn2:function (index,layero) {
-                layer.close(index);
-            }
-        });
-    });
-
-    $("body").on("click",".matchTeachingPlan",function () {
-        layer.open({
-            type: 2,
-            title: '教学计划',
-            shadeClose: true,
-            shade: 0.8,
-            area: ['30%', '50%'],
-            content: '/mathcTeachingPlan.jsp',
-            btn:['确认绑定','算了'],
-            btn1:function (index,layero) {
-                layer.msg('绑定成功');
-            },
-            btn2:function (index,layero) {
-                layer.close(index);
-            }
-        });
-    });
-
-    $("body").on("click",".addTeacher",function () {
-        layer.open({
-            type: 2,
-            title: '添加教师',
-            shadeClose: true,
-            shade: 0.8,
-            area: ['30%', '50%'],
-            content: '/page/addTeacher',
-            btn:['确认添加','算了'],
-            btn1:function (index,layero) {
-                layer.msg('添加成功');
-            },
-            btn2:function (index,layero) {
-                layer.close(index);
-            }
-        });
-    });
-
-    $("body").on("click",".initialization",function () {
-        layer.open({
-            type: 2,
-            title: '初始成绩',
-            shadeClose: true,
-            shade: 0.8,
-            area: ['30%', '50%'],
-            content: '/Initialization.jsp',
-            btn:['确认','算了'],
-            btn1:function (index,layero) {
-                layer.msg('初始成功');
-            },
-            btn2:function (index,layero) {
-                layer.close(index);
-            }
-        });
-    });
-</script>
 </body>
 
 

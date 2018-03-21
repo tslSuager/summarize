@@ -2,26 +2,27 @@ var initPullListTree = function (startlevel, count) {
 //        var message;
 //        var levels = level;
 //        var counts = count;
+    console.info("wozhiixngle");
     $.get("/office/getAllArea", {}, function (msg) {
 //            message = msg;
-        console.info(msg);
+
         for (var i = startlevel; (count + startlevel) > i; i++) {
             switch (i) {
                 case (1):
                     $("#pullListTree").append($("<span>").html("区域："));
-                    $("#pullListTree").append($("<select>").data("type", 1).addClass("form-control").attr("name", "areaId").append($("<option>").css("value", "")));
+                    $("#pullListTree").append($("<select>").data("type", 1).addClass("form-control").attr("name", "areaId").css("display","inline").css("width","23%").append($("<option>").css("value", "")));
                     break;
                 case (2):
                     $("#pullListTree").append($("<span>").html("学校："));
-                    $("#pullListTree").append($("<select>").data("type", 2).addClass("form-control").attr("name", "areaId").append($("<option>").css("value", "")));
+                    $("#pullListTree").append($("<select>").data("type", 2).addClass("form-control").attr("name", "areaId").css("display","inline").css("width","30%").append($("<option>").css("value", "")));
                     break;
                 case (3):
                     $("#pullListTree").append($("<span>").html("班级："));
-                    $("#pullListTree").append($("<select>").data("type", 3).addClass("form-control").attr("name", "areaId").append($("<option>").css("value", "")));
+                    $("#pullListTree").append($("<select>").data("type", 3).addClass("form-control").attr("name", "areaId").css("display","inline").css("width","23%").append($("<option>").css("value", "")));
                     break;
                 case (4):
                     $("#pullListTree").append($("<span>").html("组："));
-                    $("#pullListTree").append($("<select>").data("type", 4).addClass("form-control").attr("name", "areaId").append($("<option>").css("value", "")));
+                    $("#pullListTree").append($("<select>").data("type", 4).addClass("form-control").attr("name", "areaId").css("display","inline").css("width","23%").append($("<option>").css("value", "")));
                     break;
             }
         }
@@ -51,8 +52,8 @@ var initPullListTree = function (startlevel, count) {
 
             });
         }
-        $("#pullListTree").find("select").eq(startlevel+count-2).change(function () {
-            $("#pullListTree").data("selectAreaId",$(this).var());
+        $("#pullListTree").find("select").eq(count-1).change(function () {
+            $("#pullListTree").data("selectAreaId",$(this).val());
         });
     }, "json");
 

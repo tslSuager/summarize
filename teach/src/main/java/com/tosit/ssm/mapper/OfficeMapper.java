@@ -59,6 +59,7 @@ public interface OfficeMapper {
      * @return 返回该时间创建的所有班级
      */
     List<Office> selectClassByDate(@Param("createTime") Date createTime);
+
     /**
      * 根据学校查询属于该学校的班级（未测试）
      * @param schoolId  学校id

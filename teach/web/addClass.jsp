@@ -1,16 +1,14 @@
 <%--
   Created by IntelliJ IDEA.
-  User: wuhan
-  Date: 2018/3/10
-  Time: 11:02
+  User: 1234
+  Date: 2018/3/20
+  Time: 10:30
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>添加班级</title>
-
-    <link rel="shortcut icon" href="favicon.ico">
     <link href="/static/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
     <link href="/static/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
     <link href="/static/css/plugins/iCheck/custom.css" rel="stylesheet">
@@ -30,47 +28,30 @@
 </head>
 <body>
 <div class="row">
-        <div class="form-group draggable">
-            <div class="col-sm-6">
-                <label class="col-sm-3 control-label">区域:</label>
-                <select class="form-control" name="area" id="area">
-                    <option>四川</option>
-                    <option>新疆</option>
-                    <option>重庆</option>
-                </select>
-            </div>
-            <div class="col-sm-6">
-                <label class="col-sm-3 control-label">学校:</label>
-                <select class="form-control" name="school" id="school">
-                    <option>四川理工学院</option>
-                    <option>四川大学</option>
-                </select>
-            </div>
+    <div id="pullListTree" style="margin-left: 20px"></div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">班级名称:</label>
+        <div class="col-sm-8">
+            <input type="text" placeholder="名称" class="form-control" name="name" id="name">
         </div>
-        <div class="form-group">
-            <label class="col-sm-3 control-label">班级名称:</label>
-            <div class="col-sm-8">
-                <input type="text" placeholder="名称" class="form-control" name="name" id="name">
-            </div>
-        </div>
+    </div>
 </div>
-
-<script src="/static/js/jquery.min.js?v=2.1.4"></script>
-<script src="/static/js/bootstrap.min.js?v=3.3.6"></script>
-<script src="/static/js/content.min.js?v=1.0.0"></script>
-<script src="/static/js/plugins/chosen/chosen.jquery.js"></script>
-<script src="/static/js/plugins/jsKnob/jquery.knob.js"></script>
-<script src="/static/js/plugins/jasny/jasny-bootstrap.min.js"></script>
-<script src="/static/js/plugins/datapicker/bootstrap-datepicker.js"></script>
-<script src="/static/js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
-<script src="/static/js/plugins/nouslider/jquery.nouislider.min.js"></script>
-<script src="/static/js/plugins/switchery/switchery.js"></script>
-<script src="/static/js/plugins/ionRangeSlider/ion.rangeSlider.min.js"></script>
-<script src="/static/js/plugins/iCheck/icheck.min.js"></script>
-<script src="/static/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="/static/js/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
-<script src="/static/js/plugins/clockpicker/clockpicker.js"></script>
-<script src="/static/js/plugins/cropper/cropper.min.js"></script>
-<script src="/static/js/demo/form-advanced-demo.min.js"></script>
 </body>
+<script src="/static/js/jquery.min.js?v=2.1.4"></script>
+<script src="/static/js/jquery.min.js"></script>
+<script id="welcome-template" type="text/x-handlebars-template"/>
+<script src="/static/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/static/js/pullListTree.js"></script>
+
+
+<script>
+    $(function () {
+        initPullListTree(1, 2);//一个参数 开始的级别  第二参数 有几个下拉框
+        var id = $("#pullListTree").data("selectAreaId");
+        console.info(id);
+    });
+</script>
 </html>
+
+
+

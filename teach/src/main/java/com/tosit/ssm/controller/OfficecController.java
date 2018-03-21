@@ -93,11 +93,45 @@ public class OfficecController {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        System.out.println("本月第一天和最后一天分别是 ： " + date1 + " and " + date2);
+        //System.out.println("本月第一天和最后一天分别是 ： " + date1 + " and " + date2);
         office.setMaster("何团");
         office.setCreateTime(date1);
         office.setUpdateTime(date2);
         List<Office> classes = officeService.findClassByTeacherAndDate(office);
+        JSONModel.put("classes",classes);
+        return JSONModel.put();
+    }
+
+    @RequestMapping("/getAllClassByTeacherByDate")
+    @ResponseBody
+    public Object getClassByTeacherByDate(Office office,HttpServletRequest request){
+        Date startDate = null;
+        Date endDate = null;
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String date1 = request.getParameter("date1");
+        String date2 = request.getParameter("date2");
+        try {
+            startDate = format.parse(date1);
+            endDate = format.parse(date2);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        office.setMaster("何团");
+        office.setCreateTime(startDate);
+        office.setUpdateTime(endDate);
+        List<Office> classes = officeService.findClassByTeacherAndDate(office);
+        JSONModel.put("classes",classes);
+        return JSONModel.put();
+    }
+
+    @RequestMapping("/getClassByTeacherByArea")
+    @ResponseBody
+    public Object getClassByTeacherByArea(Office office,HttpServletRequest request){
+        String pId = request.getParameter("pId");
+        System.out.println(pId);
+        office.setId(pId);
+        office.setMaster("何团");
+        List<Office> classes = officeService.findClassByTeacherAndSchool(office);
         JSONModel.put("classes",classes);
         return JSONModel.put();
     }
