@@ -12,7 +12,7 @@ public interface TaskMapper {
 
     int deleteByPrimaryKey(String id);
 
-    int insert(Task record);
+//    int insert(Task record);
 
     int insertSelective(Task record);
 
@@ -26,5 +26,21 @@ public interface TaskMapper {
 
     int updateByPrimaryKeySelective(Task record);
 
+//    int updateByPrimaryKey(Task record);
+
+
+    /**
+     * 插入一个任务
+     * @param record 插入一个含有id的任务对象
+     * @return
+     */
+    int insertTask(Task record);
+
+    /**
+     * 更新一个任务
+     * @param record 更新一个含有id的任务对象
+     * @return
+     */
     int updateByPrimaryKey(Task record);
+
 }
