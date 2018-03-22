@@ -363,25 +363,7 @@
     </set>
     where ID = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.tosit.ssm.entity.Task">
-    update task
-    set teaching_id = #{teachingId,jdbcType=VARCHAR},
-      fileName = #{filename,jdbcType=VARCHAR},
-      fileType = #{filetype,jdbcType=VARCHAR},
-      icon = #{icon,jdbcType=VARCHAR},
-      limit_size = #{limitSize,jdbcType=REAL},
-      file_id = #{fileId,jdbcType=VARCHAR},
-      after_submit = #{afterSubmit,jdbcType=INTEGER},
-      before_submit = #{beforeSubmit,jdbcType=INTEGER},
-      remarks = #{remarks,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      create_by = #{createBy,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      update_by = #{updateBy,jdbcType=VARCHAR},
-      check_status = #{checkStatus,jdbcType=INTEGER},
-      is_del = #{isDel,jdbcType=INTEGER}
-    where ID = #{id,jdbcType=VARCHAR}
-  </update>
+
 
 
   <insert id="insertTask" parameterType="com.tosit.ssm.entity.Task">

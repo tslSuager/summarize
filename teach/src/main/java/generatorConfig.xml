@@ -59,7 +59,10 @@
 		<!--<table tableName="task" domainObjectName="Task"/>-->
 		<!--<table tableName="task_result" domainObjectName="TaskResult"/>-->
 		<!--<table tableName="teaching" domainObjectName="Teaching"/>-->
-		<table tableName="teaching_office" domainObjectName="TeachingOffice"/>
+		<!--<table tableName="teaching_office" domainObjectName="TeachingOffice"/>-->
+		<!--<table tableName="Dormitory_info" domainObjectName="DormitoryInfo"/>-->
+		<!--<table tableName="materiel" domainObjectName="Materiel"/>-->
+		<table tableName="utilttles" domainObjectName="Utilttles"/>
 		<!-- 有些表的字段需要指定java类型
 		 <table schema="" tableName="">
 			<columnOverride column="" javaType="" />

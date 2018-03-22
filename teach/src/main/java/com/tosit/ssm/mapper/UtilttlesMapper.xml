@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tosit.ssm.mapper.UtilttlesMapper">
+  <resultMap id="BaseResultMap" type="com.tosit.ssm.entity.Utilttles">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="dormitory_id" jdbcType="VARCHAR" property="dormitoryId" />
+    <result column="cin_water_count" jdbcType="INTEGER" property="cinWaterCount" />
+    <result column="cin_electricity_count" jdbcType="INTEGER" property="cinElectricityCount" />
+    <result column="cin_gas_count" jdbcType="INTEGER" property="cinGasCount" />
+    <result column="record_time" jdbcType="TIMESTAMP" property="recordTime" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, dormitory_id, cin_water_count, cin_electricity_count, cin_gas_count, record_time, 
+    create_by, create_time
+  </sql>
+  <select id="selectByExample" parameterType="com.tosit.ssm.entity.UtilttlesExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from utilttles
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from utilttles
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from utilttles
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tosit.ssm.entity.UtilttlesExample">
+    delete from utilttles
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tosit.ssm.entity.Utilttles">
+    insert into utilttles (id, dormitory_id, cin_water_count, 
+      cin_electricity_count, cin_gas_count, record_time, 
+      create_by, create_time)
+    values (#{id,jdbcType=VARCHAR}, #{dormitoryId,jdbcType=VARCHAR}, #{cinWaterCount,jdbcType=INTEGER}, 
+      #{cinElectricityCount,jdbcType=INTEGER}, #{cinGasCount,jdbcType=INTEGER}, #{recordTime,jdbcType=TIMESTAMP}, 
+      #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tosit.ssm.entity.Utilttles">
+    insert into utilttles
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="dormitoryId != null">
+        dormitory_id,
+      </if>
+      <if test="cinWaterCount != null">
+        cin_water_count,
+      </if>
+      <if test="cinElectricityCount != null">
+        cin_electricity_count,
+      </if>
+      <if test="cinGasCount != null">
+        cin_gas_count,
+      </if>
+      <if test="recordTime != null">
+        record_time,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="dormitoryId != null">
+        #{dormitoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="cinWaterCount != null">
+        #{cinWaterCount,jdbcType=INTEGER},
+      </if>
+      <if test="cinElectricityCount != null">
+        #{cinElectricityCount,jdbcType=INTEGER},
+      </if>
+      <if test="cinGasCount != null">
+        #{cinGasCount,jdbcType=INTEGER},
+      </if>
+      <if test="recordTime != null">
+        #{recordTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tosit.ssm.entity.UtilttlesExample" resultType="java.lang.Long">
+    select count(*) from utilttles
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update utilttles
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dormitoryId != null">
+        dormitory_id = #{record.dormitoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cinWaterCount != null">
+        cin_water_count = #{record.cinWaterCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.cinElectricityCount != null">
+        cin_electricity_count = #{record.cinElectricityCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.cinGasCount != null">
+        cin_gas_count = #{record.cinGasCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.recordTime != null">
+        record_time = #{record.recordTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createBy != null">
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update utilttles
+    set id = #{record.id,jdbcType=VARCHAR},
+      dormitory_id = #{record.dormitoryId,jdbcType=VARCHAR},
+      cin_water_count = #{record.cinWaterCount,jdbcType=INTEGER},
+      cin_electricity_count = #{record.cinElectricityCount,jdbcType=INTEGER},
+      cin_gas_count = #{record.cinGasCount,jdbcType=INTEGER},
+      record_time = #{record.recordTime,jdbcType=TIMESTAMP},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tosit.ssm.entity.Utilttles">
+    update utilttles
+    <set>
+      <if test="dormitoryId != null">
+        dormitory_id = #{dormitoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="cinWaterCount != null">
+        cin_water_count = #{cinWaterCount,jdbcType=INTEGER},
+      </if>
+      <if test="cinElectricityCount != null">
+        cin_electricity_count = #{cinElectricityCount,jdbcType=INTEGER},
+      </if>
+      <if test="cinGasCount != null">
+        cin_gas_count = #{cinGasCount,jdbcType=INTEGER},
+      </if>
+      <if test="recordTime != null">
+        record_time = #{recordTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tosit.ssm.entity.Utilttles">
+    update utilttles
+    set dormitory_id = #{dormitoryId,jdbcType=VARCHAR},
+      cin_water_count = #{cinWaterCount,jdbcType=INTEGER},
+      cin_electricity_count = #{cinElectricityCount,jdbcType=INTEGER},
+      cin_gas_count = #{cinGasCount,jdbcType=INTEGER},
+      record_time = #{recordTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
