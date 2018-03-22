@@ -89,8 +89,8 @@ public class UserController {
     @ResponseBody
     public Object getUserByDateAreaNoClass(Date startDate, Date endDate, Office office, HttpServletRequest request){
         SimpleDateFormat format = new SimpleDateFormat("yyyy:MM:dd");
-        String sdate = "2018:03:03";//request.getParameter("");
-        String edate = "2018:04:04";//request.getParameter("");
+        String sdate = request.getParameter("startDate");
+        String edate = request.getParameter("endDate");
         try {
             startDate = format.parse(sdate);
             endDate = format.parse(edate);
@@ -119,5 +119,18 @@ public class UserController {
         return JSONModel.put();
     }
 
-
+    @RequestMapping("/getStuNoClassByDate")
+    @ResponseBody
+    public Object getStuNoClassByDate(Office office,Date sDate,Date eDate,HttpServletRequest request){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy:MM:dd");
+        String date1 = request.getParameter("startDate");
+        String date2 = request.getParameter("ednDate");
+        try {
+            sDate = format.parse(date1);
+            eDate = format.parse(date2);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

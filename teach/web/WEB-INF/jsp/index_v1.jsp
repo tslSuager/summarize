@@ -37,11 +37,13 @@
     <script>
 
         $(function () {
-            initPullListTree(1, 2);//一个参数 开始的级别  第二参数 有几个下拉框
+            initPullListTree("/office/getAllArea",1, 2,function () {
+                
+            });//一个参数 开始的级别  第二参数 有几个下拉框
             $.get("/office/getAllClassByTeacherAndDate",function (msg) {
                 var classes =msg['classes'];
                 $.each(classes,function (i,each) {
-                    $('.table').append('<tr>' +
+                    $('.table').append('<tr id="'+each['id']+'">' +
                         '                                <td>'+each['name']+'</td>\n' +
                         '                                <td>'+each['createTime']+'</td>\n' +
                         '                                <td>'+each['parentId']+'</td>'+
@@ -180,14 +182,26 @@
                     btn:['完成','算了'],
                     yes:function (index,layero) {
                         var body = layer.getChildFrame('body', index);
-                        var school = body.find("#pullListTree").data("selectAreaId");
-                        //var schoolId = school.date("selectAreaId");
-                        console.info(school);
+                        var school = body.find("#pullListTree").find("select").eq(1).val();
                         var name = body.find("#name").val();
+
+                        function p(s) {
+                            return s < 10 ? '0' + s: s;
+                        }
+
+                        var myDate = new Date();//获取当前年
+                        var year=myDate.getFullYear();//获取当前月
+                        var month=myDate.getMonth()+1;//获取当前日
+                        var date=myDate.getDate();
+                        var h=myDate.getHours();       //获取当前小时数(0-23)
+                        var m=myDate.getMinutes();     //获取当前分钟数(0-59)
+                        var s=myDate.getSeconds();
+                        var now=year+'-'+p(month)+"-"+p(date)+" "+p(h)+':'+p(m)+":"+p(s);
+
                         $.get("/office/addClass",{school,name},function () {
                             $('.table').append('<tr>\n' +
                                 '                                <td>'+name+'</td>\n' +
-                                '                                <td>2018-3-20</td>\n' +
+                                '                                <td>'+now+'</td>\n' +
                                 '                                <td>'+school+'</td>'+
                                 '                                <td><button class="btn btn-outline btn-info checkClassInfo btn-xs" type="button" >查看班级信息</button></td>\n' +
                                 '                                <td><button class="btn btn-outline btn-info checkGroupInfo btn-xs" type="button">查看小组信息</button></td>\n' +
@@ -227,13 +241,14 @@
             });
 
             $("body").on("click",".checkClassInfo",function () {
+                var cid = $(this).parent().parent().attr("id");
                 layer.open({
                     type: 2,
                     title: '班级信息',
                     shadeClose: true,
                     shade: 0,
                     area: ['100%', '100%'],
-                    content: '/classInfo.jsp',
+                    content: '/classInfo.jsp?cid='+cid,
                     btn:['完成','算了'],
                     yes:function (index,layero) {
                         layer.confirm('确定修改吗',{

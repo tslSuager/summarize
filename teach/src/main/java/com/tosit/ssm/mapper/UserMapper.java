@@ -104,8 +104,6 @@ public interface UserMapper {
     List<User> selectKaoqinOrShensu(@Param("id") String officeId);
 
 
-
-
     /**
      * 查看未分班但与某个考勤规则关联了的人
      * @param kaoqinRule 包括考勤规则id的kaoqinRule对象

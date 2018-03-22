@@ -46,9 +46,8 @@
 
 <script>
     $(function () {
-        initPullListTree(1, 2);//一个参数 开始的级别  第二参数 有几个下拉框
-        var id = $("#pullListTree").data("selectAreaId");
-        console.info(id);
+        initPullListTree("/office/getAllArea",1, 2,function () {
+        });//一个参数 开始的级别  第二参数 有几个下拉框
     });
 </script>
 </html>

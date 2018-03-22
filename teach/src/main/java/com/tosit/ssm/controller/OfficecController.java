@@ -102,6 +102,12 @@ public class OfficecController {
         return JSONModel.put();
     }
 
+    /**
+     * 查询某个教员某个时间段内的所有班级
+     * @param office
+     * @param request
+     * @return
+     */
     @RequestMapping("/getAllClassByTeacherByDate")
     @ResponseBody
     public Object getClassByTeacherByDate(Office office,HttpServletRequest request){
@@ -124,6 +130,12 @@ public class OfficecController {
         return JSONModel.put();
     }
 
+    /**
+     * 通过区域和老师查找班级
+     * @param office 其中建议只有master 和 学校id （提醒：这两个属性没有直接的关联，这里使用Office类只是暂存数据【id和master】）
+     * @param request 获得学校id
+     * @return
+     */
     @RequestMapping("/getClassByTeacherByArea")
     @ResponseBody
     public Object getClassByTeacherByArea(Office office,HttpServletRequest request){
@@ -145,13 +157,13 @@ public class OfficecController {
     @ResponseBody
     public void addClass(Office office,HttpServletRequest request){
         office.setId(UUID.randomUUID().toString().replaceAll("-",""));
-        /*office.setMaster();
-        office.setParentId();*/
+        office.setMaster("何团");
         String name = request.getParameter("name");
         String school = request.getParameter("school");
-        System.out.println(name+school);
+        office.setParentId(school);
         office.setName(name);
         office.setIsDel(1);
+        office.setOfficeType(3);
         officeService.addOffice(office);
         System.out.println("OK");
     }
