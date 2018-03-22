@@ -26,5 +26,23 @@ public interface FileMapper {
 
     int updateByPrimaryKeySelective(File record);
 
+//    int updateByPrimaryKey(File record);
+
+    /**
+     *  插入一个文件
+     * @param record  拥有id的文件对象
+     * @return
+     */
+    int insertFile(File record);
+
+
+    /**
+     *  修改一个文件的任意字段
+     * @param record 拥有文件id的文件对象
+     * @return
+     */
     int updateByPrimaryKey(File record);
+
+
+
 }

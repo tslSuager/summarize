@@ -305,19 +305,144 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  <!--<update id="updateByPrimaryKey" parameterType="com.tosit.ssm.entity.File">-->
+    <!--update file-->
+    <!--set upload_file_type = #{uploadFileType,jdbcType=INTEGER},-->
+      <!--file_catalogue = #{fileCatalogue,jdbcType=VARCHAR},-->
+      <!--name = #{name,jdbcType=VARCHAR},-->
+      <!--saveName = #{savename,jdbcType=VARCHAR},-->
+      <!--file_pah = #{filePah,jdbcType=VARCHAR},-->
+      <!--fileType = #{filetype,jdbcType=VARCHAR},-->
+      <!--icon = #{icon,jdbcType=VARCHAR},-->
+      <!--submit_time = #{submitTime,jdbcType=TIMESTAMP},-->
+      <!--submi_remarks = #{submiRemarks,jdbcType=VARCHAR},-->
+      <!--is_del = #{isDel,jdbcType=INTEGER},-->
+      <!--download_time = #{downloadTime,jdbcType=TIMESTAMP}-->
+    <!--where id = #{id,jdbcType=VARCHAR}-->
+  <!--</update>-->
+
+
+
+
+
+
+  <insert id="insertFile" parameterType="com.tosit.ssm.entity.File">
+    insert into file
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="uploadFileType != null">
+        upload_file_type,
+      </if>
+      <if test="fileCatalogue != null">
+        file_catalogue,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="savename != null">
+        saveName,
+      </if>
+      <if test="filePah != null">
+        file_pah,
+      </if>
+      <if test="filetype != null">
+        fileType,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="submitTime != null">
+        submit_time,
+      </if>
+      <if test="submiRemarks != null">
+        submi_remarks,
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+      <if test="downloadTime != null">
+        download_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadFileType != null">
+        #{uploadFileType,jdbcType=INTEGER},
+      </if>
+      <if test="fileCatalogue != null">
+        #{fileCatalogue,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="savename != null">
+        #{savename,jdbcType=VARCHAR},
+      </if>
+      <if test="filePah != null">
+        #{filePah,jdbcType=VARCHAR},
+      </if>
+      <if test="filetype != null">
+        #{filetype,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="submitTime != null">
+        #{submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="submiRemarks != null">
+        #{submiRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null">
+        #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="downloadTime != null">
+        #{downloadTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
   <update id="updateByPrimaryKey" parameterType="com.tosit.ssm.entity.File">
     update file
-    set upload_file_type = #{uploadFileType,jdbcType=INTEGER},
-      file_catalogue = #{fileCatalogue,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
-      saveName = #{savename,jdbcType=VARCHAR},
-      file_pah = #{filePah,jdbcType=VARCHAR},
-      fileType = #{filetype,jdbcType=VARCHAR},
-      icon = #{icon,jdbcType=VARCHAR},
-      submit_time = #{submitTime,jdbcType=TIMESTAMP},
-      submi_remarks = #{submiRemarks,jdbcType=VARCHAR},
-      is_del = #{isDel,jdbcType=INTEGER},
-      download_time = #{downloadTime,jdbcType=TIMESTAMP}
+    <set>
+      <if test="uploadFileType != null">
+        upload_file_type = #{uploadFileType,jdbcType=INTEGER},
+      </if>
+      <if test="fileCatalogue != null">
+        file_catalogue = #{fileCatalogue,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="savename != null">
+        saveName = #{savename,jdbcType=VARCHAR},
+      </if>
+      <if test="filePah != null">
+        file_pah = #{filePah,jdbcType=VARCHAR},
+      </if>
+      <if test="filetype != null">
+        fileType = #{filetype,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="submitTime != null">
+        submit_time = #{submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="submiRemarks != null">
+        submi_remarks = #{submiRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null">
+        is_del = #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="downloadTime != null">
+        download_time = #{downloadTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
 </mapper>
