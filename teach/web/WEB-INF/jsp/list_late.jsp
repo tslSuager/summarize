@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -38,12 +39,15 @@
                     <button class="btn btn-outline btn-info chooseAll btn-xs buttonCss" type="button" name="">
                         全选
                     </button>
-
                 <div class="col-sm-12">
                     <div class="ibox float-e-margins">
-
-                        <div class="ibox-content">
-                            <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">
+                        <div class="ibox-content" id="data">
+                            <c:forEach items="${mingdan}" varStatus="i" var="item" >
+                                <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="" id="${item.id}">
+                                    ${item.username}
+                                </button>
+                            </c:forEach>
+                            <%--<button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">
                                 即可夜壶
                             </button>
                             <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">
@@ -78,14 +82,11 @@
                             </button>
                             <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">
                                 即可夜壶
-                            </button>
-                            <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">
-                                即可夜壶
-                            </button>
+                            </button>--%>
                         </div>
                         <hr/>
                         <div>
-                            <h5>备注:修改被选中学生考勤为正常.</h5>
+                            <h5 id="aa">备注:修改被选中学生考勤为正常.</h5>
                         </div>
                     </div>
                 </div>
@@ -100,27 +101,42 @@
 <script src="/static/js/content.min.js"></script>
 <script src="/static/js/welcome.min.js"></script>
 <script type="text/javascript">
-    $(".chooseStu").click(function () {
-        if ($(this).hasClass("btn-info")) {
-            $(this).removeClass("btn-info").addClass("btn-warning").attr("id", Math.random());
-        } else if ($(this).hasClass("btn-warning")) {
-            $(this).removeClass("btn-warning").addClass("btn-info").removeAttr("id");
-        }
+    $(function () {
+        initInfo();
+//        parent.$('#data').html();
     });
-    $(".chooseAll").click(function () {
-        /*if ($(this).hasClass("btn-info")) {
-            $(this).removeClass("btn-info").addClass("btn-warning").attr("id", Math.random());
-        } else if ($(this).hasClass("btn-warning")) {
-            $(this).removeClass("btn-warning").addClass("btn-info").removeAttr("id");
-        }*/
-        if($(":button").hasClass("btn-info")){
-            $(":button").removeClass("btn-info").addClass("btn-warning").attr("id", Math.random());
-        } else if ($(":button").hasClass("btn-warning")){
-            $(":button").removeClass("btn-warning").addClass("btn-info").removeAttr("id");
+    function initInfo() {
+        $(".chooseStu").click(function () {
+            if ($(this).hasClass("btn-info")) {
+                $(this).removeClass("btn-info").addClass("btn-warning");
+            } else if ($(this).hasClass("btn-warning")) {
+                $(this).removeClass("btn-warning").addClass("btn-info");
+            }
+        });
+        $(".chooseAll").click(function () {
+            /*if ($(this).hasClass("btn-info")) {
+                $(this).removeClass("btn-info").addClass("btn-warning").attr("id", Math.random());
+            } else if ($(this).hasClass("btn-warning")) {
+                $(this).removeClass("btn-warning").addClass("btn-info").removeAttr("id");
+            }*/
+            if($(":button").hasClass("btn-info")){
+                $(":button").removeClass("btn-info").addClass("btn-warning").attr("id", Math.random());
+            } else if ($(":button").hasClass("btn-warning")){
+                $(":button").removeClass("btn-warning").addClass("btn-info").removeAttr("id");
+            }
+        });
+    }
+    function mingDan() {
+        var buttons = $("#data").find("button");
+        var  data=[];
+        for (var i=0;i<buttons.length;i++){
+            var btn = $(buttons[i]);
+            if (btn.hasClass("btn-warning")){
+                data.push(btn.attr("id"))
+            }
         }
-
-    });
-
+        return data;
+    }
 </script>
 </body>
 </html>

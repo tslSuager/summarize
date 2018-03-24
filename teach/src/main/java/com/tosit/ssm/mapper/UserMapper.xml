@@ -751,7 +751,7 @@ SELECT
     SELECT
      <include refid="Base_Column_List"/>
     FROM user u join user_office uo on u.id=uo.user_id
-    join   office f on uo.office_id=f.id where f.id=#{office.id} and f.is_del=1 and u.is_del=1 and uo.is_del=1 and f.id not in
+    join   office f on uo.office_id=f.id where f.id=#{office.id} and f.is_del=1 and u.is_del=1 and uo.is_del=1 and u.id not in
      (SELECT
     uu.id   FROM user uu join user_office uoo on uu.id=uoo.user_id
     join   office ff on uoo.office_id=ff.id where ff.parent_id=#{office.id} and ff.is_del=1 and uu.is_del=1 and uoo.is_del=1)

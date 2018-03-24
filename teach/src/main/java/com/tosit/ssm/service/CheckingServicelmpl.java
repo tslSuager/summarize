@@ -34,7 +34,7 @@ public class CheckingServicelmpl implements CheckingService{
     }
 
     @Override
-    public List<KaoqinResult> selectByClassLate(String officeId) {
+    public List<KaoqinResultVO> selectByClassLate(String officeId) {
         return kaoqinResultMapper.selectByClassLate(officeId);
     }
 
