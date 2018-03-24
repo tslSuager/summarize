@@ -1,10 +1,5 @@
-var initPullListTree = function (startlevel, count) {
-//        var message;
-//        var levels = level;
-//        var counts = count;
-    $.get("/office/getAllArea", {}, function (msg) {
-//            message = msg;
-        console.info(msg);
+var initPullListTree = function (url,startlevel, count,fn) {
+    $.get(url, {}, function (msg) {
         for (var i = startlevel; (count + startlevel) > i; i++) {
             switch (i) {
                 case (1):
@@ -41,22 +36,27 @@ var initPullListTree = function (startlevel, count) {
             $("#pullListTree").find("select").eq(ss).change(function () {
                 var parentid = $(this).val();
                 var son = $(this).data("type");
-//                    console.info(son);
-//                    console.info(parentid);
                 for(var em=son;em<(count+startlevel-1);em++) {
                     $("#pullListTree").find("select").eq(em).empty();
                 }
+                var aaa = 1;
                 $.each(msg.allArea, function (i, e) {
-                    console.info(parentid === e.parentId);
                     if (parentid === e.parentId) {
+                        if (aaa==1) {
+                            $("#pullListTree").data("selectAreaId",e.id);
+                            $("#pullListTree").data("selectAreaText",e.name);
+                        }
                         $("#pullListTree").find("select").eq(son).append($("<option>").attr("value", e.id).html(e.name));
+                        aaa++;
                     }
                 });
-
+                aaa = 0;
             });
         }
-        $("#pullListTree").find("select").eq(startlevel+count-2).change(function () {
-            $("#pullListTree").data("selectAreaId",$(this).var());
+        $("#pullListTree").find("select").eq(count-1).change(function () {
+            $("#pullListTree").data("selectAreaId",$(this).val());
+            $("#pullListTree").data("selectAreaText",$(this).find("option:selected").text());
+            fn($(this));
         });
     }, "json");
 

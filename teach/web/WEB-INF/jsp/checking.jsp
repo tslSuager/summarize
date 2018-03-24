@@ -42,11 +42,8 @@
                 </div>
                 <div class="ibox-content">
                     <div id='external-events'>
-
                         <div class='external-event navy-bg'>请假</div>
                         <div class='external-event navy-bg'>备注</div>
-                        <div class='external-event navy-bg'>外出</div>
-
                     </div>
                 </div>
             </div>

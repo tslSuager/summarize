@@ -47,7 +47,7 @@
 		<!--<table tableName="kaoqinRule_office" domainObjectName="KaoqinRuleOffice"/>-->
 
 		<!--<table tableName="kaoqin_records" domainObjectName="KaoqinRecords"/>-->
-		<table tableName="kaoqin_result" domainObjectName="KaoqinResult"/>
+		<!--<table tableName="kaoqin_result" domainObjectName="KaoqinResult"/>-->
 		<!--<table tableName="kaoqin_rule" domainObjectName="KaoqinRule"/>-->
 		<!--<table tableName="kaoqin_rule_detail" domainObjectName="KaoqinRuleDetail"/>-->
 		<!--<table tableName="office" domainObjectName="Office"/>-->
@@ -55,6 +55,14 @@
 		<!--<table tableName="user_office" domainObjectName="UserOffice"/>-->
 		<!--<table tableName="kaoqin_user" domainObjectName="KaoqinUser"/>-->
 		<!--<table tableName="experience" domainObjectName="Experience"/>-->
+		<!--<table tableName="file" domainObjectName="File"/>-->
+		<!--<table tableName="task" domainObjectName="Task"/>-->
+		<!--<table tableName="task_result" domainObjectName="TaskResult"/>-->
+		<!--<table tableName="teaching" domainObjectName="Teaching"/>-->
+		<!--<table tableName="teaching_office" domainObjectName="TeachingOffice"/>-->
+		<!--<table tableName="Dormitory_info" domainObjectName="DormitoryInfo"/>-->
+		<!--<table tableName="materiel" domainObjectName="Materiel"/>-->
+		<table tableName="utilttles" domainObjectName="Utilttles"/>
 		<!-- 有些表的字段需要指定java类型
 		 <table schema="" tableName="">
 			<columnOverride column="" javaType="" />

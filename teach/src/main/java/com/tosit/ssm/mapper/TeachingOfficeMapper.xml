@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tosit.ssm.mapper.TeachingOfficeMapper">
+  <resultMap id="BaseResultMap" type="com.tosit.ssm.entity.TeachingOffice">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="office_id" jdbcType="VARCHAR" property="officeId" />
+    <result column="teaching_id" jdbcType="VARCHAR" property="teachingId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="is_del" jdbcType="INTEGER" property="isDel" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, office_id, teaching_id, create_time, create_by, update_time, update_by, remarks, 
+    is_del
+  </sql>
+  <select id="selectByExample" parameterType="com.tosit.ssm.entity.TeachingOfficeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from teaching_office
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from teaching_office
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from teaching_office
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tosit.ssm.entity.TeachingOfficeExample">
+    delete from teaching_office
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tosit.ssm.entity.TeachingOffice">
+    insert into teaching_office (ID, office_id, teaching_id, 
+      create_time, create_by, update_time, 
+      update_by, remarks, is_del
+      )
+    values (#{id,jdbcType=VARCHAR}, #{officeId,jdbcType=VARCHAR}, #{teachingId,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, #{isDel,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tosit.ssm.entity.TeachingOffice">
+    insert into teaching_office
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="officeId != null">
+        office_id,
+      </if>
+      <if test="teachingId != null">
+        teaching_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="officeId != null">
+        #{officeId,jdbcType=VARCHAR},
+      </if>
+      <if test="teachingId != null">
+        #{teachingId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null">
+        #{isDel,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tosit.ssm.entity.TeachingOfficeExample" resultType="java.lang.Long">
+    select count(*) from teaching_office
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update teaching_office
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.officeId != null">
+        office_id = #{record.officeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teachingId != null">
+        teaching_id = #{record.teachingId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createBy != null">
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateBy != null">
+        update_by = #{record.updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDel != null">
+        is_del = #{record.isDel,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update teaching_office
+    set ID = #{record.id,jdbcType=VARCHAR},
+      office_id = #{record.officeId,jdbcType=VARCHAR},
+      teaching_id = #{record.teachingId,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      update_by = #{record.updateBy,jdbcType=VARCHAR},
+      remarks = #{record.remarks,jdbcType=VARCHAR},
+      is_del = #{record.isDel,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <!--<update id="updateByPrimaryKeySelective" parameterType="com.tosit.ssm.entity.TeachingOffice">-->
+    <!--update teaching_office-->
+    <!--<set>-->
+      <!--<if test="officeId != null">-->
+        <!--office_id = #{officeId,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="teachingId != null">-->
+        <!--teaching_id = #{teachingId,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="createTime != null">-->
+        <!--create_time = #{createTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="createBy != null">-->
+        <!--create_by = #{createBy,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="updateTime != null">-->
+        <!--update_time = #{updateTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="updateBy != null">-->
+        <!--update_by = #{updateBy,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="remarks != null">-->
+        <!--remarks = #{remarks,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="isDel != null">-->
+        <!--is_del = #{isDel,jdbcType=INTEGER},-->
+      <!--</if>-->
+    <!--</set>-->
+    <!--where ID = #{id,jdbcType=VARCHAR}-->
+  <!--</update>-->
+  <!--<update id="updateByPrimaryKey" parameterType="com.tosit.ssm.entity.TeachingOffice">-->
+    <!--update teaching_office-->
+    <!--set office_id = #{officeId,jdbcType=VARCHAR},-->
+      <!--teaching_id = #{teachingId,jdbcType=VARCHAR},-->
+      <!--create_time = #{createTime,jdbcType=TIMESTAMP},-->
+      <!--create_by = #{createBy,jdbcType=VARCHAR},-->
+      <!--update_time = #{updateTime,jdbcType=TIMESTAMP},-->
+      <!--update_by = #{updateBy,jdbcType=VARCHAR},-->
+      <!--remarks = #{remarks,jdbcType=VARCHAR},-->
+      <!--is_del = #{isDel,jdbcType=INTEGER}-->
+    <!--where ID = #{id,jdbcType=VARCHAR}-->
+  <!--</update>-->
+
+
+
+  <insert id="insertTeachingOffice" parameterType="com.tosit.ssm.entity.TeachingOffice">
+    insert into teaching_office
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="officeId != null">
+        office_id,
+      </if>
+      <if test="teachingId != null">
+        teaching_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="officeId != null">
+        #{officeId,jdbcType=VARCHAR},
+      </if>
+      <if test="teachingId != null">
+        #{teachingId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null">
+        #{isDel,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.tosit.ssm.entity.TeachingOffice">
+    update teaching_office
+    <set>
+      <if test="officeId != null">
+        office_id = #{officeId,jdbcType=VARCHAR},
+      </if>
+      <if test="teachingId != null">
+        teaching_id = #{teachingId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null">
+        is_del = #{isDel,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
