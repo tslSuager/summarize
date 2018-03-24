@@ -1,7 +1,9 @@
 package com.tosit.ssm.service;
 
 import com.tosit.ssm.entity.Office;
+import com.tosit.ssm.entity.Experience;
 import com.tosit.ssm.entity.User;
+import com.tosit.ssm.mapper.ExperienceMapper;
 import com.tosit.ssm.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,24 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private ExperienceMapper experienceMapper;
+
+    @Override
+    public User selectByPrimaryKey(String userId) {
+        return userMapper.selectByPrimaryKey(userId);
+    }
+
+    @Override
+    public List<Experience> selectByIdToType(String userId) {
+        return experienceMapper.selectByIdToType(userId);
+    }
+
+    @Override
+    public List<User> selectChidaoBeforToday(String officeId) {
+        return userMapper.selectChidaoBeforToday(officeId);
+    }
+
     /*@Override
     public List<User> getUsers() {
         return userMapper.selectUsers();
@@ -34,7 +54,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public int modifyUser(User user) {
-       return userMapper.updateByPrimaryKey(user);
+        return userMapper.updateByPrimaryKey(user);
     }
 
     /**
@@ -47,5 +67,15 @@ public class UserServiceImpl implements UserService {
         Office office = new Office();
         office.setId(id);
        return userMapper.selectByClassNGH(office);
+    }
+
+    /**
+     * 查询所有班级中的学生
+     * @param officeId 班级id
+     * @return 返回该班学生集合
+     */
+    @Override
+    public List<User> findClassUser(String officeId) {
+        return userMapper.selectUserByOfficeId(officeId);
     }
 }

@@ -4,7 +4,9 @@ import com.tosit.ssm.entity.KaoqinResult;
 import com.tosit.ssm.entity.KaoqinResultExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface KaoqinResultMapper {
     long countByExample(KaoqinResultExample example);
 
@@ -42,7 +44,7 @@ public interface KaoqinResultMapper {
     List<KaoqinResult> selectByClass(@Param("officeId") String officeId);
 
     /**
-     * 获取某个班的申述或请假总人数
+     * 获取某个班的申述或请假总条数
      * @param officeId
      * @return 返回值是一个数字
      */
