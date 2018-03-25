@@ -1,9 +1,6 @@
 package com.tosit.ssm.mapper;
 
-import com.tosit.ssm.entity.KaoqinRule;
-import com.tosit.ssm.entity.Office;
-import com.tosit.ssm.entity.User;
-import com.tosit.ssm.entity.UserExample;
+import com.tosit.ssm.entity.*;
 
 import java.util.Date;
 import java.util.List;
@@ -152,7 +149,7 @@ public interface UserMapper {
      * @param office 包括学校id的office对象
      * @return
      */
-    List<User> selectByClassGroup(Office office);
+    List<User> selectByClassGroup(@Param("office") Office office);
 
 
     /**
@@ -166,10 +163,11 @@ public interface UserMapper {
     /**
      * 获取某个组的人
      *
-     * @param office 包括组id的office对象
+     *  * @param office 包括组id的office对象
      * @return
      */
     List<User> selectByGroup(Office office);
 
 
+    List<UserVO> selectUsersWithGroup(Office office);
 }

@@ -57,6 +57,7 @@
                     <div class="col-sm-12">
                         <div class="ibox float-e-margins">
                             <div class="ibox-content" id="left">
+                                <%--<button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
                                 <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
                                 <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
                                 <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
@@ -79,8 +80,7 @@
                                 <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
                                 <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
                                 <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
+                                <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>--%>
                             </div>
                             <div>
                                 <div class="col-sm-8"></div>
@@ -122,7 +122,7 @@
                         <div class="input-daterange input-group" id="datepicker">
                             <input type="text" class="input-sm form-control" name="start" value="2018-3-9" id="startDate"/>
                             <span class="input-group-addon">到</span>
-                            <input type="text" class="input-sm form-control" name="end" value="2018-3-9" id="endDate"/>
+                            <input type="text" class="input-sm form-control" name="end" value="2018-3-29" id="endDate"/>
                         </div>
                     </div>
                 </div>
@@ -131,12 +131,13 @@
                 </div>
                 <div class="input-group col-sm-1">
                     <span class="input-group-btn">
-                        <button type="button" class="btn btn-primary">搜索</button>
+                        <button type="button" class="btn btn-primary" id="select">搜索</button>
                     </span>
                 </div>
                 <div class="col-sm-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-content" id="right">
+                            <%--<button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
                             <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
                             <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
                             <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
@@ -148,8 +149,7 @@
                             <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
                             <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
                             <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                            <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                            <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
+                            <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>--%>
                         </div>
                     </div>
                 </div>
@@ -185,7 +185,7 @@
 
         });//一个参数 开始的级别  第二参数 有几个下拉框
 
-        $(".chooseStu").click(function () {
+        $("body").on("click",".chooseStu",function () {
             if ($(this).hasClass("btn-info")){
                 $(this).removeClass("btn-info").addClass("btn-warning").attr("id",Math.random());
             }else if($(this).hasClass("btn-warning")){
@@ -205,12 +205,34 @@
             $("#left").find(".btn-warning").remove();
         });
 
+        $("#select").click(function () {
+            var startDate = $("#startDate").val();
+            var endDate = $("#endDate").val();
+            var pId = $("#pullListTree").data("selectAreaId");
+            $.get("/user/getUserByDateAreaNoClass",{startDate,endDate,pId},function (msg) {
+                var users = msg['users'];
+                $.each(users,function (i,each) {
+                    $("#right").append('<button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">'+each['name']+'</button>');
+                });
+            });
+        });
+
         var startDate = $("#startDate").val();
         var endDate = $("#endDate").val();
         var url = location.search;
         var s = url.slice(5);
-        $.get("/office/getStuNoClassByDate",{startDate,endDate,s},function () {
-
+        var pId = $("#pullListTree").data("selectAreaId");
+        $.get("/user/getUserByDateAreaNoClass",{startDate,endDate,pId},function (msg) {
+            var users = msg['users'];
+            $.each(users,function (i,each) {
+                $("#right").append('<button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">'+each['name']+'</button>');
+            });
+        });
+        $.get("/user/getUserByClassId",{s},function (msg) {
+            var users = msg['users'];
+            $.each(users,function (i,each) {
+                $("#left").append('<button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">'+each['name']+'</button>');
+            })
         });
 </script>
 </body>

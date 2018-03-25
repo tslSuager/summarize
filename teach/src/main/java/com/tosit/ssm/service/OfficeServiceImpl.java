@@ -36,4 +36,8 @@ public class OfficeServiceImpl implements OfficeService{
     public void addOffice(Office office) {
         officeMapper.insertOffice(office);
     }
+
+    public List<Office> findGroupByClassId(String id) {
+        return officeMapper.selectGroupByClassId(id);
+    }
 }

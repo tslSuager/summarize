@@ -94,7 +94,7 @@ public class OfficecController {
             e.printStackTrace();
         }
         //System.out.println("本月第一天和最后一天分别是 ： " + date1 + " and " + date2);
-        office.setMaster("何团");
+        office.setMaster("aa");
         office.setCreateTime(date1);
         office.setUpdateTime(date2);
         List<Office> classes = officeService.findClassByTeacherAndDate(office);
@@ -149,12 +149,11 @@ public class OfficecController {
     }
 
     /**
-     * 从前端传来班级名称以及班级的父级id和Master
+     * 从前端传来班级名称以及班级的父级id和Master，添加班级
      * @param office
      * @param request
      */
     @RequestMapping("/addClass")
-    @ResponseBody
     public void addClass(Office office,HttpServletRequest request){
         office.setId(UUID.randomUUID().toString().replaceAll("-",""));
         office.setMaster("何团");
@@ -168,7 +167,35 @@ public class OfficecController {
         System.out.println("OK");
     }
 
-    public void addGroup(Office office,HttpServletRequest request){
+    /**
+     * 查询某个班的所有组
+     * @param id
+     * @return
+     */
+    @RequestMapping("/getGroupByClass")
+    @ResponseBody
+    public Object getGroupByClass(String id,HttpServletRequest request){
+        id = request.getParameter("s");
+        List<Office> groups = officeService.findGroupByClassId(id);
+        JSONModel.put("groups",groups);
+        return JSONModel.put();
+    }
 
+
+    @RequestMapping("/addGroup")
+    public void addGroup(Office office,HttpServletRequest request){
+        String n = request.getParameter("num");
+        String s = request.getParameter("s");
+        int num = Integer.parseInt(n);
+        String l = request.getParameter("ll");
+        int ll = Integer.parseInt(l);
+        office.setParentId(s);
+        for (int i = 1;i<=num;i++){
+            office.setName(""+(ll+i)+"组");
+            office.setId(UUID.randomUUID().toString().replaceAll("-",""));
+            office.setOfficeType(4);
+            office.setIsDel(1);
+            officeService.addOffice(office);
+        }
     }
 }

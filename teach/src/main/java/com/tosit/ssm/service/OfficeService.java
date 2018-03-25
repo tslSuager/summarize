@@ -29,4 +29,11 @@ public interface OfficeService {
      */
     void addOffice(Office office);
     List<Office> getAllArea();
+
+    /**
+     * 查询某个班的所有组
+     * @param id
+     * @return
+     */
+    List<Office> findGroupByClassId(String id);
 }

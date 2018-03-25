@@ -3,6 +3,7 @@ package com.tosit.ssm.service;
 import com.tosit.ssm.entity.Office;
 import com.tosit.ssm.entity.Experience;
 import com.tosit.ssm.entity.User;
+import com.tosit.ssm.entity.UserVO;
 import com.tosit.ssm.mapper.ExperienceMapper;
 import com.tosit.ssm.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,5 +92,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findUserWithClassNotInGroup(Office office) {
         return userMapper.selectByClassGroup(office);
+    }
+
+    @Override
+    public List<UserVO> findUserWithGroup(Office office) {
+        return userMapper.selectUsersWithGroup(office);
     }
 }

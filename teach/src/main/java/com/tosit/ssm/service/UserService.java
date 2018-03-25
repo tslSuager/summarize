@@ -1,12 +1,10 @@
 package com.tosit.ssm.service;
 
-import com.tosit.ssm.entity.Experience;
-import com.tosit.ssm.entity.User;
+import com.tosit.ssm.entity.*;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-import com.tosit.ssm.entity.Office;
 import com.tosit.ssm.entity.User;
 
 import java.util.Date;
@@ -70,4 +68,6 @@ public interface UserService {
      * @return 返回该班学生集合
      */
     List<User> findClassUser(String officeId);
+
+    List<UserVO> findUserWithGroup(Office office);
 }

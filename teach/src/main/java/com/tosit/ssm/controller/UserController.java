@@ -3,6 +3,7 @@ package com.tosit.ssm.controller;
 import com.tosit.ssm.common.util.json.JSONModel;
 import com.tosit.ssm.entity.Office;
 import com.tosit.ssm.entity.User;
+import com.tosit.ssm.service.OfficeService;
 import com.tosit.ssm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,8 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private OfficeService officeService;
     @ResponseBody
     @RequestMapping("/getAllUser")
     public Object getUsers(){
@@ -79,33 +82,37 @@ public class UserController {
 
     /**
      * 按时间段和区域查找没分班的人
-     * @param startDate 开始时间
-     * @param endDate 结束时间
      * @param office 包含学校ID的office对象
      * @param request
      * @return
      */
     @RequestMapping("/getUserByDateAreaNoClass")
     @ResponseBody
-    public Object getUserByDateAreaNoClass(Date startDate, Date endDate, Office office, HttpServletRequest request){
-        SimpleDateFormat format = new SimpleDateFormat("yyyy:MM:dd");
+    public Object getUserByDateAreaNoClass(Office office, HttpServletRequest request){
+        Date startDate = null;
+        Date endDate = null;
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String sdate = request.getParameter("startDate");
         String edate = request.getParameter("endDate");
+        String pId = request.getParameter("pId");
+        if (pId==null){
+            pId = "001001";
+        }
         try {
             startDate = format.parse(sdate);
             endDate = format.parse(edate);
         } catch (ParseException e) {
             e.printStackTrace();
-        }
-        String id = "001001";//request.getParameter("");
-        office.setId(id);
+        }System.out.println(sdate+":"+edate);
+        System.out.println(startDate+":"+endDate);
+        office.setId(pId);
         List<User> users = userService.findUserByDateAreaNoClass(startDate,endDate,office);
         JSONModel.put("users",users);
         return JSONModel.put();
     }
 
     /**
-     * 按班级id获取学生
+     * 按班级或组id获取学生
      * @param id 班级id
      * @param request
      * @return
@@ -113,24 +120,36 @@ public class UserController {
     @RequestMapping("/getUserByClassId")
     @ResponseBody
     public Object getUserByClassId(String id,HttpServletRequest request){
-        id = "001001";//request.getParameter("");
+        id = request.getParameter("s");
         List<User> users = userService.findUserByOfficeId(id);
         JSONModel.put("users",users);
         return JSONModel.put();
     }
 
-    @RequestMapping("/getStuNoClassByDate")
+    /**
+     * 获取某个班未分班的人
+     * @param office
+     * @param request
+     * @return
+     */
+    @RequestMapping("/getUsersByClassNoGroup")
     @ResponseBody
-    public Object getStuNoClassByDate(Office office,Date sDate,Date eDate,HttpServletRequest request){
-        SimpleDateFormat format = new SimpleDateFormat("yyyy:MM:dd");
-        String date1 = request.getParameter("startDate");
-        String date2 = request.getParameter("ednDate");
-        try {
-            sDate = format.parse(date1);
-            eDate = format.parse(date2);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+    public Object getUsersByClassNoGroup(Office office, HttpServletRequest request){
+        String id = request.getParameter("s");
+        office.setId(id);
+        List<User> users = userService.findUserWithClassNotInGroup(office);
+        JSONModel.put("users",users);
+        return JSONModel.put();
+    }
+
+    /**
+     * 获取某个组的人包括组号
+     * @return
+     */
+    @RequestMapping("/getUsersByGroup")
+    @ResponseBody
+    public Object getUsersByGroup(){
+        List<Office> groups = officeService.findGroupByClassId("");
         return null;
     }
 }

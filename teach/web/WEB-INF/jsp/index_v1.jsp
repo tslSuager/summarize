@@ -37,9 +37,15 @@
     <script>
 
         $(function () {
+
+            //初始化下拉框插件
             initPullListTree("/office/getAllArea",1, 2,function () {
                 
             });//一个参数 开始的级别  第二参数 有几个下拉框
+
+            /**
+             *获得的该老师管理的所有当月创建的班级
+             */
             $.get("/office/getAllClassByTeacherAndDate",function (msg) {
                 var classes =msg['classes'];
                 $.each(classes,function (i,each) {
@@ -77,6 +83,9 @@
                 });
             },"json");
 
+            /**
+             *点击日期区间旁的搜索按钮，获得该老师管理的所有在该时间段创建的班级
+             */
             $("#selectByDate").click(function () {
                 $(".table").find("tbody").find("tr").remove();
                 var date1 = $("#startDate").val();
@@ -84,7 +93,7 @@
                 $.get("/office/getAllClassByTeacherByDate",{date1,date2},function (msg) {
                     var classes = msg['classes'];
                     $.each(classes,function (i,each) {
-                        $('.table').append('<tr>' +
+                        $('.table').append('<tr id="'+each['id']+'">' +
                             '                                <td>'+each['name']+'</td>\n' +
                             '                                <td>'+each['createTime']+'</td>\n' +
                             '                                <td>'+each['parentId']+'</td>'+
@@ -119,13 +128,16 @@
                 },"json");
             });
 
+            /**
+             *点击区域下拉列表旁的搜索按钮，获得该老师管理的所有在该区域内的班级
+             */
             $("#selectByArea").click(function () {
                 $(".table").find("tbody").find("tr").remove();
                 var pId = $("#pullListTree").data("selectAreaId");
                $.get("/office/getClassByTeacherByArea",{pId},function (msg) {
                    var classes = msg['classes'];
                    $.each(classes,function (i,each) {
-                       $('.table').append('<tr>' +
+                       $('.table').append('<tr id="'+each['id']+'">' +
                            '                                <td>'+each['name']+'</td>\n' +
                            '                                <td>'+each['createTime']+'</td>\n' +
                            '                                <td>'+each['parentId']+'</td>'+
@@ -160,6 +172,9 @@
                },"json") ;
             });
 
+            /**
+             * 点击删除班级按钮删除某班级
+             */
             $('body').on("click",".deleteClass",function () {
                 layer.confirm('您确认要删除吗？', {
                     btn: ['是滴','再想想'] //按钮
@@ -171,6 +186,10 @@
                     });
                 });
             });
+
+            /**
+             * 点击添加班级按钮添加一个班级
+             */
             $('#addClass').click(function () {
                 layer.open({
                     type: 2,
@@ -240,6 +259,9 @@
                 });
             });
 
+            /**
+             * 点击查看班级信息，跳转页面，可执行分班操作
+             */
             $("body").on("click",".checkClassInfo",function () {
                 var cid = $(this).parent().parent().attr("id");
                 layer.open({
@@ -266,14 +288,18 @@
                 });
             });
 
+            /**
+             * 点击查看小组信息，跳转页面，可执行分组操作
+             */
             $("body").on("click",".checkGroupInfo",function () {
+                var cid = $(this).parent().parent().attr("id");
                 layer.open({
                     type: 2,
                     title: '班级信息',
                     shadeClose: true,
                     shade: 0,
                     area: ['100%', '100%'],
-                    content: '/groupInfo.jsp',
+                    content: '/groupInfo.jsp?cid='+cid,
                     btn:['完成','算了'],
                     yes:function (index,layero) {
                         layer.confirm('确定修改吗',{
@@ -290,6 +316,10 @@
                     }
                 });
             });
+
+            /**
+             * 点击匹配考勤规则按钮，跳转页面，分配改班级学生的考勤规则
+             */
             $("body").on("click",".matchAttendance",function () {
                 layer.open({
                     type: 2,
@@ -307,6 +337,10 @@
                     }
                 });
             });
+
+            /**
+             * 点击修改班级按钮，可修改班级名称
+             */
             $("body").on("click",".reviseClass",function () {
                 layer.open({
                     type: 2,
@@ -324,6 +358,10 @@
                     }
                 });
             });
+
+            /**
+             * 点击匹配教学计划按钮，跳转页面，可为该班级匹配教学计划
+             */
             $("body").on("click",".matchTeachingPlan",function () {
                 layer.open({
                     type: 2,
@@ -341,6 +379,10 @@
                     }
                 });
             });
+
+            /**
+             * 点击增加教师按钮，为该班级添加老师
+             */
             $("body").on("click",".addTeacher",function () {
                 layer.open({
                     type: 2,
@@ -358,6 +400,10 @@
                     }
                 });
             });
+
+            /**
+             * 点击初始成绩按钮，为该班学生初始化平时成绩
+             */
             $("body").on("click",".initialization",function () {
                 layer.open({
                     type: 2,
@@ -375,8 +421,6 @@
                     }
                 });
             });
-
-
         });
     </script>
 
