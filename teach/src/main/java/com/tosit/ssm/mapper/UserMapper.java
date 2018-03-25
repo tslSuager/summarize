@@ -144,7 +144,7 @@ public interface UserMapper {
      * @param office 包括学校id的office对象
      * @return
      */
-    List<User> selectByTimeAreaNClass(Date startDate, Date endDate,Office office);
+    List<User> selectByTimeAreaNClass(Date startDate, Date endDate, Office office);
 
 
 

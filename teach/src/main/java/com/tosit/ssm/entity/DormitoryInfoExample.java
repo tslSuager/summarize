@@ -175,63 +175,73 @@ public class DormitoryInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andDormitoryNumberIsNull() {
-            addCriterion("dormitory_number is null");
+        public Criteria andDormitoryNameIsNull() {
+            addCriterion("dormitory_name is null");
             return (Criteria) this;
         }
 
-        public Criteria andDormitoryNumberIsNotNull() {
-            addCriterion("dormitory_number is not null");
+        public Criteria andDormitoryNameIsNotNull() {
+            addCriterion("dormitory_name is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDormitoryNumberEqualTo(Integer value) {
-            addCriterion("dormitory_number =", value, "dormitoryNumber");
+        public Criteria andDormitoryNameEqualTo(String value) {
+            addCriterion("dormitory_name =", value, "dormitoryName");
             return (Criteria) this;
         }
 
-        public Criteria andDormitoryNumberNotEqualTo(Integer value) {
-            addCriterion("dormitory_number <>", value, "dormitoryNumber");
+        public Criteria andDormitoryNameNotEqualTo(String value) {
+            addCriterion("dormitory_name <>", value, "dormitoryName");
             return (Criteria) this;
         }
 
-        public Criteria andDormitoryNumberGreaterThan(Integer value) {
-            addCriterion("dormitory_number >", value, "dormitoryNumber");
+        public Criteria andDormitoryNameGreaterThan(String value) {
+            addCriterion("dormitory_name >", value, "dormitoryName");
             return (Criteria) this;
         }
 
-        public Criteria andDormitoryNumberGreaterThanOrEqualTo(Integer value) {
-            addCriterion("dormitory_number >=", value, "dormitoryNumber");
+        public Criteria andDormitoryNameGreaterThanOrEqualTo(String value) {
+            addCriterion("dormitory_name >=", value, "dormitoryName");
             return (Criteria) this;
         }
 
-        public Criteria andDormitoryNumberLessThan(Integer value) {
-            addCriterion("dormitory_number <", value, "dormitoryNumber");
+        public Criteria andDormitoryNameLessThan(String value) {
+            addCriterion("dormitory_name <", value, "dormitoryName");
             return (Criteria) this;
         }
 
-        public Criteria andDormitoryNumberLessThanOrEqualTo(Integer value) {
-            addCriterion("dormitory_number <=", value, "dormitoryNumber");
+        public Criteria andDormitoryNameLessThanOrEqualTo(String value) {
+            addCriterion("dormitory_name <=", value, "dormitoryName");
             return (Criteria) this;
         }
 
-        public Criteria andDormitoryNumberIn(List<Integer> values) {
-            addCriterion("dormitory_number in", values, "dormitoryNumber");
+        public Criteria andDormitoryNameLike(String value) {
+            addCriterion("dormitory_name like", value, "dormitoryName");
             return (Criteria) this;
         }
 
-        public Criteria andDormitoryNumberNotIn(List<Integer> values) {
-            addCriterion("dormitory_number not in", values, "dormitoryNumber");
+        public Criteria andDormitoryNameNotLike(String value) {
+            addCriterion("dormitory_name not like", value, "dormitoryName");
             return (Criteria) this;
         }
 
-        public Criteria andDormitoryNumberBetween(Integer value1, Integer value2) {
-            addCriterion("dormitory_number between", value1, value2, "dormitoryNumber");
+        public Criteria andDormitoryNameIn(List<String> values) {
+            addCriterion("dormitory_name in", values, "dormitoryName");
             return (Criteria) this;
         }
 
-        public Criteria andDormitoryNumberNotBetween(Integer value1, Integer value2) {
-            addCriterion("dormitory_number not between", value1, value2, "dormitoryNumber");
+        public Criteria andDormitoryNameNotIn(List<String> values) {
+            addCriterion("dormitory_name not in", values, "dormitoryName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDormitoryNameBetween(String value1, String value2) {
+            addCriterion("dormitory_name between", value1, value2, "dormitoryName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDormitoryNameNotBetween(String value1, String value2) {
+            addCriterion("dormitory_name not between", value1, value2, "dormitoryName");
             return (Criteria) this;
         }
 

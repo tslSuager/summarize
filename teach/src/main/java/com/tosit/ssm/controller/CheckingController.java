@@ -3,6 +3,7 @@ package com.tosit.ssm.controller;
 import com.tosit.ssm.common.util.json.JSONModel;
 import com.tosit.ssm.entity.*;
 import com.tosit.ssm.service.CheckingService;
+//import com.tosit.ssm.service.UserService;
 import com.tosit.ssm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,9 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.sql.Time;
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -39,11 +38,11 @@ public class CheckingController {
      * 获取某人某天的考勤记录，和以前的考勤的结果（包括请假和备注）
      * @return
      */
-    @RequestMapping("/ShowAllRecordsByIdByDate")
+    @RequestMapping(value = "/ShowAllRecordsByIdByDate")
     @ResponseBody
     public Object ShowRecords(String user_id,Timestamp brushTime){
         //某个人的表现分的经历
-        List<Experience> experiences = userService.selectByIdToType("u001");
+        List<Experience> experiences = userService.selectByIdToType(user_id);
         JSONModel.put("experiences",experiences);
         //某个人某天的所有考勤记录
         /*KaoqinRecords kaoqinRecords = new KaoqinRecords();
@@ -54,13 +53,13 @@ public class CheckingController {
         JSONModel.put("records",kaoqinRecordsByIdByDate);*/
 
         //某个人的所有考勤结果
-        List<KaoqinResult> kaoqinresults = checkingService.findOneById("u001");
+        List<KaoqinResult> kaoqinresults = checkingService.findOneById(user_id);
         JSONModel.put("result",kaoqinresults);
 
 
 
         //某个人的所有信息
-        User user = userService.selectByPrimaryKey("u001");
+        User user = userService.selectByPrimaryKey(user_id);
         JSONModel.put("user",user);
 
         return JSONModel.getMap();

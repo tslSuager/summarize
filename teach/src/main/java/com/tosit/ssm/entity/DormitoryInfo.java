@@ -5,7 +5,7 @@ import java.util.Date;
 public class DormitoryInfo {
     private String id;
 
-    private Integer dormitoryNumber;
+    private String dormitoryName;
 
     private Integer maxNum;
 
@@ -29,12 +29,12 @@ public class DormitoryInfo {
         this.id = id == null ? null : id.trim();
     }
 
-    public Integer getDormitoryNumber() {
-        return dormitoryNumber;
+    public String getDormitoryName() {
+        return dormitoryName;
     }
 
-    public void setDormitoryNumber(Integer dormitoryNumber) {
-        this.dormitoryNumber = dormitoryNumber;
+    public void setDormitoryName(String dormitoryName) {
+        this.dormitoryName = dormitoryName == null ? null : dormitoryName.trim();
     }
 
     public Integer getMaxNum() {
