@@ -36,4 +36,5 @@ public interface OfficeService {
      * @return
      */
     List<Office> findGroupByClassId(String id);
+        public  List<Office> getAllClass();
 }

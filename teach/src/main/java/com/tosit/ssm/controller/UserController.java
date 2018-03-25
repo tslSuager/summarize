@@ -56,6 +56,7 @@ public class UserController {
         return user ;
     }
 
+
     /**
      * 通过班级id查询一个班的学生,通过request传值到jsp页面
      *
@@ -72,8 +73,12 @@ public class UserController {
         request.setAttribute("users",classUser);
         return "student_find_jingli";
     }
-
-    @RequestMapping(value = "/getUserByClassIdNoKaoqinNum",method = RequestMethod.POST)
+    /**
+     * 得到某个班为关联考勤工号的人
+     * @param id 班级id
+     * @return
+     */
+    @RequestMapping(value = "/getUserByClassIdNoKaoqinNum")
     @ResponseBody
     public Object getUserByClassIdNoKaoqinNum(String id){
         List<User> users= userService.findUserByClassIdNoKaoqinNum(id);

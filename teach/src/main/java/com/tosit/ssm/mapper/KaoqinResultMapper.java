@@ -3,6 +3,8 @@ package com.tosit.ssm.mapper;
 import com.tosit.ssm.entity.KaoqinResult;
 import com.tosit.ssm.entity.KaoqinResultExample;
 import java.util.List;
+
+import com.tosit.ssm.entity.KaoqinResultVO;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -62,5 +64,5 @@ public interface KaoqinResultMapper {
      * @param officeId
      * @return 返回一个考勤结果集合
      */
-    List<KaoqinResult> selectByClassLate(@Param("officeId") String officeId);
+    List<KaoqinResultVO> selectByClassLate(@Param("officeId") String officeId);
 }

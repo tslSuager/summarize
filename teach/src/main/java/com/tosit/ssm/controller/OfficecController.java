@@ -58,6 +58,17 @@ public class OfficecController {
     }
 
     /**
+     *  获取所有班级
+     * @return
+     */
+    @GetMapping("/getClass")
+    @ResponseBody
+    public Object getOfficeClass() {
+        List<Office> allClass = officeService.getAllClass();
+        JSONModel.put("allClass",allClass);
+        return JSONModel.put();
+    }
+    /**
      * 查找老师当月创建的所有班级
      * @return 返回JSON格式的班级数据
      */
