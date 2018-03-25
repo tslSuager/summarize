@@ -108,6 +108,15 @@
     u.create_time, u.create_by, u.update_time, u.update_by, u.last_logintime, u.loat_longin_ip, u.remarks,
     u.is_del, u.sort, u.grade, u.cut_grade, u.col_3,u.dormitory_id,u.checkin_time,u.checkout_time
   </sql>
+  <select id="selectUserByOfficeId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT
+       <include refid="Base_Column_List"/>
+    FROM user_office uo
+    LEFT JOIN `user` u
+    ON uo.user_id = u.ID
+    WHERE uo.office_id = #{id};
+  </select>
+
   <select id="selectByExample" parameterType="com.tosit.ssm.entity.UserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -1101,11 +1110,11 @@
 
 
   <select id="selectByClassAndKRule"  resultMap="BaseResultMap">
-    SELECT
+SELECT
     <include refid="Base_Column_List" />
     from user u
-    WHERE u.id NOT in(
-    ( select us.id from user us
+  WHERE u.id NOT in(
+   ( select us.id from user us
     JOIN user_office uo
     on us.id =uo.user_id
     JOIN office f
@@ -1127,18 +1136,18 @@
 
 
   <select id="selectChidaoBeforToday" parameterType="com.tosit.ssm.entity.User" resultMap="BaseResultMap">
-    SELECT
-    <include refid="Base_Column_List"/>
-    FROM user u WHERE ID IN (
-    SELECT uo.user_id FROM user_office uo
-    LEFT JOIN kaoqin_result kr
-    ON kr.user_id=uo.user_id
-    WHERE kr.status=0 AND uo.office_id = #{id} AND kr.is_del=1 AND uo.is_del=1 )AND is_del=1 ;
+  SELECT
+  <include refid="Base_Column_List"/>
+  FROM user u WHERE ID IN (
+  SELECT uo.user_id FROM user_office uo
+  LEFT JOIN kaoqin_result kr
+  ON kr.user_id=uo.user_id
+  WHERE kr.status=0 AND uo.office_id = #{id} AND kr.is_del=1 AND uo.is_del=1 )AND is_del=1 ;
   </select>
 
   <select id="selectKaoqinOrShensu" parameterType="string" resultMap="BaseResultMap">
     SELECT
-    <include refid="Base_Column_List"/>
+     <include refid="Base_Column_List"/>
     FROM user u WHERE ID IN (
     SELECT uo.user_id FROM user_office uo
     LEFT JOIN kaoqin_result kr
@@ -1153,46 +1162,46 @@
 
   <select id="selectByClassGroup" parameterType="com.tosit.ssm.entity.Office" resultMap="BaseResultMap">
     SELECT
-    <include refid="Base_Column_List"/>
+     <include refid="Base_Column_List"/>
     FROM user u join user_office uo on u.id=uo.user_id
-    join   office f on uo.office_id=f.id where f.id=#{office.id} and f.is_del=1 and u.is_del=1 and uo.is_del=1 and .id not in
-    (SELECT
+    join   office f on uo.office_id=f.id where f.id=#{office.id} and f.is_del=1 and u.is_del=1 and uo.is_del=1 and u.id not in
+     (SELECT
     uu.id   FROM user uu join user_office uoo on uu.id=uoo.user_id
     join   office ff on uoo.office_id=ff.id where ff.parent_id=#{office.id} and ff.is_del=1 and uu.is_del=1 and uoo.is_del=1)
   </select>
 
   <select id="selectByClass" parameterType="com.tosit.ssm.entity.Office" resultMap="BaseResultMap">
     SELECT
-    <include refid="Base_Column_List"/>
+     <include refid="Base_Column_List"/>
     FROM user u join user_office uo on u.id=uo.user_id
     join   office f on uo.office_id=f.id where f.id=#{office.id} and f.is_del=1 and u.is_del=1 and uo.is_del=1
   </select>
 
   <select id="selectByGroup" parameterType="com.tosit.ssm.entity.Office" resultMap="BaseResultMap">
     SELECT
-    <include refid="Base_Column_List"/>
+     <include refid="Base_Column_List"/>
     FROM user u join user_office uo on u.id=uo.user_id
     join   office f on uo.office_id=f.id where f.id=#{office.id} and f.is_del=1 and u.is_del=1 and uo.is_del=1
   </select>
 
   <select id="selectByTimeAreaNClass" parameterType="map" resultMap="BaseResultMap">
     SELECT
-    <include refid="Base_Column_List"/>
+     <include refid="Base_Column_List"/>
     FROM user u join user_office uo on u.id=uo.user_id
     join   office f on uo.office_id=f.id where f.id=#{office.id}
     and f.is_del=1 and u.is_del=1 and uo.is_del=1
-    and  DATE_FORMAT(u.create_time,'%Y:%c:%e')>= DATE_FORMAT(#{startDate},'%Y:%c:%e')
-    and DATE_FORMAT(#{endDate},'%Y:%c:%e')  >= DATE_FORMAT(u.create_time,'%Y:%c:%e')
-    and u.id not in(
+     and  DATE_FORMAT(u.create_time,'%Y:%c:%e')>= DATE_FORMAT(#{startDate},'%Y:%c:%e')
+       and DATE_FORMAT(#{endDate},'%Y:%c:%e')  >= DATE_FORMAT(u.create_time,'%Y:%c:%e')
+     and u.id not in(
     SELECT
     uu.id   FROM user uu join user_office uoo on uu.id=uoo.user_id
     join   office ff on uoo.office_id=ff.id where ff.office_type=3 and ff.is_del=1 and uu.is_del=1 and uoo.is_del=1
     )
-  </select>
+     </select>
 
   <select id="selectByAreaNClass" parameterType="com.tosit.ssm.entity.Office" resultMap="BaseResultMap">
-    SELECT
-    <include refid="Base_Column_List"/>
+     SELECT
+     <include refid="Base_Column_List"/>
     FROM user u join user_office uo on u.id=uo.user_id
     join   office f on uo.office_id=f.id where f.id=#{office.id} and f.is_del=1 and u.is_del=1 and uo.is_del=1 and u.id not in(
     SELECT
@@ -1204,7 +1213,7 @@
 
   <select id="selectByClassNGH" parameterType="com.tosit.ssm.entity.Office" resultMap="BaseResultMap">
     SELECT
-    <include refid="Base_Column_List"/>
+     <include refid="Base_Column_List"/>
     FROM user u join user_office uo on u.id=uo.user_id
     join   office f on uo.office_id=f.id where f.id=#{office.id}
     and f.is_del=1 and u.is_del=1 and uo.is_del=1
@@ -1213,7 +1222,7 @@
 
   <select id="selectByClassChecking" parameterType="com.tosit.ssm.entity.Office" resultMap="BaseResultMap">
     SELECT
-    <include refid="Base_Column_List"/>
+     <include refid="Base_Column_List"/>
     FROM user u join user_office uo on u.id=uo.user_id
     join   office f on uo.office_id=f.id where f.id=#{office.id}
     and f.is_del=1 and u.is_del=1 and uo.is_del=1
@@ -1222,7 +1231,7 @@
 
   <select id="selectByNClassChecking" parameterType="com.tosit.ssm.entity.KaoqinRule" resultMap="BaseResultMap">
     SELECT
-    <include refid="Base_Column_List"/>
+     <include refid="Base_Column_List"/>
     FROM user u join user_office uo on u.id=uo.user_id
     join   office f on uo.office_id=f.id where u.kaoqin_ruleID=#{kaoqinRule.id}
     and f.is_del=1 and u.is_del=1 and uo.is_del=1
@@ -1233,5 +1242,4 @@
     join   office ff on uoo.office_id=ff.id where ff.office_type=3 and ff.is_del=1 and uu.is_del=1 and uoo.is_del=1
     )
   </select>
-
 </mapper>

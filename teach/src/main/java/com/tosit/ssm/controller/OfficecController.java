@@ -52,6 +52,17 @@ public class OfficecController {
         return JSONModel.put();
     }
 
+    /**
+     *  获取所有班级
+     * @return
+     */
+    @GetMapping("/getClass")
+    @ResponseBody
+    public Object getOfficeClass() {
+        List<Office> allClass = officeService.getAllClass();
+        JSONModel.put("allClass",allClass);
+        return JSONModel.put();
+    }
 
 
 }

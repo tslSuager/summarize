@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface OfficeService {
      void createOffice(Office office);
-
-    List<Office> getAllArea();
+        List<Office> getArea();
+        public  List<Office> getAllClass();
 }

@@ -87,8 +87,12 @@
   </sql>
 
   <select id="selectOfficeByManage" parameterType="string" resultMap="BaseResultMap">
-    SELECT name FROM office
-    WHERE master = #{master} AND office_type = 3 AND is_del = 1
+    SELECT
+      o.ID,o.parent_id,o.parent_ids,o.name,o.phone,o.file_dir,o.icon,o.master,o.office_type,o.create_time,o.create_by,o.update_time,o.update_by,o.remarks,o.status,o.is_del,o.sort,o.col_1,o.col_2,o.col_3
+    FROM user_office uo
+    LEFT JOIN office o
+    ON uo.office_id = o.id
+    WHERE uo.user_id = #{uId} AND  o.office_type = 3 AND uo.is_del = 1 AND o.is_del=1;
   </select>
 
   <select id="selectByExample" parameterType="com.tosit.ssm.entity.OfficeExample" resultMap="BaseResultMap">
@@ -613,18 +617,21 @@
 
   </select>
   <select id="selectOfficeByMasterAndSchool" resultMap="BaseResultMap" parameterType="com.tosit.ssm.entity.Office">
+
     SELECT
       o1.*
     FROM office o1
       LEFT JOIN office o2
         ON o1.parent_id = o2.ID
-    WHERE o1.is_del=1 AND o1.office_type=3 AND o2.is_del =1 AND o2.office_type=2 AND o2.ID=#{id} AND o1.`master`=#{master}
+    WHERE o1.is_del=1 AND o1.office_type=3 AND o2.is_del =1 AND o2.office_type=2 AND o2.ID=#{id} AND o1.ID IN
+     (SELECT office_id from user_office WHERE user_id = #{master});
   </select>
   <select id="selectOfficeByMasterAndDate" resultMap="BaseResultMap" parameterType="com.tosit.ssm.entity.Office">
     SELECT
     <include refid="Base_Column_List"/>
     FROM office
-    WHERE is_del =1 AND `master` =#{master} AND office_type = 3 AND (create_time BETWEEN DATE_FORMAT(#{createTime},'%Y-%m-%d %H:%i:%s') AND DATE_FORMAT(#{uploadTime},'%Y-%m-%d %H:%i:%s') )
+    WHERE is_del =1  AND office_type = 3 AND (create_time BETWEEN DATE_FORMAT(#{createTime},'%Y-%m-%d %H:%i:%s') AND DATE_FORMAT(#{uploadTime},'%Y-%m-%d %H:%i:%s') )
+    AND   ID IN (SELECT office_id from user_office WHERE user_id = #{master})
   </select>
 
   <select id="selectAllArea" resultMap="BaseResultMap" >

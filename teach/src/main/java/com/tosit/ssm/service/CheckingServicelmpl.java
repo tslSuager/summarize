@@ -34,7 +34,7 @@ public class CheckingServicelmpl implements CheckingService{
     }
 
     @Override
-    public List<KaoqinResult> selectByClassLate(String officeId) {
+    public List<KaoqinResultVO> selectByClassLate(String officeId) {
         return kaoqinResultMapper.selectByClassLate(officeId);
     }
 
@@ -65,6 +65,7 @@ public class CheckingServicelmpl implements CheckingService{
     /**
      * 添加考勤规则和规则详情
      * @param kaoqinRule 待插入的考情规则
+     * @param kaoqindetailVO 带插入的考勤详情
      * @return
      */
     @Override
@@ -75,7 +76,7 @@ public class CheckingServicelmpl implements CheckingService{
          kaoqinRuleMapper.insert(kaoqinRule);
         //然后再考勤规则详情中插入详情信息
         List<KaoqinRuleDetail> kaoqinRuleDetails = kaoqindetailVO.getKrd();
-        for (int i=1;i<kaoqinRuleDetails.size();i++) {
+        for (int i=( kaoqinRuleDetails.get(0).getWeekDay()==null?1:0);i<kaoqinRuleDetails.size();i++) {
             KaoqinRuleDetail k = kaoqinRuleDetails.get(i);
             k.setKaoqinRuleId(ruleId);
             String detailId = UUID.randomUUID().toString().replaceAll("-", "");

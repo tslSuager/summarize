@@ -3,7 +3,6 @@ package com.tosit.ssm.controller;
 import com.tosit.ssm.common.util.json.JSONModel;
 import com.tosit.ssm.entity.*;
 import com.tosit.ssm.service.CheckingService;
-//import com.tosit.ssm.service.UserService;
 import com.tosit.ssm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +10,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.sql.Time;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -21,7 +24,7 @@ public class CheckingController {
     private CheckingService checkingService;
     @Autowired
     private UserService userService;
-
+    private SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
     /**
      * 添加考勤规则  当为方案三方案四的时候第一条记录不要
      * @return 返回成功或者失败（具体的返回值到时候常量类定义了再说）
@@ -88,47 +91,70 @@ public class CheckingController {
     /**
      *查找某班今天以前的迟到人员
      * @param officeId 班级id
-     * @param name 班级名
+     * @param uId 班级名
      * @return
      */
     @RequestMapping("/viewKaoqin")
     @ResponseBody
-    public Object ViewKaoqin(String officeId, String name, Model model){
-        //老师查看某个班的考勤迟到人员
-        List<User> users = userService.selectChidaoBeforToday(officeId);
-        JSONModel.put("users",users);
-
-        //查看某个班迟到的考勤结果
-        List<KaoqinResult> kaoqinResults = checkingService.selectByClassLate(officeId);
+    public Object ViewKaoqin(String officeId, String uId, Model model){
+        //查看某个班迟到和旷工的考勤结果
+        List<KaoqinResultVO> kaoqinResults = checkingService.selectByClassLate(officeId);
         JSONModel.put("kaoqinResults",kaoqinResults);
-
-        //查找某个教员管理的某个班级
-        List<Office> offices = checkingService.selectOfficeByManage(name);
-        JSONModel.put("offices",offices);
-
+        //查找某个教员管理的所有班级
+        List<Office> offices = checkingService.selectOfficeByManage(uId);
+        if (offices!=null){
+            JSONModel.put("offices",offices);
+        }
         //获取某个班的申诉或请假的考勤结果的数量
         Integer counts = checkingService.countByClass(officeId);
-        model.addAttribute("counts",counts);
-
+        if (counts!=null){
+            model.addAttribute("counts",counts);
+        }
         return JSONModel.getMap();
     }
 
+    /**
+     * 得到指定的某教员负责的某班某天的用户名单（迟到还是旷工）
+     * @param isAbsenteeism
+     * @return
+     */
+    @RequestMapping("/getMingDan")
+    public Object getMingdan(Boolean isAbsenteeism,String officeId, String date,Model model){
+        //这个时得到迟到的和矿工的所有人数
+        List<KaoqinResultVO> kaoqinResults = checkingService.selectByClassLate(officeId);
+        List<KaoqinResultVO> rs=new ArrayList<>();
+        for (KaoqinResultVO k:kaoqinResults){
+            if (date.equals(simpleDateFormat.format(k.getDate()))){
+                //得到指定条件下迟到的名单
+                if (!isAbsenteeism && k.getStatus()==0){
+                    rs.add(k);
+                }else if (isAbsenteeism && k.getStatus()==2){//矿工的名单
+                    rs.add(k);
+                }
+            }
+        }
+
+        JSONModel.put("mingdan",rs);
+        model.addAttribute("mingdan",rs);
+        return "list_late";
+    }
     /**
      * 点击“迟到人员名单”进入名单详情,可以修改其考勤状态
      * @param
      * @return
      */
-    @RequestMapping("/xiugaiKaoqin")
-    public String XiugaiKaoqin(String user_Id){
-        KaoqinResult kaoqinResult = new KaoqinResult();
-        kaoqinResult.setUserId(user_Id);
-        kaoqinResult.setStatus(1);
-        checkingService.updateByPrimaryKey(kaoqinResult);
-
-        return null;
+    @RequestMapping(value = "/xiugaiKaoqin",method = RequestMethod.POST)
+    @ResponseBody
+    public Object XiugaiKaoqin(@RequestBody List<String> ids){
+        for (String user_Id:
+             ids) {
+            KaoqinResult kaoqinResult = new KaoqinResult();
+            kaoqinResult.setId(user_Id);
+            kaoqinResult.setStatus(1);
+            checkingService.updateByPrimaryKey(kaoqinResult);
+        }
+        return "success";
     }
-
-
 
     /**
      * 进入处理信息页面
@@ -154,7 +180,5 @@ public class CheckingController {
 
         return JSONModel.getMap();
     }
-
-
 
 }
