@@ -92,7 +92,7 @@
     FROM user_office uo
     LEFT JOIN office o
     ON uo.office_id = o.id
-    WHERE uo.user_id = #{uId} AND  o.office_type = 3 AND uo.is_del = 1 AND o.is_del=1;
+    WHERE uo.user_id = #{userId} AND  o.office_type = 3 AND uo.is_del = 1 AND o.is_del=1;
   </select>
 
   <select id="selectByExample" parameterType="com.tosit.ssm.entity.OfficeExample" resultMap="BaseResultMap">

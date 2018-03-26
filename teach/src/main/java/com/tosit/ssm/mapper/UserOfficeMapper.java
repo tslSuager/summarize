@@ -48,5 +48,4 @@ public interface UserOfficeMapper {
      */
     int updateByPrimaryKey(UserOffice record);
 
-
 }
