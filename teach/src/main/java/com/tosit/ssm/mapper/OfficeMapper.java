@@ -88,11 +88,17 @@ public interface OfficeMapper {
     List<Office> selectOfficeByOfficeType(@Param("officeType") String officeType);
 
     /**
-     * 查找某个教员管理的某个班级
-     * @param userId 用户id
+     * 查找某个教员管理的所有班级
+     * @param uId 教师id
+     * @return  返回教员管理的所有有效班级
+     */
+    List<Office> selectOfficeByManage(@Param("uId")String uId);
+
+    /**
+     * 根据各个类型的组织（区域/学校/班级/小组）
+     * @param officeType
      * @return
      */
-    List<Office> selectOfficeByManage(@Param("userId")String userId);
     List<Office> selectOfficeByOfficeType(@Param("officeType") Integer officeType);
 
     /**

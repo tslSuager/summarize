@@ -1,7 +1,5 @@
 package com.tosit.ssm.entity;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.util.Date;
 
 public class User {
@@ -54,17 +52,15 @@ public class User {
     private String kaoqinRuleid;
 
     private Integer status;
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+
     private Date createTime;
 
     private String createBy;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date updateTime;
 
     private String updateBy;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date lastLogintime;
 
     private String loatLonginIp;
@@ -80,6 +76,12 @@ public class User {
     private String cutGrade;
 
     private String col3;
+
+    private String dormitoryId;
+
+    private Date checkinTime;
+
+    private Date checkoutTime;
 
     public String getId() {
         return id;
@@ -377,46 +379,27 @@ public class User {
         this.col3 = col3 == null ? null : col3.trim();
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id='" + id + '\'' +
-                ", loginname='" + loginname + '\'' +
-                ", password='" + password + '\'' +
-                ", salt='" + salt + '\'' +
-                ", name='" + name + '\'' +
-                ", niname='" + niname + '\'' +
-                ", sex='" + sex + '\'' +
-                ", personno='" + personno + '\'' +
-                ", daxue='" + daxue + '\'' +
-                ", daxueAddress='" + daxueAddress + '\'' +
-                ", homeAddress='" + homeAddress + '\'' +
-                ", stuNumber='" + stuNumber + '\'' +
-                ", daxueZhuanye='" + daxueZhuanye + '\'' +
-                ", shixunZhuanye='" + shixunZhuanye + '\'' +
-                ", peixunZhuanye='" + peixunZhuanye + '\'' +
-                ", phone1='" + phone1 + '\'' +
-                ", phone2='" + phone2 + '\'' +
-                ", photo='" + photo + '\'' +
-                ", qq='" + qq + '\'' +
-                ", weixin='" + weixin + '\'' +
-                ", email='" + email + '\'' +
-                ", userType=" + userType +
-                ", kaoqinCode='" + kaoqinCode + '\'' +
-                ", kaoqinRuleid='" + kaoqinRuleid + '\'' +
-                ", status=" + status +
-                ", createTime=" + createTime +
-                ", createBy='" + createBy + '\'' +
-                ", updateTime=" + updateTime +
-                ", updateBy='" + updateBy + '\'' +
-                ", lastLogintime=" + lastLogintime +
-                ", loatLonginIp='" + loatLonginIp + '\'' +
-                ", remarks='" + remarks + '\'' +
-                ", isDel=" + isDel +
-                ", sort=" + sort +
-                ", grade='" + grade + '\'' +
-                ", cutGrade='" + cutGrade + '\'' +
-                ", col3='" + col3 + '\'' +
-                '}';
+    public String getDormitoryId() {
+        return dormitoryId;
+    }
+
+    public void setDormitoryId(String dormitoryId) {
+        this.dormitoryId = dormitoryId == null ? null : dormitoryId.trim();
+    }
+
+    public Date getCheckinTime() {
+        return checkinTime;
+    }
+
+    public void setCheckinTime(Date checkinTime) {
+        this.checkinTime = checkinTime;
+    }
+
+    public Date getCheckoutTime() {
+        return checkoutTime;
+    }
+
+    public void setCheckoutTime(Date checkoutTime) {
+        this.checkoutTime = checkoutTime;
     }
 }

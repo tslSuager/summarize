@@ -81,123 +81,170 @@
 <script src="/static/js/plugins/fullcalendar/fullcalendar.min.js"></script>
 <script>
     $(document).ready(function () {
-        /*$(".i-checks").iCheck({
-            checkboxClass: "icheckbox_square-green",
-            radioClass: "iradio_square-green",
-        });*/
-        $("#external-events div.external-event").each(function () {
-            var d = {
-                title: $.trim($(this).text())
-            };
-            $(this).data("eventObject", d);
-            $(this).draggable({
-                zIndex: 999,
-                revert: true,
-                revertDuration: 0
-            })
-        });
-        //暂时静态，数据来源于数据库，json
-        var b = new Date();
-        var c = b.getDate();
-        var a = b.getMonth();
-        var e = b.getFullYear();
-        $("#calendar").fullCalendar({
-            header: {
-                left: "prev,next",
-                center: "title",
-                right: "today"
-            },
-            editable: true,
-            droppable: true,
-            //g:年月日,即坐标
-            drop: function (g, h) {
-                var f = $(this).data("eventObject");
-                var e = $.extend({}, f);//事件就是一个{}
-//					    console.info(g.constructor.name);   Date类型
-//					    console.info(g);    Tue Mar 06 2018 00:00:00 GMT+0800 (中国标准时间)
-//                      console.info(new Date());
-                if (g >= new Date()) {
-                    layer.open({
-                        type: 2,
-                        title: "申述内容",
-                        area: ['500px', '300px'],
-                        btn: ['提交', '算了'],
-                        content: "/textarea.html",
-                        yes: function (index, layero) {
-                            //									console.info($($(layero).find("iframe")[0].contentWindow.document.getElementById("tra")).val());
-
-                            e.start = g;
-                            e.allDay = h;
-                            $("#calendar").fullCalendar("renderEvent", e, true);
-                            //ajax 发请求存储 代码写在这
-                            layer.close(index);
-                        },
-                        btn2: function (index, layero) {
-
-                            layer.close(index);
-                        }
-                    });
-                }
-
-            },
-
-            eventClick: function (e) {
-                if (e.borderColor === "red") {
-                    parent.layer.open({
-                        type: 2,
-                        title: "申述内容",
-                        area: ['500px', '300px'],
-                        btn: ['提交', '算了'],
-                        content: "/textarea.html",
-                        yes: function (index, layero) {
-                            //console.info($($(layero).find("iframe")[0].contentWindow.document.getElementById("tra")).val());
-                            layer.close(index);
-                        },
-                        btn2: function (index, layero) {
-
-                            layer.close(index);
-                        }
-                    });
-                }
-            },
-            events: [{
-                title: "上午:           09:15",
-                borderColor: "red",
-                start: new Date(e, a, 28),
-
-            },{ title: "上午:           09:15",
-                start: new Date(e, a, 13),
-                url: '/checking/ShowAllRecordsByIdByDate',
-                type: 'POST',
-                }],
-
-
-        })
-    });
-
-
-    $(document).ready(function () {
-        $.post("/checking/ShowAllRecordsByIdByDate", {}, function (msg) {
+        //获取页面所有数据
+        $.get("/checking/ShowAllRecordsByIdByDate", {"user_id":"u001"}, function (msg) {
             var allmsg = msg['user'];
             var experience = msg['experiences'];
-//            console.info(allmsg);
-//            console.info(experience);
-            $("#grade").html('分数：' + allmsg['grade'] + '分，（总分:30分）');
+            var result = msg['result'];
+
+
+            //个人经历的页面加载
+            $("#grade").html('分数：' + allmsg['grade'] + '分');
             if (experience != null) {
                 experience.forEach(function (value) {
-                    console.info(value);
                     $("#ibox-content1").append("<div class='external-event navy-bg aaa'</div>");
                     $(".aaa").html('扣除：' + allmsg['cutGrade'] + '分');
                     $("#ibox-content1").append("<div class='external-event navy-bg bbb'</div>");
-                    console.info(value['event']);
                     //这里有个BUG 后面的event会把前面的覆盖  未解决
                     $(".bbb").html('原因：' + value['event']);
                 })
             }
 
 
+
+            //考勤结果的数据处理，转换成事件对象
+            var dataevents=new Array();
+            $.each(result, function (i, e) {
+                if(e.kaoqinRemarkDisposetime!=null)
+                {  //处理请假的数据（备注，请假）
+                    dataevents[i] = new Object();
+                    if(e.kaoqinRemarkType==1) {
+                        if (e.kaoqinRemarkStatus==1) {
+
+                        }else  if (e.kaoqinRemarkStatus==1) {
+
+                        }else  if (e.kaoqinRemarkStatus==1) {
+
+                        }
+                        dataevents[i].borderColor = "blue";
+                        dataevents[i].title = "请假";
+                        dataevents[i].start = e.kaoqinRemarkDisposetime;
+                        dataevents[i].type = "请假";
+                        dataevents[i].content = e.kaoqinRemarkContent;
+                    }else if (e.kaoqinRemarkType==2) {
+                        dataevents[i].borderColor = "blue";
+                        dataevents[i].title = "备注";
+                        dataevents[i].start = e.kaoqinRemarkDisposetime;
+                        dataevents[i].type = "备注";
+                        dataevents[i].content = e.kaoqinRemarkContent;
+                    }
+                }else {
+                    //处理考勤数据（迟到，矿工，申诉）
+                    if (e.lastTime!=null&&e.status==1) {
+                        dataevents[i] = new Object();
+                        dataevents[i].borderColor = "green";
+                        dataevents[i].start = e.lastTime;
+                        dataevents[i].title = "打卡时间：" +e.lastTime;
+                    }else if (e.lastTime!=null&&e.status==0) {
+                        dataevents[i] = new Object();
+                        dataevents[i].borderColor = "red";
+                        dataevents[i].start = e.lastTime;
+                        if (e.kaoqinShenshuStatus==1) {
+                            dataevents[i].title = "打卡时间（迟到）：" +e.lastTime+"  申诉";
+                        }else if (e.kaoqinShenshuStatus==2) {
+                            dataevents[i].title = "打卡时间（迟到）：" +e.lastTime+"  待处理";
+                        }
+                        else if (e.kaoqinShenshuStatus==3) {
+                            dataevents[i].borderColor = "green";
+                        }else if (e.kaoqinShenshuStatus==4) {
+                            dataevents[i].title = "打卡时间（迟到）：" +e.lastTime+" 不同意";
+                        }
+                    }else if (e.lastTime!=null&&e.status==2){
+                        dataevents[i] = new Object();
+                        dataevents[i].borderColor = "red";
+                        dataevents[i].start = e.lastTime;
+                        if (e.kaoqinShenshuStatus==1) {
+                            dataevents[i].title = "打卡时间（矿工）：" +e.lastTime+"  申诉";
+                        }else if (e.kaoqinShenshuStatus==2) {
+                            dataevents[i].title = "打卡时间（矿工）：" +e.lastTime+"  待处理";
+                        }
+                        else if (e.kaoqinShenshuStatus==3) {
+                            dataevents[i].borderColor = "green";
+                        }else if (e.kaoqinShenshuStatus==4) {
+                            dataevents[i].title = "打卡时间（矿工）：" +e.lastTime+" 不同意";
+                        }
+                    }
+                }
+            });
+
+
+
+
+            //考勤页面的数据加载
+            $("#external-events div.external-event").each(function () {
+                var d = {
+                    title: $.trim($(this).text())
+                };
+                $(this).data("eventObject", d);
+                $(this).draggable({
+                    zIndex: 999,
+                    revert: true,
+                    revertDuration: 0
+                })
+            });
+            $("#calendar").fullCalendar({
+                header: {
+                    left: "prev,next",
+                    center: "title",
+                    right: "today"
+                },
+                editable: true,
+                droppable: true,
+                //g:年月日,即坐标
+                drop: function (g, h) {
+                    var f = $(this).data("eventObject");
+                    var e = $.extend({}, f);//事件就是一个{}
+                    if (g >= new Date()) {
+                        layer.open({
+                            type: 2,
+                            title: "申述内容",
+                            area: ['500px', '300px'],
+                            btn: ['提交', '算了'],
+                            content: "/textarea.html",
+                            yes: function (index, layero) {
+                                //									console.info($($(layero).find("iframe")[0].contentWindow.document.getElementById("tra")).val());
+
+                                e.start = g;
+                                e.allDay = h;
+                                $("#calendar").fullCalendar("renderEvent", e, true);
+                                //ajax 发请求存储 代码写在这
+                                layer.close(index);
+                            },
+                            btn2: function (index, layero) {
+
+                                layer.close(index);
+                            }
+                        });
+                    }
+
+                },
+
+                eventClick: function (e) {
+                    if (e.type == "请假") {
+                        parent.layer.open({
+                            type: 1,
+                            title: "请假理由",
+                            area: ['500px', '300px'],
+                            btn: ['提交', '算了'],
+                            content: e.content,
+                            yes: function (index, layero) {
+                                //console.info($($(layero).find("iframe")[0].contentWindow.document.getElementById("tra")).val());
+                                layer.close(index);
+                            },
+                            btn2: function (index, layero) {
+                                layer.close(index);
+                            }
+                        });
+                    }
+                },
+                events:dataevents
+
+
+            })
+
         }, "json");
     });
+
 
 </script>
 <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>

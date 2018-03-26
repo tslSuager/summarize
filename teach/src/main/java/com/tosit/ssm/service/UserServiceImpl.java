@@ -1,5 +1,6 @@
 package com.tosit.ssm.service;
 
+import com.tosit.ssm.entity.Office;
 import com.tosit.ssm.entity.Experience;
 import com.tosit.ssm.entity.User;
 import com.tosit.ssm.mapper.ExperienceMapper;
@@ -57,13 +58,15 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * 未实现，，后续
+     * 得到某个人未关联考勤工号的人
      * @param id
      * @return
      */
     @Override
     public List<User> findUserByClassIdNoKaoqinNum(String id) {
-        return null;
+        Office office = new Office();
+        office.setId(id);
+       return userMapper.selectByClassNGH(office);
     }
 
     /**

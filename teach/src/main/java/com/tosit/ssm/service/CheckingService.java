@@ -6,6 +6,12 @@ import java.util.List;
 
 public interface CheckingService {
     /**
+     * 添加考勤规则和规则详情
+     * @param kaoqinRule 待插入的考情规则
+     * @param kaoqindetailVO 带插入的考勤详情
+     * @return
+     */
+    /**
      * 获取某个人某天的所有考勤记录
      * @param kaoqinRecords 用户考勤记录
      * @return
@@ -31,7 +37,7 @@ public interface CheckingService {
      * @param officeId
      * @return 返回一个考勤结果集合
      */
-    List<KaoqinResult> selectByClassLate(String officeId);
+    List<KaoqinResultVO> selectByClassLate(String officeId);
 
     /**
      * 查找某个教员管理的某个班级

@@ -39,6 +39,9 @@
     <result column="grade" jdbcType="VARCHAR" property="grade" />
     <result column="cut_grade" jdbcType="VARCHAR" property="cutGrade" />
     <result column="col_3" jdbcType="VARCHAR" property="col3" />
+    <result column="dormitory_id" jdbcType="VARCHAR" property="dormitoryId" />
+    <result column="checkin_time" jdbcType="TIMESTAMP" property="checkinTime" />
+    <result column="checkout_time" jdbcType="TIMESTAMP" property="checkoutTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -103,7 +106,7 @@
     u.home_address, u.stu_number, u.daxue_zhuanye, u.shixun_zhuanye, u.peixun_zhuanye, u.phone1,
     u.phone2, u.photo, u.QQ, u.weixin, u.email, u.user_type, u.kaoqin_code, u.kaoqin_ruleID, u.status,
     u.create_time, u.create_by, u.update_time, u.update_by, u.last_logintime, u.loat_longin_ip, u.remarks,
-    u.is_del, u.sort, u.grade, u.cut_grade, u.col_3
+    u.is_del, u.sort, u.grade, u.cut_grade, u.col_3,u.dormitory_id,u.checkin_time,u.checkout_time
   </sql>
   <select id="selectUserByOfficeId" parameterType="java.lang.String" resultMap="BaseResultMap">
     SELECT
@@ -140,34 +143,282 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.tosit.ssm.entity.User">
-    insert into user (ID, loginName, password, 
-      salt, name, niName, 
-      sex, personNo, daXue, 
-      daXue_address, home_address, stu_number, 
-      daxue_zhuanye, shixun_zhuanye, peixun_zhuanye, 
-      phone1, phone2, photo, 
-      QQ, weixin, email, 
-      user_type, kaoqin_code, kaoqin_ruleID, 
-      status, create_time, create_by, 
-      update_time, update_by, last_logintime, 
-      loat_longin_ip, remarks, is_del, 
-      sort, grade, cut_grade, 
-      col_3)
-    values (#{id,jdbcType=VARCHAR}, #{loginname,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{salt,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{niname,jdbcType=VARCHAR}, 
-      #{sex,jdbcType=CHAR}, #{personno,jdbcType=VARCHAR}, #{daxue,jdbcType=VARCHAR}, 
-      #{daxueAddress,jdbcType=VARCHAR}, #{homeAddress,jdbcType=VARCHAR}, #{stuNumber,jdbcType=VARCHAR}, 
-      #{daxueZhuanye,jdbcType=VARCHAR}, #{shixunZhuanye,jdbcType=VARCHAR}, #{peixunZhuanye,jdbcType=VARCHAR}, 
-      #{phone1,jdbcType=VARCHAR}, #{phone2,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, 
-      #{qq,jdbcType=VARCHAR}, #{weixin,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
-      #{userType,jdbcType=INTEGER}, #{kaoqinCode,jdbcType=VARCHAR}, #{kaoqinRuleid,jdbcType=VARCHAR}, 
-      #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{lastLogintime,jdbcType=TIMESTAMP}, 
-      #{loatLonginIp,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, #{isDel,jdbcType=INTEGER}, 
-      #{sort,jdbcType=INTEGER}, #{grade,jdbcType=VARCHAR}, #{cutGrade,jdbcType=VARCHAR}, 
-      #{col3,jdbcType=VARCHAR})
+    insert into user (ID, loginName, password,
+      salt, name, niName,
+      sex, personNo, daXue,
+      daXue_address, home_address, stu_number,
+      daxue_zhuanye, shixun_zhuanye, peixun_zhuanye,
+      phone1, phone2, photo,
+      QQ, weixin, email,
+      user_type, kaoqin_code, kaoqin_ruleID,
+      status, create_time, create_by,
+      update_time, update_by, last_logintime,
+      loat_longin_ip, remarks, is_del,
+      sort, grade, cut_grade,
+      col_3, dormitory_id, checkin_time,
+      checkout_time)
+    values (#{id,jdbcType=VARCHAR}, #{loginname,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+      #{salt,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{niname,jdbcType=VARCHAR},
+      #{sex,jdbcType=CHAR}, #{personno,jdbcType=VARCHAR}, #{daxue,jdbcType=VARCHAR},
+      #{daxueAddress,jdbcType=VARCHAR}, #{homeAddress,jdbcType=VARCHAR}, #{stuNumber,jdbcType=VARCHAR},
+      #{daxueZhuanye,jdbcType=VARCHAR}, #{shixunZhuanye,jdbcType=VARCHAR}, #{peixunZhuanye,jdbcType=VARCHAR},
+      #{phone1,jdbcType=VARCHAR}, #{phone2,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR},
+      #{qq,jdbcType=VARCHAR}, #{weixin,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},
+      #{userType,jdbcType=INTEGER}, #{kaoqinCode,jdbcType=VARCHAR}, #{kaoqinRuleid,jdbcType=VARCHAR},
+      #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR},
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{lastLogintime,jdbcType=TIMESTAMP},
+      #{loatLonginIp,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, #{isDel,jdbcType=INTEGER},
+      #{sort,jdbcType=INTEGER}, #{grade,jdbcType=VARCHAR}, #{cutGrade,jdbcType=VARCHAR},
+      #{col3,jdbcType=VARCHAR}, #{dormitoryId,jdbcType=VARCHAR}, #{checkinTime,jdbcType=TIMESTAMP},
+      #{checkoutTime,jdbcType=TIMESTAMP})
   </insert>
-
+  <insert id="insertSelective" parameterType="com.tosit.ssm.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="loginname != null">
+        loginName,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="salt != null">
+        salt,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="niname != null">
+        niName,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="personno != null">
+        personNo,
+      </if>
+      <if test="daxue != null">
+        daXue,
+      </if>
+      <if test="daxueAddress != null">
+        daXue_address,
+      </if>
+      <if test="homeAddress != null">
+        home_address,
+      </if>
+      <if test="stuNumber != null">
+        stu_number,
+      </if>
+      <if test="daxueZhuanye != null">
+        daxue_zhuanye,
+      </if>
+      <if test="shixunZhuanye != null">
+        shixun_zhuanye,
+      </if>
+      <if test="peixunZhuanye != null">
+        peixun_zhuanye,
+      </if>
+      <if test="phone1 != null">
+        phone1,
+      </if>
+      <if test="phone2 != null">
+        phone2,
+      </if>
+      <if test="photo != null">
+        photo,
+      </if>
+      <if test="qq != null">
+        QQ,
+      </if>
+      <if test="weixin != null">
+        weixin,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="userType != null">
+        user_type,
+      </if>
+      <if test="kaoqinCode != null">
+        kaoqin_code,
+      </if>
+      <if test="kaoqinRuleid != null">
+        kaoqin_ruleID,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="lastLogintime != null">
+        last_logintime,
+      </if>
+      <if test="loatLonginIp != null">
+        loat_longin_ip,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="grade != null">
+        grade,
+      </if>
+      <if test="cutGrade != null">
+        cut_grade,
+      </if>
+      <if test="col3 != null">
+        col_3,
+      </if>
+      <if test="dormitoryId != null">
+        dormitory_id,
+      </if>
+      <if test="checkinTime != null">
+        checkin_time,
+      </if>
+      <if test="checkoutTime != null">
+        checkout_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="loginname != null">
+        #{loginname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null">
+        #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="niname != null">
+        #{niname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=CHAR},
+      </if>
+      <if test="personno != null">
+        #{personno,jdbcType=VARCHAR},
+      </if>
+      <if test="daxue != null">
+        #{daxue,jdbcType=VARCHAR},
+      </if>
+      <if test="daxueAddress != null">
+        #{daxueAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="homeAddress != null">
+        #{homeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="stuNumber != null">
+        #{stuNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="daxueZhuanye != null">
+        #{daxueZhuanye,jdbcType=VARCHAR},
+      </if>
+      <if test="shixunZhuanye != null">
+        #{shixunZhuanye,jdbcType=VARCHAR},
+      </if>
+      <if test="peixunZhuanye != null">
+        #{peixunZhuanye,jdbcType=VARCHAR},
+      </if>
+      <if test="phone1 != null">
+        #{phone1,jdbcType=VARCHAR},
+      </if>
+      <if test="phone2 != null">
+        #{phone2,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null">
+        #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null">
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="weixin != null">
+        #{weixin,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null">
+        #{userType,jdbcType=INTEGER},
+      </if>
+      <if test="kaoqinCode != null">
+        #{kaoqinCode,jdbcType=VARCHAR},
+      </if>
+      <if test="kaoqinRuleid != null">
+        #{kaoqinRuleid,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLogintime != null">
+        #{lastLogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loatLonginIp != null">
+        #{loatLonginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null">
+        #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="grade != null">
+        #{grade,jdbcType=VARCHAR},
+      </if>
+      <if test="cutGrade != null">
+        #{cutGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="col3 != null">
+        #{col3,jdbcType=VARCHAR},
+      </if>
+      <if test="dormitoryId != null">
+        #{dormitoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="checkinTime != null">
+        #{checkinTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkoutTime != null">
+        #{checkoutTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
   <select id="countByExample" parameterType="com.tosit.ssm.entity.UserExample" resultType="java.lang.Long">
     select count(*) from user
     <if test="_parameter != null">
@@ -288,6 +539,15 @@
       <if test="record.col3 != null">
         col_3 = #{record.col3,jdbcType=VARCHAR},
       </if>
+      <if test="record.dormitoryId != null">
+        dormitory_id = #{record.dormitoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkinTime != null">
+        checkin_time = #{record.checkinTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.checkoutTime != null">
+        checkout_time = #{record.checkoutTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -331,10 +591,136 @@
       sort = #{record.sort,jdbcType=INTEGER},
       grade = #{record.grade,jdbcType=VARCHAR},
       cut_grade = #{record.cutGrade,jdbcType=VARCHAR},
-      col_3 = #{record.col3,jdbcType=VARCHAR}
+      col_3 = #{record.col3,jdbcType=VARCHAR},
+      dormitory_id = #{record.dormitoryId,jdbcType=VARCHAR},
+      checkin_time = #{record.checkinTime,jdbcType=TIMESTAMP},
+      checkout_time = #{record.checkoutTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tosit.ssm.entity.User">
+    update user
+    <set>
+      <if test="loginname != null">
+        loginName = #{loginname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null">
+        salt = #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="niname != null">
+        niName = #{niname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=CHAR},
+      </if>
+      <if test="personno != null">
+        personNo = #{personno,jdbcType=VARCHAR},
+      </if>
+      <if test="daxue != null">
+        daXue = #{daxue,jdbcType=VARCHAR},
+      </if>
+      <if test="daxueAddress != null">
+        daXue_address = #{daxueAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="homeAddress != null">
+        home_address = #{homeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="stuNumber != null">
+        stu_number = #{stuNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="daxueZhuanye != null">
+        daxue_zhuanye = #{daxueZhuanye,jdbcType=VARCHAR},
+      </if>
+      <if test="shixunZhuanye != null">
+        shixun_zhuanye = #{shixunZhuanye,jdbcType=VARCHAR},
+      </if>
+      <if test="peixunZhuanye != null">
+        peixun_zhuanye = #{peixunZhuanye,jdbcType=VARCHAR},
+      </if>
+      <if test="phone1 != null">
+        phone1 = #{phone1,jdbcType=VARCHAR},
+      </if>
+      <if test="phone2 != null">
+        phone2 = #{phone2,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null">
+        photo = #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null">
+        QQ = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="weixin != null">
+        weixin = #{weixin,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null">
+        user_type = #{userType,jdbcType=INTEGER},
+      </if>
+      <if test="kaoqinCode != null">
+        kaoqin_code = #{kaoqinCode,jdbcType=VARCHAR},
+      </if>
+      <if test="kaoqinRuleid != null">
+        kaoqin_ruleID = #{kaoqinRuleid,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLogintime != null">
+        last_logintime = #{lastLogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loatLonginIp != null">
+        loat_longin_ip = #{loatLonginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null">
+        is_del = #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="grade != null">
+        grade = #{grade,jdbcType=VARCHAR},
+      </if>
+      <if test="cutGrade != null">
+        cut_grade = #{cutGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="col3 != null">
+        col_3 = #{col3,jdbcType=VARCHAR},
+      </if>
+      <if test="dormitoryId != null">
+        dormitory_id = #{dormitoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="checkinTime != null">
+        checkin_time = #{checkinTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkoutTime != null">
+        checkout_time = #{checkoutTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
   </update>
 
 
@@ -460,6 +846,15 @@
       <if test="col3 != null">
         col_3 = #{col3,jdbcType=VARCHAR},
       </if>
+      <if test="dormitoryId != null">
+        dormitory_id = #{dormitoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="checkinTime != null">
+        checkin_time = #{checkinTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkoutTime != null">
+        checkout_time = #{checkoutTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where ID = #{id,jdbcType=VARCHAR}
   </update>
@@ -578,6 +973,15 @@
       <if test="col3 != null">
         col_3,
       </if>
+      <if test="dormitoryId != null">
+        dormitory_id,
+      </if>
+      <if test="checkinTime != null">
+        checkin_time,
+      </if>
+      <if test="checkoutTime != null">
+        checkout_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -691,6 +1095,15 @@
       <if test="col3 != null">
         #{col3,jdbcType=VARCHAR},
       </if>
+      <if test="dormitoryId != null">
+        #{dormitoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="checkinTime != null">
+        #{checkinTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkoutTime != null">
+        #{checkoutTime,jdbcType=TIMESTAMP},
+      </if>
     </trim>
   </insert>
 
@@ -751,7 +1164,7 @@ SELECT
     SELECT
      <include refid="Base_Column_List"/>
     FROM user u join user_office uo on u.id=uo.user_id
-    join   office f on uo.office_id=f.id where f.id=#{office.id} and f.is_del=1 and u.is_del=1 and uo.is_del=1 and f.id not in
+    join   office f on uo.office_id=f.id where f.id=#{office.id} and f.is_del=1 and u.is_del=1 and uo.is_del=1 and u.id not in
      (SELECT
     uu.id   FROM user uu join user_office uoo on uu.id=uoo.user_id
     join   office ff on uoo.office_id=ff.id where ff.parent_id=#{office.id} and ff.is_del=1 and uu.is_del=1 and uoo.is_del=1)
