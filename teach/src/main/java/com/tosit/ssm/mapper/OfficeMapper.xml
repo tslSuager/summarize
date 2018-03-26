@@ -87,8 +87,10 @@
   </sql>
 
   <select id="selectOfficeByManage" parameterType="string" resultMap="BaseResultMap">
-    SELECT name FROM office
-    WHERE master = #{master} AND office_type = 3 AND is_del = 1
+    SELECT o.*
+    FROM office o LEFT JOIN user_office uo ON
+    o.id = uo.office_id
+    WHERE user_id = #{userId} AND o.office_type = 3 AND o.is_del = 1 AND uo.is_del = 1
   </select>
 
   <select id="selectByExample" parameterType="com.tosit.ssm.entity.OfficeExample" resultMap="BaseResultMap">
@@ -603,6 +605,14 @@
     WHERE is_del = 1
     AND  office_type = 4
     AND parent_id in (SELECT ID FROM office o WHERE o.office_type = 3 AND o.ID=#{classId})
+  </select>
+  <select id="selectOfficeByUserId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM office o LEFT JOIN user_office uo ON o.id = uo.office_id
+    WHERE o.is_del = 1
+    AND  uo.is_del = 1
+    AND uo.user_id = #{userId} AND o.office_type = 3
   </select>
   <select id="selectOfficeByOfficeType" resultMap="BaseResultMap" parameterType="java.lang.Integer">
     SELECT

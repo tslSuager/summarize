@@ -89,10 +89,10 @@ public interface OfficeMapper {
 
     /**
      * 查找某个教员管理的某个班级
-     * @param name
+     * @param userId 用户id
      * @return
      */
-    List<Office> selectOfficeByManage(@Param("name")String name);
+    List<Office> selectOfficeByManage(@Param("userId")String userId);
     List<Office> selectOfficeByOfficeType(@Param("officeType") Integer officeType);
 
     /**
@@ -108,5 +108,12 @@ public interface OfficeMapper {
      * @return 返回满足条件的班级
      */
     List<Office> selectOfficeByMasterAndDate(Office office);
+
+    /**
+     * 查询某个学生所在的班级
+     * @param userId 学生id
+     * @return 返回满足条件的班级
+     */
+    List<Office> selectOfficeByUserId(@Param("userId") String userId);
 
 }

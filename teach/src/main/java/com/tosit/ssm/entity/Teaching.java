@@ -1,5 +1,8 @@
 package com.tosit.ssm.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Teaching {
@@ -15,22 +18,32 @@ public class Teaching {
 
     private Integer type;
 
+    @DateTimeFormat(pattern ="yyyy-MM-dd hh:mm:ss" )
+    @JSONField(format ="yyyy-MM-dd hh:mm:ss")
     private Date startTime;
 
+    @DateTimeFormat(pattern ="yyyy-MM-dd hh:mm:ss" )
+    @JSONField(format ="yyyy-MM-dd hh:mm:ss")
     private Date endTime;
 
     private String jishuzhuanye;
 
+    @DateTimeFormat(pattern ="yyyy-MM-dd hh:mm:ss" )
+    @JSONField(format ="yyyy-MM-dd hh:mm:ss")
     private Date createTime;
 
     private String createBy;
 
+    @DateTimeFormat(pattern ="yyyy-MM-dd hh:mm:ss" )
+    @JSONField(format ="yyyy-MM-dd hh:mm:ss")
     private Date updateTime;
 
     private String updateBy;
 
     private String checkUser;
 
+    @DateTimeFormat(pattern ="yyyy-MM-dd hh:mm:ss" )
+    @JSONField(format ="yyyy-MM-dd hh:mm:ss")
     private Date checkTime;
 
     private String checkMarks;

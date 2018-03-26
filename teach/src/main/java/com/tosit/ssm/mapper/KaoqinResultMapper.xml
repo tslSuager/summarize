@@ -28,6 +28,10 @@
     <result column="is_del" jdbcType="INTEGER" property="isDel" />
   </resultMap>
 
+  <resultMap id="SecondResultMap" type="com.tosit.ssm.entity.KaoqinResultVO" extends="BaseResultMap">
+    <result column="username" jdbcType="VARCHAR" property="userName"/>
+    <result column="officename" jdbcType="VARCHAR" property="officeName"/>
+  </resultMap>
 
   <sql id="Base_Column_List">
     date, user_id, status, remark, last_time, createResultTime, kaoqin_remark_status,
@@ -270,13 +274,15 @@
       </if>
     </trim>
   </insert>
-
+  <!--kr.id ,kr.date,kr.user_id,kr.status,kr.remark,kr.last_time,kr.createResultTime,kr.kaoqin_remark_status,kr.kaoqin_remark_type,kr.kaoqin_remark_content,kr.kaoqin_remark_disposeUser,kr.kaoqin_remark_disposeTime,
+  kr.kaoqin_remark_dispose_Result,kr.kaoqin_shenshu_status,kr.kaoqin_shenshu_type,kr.kaoqin_shenshu_content,kr.kaoqin_shenshu_disposeUser,kr.kaoqin_shenshu_disposeTime,kr.kaoqin_shenshu_disposeResult,
+  kr.create_time,kr.create_by,kr.update_time,kr.update_by,kr.is_del,kr.kaoqin_shenshu_reply,kr.kaoqin_remark_reply,kr.kaoqin_shenshu_reqtime,kr.kaoqin_remark_reqtime,-->
   <select id="selectByClass" parameterType="string" resultMap="BaseResultMap">
-    SELECT
-     kr.id,<include refid="Base_Column_List" />
+    (SELECT
+     kr.user_id,u.name`username`,o.name`officename`
     FROM
-    user_office uo LEFT JOIN kaoqin_result kr ON uo.user_id = kr.user_id
-    WHERE uo.office_id = #{officeId} AND kr.is_del = 1 AND uo.is_del=1 OR kr.kaoqin_remark_status!='' OR kr.kaoqin_shenshu_status!=''
+    user_office uo LEFT JOIN kaoqin_result kr ON uo.user_id = kr.user_id LEFT JOIN user u ON kr.user_id = u.id LEFT JOIN office o ON o.id = uo.office_id
+    WHERE uo.office_id = #{officeId} AND kr.is_del = 1 AND uo.is_del=1 AND kr.status= 0 AND o.office_type=3)
   </select>
 
   <select id="countByClass" parameterType="string" resultMap="BaseResultMap">

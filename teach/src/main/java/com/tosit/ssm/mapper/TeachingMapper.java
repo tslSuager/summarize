@@ -3,6 +3,8 @@ package com.tosit.ssm.mapper;
 import com.tosit.ssm.entity.Teaching;
 import com.tosit.ssm.entity.TeachingExample;
 import java.util.List;
+
+import com.tosit.ssm.entity.TeachingOffice;
 import org.apache.ibatis.annotations.Param;
 
 public interface TeachingMapper {
@@ -32,4 +34,45 @@ public interface TeachingMapper {
      */
     int updateByPrimaryKey(Teaching record);
 
+    /**
+     * 查看某个班的所有教学计划
+     * @param officeId 班级id
+     * @return
+     */
+    List<Teaching> selectTeachingByClass(@Param("officeId") String officeId);
+
+    /**
+     * 查看某个教学计划的所有阶段
+     * @param teachingId 教学计划的id
+     * @return  返回多个阶段
+     */
+    List<Teaching> selectJieduanByTeaching(@Param("teachingId")String teachingId);
+
+    /**
+     * 查看某个阶段的所有任务
+     * @param teachingId  阶段id
+     * @return 返回多个任务
+     */
+    List<Teaching> selectRenwuByJieduan(@Param("teachingId")String teachingId);
+
+    /**
+     * 查询某人的所有教学计划
+     * @param userId 用户id
+     * @return 返回多个计划
+     */
+    List<Teaching> selectTeachingByUserId(@Param("userId") String userId);
+
+    /**
+     * 查询某人的所有计划的所有阶段
+     * @param userId 用户id
+     * @return 返回多个阶段
+     */
+    List<Teaching> selectJieduanByUserIdByTeaching(@Param("userId")String userId);
+
+    /**
+     * 查询某人的所有计划的所有阶段的所有任务
+     * @param userId 用户id
+     * @return 返回多个任务
+     */
+    List<Teaching> selectRenwuByUserIdByJieduan(@Param("userId")String userId);
 }

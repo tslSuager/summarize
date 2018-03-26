@@ -21,5 +21,10 @@ public class OfficeServiceImpl implements OfficeService{
         return  officeMapper.selectAllArea();
     }
 
+    @Override
+    public List<Office> selectOfficeByManage(String userId) {
+        return officeMapper.selectOfficeByManage(userId);
+    }
+
 
 }
