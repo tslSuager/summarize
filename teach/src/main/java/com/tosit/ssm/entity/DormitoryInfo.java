@@ -4,43 +4,29 @@ import java.util.Date;
 
 public class DormitoryInfo {
     private String id;
-
     private String dormitoryName;
-
     private Integer maxNum;
-
     private Integer curNum;
-
     private String remark;
-
     private String createBy;
-
     private Date updateTime;
-
     private Date createTime;
-
     private String updateBy2;
-
     public String getId() {
         return id;
     }
-
     public void setId(String id) {
         this.id = id == null ? null : id.trim();
     }
-
     public String getDormitoryName() {
         return dormitoryName;
     }
-
     public void setDormitoryName(String dormitoryName) {
         this.dormitoryName = dormitoryName == null ? null : dormitoryName.trim();
     }
-
     public Integer getMaxNum() {
         return maxNum;
     }
-
     public void setMaxNum(Integer maxNum) {
         this.maxNum = maxNum;
     }

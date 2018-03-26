@@ -35,7 +35,7 @@ var initPullListTree = function (url,startlevel, count,fn) {
             //为每个有子级的区域设置change事件
             $("#pullListTree").find("select").eq(ss).change(function () {
                 var parentid = $(this).val();
-                var son = $(this).data("type");
+                var son = $(this).data("type")-startlevel+1;
                 for(var em=son;em<(count+startlevel-1);em++) {
                     $("#pullListTree").find("select").eq(em).empty();
                 }

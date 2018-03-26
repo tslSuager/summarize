@@ -1,16 +1,18 @@
 package com.tosit.ssm.controller;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.tosit.ssm.common.util.json.JSONModel;
 import com.tosit.ssm.entity.*;
 import com.tosit.ssm.service.CheckingService;
 import com.tosit.ssm.service.UserService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -27,6 +29,14 @@ public class CheckingController {
     @Autowired
     private UserService userService;
     private SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
+
+
+//    @InitBinder
+//    protected void initBinder(WebDataBinder binder) {
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//        dateFormat.setLenient(false);
+//        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));//第二个参数是控制是否支持传入的值是空，这个值很关键，如果指定为false，那么如果前台没有传值的话就会报错
+//    }
     /**
      * 添加考勤规则  当为方案三方案四的时候第一条记录不要
      * @return 返回成功或者失败（具体的返回值到时候常量类定义了再说）
@@ -45,26 +55,24 @@ public class CheckingController {
      */
     @RequestMapping(value = "/ShowAllRecordsByIdByDate")
     @ResponseBody
-    public Object ShowRecords(String user_id,Timestamp brushTime){
+    public Object ShowRecords(KaoqinRecords kaoqinRecords){
+        System.out.println(kaoqinRecords);
         //某个人的表现分的经历
-        List<Experience> experiences = userService.selectByIdToType(user_id);
+        List<Experience> experiences = userService.selectByIdToType(kaoqinRecords.getUserId());
         JSONModel.put("experiences",experiences);
-        //某个人某天的所有考勤记录
-        /*KaoqinRecords kaoqinRecords = new KaoqinRecords();
-        kaoqinRecords.setUserId("u001");
-        kaoqinRecords.setBrushtime();
-        System.out.println(checkingService.toString());
+
+
         List<KaoqinRecords> kaoqinRecordsByIdByDate = checkingService.findKaoqinRecordsByIdByDate(kaoqinRecords);
-        JSONModel.put("records",kaoqinRecordsByIdByDate);*/
+        JSONModel.put("records",kaoqinRecordsByIdByDate);
 
         //某个人的所有考勤结果
-        List<KaoqinResult> kaoqinresults = checkingService.findOneById(user_id);
+        List<KaoqinResult> kaoqinresults = checkingService.findOneById(kaoqinRecords.getUserId());
         JSONModel.put("result",kaoqinresults);
 
 
 
         //某个人的所有信息
-        User user = userService.selectByPrimaryKey(user_id);
+        User user = userService.selectByPrimaryKey(kaoqinRecords.getUserId());
         JSONModel.put("user",user);
 
         return JSONModel.getMap();

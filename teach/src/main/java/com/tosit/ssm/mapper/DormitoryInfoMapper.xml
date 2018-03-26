@@ -104,16 +104,6 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.tosit.ssm.entity.DormitoryInfo">
-    insert into dormitory_info (id, dormitory_name, max_num, 
-      cur_num, remark, create_by, 
-      update_time, create_time, update_by2
-      )
-    values (#{id,jdbcType=VARCHAR}, #{dormitoryName,jdbcType=VARCHAR}, #{maxNum,jdbcType=INTEGER}, 
-      #{curNum,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{updateBy2,jdbcType=VARCHAR}
-      )
-  </insert>
   <insert id="insertSelective" parameterType="com.tosit.ssm.entity.DormitoryInfo">
     insert into dormitory_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -261,17 +251,108 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  <!--<update id="updateByPrimaryKey" parameterType="com.tosit.ssm.entity.DormitoryInfo">-->
+    <!--update dormitory_info-->
+    <!--set dormitory_name = #{dormitoryName,jdbcType=VARCHAR},-->
+      <!--max_num = #{maxNum,jdbcType=INTEGER},-->
+      <!--cur_num = #{curNum,jdbcType=INTEGER},-->
+      <!--remark = #{remark,jdbcType=VARCHAR},-->
+      <!--create_by = #{createBy,jdbcType=VARCHAR},-->
+      <!--update_time = #{updateTime,jdbcType=TIMESTAMP},-->
+      <!--create_time = #{createTime,jdbcType=TIMESTAMP},-->
+      <!--update_by2 = #{updateBy2,jdbcType=VARCHAR}-->
+    <!--where id = #{id,jdbcType=VARCHAR}-->
+  <!--</update>-->
+
+  <insert id="insertDormitoryInfo" parameterType="com.tosit.ssm.entity.DormitoryInfo">
+    insert into dormitory_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="dormitoryName != null">
+        dormitory_name,
+      </if>
+      <if test="maxNum != null">
+        max_num,
+      </if>
+      <if test="curNum != null">
+        cur_num,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateBy2 != null">
+        update_by2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="dormitoryName != null">
+        #{dormitoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="maxNum != null">
+        #{maxNum,jdbcType=INTEGER},
+      </if>
+      <if test="curNum != null">
+        #{curNum,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy2 != null">
+        #{updateBy2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
   <update id="updateByPrimaryKey" parameterType="com.tosit.ssm.entity.DormitoryInfo">
     update dormitory_info
-    set dormitory_name = #{dormitoryName,jdbcType=VARCHAR},
-      max_num = #{maxNum,jdbcType=INTEGER},
-      cur_num = #{curNum,jdbcType=INTEGER},
-      remark = #{remark,jdbcType=VARCHAR},
-      create_by = #{createBy,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_by2 = #{updateBy2,jdbcType=VARCHAR}
+    <set>
+      <if test="dormitoryName != null">
+        dormitory_name = #{dormitoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="maxNum != null">
+        max_num = #{maxNum,jdbcType=INTEGER},
+      </if>
+      <if test="curNum != null">
+        cur_num = #{curNum,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy2 != null">
+        update_by2 = #{updateBy2,jdbcType=VARCHAR},
+      </if>
+    </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-
 </mapper>

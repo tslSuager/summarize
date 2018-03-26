@@ -82,11 +82,13 @@
 <script>
     $(document).ready(function () {
         //获取页面所有数据
-        $.get("/checking/ShowAllRecordsByIdByDate", {"user_id":"u001"}, function (msg) {
+        $.get("/checking/ShowAllRecordsByIdByDate", {"userId": "u001","brushtime":new Date()}, function (msg) {
+
             var allmsg = msg['user'];
             var experience = msg['experiences'];
             var result = msg['result'];
-
+            var records = msg['records'];
+            console.info(records);
 
             //个人经历的页面加载
             $("#grade").html('分数：' + allmsg['grade'] + '分');
@@ -101,74 +103,116 @@
             }
 
 
-
             //考勤结果的数据处理，转换成事件对象
-            var dataevents=new Array();
+            var dataevents = new Array();
             $.each(result, function (i, e) {
-                if(e.kaoqinRemarkDisposetime!=null)
-                {  //处理请假的数据（备注，请假）
+                if (e.kaoqinRemarkReqtime != null) {  //处理请假的数据（备注，请假）
                     dataevents[i] = new Object();
-                    if(e.kaoqinRemarkType==1) {
-                        if (e.kaoqinRemarkStatus==1) {
-
-                        }else  if (e.kaoqinRemarkStatus==1) {
-
-                        }else  if (e.kaoqinRemarkStatus==1) {
-
+                    dataevents[i].start = e.kaoqinRemarkReqtime;
+                    e.kaoqinRemarkReqtime = e.kaoqinRemarkReqtime.split(" ")[1];
+                    if (e.kaoqinRemarkType == 1) {
+                        if (e.kaoqinRemarkStatus == 0) {
+                            dataevents[i].borderColor = "blue";
+                            dataevents[i].title = "请假   待处理";
+                            dataevents[i].type = "请假0";
+                            dataevents[i].content = e.kaoqinRemarkContent;
+                        } else if (e.kaoqinRemarkStatus == 1) {
+                            dataevents[i].borderColor = "green";
+                            dataevents[i].title = "请假";
+                            dataevents[i].type = "请假1";
+                            dataevents[i].content = e.kaoqinRemarkContent;
+                        } else if (e.kaoqinRemarkStatus == 2) {
+                            dataevents[i].borderColor = "blue";
+                            dataevents[i].title = "请假";
+                            dataevents[i].type = "请假2";
+                            dataevents[i].content = e.kaoqinRemarkReply;
                         }
-                        dataevents[i].borderColor = "blue";
-                        dataevents[i].title = "请假";
-                        dataevents[i].start = e.kaoqinRemarkDisposetime;
-                        dataevents[i].type = "请假";
-                        dataevents[i].content = e.kaoqinRemarkContent;
-                    }else if (e.kaoqinRemarkType==2) {
-                        dataevents[i].borderColor = "blue";
-                        dataevents[i].title = "备注";
-                        dataevents[i].start = e.kaoqinRemarkDisposetime;
-                        dataevents[i].type = "备注";
-                        dataevents[i].content = e.kaoqinRemarkContent;
+                    } else if (e.kaoqinRemarkType == 2) {
+                        if (e.kaoqinRemarkStatus == 0) {
+                            dataevents[i].borderColor = "blue";
+                            dataevents[i].title = "备注   待处理";
+                            dataevents[i].type = "备注0";
+                            dataevents[i].content = e.kaoqinRemarkContent;
+                        } else if (e.kaoqinRemarkStatus == 1) {
+                            dataevents[i].borderColor = "green";
+                            dataevents[i].title = "备注";
+                            dataevents[i].type = "备注1";
+                            dataevents[i].content = e.kaoqinRemarkContent;
+                        } else if (e.kaoqinRemarkStatus == 2) {
+                            dataevents[i].borderColor = "blue";
+                            dataevents[i].title = "备注";
+                            dataevents[i].type = "备注2";
+                            dataevents[i].content = e.kaoqinRemarkReply;
+                        }
                     }
-                }else {
+                } else {
                     //处理考勤数据（迟到，矿工，申诉）
-                    if (e.lastTime!=null&&e.status==1) {
+                    if (e.lastTime != null && e.status == 1) {
                         dataevents[i] = new Object();
                         dataevents[i].borderColor = "green";
                         dataevents[i].start = e.lastTime;
-                        dataevents[i].title = "打卡时间：" +e.lastTime;
-                    }else if (e.lastTime!=null&&e.status==0) {
+                        e.lastTime = e.lastTime.split(" ")[1];
+                        dataevents[i].title = "打卡时间：" + e.lastTime;
+                    } else if (e.lastTime != null && e.status == 0) {
                         dataevents[i] = new Object();
                         dataevents[i].borderColor = "red";
                         dataevents[i].start = e.lastTime;
-                        if (e.kaoqinShenshuStatus==1) {
-                            dataevents[i].title = "打卡时间（迟到）：" +e.lastTime+"  申诉";
-                        }else if (e.kaoqinShenshuStatus==2) {
-                            dataevents[i].title = "打卡时间（迟到）：" +e.lastTime+"  待处理";
+                        e.lastTime = e.lastTime.split(" ")[1];
+                        if (e.kaoqinShenshuStatus == 1) {//未申诉
+                            dataevents[i].title = "打卡时间（迟到）：" + e.lastTime + "  申诉";
+                            dataevents[i].type = "申诉1";
+                            dataevents[i].content = e.kaoqinShenshuContent;
+                        } else if (e.kaoqinShenshuStatus == 2) {//待申诉
+                            dataevents[i].title = "打卡时间（迟到）：" + e.lastTime + "  待处理";
+                            dataevents[i].type = "申诉2";
+                            dataevents[i].content = e.kaoqinShenshuContent;
                         }
-                        else if (e.kaoqinShenshuStatus==3) {
+                        else if (e.kaoqinShenshuStatus == 3) {//申诉成功
                             dataevents[i].borderColor = "green";
-                        }else if (e.kaoqinShenshuStatus==4) {
-                            dataevents[i].title = "打卡时间（迟到）：" +e.lastTime+" 不同意";
+                            dataevents[i].title = "打卡时间：" + e.lastTime;
+                            dataevents[i].type = "申诉3";
+                            dataevents[i].content = e.kaoqinShenshuReply;
+                        } else if (e.kaoqinShenshuStatus == 4) {//申述失败
+                            dataevents[i].title = "打卡时间（迟到）：" + e.lastTime + " 不同意";
+                            dataevents[i].type = "申诉4";
+                            dataevents[i].content = e.kaoqinShenshuReply;
                         }
-                    }else if (e.lastTime!=null&&e.status==2){
+                    } else if (e.lastTime != null && e.status == 2) {
                         dataevents[i] = new Object();
                         dataevents[i].borderColor = "red";
                         dataevents[i].start = e.lastTime;
-                        if (e.kaoqinShenshuStatus==1) {
-                            dataevents[i].title = "打卡时间（矿工）：" +e.lastTime+"  申诉";
-                        }else if (e.kaoqinShenshuStatus==2) {
-                            dataevents[i].title = "打卡时间（矿工）：" +e.lastTime+"  待处理";
+                        e.lastTime = e.lastTime.split(" ")[1];
+                        if (e.kaoqinShenshuStatus == 1) {
+                            dataevents[i].title = "打卡时间（矿工）：" + e.lastTime + "  申诉";
+                            dataevents[i].type = "申诉1";
+                            dataevents[i].content = e.kaoqinShenshuContent;
+                        } else if (e.kaoqinShenshuStatus == 2) {
+                            dataevents[i].title = "打卡时间（矿工）：" + e.lastTime + "  待处理";
+                            dataevents[i].type = "申诉1";
+                            dataevents[i].content = e.kaoqinShenshuContent;
                         }
-                        else if (e.kaoqinShenshuStatus==3) {
+                        else if (e.kaoqinShenshuStatus == 3) {
                             dataevents[i].borderColor = "green";
-                        }else if (e.kaoqinShenshuStatus==4) {
-                            dataevents[i].title = "打卡时间（矿工）：" +e.lastTime+" 不同意";
+                            dataevents[i].title = "打卡时间：" + e.lastTime;
+                            dataevents[i].type = "申诉3";
+                            dataevents[i].content = e.kaoqinShenshuReply;
+                        } else if (e.kaoqinShenshuStatus == 4) {
+                            dataevents[i].title = "打卡时间（矿工）：" + e.lastTime + " 不同意";
+                            dataevents[i].type = "申诉4";
+                            dataevents[i].content = e.kaoqinShenshuReply;
                         }
                     }
                 }
             });
 
-
-
+            //当天考情记录的数据处理
+            $.each(records, function (i,e) {
+                var current=i + dataevents.length - 1;
+                dataevents[current] = new Object();
+                dataevents[current].borderColor = "grey";
+                dataevents[current].start = e.brushtime;
+                dataevents[current].title = "打卡时间：" + e.brushtime.split(" ")[1] ;
+            });
 
             //考勤页面的数据加载
             $("#external-events div.external-event").each(function () {
@@ -202,8 +246,6 @@
                             btn: ['提交', '算了'],
                             content: "/textarea.html",
                             yes: function (index, layero) {
-                                //									console.info($($(layero).find("iframe")[0].contentWindow.document.getElementById("tra")).val());
-
                                 e.start = g;
                                 e.allDay = h;
                                 $("#calendar").fullCalendar("renderEvent", e, true);
@@ -211,35 +253,104 @@
                                 layer.close(index);
                             },
                             btn2: function (index, layero) {
-
                                 layer.close(index);
                             }
                         });
                     }
 
                 },
-
                 eventClick: function (e) {
-                    if (e.type == "请假") {
+                    if (e.type == "请假2") {
+                        parent.layer.open({
+                            type: 1,
+                            title: "回复内容",
+                            area: ['500px', '300px'],
+                            btn: ['关闭'],
+                            content: e.content,
+                            yes: function (index, layero) {
+                                layer.close(index);
+                            }
+                        });
+                    } else if (e.type == "请假0") {
                         parent.layer.open({
                             type: 1,
                             title: "请假理由",
                             area: ['500px', '300px'],
-                            btn: ['提交', '算了'],
+                            btn: ['关闭'],
                             content: e.content,
                             yes: function (index, layero) {
-                                //console.info($($(layero).find("iframe")[0].contentWindow.document.getElementById("tra")).val());
+                                layer.close(index);
+                            }
+                        });
+                    } else if (e.type == "备注2") {
+                        parent.layer.open({
+                            type: 1,
+                            title: "回复理由",
+                            area: ['500px', '300px'],
+                            btn: ['关闭'],
+                            content: e.content,
+                            yes: function (index, layero) {
+                                layer.close(index);
+                            }
+                        });
+                    } else if (e.type == "备注0") {
+                        parent.layer.open({
+                            type: 1,
+                            title: "备注理由",
+                            area: ['500px', '300px'],
+                            btn: ['关闭'],
+                            content: e.content,
+                            yes: function (index, layero) {
+                                layer.close(index);
+                            }
+                        });
+                    } else if (e.type == "申诉2") {
+                        parent.layer.open({
+                            type: 1,
+                            title: "回复内容",
+                            area: ['500px', '300px'],
+                            btn: ['继续申诉', '算了'],
+                            content: e.content,
+                            yes: function (index, layero) {
+                                layer.open({
+                                    type: 2,
+                                    title: "申述内容",
+                                    area: ['500px', '300px'],
+                                    btn: ['提交', '算了'],
+                                    content: "/textarea.html",
+                                    yes: function (index, layero) {
+                                        //console.info($($(layero).find("iframe")[0].contentWindow.document.getElementById("tra")).val());
+                                        //ajax 发请求存储 代码写在这
+
+
+                                        layer.close(index);
+                                    },
+                                    btn2: function (index, layero) {
+                                        layer.close(index);
+                                    }
+                                });
                                 layer.close(index);
                             },
                             btn2: function (index, layero) {
                                 layer.close(index);
                             }
                         });
+
+                    } else if (e.type == "申诉0") {
+                        parent.layer.open({
+                            type: 1,
+                            title: "申诉理由",
+                            area: ['500px', '300px'],
+                            btn: ['关闭'],
+                            content: e.content,
+                            yes: function (index, layero) {
+                                layer.close(index);
+                            }
+                        });
+
                     }
                 },
-                events:dataevents
-
-
+                events: dataevents
             })
 
         }, "json");
