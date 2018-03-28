@@ -129,8 +129,9 @@ public class TeachingController {
      * @param jihuaId
      * @return
      */
+    @ResponseBody
     @RequestMapping("/viewJieduan")
-    public String ViewJieduan(HttpServletRequest request,String jihuaId){
+    public Object ViewJieduan(HttpServletRequest request,String jihuaId){
         List<Teaching> jieduans = teachingService.selectJieduanByTeaching(jihuaId);
         for (Teaching j:jieduans
              ) {
@@ -138,7 +139,7 @@ public class TeachingController {
         }
         request.setAttribute("jieduans",JSON.toJSON(jieduans));
         request.setAttribute("jihuaId",jihuaId);
-        return "/jiaoan/jiaoxueplan_addjieduan";
+        return jieduans;
     }
 
 
