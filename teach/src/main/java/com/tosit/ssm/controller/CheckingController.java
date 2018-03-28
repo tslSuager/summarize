@@ -1,22 +1,19 @@
 package com.tosit.ssm.controller;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.tosit.ssm.common.util.json.JSONModel;
 import com.tosit.ssm.entity.*;
 import com.tosit.ssm.service.CheckingService;
 import com.tosit.ssm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/checking")
@@ -180,6 +177,46 @@ public class CheckingController {
         checkingService.updateByPrimaryKey(kaoqinResult);
 
         return JSONModel.getMap();
+    }
+    /**
+     * 进入处理信息页面
+     * @param officeId 班级ID
+     * @return
+     */
+    @RequestMapping("/getKaoqinRemarkAndQingJiaRecord")
+    @ResponseBody
+    public Object getKaoqinRemarkAndQingJiaRecord(String officeId){
+        List<KaoqinResult> kaoqinResults= checkingService.findKaoqinRemarkAndQingJiaRecord(officeId);
+       return kaoqinResults;
+    }
+
+    /**
+     * 查询所有的考勤规则和详情
+     * @return
+     */
+    @RequestMapping("/getKaoqinAllRules")
+    @ResponseBody
+    public Object getKaoqinAllRules(){
+        List<KaoqinRule> kaoqinRulesIncludeDetail = checkingService.findKaoqinRulesIncludeDetail();
+        return kaoqinRulesIncludeDetail;
+    }
+
+    /**
+     * 为指定得考勤规则添加考勤详情
+     * @return
+     */
+    @RequestMapping("/addKaoqinDetail")
+    public String addKaoqinDetail(KaoqinRule kaoqinRule){
+        kaoqinRule.getKaoqinRuleDetails().get(0).setKaoqinRuleId(kaoqinRule.getId());
+        kaoqinRule.getKaoqinRuleDetails().get(0).setId(UUID.randomUUID().toString());
+        checkingService.addKaoQinRuleDetail(kaoqinRule);
+       return "/kaoqin_rule_display";
+    }
+    @RequestMapping(value = "/updateKaoqinDetail" ,method = RequestMethod.POST)
+    @ResponseBody
+    public Object updateKaoqinDetail(KaoqinRuleDetail kaoqinRuleDetail){
+        checkingService.updateKaoqinDetail(kaoqinRuleDetail);
+        return "success";
     }
 
 }

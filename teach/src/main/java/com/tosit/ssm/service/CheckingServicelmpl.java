@@ -5,6 +5,7 @@ import com.tosit.ssm.mapper.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -62,6 +63,8 @@ public class CheckingServicelmpl implements CheckingService{
     private KaoqinRuleMapper kaoqinRuleMapper;
     @Autowired
     private KaoqinRuleDetailMapper kaoqinRuleDetailMapper;
+
+
     /**
      * 添加考勤规则和规则详情
      * @param kaoqinRule 待插入的考情规则
@@ -76,13 +79,57 @@ public class CheckingServicelmpl implements CheckingService{
          kaoqinRuleMapper.insert(kaoqinRule);
         //然后再考勤规则详情中插入详情信息
         List<KaoqinRuleDetail> kaoqinRuleDetails = kaoqindetailVO.getKrd();
-        for (int i=( kaoqinRuleDetails.get(0).getWeekDay()==null?1:0);i<kaoqinRuleDetails.size();i++) {
+        for (/*int i=( kaoqinRuleDetails.get(0).getWeekDay()==null?1:0)*/int i=0;i<kaoqinRuleDetails.size();i++) {
             KaoqinRuleDetail k = kaoqinRuleDetails.get(i);
+            if (k.getBrushEndtime1() == null){
+                continue;
+            }
             k.setKaoqinRuleId(ruleId);
             String detailId = UUID.randomUUID().toString().replaceAll("-", "");
             k.setId(detailId);
             int row = kaoqinRuleDetailMapper.insertKaoqinRuleDetail(k);
         }
 //        kaoqinRuleDetailMapper.insert();
+    }
+
+    /**
+     * 获取某个班的申述或请假记录的集合
+     *
+     * @param officeId
+     * @return 返回值是一个考勤结果集合
+     */
+    @Override
+    public List<KaoqinResult> findKaoqinRemarkAndQingJiaRecord(String officeId) {
+        return kaoqinResultMapper.selectByClass(officeId);
+    }
+
+    /**
+     * 获取所有的考勤规则和相关详情
+     *
+     * @return
+     */
+    @Override
+    public List<KaoqinRule> findKaoqinRulesIncludeDetail() {
+        return kaoqinRuleMapper.selcetKaoqinRuleAndDetails();
+    }
+
+    /**
+     * 添加考勤详情
+     *
+     * @param kaoqinRule 属性id 不能为空
+     */
+    @Override
+    public void addKaoQinRuleDetail(KaoqinRule kaoqinRule) {
+        kaoqinRuleDetailMapper.insertKaoqinRuleDetail(kaoqinRule.getKaoqinRuleDetails().get(0));
+    }
+
+    /**
+     * 更新考勤详情（根据id）
+     *
+     * @param kaoqinRuleDetail
+     */
+    @Override
+    public int updateKaoqinDetail(KaoqinRuleDetail kaoqinRuleDetail) {
+       return kaoqinRuleDetailMapper.updateByPrimaryKey(kaoqinRuleDetail);
     }
 }

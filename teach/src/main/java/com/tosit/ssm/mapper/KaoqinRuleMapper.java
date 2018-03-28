@@ -29,6 +29,12 @@ public interface KaoqinRuleMapper {
      * @return  返回若干个规则详情
      */
     List<KaoqinRule>  selectRule(@Param("id") String id);
+
+    /**
+     * 查询考勤规则和相关规则的详情
+     * @return
+     */
+    List<KaoqinRule> selcetKaoqinRuleAndDetails();
 /*    int insertSelective(KaoqinRule record);
 
     List<KaoqinRule> selectByExample(KaoqinRuleExample example);*/

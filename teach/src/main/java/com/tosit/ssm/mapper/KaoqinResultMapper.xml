@@ -273,7 +273,9 @@
 
   <select id="selectByClass" parameterType="string" resultMap="BaseResultMap">
     SELECT
-     kr.id,<include refid="Base_Column_List" />
+     kr.id,kr.date,kr.user_id,kr.status,kr.remark,kr.last_time,kr.createResultTime,kr.kaoqin_remark_status,kr.kaoqin_remark_type,kr.kaoqin_remark_content,kr.kaoqin_remark_disposeUser,kr.kaoqin_remark_disposeTime,
+    kr.kaoqin_remark_dispose_Result,kr.kaoqin_shenshu_status,kr.kaoqin_shenshu_type,kr.kaoqin_shenshu_content,kr.kaoqin_shenshu_disposeUser,kr.kaoqin_shenshu_disposeTime,kr.kaoqin_shenshu_disposeResult,
+      kr.create_time,kr.create_by,kr.update_time,kr.update_by,kr.is_del,kr.kaoqin_shenshu_reply,kr.kaoqin_remark_reply,kr.kaoqin_shenshu_reqtime,kr.kaoqin_remark_reqtime
     FROM
     user_office uo LEFT JOIN kaoqin_result kr ON uo.user_id = kr.user_id
     WHERE uo.office_id = #{officeId} AND kr.is_del = 1 AND uo.is_del=1 OR kr.kaoqin_remark_status!='' OR kr.kaoqin_shenshu_status!=''
@@ -311,7 +313,6 @@
     ON u.ID=kr.user_id
     WHERE uo.office_id = #{officeId} AND (kr.status= 0 OR kr.status= 2) AND kr.is_del = 1 AND uo.is_del = 1
   </select>
-
 
 
 </mapper>
