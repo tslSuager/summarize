@@ -11,6 +11,7 @@
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_by2" jdbcType="VARCHAR" property="updateBy2" />
+    <result column="is_del" jdbcType="INTEGER" property="isDel" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -72,7 +73,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, dormitory_name, max_num, cur_num, remark, create_by, update_time, create_time, 
-    update_by2
+    update_by2,is_del
   </sql>
   <select id="selectByExample" parameterType="com.tosit.ssm.entity.DormitoryInfoExample" resultMap="BaseResultMap">
     select
@@ -264,6 +265,12 @@
     <!--where id = #{id,jdbcType=VARCHAR}-->
   <!--</update>-->
 
+
+
+
+
+
+
   <insert id="insertDormitoryInfo" parameterType="com.tosit.ssm.entity.DormitoryInfo">
     insert into dormitory_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -294,6 +301,9 @@
       <if test="updateBy2 != null">
         update_by2,
       </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -323,6 +333,9 @@
       <if test="updateBy2 != null">
         #{updateBy2,jdbcType=VARCHAR},
       </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.tosit.ssm.entity.DormitoryInfo">
@@ -351,6 +364,9 @@
       </if>
       <if test="updateBy2 != null">
         update_by2 = #{updateBy2,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null">
+        is_del,
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}

@@ -1242,4 +1242,11 @@ SELECT
     join   office ff on uoo.office_id=ff.id where ff.office_type=3 and ff.is_del=1 and uu.is_del=1 and uoo.is_del=1
     )
   </select>
+
+  <select id="selectByUsername" parameterType="string" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM user u WHERE u.loginName=#{username}
+  </select>
+
 </mapper>

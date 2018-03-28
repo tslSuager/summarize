@@ -28,6 +28,8 @@ var initPullListTree = function (url,startlevel, count,fn) {
             switch (e.officeType) {
                 case startlevel:
                     $("#pullListTree").find("select").eq(0).append($("<option>").attr("value", e.id).html(e.name));
+                    $("#pullListTree").data("selectAreaId",e.id);
+                    $("#pullListTree").data("selectAreaText",e.name);
                     break;
             }
         });

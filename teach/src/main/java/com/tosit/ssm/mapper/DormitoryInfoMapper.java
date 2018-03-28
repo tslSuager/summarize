@@ -17,15 +17,15 @@ public interface DormitoryInfoMapper {
     int updateByPrimaryKeySelective(DormitoryInfo record);
 
     /**
-     * 插入物料表
-     * @param record  含有id的一个物料表
+     * 插入寝室表
+     * @param record  含有id的一个寝室表
      * @return
      */
     int insertDormitoryInfo(DormitoryInfo record);
 
     /**
-     * 修改物料表
-     * @param record 含有id的一个物料表
+     * 修改寝室表
+     * @param record 含有id的一个寝室表
      * @return
      */
     int updateByPrimaryKey(DormitoryInfo record);

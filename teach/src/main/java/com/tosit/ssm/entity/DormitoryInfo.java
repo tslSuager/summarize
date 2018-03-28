@@ -12,6 +12,16 @@ public class DormitoryInfo {
     private Date updateTime;
     private Date createTime;
     private String updateBy2;
+    private Integer isDel;
+
+    public Integer getIsDel() {
+        return isDel;
+    }
+
+    public void setIsDel(Integer isDel) {
+        this.isDel = isDel ;
+    }
+
     public String getId() {
         return id;
     }

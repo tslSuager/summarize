@@ -173,5 +173,11 @@ public interface UserMapper {
      */
     List<User> selectByGroup(Office office);
 
-
+    /**
+     * 通过用户名 获取user
+     *
+     * @param username 用户名
+     * @return 返回用户集合
+     */
+    User selectByUsername(String username);
 }

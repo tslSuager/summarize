@@ -1,5 +1,6 @@
 package com.tosit.ssm.mapper;
 
+import com.tosit.ssm.entity.DormitoryInfo;
 import com.tosit.ssm.entity.Materiel;
 import com.tosit.ssm.entity.MaterielExample;
 import java.util.List;
@@ -26,5 +27,21 @@ public interface MaterielMapper {
 
     int updateByPrimaryKeySelective(Materiel record);
 
+
+
+
+
+    /**
+     * 插入物料表
+     * @param record  含有id的一个物料表
+     * @return
+     */
+    int insertMateriel(Materiel record);
+
+    /**
+     * 修改物料表
+     * @param record 含有id的一个物料表
+     * @return
+     */
     int updateByPrimaryKey(Materiel record);
 }
