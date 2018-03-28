@@ -19,6 +19,16 @@ public class Utilttles {
 
     private Date createTime;
 
+    private Integer isDel;
+
+    public Integer getIsDel() {
+        return isDel;
+    }
+
+    public void setIsDel(Integer isDel) {
+        this.isDel = isDel ;
+    }
+
     public String getId() {
         return id;
     }

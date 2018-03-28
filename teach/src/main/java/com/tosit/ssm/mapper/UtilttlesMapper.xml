@@ -10,6 +10,7 @@
     <result column="record_time" jdbcType="TIMESTAMP" property="recordTime" />
     <result column="create_by" jdbcType="VARCHAR" property="createBy" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="is_del" jdbcType="INTEGER" property="isDel" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -71,7 +72,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, dormitory_id, cin_water_count, cin_electricity_count, cin_gas_count, record_time, 
-    create_by, create_time
+    create_by, create_time,is_del
   </sql>
   <select id="selectByExample" parameterType="com.tosit.ssm.entity.UtilttlesExample" resultMap="BaseResultMap">
     select
@@ -245,15 +246,96 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+  <insert id="insertUtilttles" parameterType="com.tosit.ssm.entity.Utilttles">
+    insert into utilttles
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="dormitoryId != null">
+        dormitory_id,
+      </if>
+      <if test="cinWaterCount != null">
+        cin_water_count,
+      </if>
+      <if test="cinElectricityCount != null">
+        cin_electricity_count,
+      </if>
+      <if test="cinGasCount != null">
+        cin_gas_count,
+      </if>
+      <if test="recordTime != null">
+        record_time,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="dormitoryId != null">
+        #{dormitoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="cinWaterCount != null">
+        #{cinWaterCount,jdbcType=INTEGER},
+      </if>
+      <if test="cinElectricityCount != null">
+        #{cinElectricityCount,jdbcType=INTEGER},
+      </if>
+      <if test="cinGasCount != null">
+        #{cinGasCount,jdbcType=INTEGER},
+      </if>
+      <if test="recordTime != null">
+        #{recordTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+    </trim>
+  </insert>
   <update id="updateByPrimaryKey" parameterType="com.tosit.ssm.entity.Utilttles">
     update utilttles
-    set dormitory_id = #{dormitoryId,jdbcType=VARCHAR},
-      cin_water_count = #{cinWaterCount,jdbcType=INTEGER},
-      cin_electricity_count = #{cinElectricityCount,jdbcType=INTEGER},
-      cin_gas_count = #{cinGasCount,jdbcType=INTEGER},
-      record_time = #{recordTime,jdbcType=TIMESTAMP},
-      create_by = #{createBy,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP}
+    <set>
+      <if test="dormitoryId != null">
+        dormitory_id = #{dormitoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="cinWaterCount != null">
+        cin_water_count = #{cinWaterCount,jdbcType=INTEGER},
+      </if>
+      <if test="cinElectricityCount != null">
+        cin_electricity_count = #{cinElectricityCount,jdbcType=INTEGER},
+      </if>
+      <if test="cinGasCount != null">
+        cin_gas_count = #{cinGasCount,jdbcType=INTEGER},
+      </if>
+      <if test="recordTime != null">
+        record_time = #{recordTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+    </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

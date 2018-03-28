@@ -1,5 +1,6 @@
 package com.tosit.ssm.mapper;
 
+import com.tosit.ssm.entity.DormitoryInfo;
 import com.tosit.ssm.entity.Utilttles;
 import com.tosit.ssm.entity.UtilttlesExample;
 import java.util.List;
@@ -26,5 +27,21 @@ public interface UtilttlesMapper {
 
     int updateByPrimaryKeySelective(Utilttles record);
 
+
+
+
+
+    /**
+     * 插入水电气表
+     * @param record  含有id的一个水电气表
+     * @return
+     */
+    int insertUtilttles(Utilttles record);
+
+    /**
+     * 修改水电气表
+     * @param record 含有id的一个水电气表
+     * @return
+     */
     int updateByPrimaryKey(Utilttles record);
 }

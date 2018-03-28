@@ -239,7 +239,7 @@
       is_del = #{isDel,jdbcType=INTEGER}
     where ID = #{id,jdbcType=VARCHAR}
   </update>-->
-  <update id="updateByExampleSelective" parameterType="com.tosit.ssm.entity.UserOffice">
+  <update id="updateByPrimaryKey" parameterType="com.tosit.ssm.entity.UserOffice">
     update user_office
     <set>
       <if test="record.id != null">
