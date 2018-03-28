@@ -78,4 +78,14 @@ public class UserServiceImpl implements UserService {
     public List<User> findClassUser(String officeId) {
         return userMapper.selectUserByOfficeId(officeId);
     }
+    /**
+     * 通过用户名 获取user
+     *
+     * @param username 用户名
+     * @return 返回用户集合
+     */
+    @Override
+    public User findsUserByUserName(String username) {
+        return userMapper.selectByUsername(username);
+    }
 }

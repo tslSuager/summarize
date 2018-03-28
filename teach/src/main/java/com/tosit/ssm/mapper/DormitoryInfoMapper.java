@@ -7,24 +7,26 @@ import org.apache.ibatis.annotations.Param;
 
 public interface DormitoryInfoMapper {
     long countByExample(DormitoryInfoExample example);
-
     int deleteByExample(DormitoryInfoExample example);
-
     int deleteByPrimaryKey(String id);
-
-    int insert(DormitoryInfo record);
-
     int insertSelective(DormitoryInfo record);
-
     List<DormitoryInfo> selectByExample(DormitoryInfoExample example);
-
     DormitoryInfo selectByPrimaryKey(String id);
-
     int updateByExampleSelective(@Param("record") DormitoryInfo record, @Param("example") DormitoryInfoExample example);
-
     int updateByExample(@Param("record") DormitoryInfo record, @Param("example") DormitoryInfoExample example);
-
     int updateByPrimaryKeySelective(DormitoryInfo record);
 
+    /**
+     * 插入寝室表
+     * @param record  含有id的一个寝室表
+     * @return
+     */
+    int insertDormitoryInfo(DormitoryInfo record);
+
+    /**
+     * 修改寝室表
+     * @param record 含有id的一个寝室表
+     * @return
+     */
     int updateByPrimaryKey(DormitoryInfo record);
 }

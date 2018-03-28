@@ -13,6 +13,7 @@ import java.util.List;
 public interface UserService {
     /**
      * 通过user.id 获取一user
+     *
      * @param userId
      * @return
      */
@@ -20,6 +21,7 @@ public interface UserService {
 
     /**
      * 获取某个人的所有经历
+     *
      * @param userId 用户的id
      * @return 返回该用户的type类型为1的Experience的集合
      */
@@ -27,6 +29,7 @@ public interface UserService {
 
     /**
      * 获取某个班今天之前迟到的人
+     *
      * @param officeId
      * @return
      */
@@ -36,17 +39,30 @@ public interface UserService {
     User getUserById(String id);
 
     int modifyUser(User user);
+
     /**
      * 得到某个人未关联考勤工号的人
-     * @param id  班级id
+     *
+     * @param id 班级id
      * @return
      */
     List<User> findUserByClassIdNoKaoqinNum(String id);
 
     /**
      * 查询所有班级中的学生
+     *
      * @param officeId 班级id
      * @return 返回该班学生集合
      */
     List<User> findClassUser(String officeId);
+
+
+    /**
+     * 通过用户名 获取user
+     *
+     * @param username 用户名
+     * @return 返回用户集合
+     */
+    User findsUserByUserName(String username);
+
 }

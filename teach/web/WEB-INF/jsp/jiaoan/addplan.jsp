@@ -122,7 +122,8 @@
         var aHTML = $(".click2edit").code();
         $(".click2edit").destroy()
     };
-    
+
+    //继续添加文件
     $(function () {
         $(".btn-xs").click(function () {
             $("#add_zuoye").append('<input type="file" multiple="multiple" class="form-control">');

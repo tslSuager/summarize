@@ -1,12 +1,17 @@
 package com.tosit.ssm.controller;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.tosit.ssm.common.util.json.JSONModel;
 import com.tosit.ssm.entity.*;
 import com.tosit.ssm.service.CheckingService;
 import com.tosit.ssm.service.UserService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
@@ -39,28 +44,26 @@ public class CheckingController {
      * 获取某人某天的考勤记录，和以前的考勤的结果（包括请假和备注）
      * @return
      */
-    @RequestMapping("/ShowAllRecordsByIdByDate")
+    @RequestMapping(value = "/ShowAllRecordsByIdByDate")
     @ResponseBody
-    public Object ShowRecords(String user_id,Timestamp brushTime){
+    public Object ShowRecords(KaoqinRecords kaoqinRecords){
+        System.out.println(kaoqinRecords);
         //某个人的表现分的经历
-        List<Experience> experiences = userService.selectByIdToType("u001");
+        List<Experience> experiences = userService.selectByIdToType(kaoqinRecords.getUserId());
         JSONModel.put("experiences",experiences);
-        //某个人某天的所有考勤记录
-        /*KaoqinRecords kaoqinRecords = new KaoqinRecords();
-        kaoqinRecords.setUserId("u001");
-        kaoqinRecords.setBrushtime();
-        System.out.println(checkingService.toString());
+
+
         List<KaoqinRecords> kaoqinRecordsByIdByDate = checkingService.findKaoqinRecordsByIdByDate(kaoqinRecords);
-        JSONModel.put("records",kaoqinRecordsByIdByDate);*/
+        JSONModel.put("records",kaoqinRecordsByIdByDate);
 
         //某个人的所有考勤结果
-        List<KaoqinResult> kaoqinresults = checkingService.findOneById("u001");
+        List<KaoqinResult> kaoqinresults = checkingService.findOneById(kaoqinRecords.getUserId());
         JSONModel.put("result",kaoqinresults);
 
 
 
         //某个人的所有信息
-        User user = userService.selectByPrimaryKey("u001");
+        User user = userService.selectByPrimaryKey(kaoqinRecords.getUserId());
         JSONModel.put("user",user);
 
         return JSONModel.getMap();
