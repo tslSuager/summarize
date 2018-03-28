@@ -21,6 +21,28 @@
     <result column="check_status" jdbcType="INTEGER" property="checkStatus" />
     <result column="is_del" jdbcType="INTEGER" property="isDel" />
   </resultMap>
+  <resultMap id="SeBaseResultMap" type="com.tosit.ssm.entity.TeachingVO">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="parent_id" jdbcType="VARCHAR" property="parentId" />
+    <result column="parent_ids" jdbcType="VARCHAR" property="parentIds" />
+    <result column="planName" jdbcType="VARCHAR" property="planname" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="jishuzhuanye" jdbcType="VARCHAR" property="jishuzhuanye" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="check_user" jdbcType="VARCHAR" property="checkUser" />
+    <result column="check_time" jdbcType="TIMESTAMP" property="checkTime" />
+    <result column="check_marks" jdbcType="VARCHAR" property="checkMarks" />
+    <result column="check_status" jdbcType="INTEGER" property="checkStatus" />
+    <result column="is_del" jdbcType="INTEGER" property="isDel" />
+    <result column="officename" jdbcType="VARCHAR" property="officeName"/>
+  </resultMap>
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -583,14 +605,11 @@
     ON t2.id = t3.parent_id
     WHERE t2.id = #{teachingId} AND t2.type = 2 AND t3.type = 3 AND t2.is_del = 1 AND t3.is_del = 1
   </select>
-  <select id="selectTeachingByUserId" parameterType="string" resultMap="BaseResultMap">
-    SELECT t.* FROM teaching t LEFT JOIN teaching_office tf
-    ON t.id = tf.teaching_id
-    WHERE office_id IN
-    (SELECT uo.office_id FROM user_office uo LEFT JOIN office o
-    ON uo.office_id = o.id
+  <select id="selectTeachingByUserId" parameterType="string" resultMap="SeBaseResultMap">
+    SELECT o.name'officename',t.* FROM user_office uo LEFT JOIN office o
+    ON uo.office_id = o.id LEFT JOIN teaching_office tf ON o.id = tf.office_id LEFT JOIN teaching t ON t.id = tf.teaching_id
     WHERE uo.user_id = #{userId} AND o.office_type = 3
-    AND o.is_del = 1 AND  uo.is_del = 1) AND t.type = 1 AND t.is_del = 1 AND tf.is_del = 1
+    AND o.is_del = 1 AND  uo.is_del = 1 AND tf.is_del = 1 AND t.is_del = 1
   </select>
   <select id="selectJieduanByUserIdByTeaching" parameterType="string" resultMap="BaseResultMap">
     SELECT t2.* FROM teaching t1 LEFT JOIN teaching t2

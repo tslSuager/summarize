@@ -115,6 +115,12 @@
     from office
     where ID = #{id,jdbcType=VARCHAR}
   </select>
+  <select id="selectOfficeByUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    o.*
+    from office o LEFT JOIN user_office uo ON o.id = uo.office_id
+    where uo.user_id = #{userId} AND uo.is_del = 1 AND o.is_del = 1 AND o.office_type = 3
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from office
     where ID = #{id,jdbcType=VARCHAR}

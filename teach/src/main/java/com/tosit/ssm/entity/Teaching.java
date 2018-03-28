@@ -18,12 +18,12 @@ public class Teaching {
 
     private Integer type;
 
-    @DateTimeFormat(pattern ="yyyy-MM-dd hh:mm:ss" )
-    @JSONField(format ="yyyy-MM-dd hh:mm:ss")
+    @DateTimeFormat(pattern ="yyyy-MM-dd" )
+    @JSONField(format ="yyyy-MM-dd")
     private Date startTime;
 
-    @DateTimeFormat(pattern ="yyyy-MM-dd hh:mm:ss" )
-    @JSONField(format ="yyyy-MM-dd hh:mm:ss")
+    @DateTimeFormat(pattern ="yyyy-MM-dd" )
+    @JSONField(format ="yyyy-MM-dd")
     private Date endTime;
 
     private String jishuzhuanye;
@@ -194,5 +194,29 @@ public class Teaching {
 
     public void setIsDel(Integer isDel) {
         this.isDel = isDel;
+    }
+
+    @Override
+    public String toString() {
+        return "Teaching{" +
+                "id='" + id + '\'' +
+                ", parentId='" + parentId + '\'' +
+                ", parentIds='" + parentIds + '\'' +
+                ", planname='" + planname + '\'' +
+                ", remarks='" + remarks + '\'' +
+                ", type=" + type +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", jishuzhuanye='" + jishuzhuanye + '\'' +
+                ", createTime=" + createTime +
+                ", createBy='" + createBy + '\'' +
+                ", updateTime=" + updateTime +
+                ", updateBy='" + updateBy + '\'' +
+                ", checkUser='" + checkUser + '\'' +
+                ", checkTime=" + checkTime +
+                ", checkMarks='" + checkMarks + '\'' +
+                ", checkStatus=" + checkStatus +
+                ", isDel=" + isDel +
+                '}';
     }
 }

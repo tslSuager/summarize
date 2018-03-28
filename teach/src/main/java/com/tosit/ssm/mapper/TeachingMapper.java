@@ -2,10 +2,10 @@ package com.tosit.ssm.mapper;
 
 import com.tosit.ssm.entity.Teaching;
 import com.tosit.ssm.entity.TeachingExample;
-import java.util.List;
-
-import com.tosit.ssm.entity.TeachingOffice;
+import com.tosit.ssm.entity.TeachingVO;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface TeachingMapper {
     long countByExample(TeachingExample example);
@@ -56,11 +56,11 @@ public interface TeachingMapper {
     List<Teaching> selectRenwuByJieduan(@Param("teachingId")String teachingId);
 
     /**
-     * 查询某人的所有教学计划
+     * 查询某人的所有教学计划与班级
      * @param userId 用户id
      * @return 返回多个计划
      */
-    List<Teaching> selectTeachingByUserId(@Param("userId") String userId);
+    List<TeachingVO> selectTeachingByUserId(@Param("userId") String userId);
 
     /**
      * 查询某人的所有计划的所有阶段
