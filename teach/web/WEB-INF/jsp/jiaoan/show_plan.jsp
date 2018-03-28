@@ -144,12 +144,12 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${teachings}" var="t">
+                            <c:forEach items="${teachings}" var="t" varStatus="px">
                             <tr class="no-records-found planT" data-toggle="tooltip" data-placement="top" title=""
                                 data-original-title="这里是提示内容">
-                                <td style="text-align: center">${t.id}</td>
+                                <td style="text-align: center">${px.count}</td>
                                 <td style="text-align: center">${t.planname}</td>
-                                <td style="text-align: center">JAVA一班</td>
+                                <td style="text-align: center">${t.officeName}</td>
                                 <td style="text-align: center">${t.startTime}</td>
                                 <td style="text-align: center">${t.endTime}</td>
                                 <td style="text-align: center">${t.remarks}</td>
@@ -158,34 +158,16 @@
                                     <button type="button" class="btn btn-outline btn-default">
                                         <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i>
                                     </button>
+                                    </button>
+                                    <button type="button" class="btn btn-outline btn-default viewplan" name="${t.id}">
+                                        <i class="glyphicon glyphicon-check" aria-hidden="true"></i>
+                                    </button>
                                     <button type="button" class="btn btn-outline btn-default" onClick="delete_plan(this,'001')" href="javascript:;" title="删除">
                                         <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
                                     </button>
                                 </td>
                             </tr>
                             </c:forEach>
-
-                           <%-- <tr class="no-records-found planT" data-toggle="tooltip" data-placement="top" title=""
-                                data-original-title="这里是提示内容">
-                                <td style="text-align: center">002</td>
-                                <td style="text-align: center">呵呵哒哒</td>
-                                <td style="text-align: center">JAVA二班</td>
-                                <td style="text-align: center">2018-2-5</td>
-                                <td style="text-align: center">2018-3-8</td>
-                                <td style="text-align: center">程序性撒打算</td>
-                                &lt;%&ndash;<td style="text-align: center">未完成</td>&ndash;%&gt;
-                                <td style="text-align: center;width: 220px">
-                                    &lt;%&ndash; <button type="button" class="btn btn-outline btn-default" id="new_son_plan" value="添加阶段">
-                                         <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
-                                     </button>&ndash;%&gt;
-                                    <button type="button" class="btn btn-outline btn-default">
-                                        <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-outline btn-default" onClick="delete_plan(this,'002')" href="javascript:;" title="删除">
-                                        <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
-                                    </button>
-                                </td>
-                            </tr>--%>
 
 
                             </tbody>
@@ -210,20 +192,45 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
+//        tr:not(':first')
+        /**
+         * 点击查看某条计划
+         */
+        $.each($(".viewplan"), function () {
+            $(this).click(function () {
+                var jihuaId = $(this).attr("name");
+                //此处写跳转到具体计划的详细阶段与任务界面
+                console.info(jihuaId);
+                <%--window.location.href="${pageContext.request.contextPath}/teaching/viewJieduan?jihuaId="+jihuaId;--%>
+                window.location.href="${pageContext.request.contextPath}/page/jiaoan/jiaoxueplan_addjieduan?jihuaId="+jihuaId;
+            })
+        })
 
         $("#new_plan").click(function () {
             layer.open({
                 type: 2,
                 title: '新建计划',
                 content: '/plan_new.jsp',
-                btn: ['添加阶段','完成', '取消'],
-                yes:function (index) {
+                btn: [/*'添加阶段',*/'完成', '取消'],
+                /*yes:function (index) {
                     window.location.href = "/page/jiaoan/jiaoxueplan_addjieduan";
+                },*/
+                yes:function (index) {
+                    /**
+                     *点击“完成”按钮，为某个班级添加一条新的教学计划
+                     */
+                    var body = layer.getChildFrame('body',index);
+                    var planName = body.find("#planName").val();
+                    var banji = body.find("#pullListTree").find("select").val();
+                    var start = body.find("#start").val();
+                    var end = body.find("#end").val();
+                    var remarks = body.find("#remarks").val();
+                    $.get("/teaching/insertTeaching",{planName,banji,start,end,remarks},function (msg) {
+                        window.location.href ="/teaching/viewTeaching";
+                    });
+
                 },
                 btn2:function (index) {
-                    layer.close(index);
-                },
-                btn3:function (index) {
                     layer.close(index);
                 },
                 shade: false,

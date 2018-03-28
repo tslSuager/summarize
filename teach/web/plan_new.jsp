@@ -35,7 +35,7 @@
     <div class="modal-header">
         <h2 class="modal-title" style="text-align: center">新建计划</h2>
     </div>
-    <form style="margin-left: 80px;margin-top: 50px">
+    <form style="margin-left: 80px;margin-top: 50px" action="/teaching/insertTeaching" method="post" id="form1">
         <small class="font-bold">
             <%--id="pullListTree" style="display: inline;margin-left: 30px;width: 320px"--%>
             <div style="margin-top: 5px;margin-left: 45px;width: 1400px" id="pullListTree" class="">
@@ -47,7 +47,7 @@
                 <div style="margin-top: 5px">
                     <label class="col-sm-3 text-center control-label" style="margin-top: 8px;margin-left: 10px">计划名
                         :</label>
-                    <input type="text" name="planName" class="form-control" style="width: 320px">
+                    <input type="text" name="planName" class="form-control" style="width: 320px" id="planName">
                 </div>
             </div>
 
@@ -56,10 +56,10 @@
                 <div class="input-daterange input-group" id="datepicker">
                     <label class="col-sm-3 text-center control-label" style="margin-top: 5px">开始时间 :</label>
                     <input type="text" class="input-sm form-control" name="start" value="2017-11-11"
-                           style="width: 320px"/>
+                           style="width: 320px" id="start"/>
                     <label class="col-sm-3 text-center control-label" style="margin-top: 15px">结束时间 :</label>
                     <input type="text" class="input-sm form-control" name="end"  value="2017-11-17"
-                           style="width: 320px;margin-top: 10px"/>
+                           style="width: 320px;margin-top: 10px" id="end"/>
                 </div>
             </div>
 
@@ -67,7 +67,7 @@
             <div>
                 <div style="margin-top: 5px">
                     <label class="col-sm-3 text-center control-label" style="margin-top: 5px">备注说明 :</label>
-                    <textarea class="form-control layer-date" style="width: 320px" rows="5"></textarea>
+                    <textarea class="form-control layer-date" name="remarks" style="width: 320px" rows="5" id="remarks"></textarea>
                 </div>
             </div>
 
@@ -103,6 +103,7 @@
         $("#dddd").click(function () {
             alert($("#pullListTree").data("selectArea"));
         });
+
 
     });
 

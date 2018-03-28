@@ -87,7 +87,8 @@
 </head>
 <body>
 <div class="Hui-article">
-    <div class="four steps" style="margin-left: 10%;margin-top: 50px;width: 80%;float: left;margin-right: 10%">
+    <div style="margin-left: 10%;margin-top: 2%"><span><h4>02班</h4></span></div>
+    <div class="four steps" style="margin-left: 10%;margin-top: 2%;width: 80%;float: left;margin-right: 10%">
         <span class="active step" id="span1">起2月1日至2月7日</span>
         <span class="step"></span>
         <span class=" step"></span>
@@ -97,7 +98,7 @@
                 <div class="col-sm-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>学生任务完成状况</h5>
+                            <h5>小组任务完成状况</h5>
                             <div class="ibox-tools">
                                 <a class="collapse-link">
                                     <i class="fa fa-chevron-up"></i>
@@ -112,19 +113,16 @@
                             </div>
                         </div>
                         <div class="ibox-content">
-
-
-
                             <div class="table-responsive">
                                 <table class="table table-striped">
                                     <thead>
                                     <tr>
-
                                         <th></th>
                                         <th>任务</th>
-                                        <th>进度</th>
-                                        <th>日期</th>
+                                        <th>小组名</th>
+                                        <th>任务下发日期</th>
                                         <th>审阅状态</th>
+                                        <th>任务提交时间</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -132,23 +130,24 @@
                                         <td>
                                             <input type="checkbox" checked class="i-checks" name="input[]">
                                         </td>
-                                        <td >需求分析</td>
+                                        <td>需求分析<a href="" title="模版下载" style="margin-left: 30px">
+                                            <small>模版下载</small>
+                                        </a></td>
                                         </td>
-                                        <td>20%</td>
+                                        <td>二组</td>
                                         <td>2017.11.11</td>
-                                        <td><a href="#"><i class=" ">
-                                            <button class="demo3  glyphicon glyphicon-remove text-navy"></button>
-                                        </i></a>
+                                        <td class="status"><i class="glyphicon glyphicon-check text-success">已阅</i>
                                         </td>
+                                        <td>2018.3.26<a href="" title="提交任务" style="margin-left: 30px">
+                                            <small>提交任务</small>
+                                        </a></td>
                                     </tr>
                                     </tbody>
                                 </table>
                             </div>
-
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -163,7 +162,7 @@
                 <div class="col-sm-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>学生任务完成状况</h5>
+                            <h5>小组任务完成状况</h5>
                             <div class="ibox-tools">
                                 <a class="collapse-link">
                                     <i class="fa fa-chevron-up"></i>
@@ -178,52 +177,38 @@
                             </div>
                         </div>
                         <div class="ibox-content">
-
                             <div class="table-responsive">
                                 <table class="table table-striped">
                                     <thead>
                                     <tr>
-
                                         <th></th>
                                         <th>任务</th>
-                                        <th>进度</th>
-                                        <th>日期</th>
+                                        <th>小组名</th>
+                                        <th>任务下发日期</th>
                                         <th>审阅状态</th>
+                                        <th>任务提交时间</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-
                                     <tr>
                                         <td>
                                             <input type="checkbox" checked class="i-checks" name="input[]">
                                         </td>
-                                        <td>设计原型</td>
+                                        <td>设计原型<a href="" title="模版下载" style="margin-left: 30px">
+                                            <small>模版下载</small>
+                                        </a></td>
                                         </td>
-                                        <td>40%</td>
+                                        <td>二组</td>
                                         <td>2017.11.11</td>
-                                        <td><a href="#"><i>
-                                            <button class="demo3  fa fa-check text-navy"></button>
-                                        </i></a>
+                                        <td class="status"><i class="glyphicon glyphicon-remove text-warning">未阅</i>
                                         </td>
+                                        <td>2018.3.26<a href="" title="提交任务" style="margin-left: 30px">
+                                            <small>提交任务</small>
+                                        </a></td>
                                     </tr>
-
-                                   <%-- <tr>
-                                        <td>
-                                            <input type="checkbox" class="i-checks" name="input[]">
-                                        </td>
-                                        <td>编程测试</td>
-                                        </td>
-                                        <td>18%</td>
-                                        <td>2017.11.11</td>
-                                        <td><a href="#"><i>
-                                            <button class="demo3  fa fa-check text-navy"></button>
-                                        </i></a>
-                                        </td>
-                                    </tr>--%>
                                     </tbody>
                                 </table>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -372,45 +357,45 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                   <%-- <tr>
-                                        <td>
-                                            <input type="checkbox" checked class="i-checks" name="input[]">
-                                        </td>
-                                        <td >需求分析</td>
-                                        </td>
-                                        <td>20%</td>
-                                        <td>2017.11.11</td>
-                                        <td><a href="#"><i class=" ">
-                                            <button class="demo3  glyphicon glyphicon-remove text-navy"></button>
-                                        </i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" class="i-checks" name="input[]">
-                                        </td>
-                                        <td>设计原型</td>
-                                        </td>
-                                        <td>40%</td>
-                                        <td>2017.11.11</td>
-                                        <td><a href="#"><i>
-                                            <button class="demo3  fa fa-check text-navy"></button>
-                                        </i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" class="i-checks" name="input[]">
-                                        </td>
-                                        <td>设计数据库</td>
-                                        </td>
-                                        <td>75%</td>
-                                        <td>2017.11.11</td>
-                                        <td><a href="#"><i>
-                                            <button class="demo3  fa fa-check text-navy"></button>
-                                        </i></a>
-                                        </td>
-                                    </tr>--%>
+                                    <%-- <tr>
+                                         <td>
+                                             <input type="checkbox" checked class="i-checks" name="input[]">
+                                         </td>
+                                         <td >需求分析</td>
+                                         </td>
+                                         <td>20%</td>
+                                         <td>2017.11.11</td>
+                                         <td><a href="#"><i class=" ">
+                                             <button class="demo3  glyphicon glyphicon-remove text-navy"></button>
+                                         </i></a>
+                                         </td>
+                                     </tr>
+                                     <tr>
+                                         <td>
+                                             <input type="checkbox" class="i-checks" name="input[]">
+                                         </td>
+                                         <td>设计原型</td>
+                                         </td>
+                                         <td>40%</td>
+                                         <td>2017.11.11</td>
+                                         <td><a href="#"><i>
+                                             <button class="demo3  fa fa-check text-navy"></button>
+                                         </i></a>
+                                         </td>
+                                     </tr>
+                                     <tr>
+                                         <td>
+                                             <input type="checkbox" class="i-checks" name="input[]">
+                                         </td>
+                                         <td>设计数据库</td>
+                                         </td>
+                                         <td>75%</td>
+                                         <td>2017.11.11</td>
+                                         <td><a href="#"><i>
+                                             <button class="demo3  fa fa-check text-navy"></button>
+                                         </i></a>
+                                         </td>
+                                     </tr>--%>
                                     <tr>
                                         <td>
                                             <input type="checkbox" class="i-checks" checked name="input[]">
@@ -439,34 +424,34 @@
     <jsp:include page="common/head.jsp"/>
     <script>
         $("#span1").dblclick(
-            function(){
-                if($("#s1").css("display")=='none'){
+            function () {
+                if ($("#s1").css("display") == 'none') {
                     $("#s1").slideDown();
-                }else{
+                } else {
                     $("#s1").slideUp();
                 }
             });
         $("#span2").dblclick(
-            function(){
-                if($("#s2").css("display")=='none'){
+            function () {
+                if ($("#s2").css("display") == 'none') {
                     $("#s2").slideDown();
-                }else{
+                } else {
                     $("#s2").slideUp();
                 }
             });
         $("#span3").dblclick(
-            function(){
-                if($("#s3").css("display")=='none'){
+            function () {
+                if ($("#s3").css("display") == 'none') {
                     $("#s3").slideDown();
-                }else{
+                } else {
                     $("#s3").slideUp();
                 }
             });
         $("#span4").dblclick(
-            function(){
-                if($("#s4").css("display")=='none'){
+            function () {
+                if ($("#s4").css("display") == 'none') {
                     $("#s4").slideDown();
-                }else{
+                } else {
                     $("#s4").slideUp();
                 }
             });
