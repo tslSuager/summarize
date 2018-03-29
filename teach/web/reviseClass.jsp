@@ -31,7 +31,7 @@
 
 <div class="row">
     <div class="form-group col-sm-2">
-        <label class="col-sm-3 control-label">请输入修改的班级名：</label>
+        <label class="col-sm-3 control-label">请输入修改后的班级名：</label>
         <div class="col-sm-6">
             <input type="name" class="form-control">
         </div>

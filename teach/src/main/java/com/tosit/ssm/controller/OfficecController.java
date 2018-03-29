@@ -1,9 +1,12 @@
 package com.tosit.ssm.controller;
 
 import com.tosit.ssm.common.util.json.JSONModel;
+import com.tosit.ssm.common.util.json.JSONUtil;
 import com.tosit.ssm.entity.Office;
+import com.tosit.ssm.entity.UserOffice;
 import com.tosit.ssm.service.OfficeService;
 import com.tosit.ssm.service.OfficeServiceImpl;
+import com.tosit.ssm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -14,16 +17,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 @RequestMapping("/office")
 public class OfficecController {
     @Autowired
-    OfficeServiceImpl officeService;
+    OfficeService officeService;
+    @Autowired
+    UserService userService;
+
     @GetMapping("/createOffice")
     @ResponseBody
     public void createOffice(Office office, HttpServletRequest servletRequest) {
@@ -105,7 +108,7 @@ public class OfficecController {
             e.printStackTrace();
         }
         //System.out.println("本月第一天和最后一天分别是 ： " + date1 + " and " + date2);
-        office.setMaster("aa");
+        office.setMaster("u016");
         office.setCreateTime(date1);
         office.setUpdateTime(date2);
         List<Office> classes = officeService.findClassByTeacherAndDate(office);
@@ -133,7 +136,7 @@ public class OfficecController {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        office.setMaster("何团");
+        office.setMaster("u016");
         office.setCreateTime(startDate);
         office.setUpdateTime(endDate);
         List<Office> classes = officeService.findClassByTeacherAndDate(office);
@@ -153,7 +156,7 @@ public class OfficecController {
         String pId = request.getParameter("pId");
         System.out.println(pId);
         office.setId(pId);
-        office.setMaster("何团");
+        office.setMaster("u016");
         List<Office> classes = officeService.findClassByTeacherAndSchool(office);
         JSONModel.put("classes",classes);
         return JSONModel.put();
@@ -165,6 +168,7 @@ public class OfficecController {
      * @param request
      */
     @RequestMapping("/addClass")
+    @ResponseBody
     public void addClass(Office office,HttpServletRequest request){
         office.setId(UUID.randomUUID().toString().replaceAll("-",""));
         office.setMaster("何团");
@@ -188,11 +192,31 @@ public class OfficecController {
     public Object getGroupByClass(String id,HttpServletRequest request){
         id = request.getParameter("s");
         List<Office> groups = officeService.findGroupByClassId(id);
+        Collections.sort(groups,new Comparator<Office>(){
+            public int compare(Office o1, Office o2) {
+                String n1 = o1.getName().substring(0,o1.getName().lastIndexOf("组"));
+                int i1 = Integer.parseInt(n1);
+                String n2 = o2.getName().substring(0,o2.getName().lastIndexOf("组"));
+                int i2 = Integer.parseInt(n2);
+                if (i1>i2){
+                    return 1;
+                }
+                else if (i1==i2){
+                    return 0;
+                }
+                return -1;
+            }
+        });
         JSONModel.put("groups",groups);
         return JSONModel.put();
     }
 
 
+    /**
+     * 添加分组
+     * @param office
+     * @param request
+     */
     @RequestMapping("/addGroup")
     public void addGroup(Office office,HttpServletRequest request){
         String n = request.getParameter("num");
@@ -208,5 +232,85 @@ public class OfficecController {
             office.setIsDel(1);
             officeService.addOffice(office);
         }
+    }
+
+    /**
+     * 删除班级
+     * @param office
+     * @param userOffice
+     * @param request
+     */
+    @RequestMapping("/deleteClass")
+    @ResponseBody
+    public void deleteClass(Office office,UserOffice userOffice,HttpServletRequest request){
+
+        String classId = request.getParameter("classId");
+        office.setId(classId);
+        //删除该班的所有关联表
+        List<UserOffice> userOfficeId1 = userService.findIdByOid(office);
+        if (userOffice!=null){
+            for (UserOffice o:
+                 userOfficeId1) {
+                System.out.println(o.getId());
+                userOffice.setId(o.getId());
+                userOffice.setIsDel(0);
+                userService.deleteUserOfficeByGroup(userOffice);
+            }
+        }
+
+        //删除该班的小组的所有关联表
+        UserOffice userOffice1 = new UserOffice();
+        List<Office> officeId = officeService.findIdByParent(office);
+        for (Office o:
+             officeId) {
+            System.out.println(o.getId());
+            List<UserOffice> userOfficeId2 = userService.findIdByOid(o);
+            for (UserOffice uo:
+                 userOfficeId2) {
+                System.out.println(uo.getId());
+                userOffice1.setId(uo.getId());
+                userOffice1.setIsDel(0);
+                userService.deleteUserOfficeByGroup(userOffice1);
+            }
+
+            //删除该班所有组
+            o.setIsDel(0);
+            officeService.deleteOffice(o);
+        }
+
+        office.setIsDel(0);
+        officeService.deleteOffice(office);
+    }
+
+    /**
+     * 删除小组
+     * @param request
+     */
+    @RequestMapping("/deleteGroup")
+    @ResponseBody
+    public void deleteGroup(HttpServletRequest request){
+        String gid = request.getParameter("gid");
+        System.out.println(gid);
+        Office office = new Office();
+        office.setId(gid);
+        List<UserOffice> userOffices = userService.findIdByOid(office);
+        for (UserOffice uo:
+             userOffices) {
+            uo.setIsDel(0);
+            userService.deleteUserOfficeByGroup(uo);
+        }
+        office.setIsDel(0);
+        officeService.deleteOffice(office);
+    }
+
+
+    @RequestMapping("/reviseClassName")
+    @ResponseBody
+    public void reviseClassName(Office office,HttpServletRequest request){
+        String name = request.getParameter("name");
+        String cid = request.getParameter("cid");
+        office.setId(cid);
+        office.setName(name);
+        officeService.deleteOffice(office);
     }
 }

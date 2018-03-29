@@ -114,7 +114,7 @@ public interface UserMapper {
      * @param office 包括班级id的office对象
      * @return
      */
-    List<User> selectByClassChecking(Office office);
+    List<User> selectByClassChecking(@Param("office") Office office);
 
 
 
@@ -169,5 +169,17 @@ public interface UserMapper {
     List<User> selectByGroup(Office office);
 
 
-    List<UserVO> selectUsersWithGroup(Office office);
+    /**
+     * 获取某个班的学生包括组号
+     * @param office
+     * @return
+     */
+    List<UserVO> selectUsersWithGroup(@Param("office") Office office);
+
+    /**
+     * 获取没有与某班级关联的教员
+     * @return
+     */
+    List<User> selectAllTeacherNoThisClass(@Param("office") Office office);
+
 }

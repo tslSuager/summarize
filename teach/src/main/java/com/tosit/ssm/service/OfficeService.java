@@ -37,4 +37,24 @@ public interface OfficeService {
      */
     List<Office> findGroupByClassId(String id);
         public  List<Office> getAllClass();
+
+    /**
+     * 删除某个组织
+     * @param office
+     */
+    int deleteOffice(Office office);
+
+    /**
+     *通过Id查找某组织
+     * @param id
+     * @return
+     */
+    Office findOfficeById(String id);
+
+    /**
+     * 查找某组织的子Id
+     * @param office
+     * @return
+     */
+    List<Office> findIdByParent(Office office);
 }

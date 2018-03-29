@@ -22,14 +22,14 @@
             <div class="ibox-content">
                 <div class="row">
                     <div class="col-sm-2"></div>
-                    <div class="col-sm-8">
-                        <button class="btn btn-outline btn-info chooseTeacher btn-xs buttonCss" type="button" name="">即可夜壶</button>
+                    <div class="col-sm-8" id="teachers">
+                       <%-- <button class="btn btn-outline btn-info chooseTeacher btn-xs buttonCss" type="button" name="">即可夜壶</button>
                         <button class="btn btn-outline btn-info chooseTeacher btn-xs buttonCss" type="button" name="">即可夜壶</button>
                         <button class="btn btn-outline btn-info chooseTeacher btn-xs buttonCss" type="button" name="">即可夜壶</button>
                         <button class="btn btn-outline btn-info chooseTeacher btn-xs buttonCss" type="button" name="">即可夜壶</button>
                         <button class="btn btn-outline btn-info chooseTeacher btn-xs buttonCss" type="button" name="">即夜壶</button>
                         <button class="btn btn-outline btn-info chooseTeacher btn-xs buttonCss" type="button" name="">即壶</button>
-                        <button class="btn btn-outline btn-info chooseTeacher btn-xs buttonCss" type="button" name="">即可夜壶</button>
+                        <button class="btn btn-outline btn-info chooseTeacher btn-xs buttonCss" type="button" name="">即可夜壶</button>--%>
                     </div>
                     <div class="col-sm-2"></div>
                 </div>
@@ -45,12 +45,23 @@
 <script src="/static/js/content.min.js"></script>
 <script src="/static/js/welcome.min.js"></script>
 <script type="text/javascript">
-    $(".chooseTeacher").click(function () {
+    $("body").on("click",".chooseTeacher",function () {
         if ($(this).hasClass("btn-info")){
-            $(this).removeClass("btn-info").addClass("btn-warning").attr("id",Math.random());
+            $(this).removeClass("btn-info").addClass("btn-warning");
         }else if($(this).hasClass("btn-warning")){
             $(this).removeClass("btn-warning").addClass("btn-info").removeAttr("id");
         }
+    });
+
+    //获取从父页面传来的班级id
+    var url = location.search;
+    var s = url.slice(5);
+
+    $.get("/user/getAllTeacherNoThisClass",{s},function (msg) {
+        var teachers = msg['teachers'];
+        $.each(teachers,function (i,each) {
+            $("#teachers").append('<button class="btn btn-outline btn-info chooseTeacher btn-xs buttonCss" id="'+each['id']+'" type="button" name="" style="margin-right: 10px">'+each['name']+'</button>')
+        });
     });
 </script>
 </body>

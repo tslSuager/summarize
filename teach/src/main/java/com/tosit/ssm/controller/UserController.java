@@ -3,6 +3,8 @@ package com.tosit.ssm.controller;
 import com.tosit.ssm.common.util.json.JSONModel;
 import com.tosit.ssm.entity.Office;
 import com.tosit.ssm.entity.User;
+import com.tosit.ssm.entity.UserOffice;
+import com.tosit.ssm.entity.UserVO;
 import com.tosit.ssm.service.OfficeService;
 import com.tosit.ssm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +14,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/user")
@@ -93,27 +97,57 @@ public class UserController {
      */
     @RequestMapping("/getUserByDateAreaNoClass")
     @ResponseBody
-    public Object getUserByDateAreaNoClass(Office office, HttpServletRequest request){
+    public Object getUserByDateAreaNoClass(Office office, HttpServletRequest request) {
         Date startDate = null;
         Date endDate = null;
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
         String sdate = request.getParameter("startDate");
         String edate = request.getParameter("endDate");
         String pId = request.getParameter("pId");
-        if (pId==null){
-            pId = "001001";
+        String s = request.getParameter("s");
+        if (s == null && pId == null) {//没有选择学校
+            System.out.println("没有选择学校");
+            JSONModel.put("message", "error");
+            return JSONModel.put();
         }
-        try {
-            startDate = format.parse(sdate);
-            endDate = format.parse(edate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }System.out.println(sdate+":"+edate);
-        System.out.println(startDate+":"+endDate);
-        office.setId(pId);
-        List<User> users = userService.findUserByDateAreaNoClass(startDate,endDate,office);
-        JSONModel.put("users",users);
-        return JSONModel.put();
+        else if (s == null && pId != null) {//正常搜索
+            System.out.println("正常搜索");
+            try {
+                startDate = format.parse(sdate);
+                endDate = format.parse(edate);
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            office.setId(pId);
+            List<User> users = userService.findUserByDateAreaNoClass(startDate, endDate, office);
+            JSONModel.put("message", "success");
+            JSONModel.put("users", users);
+            return JSONModel.put();
+        }
+        else if (s != null && pId == null) {//初始化界面
+            System.out.println("初始化界面");
+
+            Office class1 = officeService.findOfficeById(s);
+            pId = class1.getParentId();
+            System.out.println(s);
+            System.out.println(pId);
+            try {
+                startDate = format.parse(sdate);
+                endDate = format.parse(edate);
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            office.setId(pId);
+            List<User> users = userService.findUserByDateAreaNoClass(startDate, endDate, office);
+            JSONModel.put("users", users);
+            return JSONModel.put();
+        }
+        else {
+            return JSONModel.put("message","OK");
+        }
     }
 
     /**
@@ -153,8 +187,149 @@ public class UserController {
      */
     @RequestMapping("/getUsersByGroup")
     @ResponseBody
-    public Object getUsersByGroup(){
-        List<Office> groups = officeService.findGroupByClassId("");
-        return null;
+    public Object getUsersByGroup(Office office,HttpServletRequest request){
+        String cId = request.getParameter("s");
+        office.setId(cId);
+        List<UserVO> users = userService.findUserWithGroup(office);
+        JSONModel.put("users",users);
+        return JSONModel.put();
+    }
+
+    /**
+     * 获取所有没有与某个班级关联的教员
+     * @return
+     */
+    @RequestMapping("/getAllTeacherNoThisClass")
+    @ResponseBody
+    public Object getAllTeacherNoThisClass(Office office,HttpServletRequest request){
+        String cid = request.getParameter("s");
+        office.setId(cid);
+        List<User> techers = userService.findAllTeacherNoThisClass(office);
+        JSONModel.put("teachers",techers);
+        return JSONModel.put();
+    }
+
+    /**
+     * 向组织（小组或班级）添加成员
+     * @param userOffice 关联表
+     * @param request
+     */
+    @RequestMapping("/addStuToGroup")
+    @ResponseBody
+    public void addStuToGroup(UserOffice userOffice, HttpServletRequest request){
+        String sid = request.getParameter("id");
+        String gid = request.getParameter("gid");
+        userOffice.setOfficeId(gid);
+        userOffice.setUserId(sid);
+        System.out.println(gid);
+        UserOffice userOfficeId = userService.findUserOfficeId(userOffice);
+        if (userOfficeId==null){
+            userOffice.setId(UUID.randomUUID().toString().replaceAll("-",""));
+            userOffice.setIsDel(1);
+            userService.insertUserOfficeByGroup(userOffice);
+        } else {
+            String id = userOfficeId.getId();
+            userOffice.setId(id);
+            userOffice.setIsDel(1);
+            userService.deleteUserOfficeByGroup(userOffice);
+        }
+    }
+
+    /**
+     * 删除某个组织（班级，小组）的学生
+     * @param userOffice 关联表
+     * @param request
+     */
+    @RequestMapping("/deleteStuByGroup")
+    @ResponseBody
+    public void deleteStuByGroup(UserOffice userOffice,HttpServletRequest request){
+        String sid = request.getParameter("id");
+        String gid = request.getParameter("gid");
+        System.out.println(gid+":"+sid);
+        userOffice.setUserId(sid);
+
+
+        List<Office> groups = officeService.findGroupByClassId(gid);
+        for (Office o:
+             groups) {
+            userOffice.setOfficeId(o.getId());
+            UserOffice userOfficeChild = userService.findUserOfficeId(userOffice);
+            if (userOfficeChild!=null){
+                userOfficeChild.setIsDel(0);
+                userService.deleteUserOfficeByGroup(userOfficeChild);
+            }
+        }
+
+        userOffice.setOfficeId(gid);
+        System.out.println(userOffice);
+        UserOffice userOfficeId = userService.findUserOfficeId(userOffice);
+        String id = userOfficeId.getId();
+        userOffice.setId(id);
+        userOffice.setIsDel(0);
+        userService.deleteUserOfficeByGroup(userOffice);
+
+        System.out.println("ok");
+    }
+
+    /**
+     * 向某个班级添加老师
+     * @param userOffice
+     * @param request
+     */
+    @RequestMapping("/addTeacherToClass")
+    @ResponseBody
+    public void addTeacherToClass(UserOffice userOffice, HttpServletRequest request){
+        String id = request.getParameter("id");
+        String cid = request.getParameter("cid");
+        userOffice.setId(UUID.randomUUID().toString().replaceAll("-",""));
+        userOffice.setUserId(id);
+        userOffice.setOfficeId(cid);
+        userService.insertUserOfficeByGroup(userOffice);
+    }
+
+    /**
+     * 获得某班未关联考勤规则的人
+     * @param request
+     * @return
+     */
+    @RequestMapping("/getUserNoRuleByClass")
+    @ResponseBody
+    public Object getUserNoRuleByClass(HttpServletRequest request){
+        String id = request.getParameter("s");
+        List<User> users = userService.findUserNoRuleByClass(id);
+        JSONModel.put("users",users);
+        return  JSONModel.put();
+    }
+
+    /**
+     * 获得某班关联了考勤规则的学生
+     * @param office
+     * @param request
+     * @return
+     */
+    @RequestMapping("/gerUserWithRuleByClass")
+    @ResponseBody
+    public Object gerUserWithRuleByClass(Office office,HttpServletRequest request){
+        String cid = request.getParameter("s");
+        office.setId(cid);
+        List<User> users = userService.findUserWithRuleByClass(office);
+        JSONModel.put("users",users);
+        return JSONModel.put();
+    }
+
+    /**
+     * 修改某用户的考勤规则id
+     * @param user
+     * @param request
+     */
+    @RequestMapping("/updateStuWithRule")
+    @ResponseBody
+    public void updateStuWithRule(User user,HttpServletRequest request){
+        String id = request.getParameter("id");
+        String rid = request.getParameter("rid");
+        System.out.println(id+":"+rid);
+        user.setId(id);
+        user.setKaoqinRuleid(rid);
+        userService.modifyUser(user);
     }
 }

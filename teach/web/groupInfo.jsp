@@ -115,9 +115,10 @@
     $(function () {
         $("body").on("click",".chooseStu",function () {
             if ($(this).hasClass("btn-info")){
-                $(this).removeClass("btn-info").addClass("btn-warning").attr("id",Math.random());
+                var id = $(this).parent().attr("id");
+                $(this).attr("name",id).removeClass("btn-info").addClass("btn-warning");
             }else if($(this).hasClass("btn-warning")){
-                $(this).removeClass("btn-warning").addClass("btn-info").removeAttr("id");
+                $(this).removeClass("btn-warning").addClass("btn-info").removeAttr("id").removeAttrs("name");
             }
         });
         $("#addStu").click(function () {
@@ -133,17 +134,14 @@
             $("#left").find(".btn-warning").remove();
         });
 
-        $("body").on("click",".deleteGroup",function () {
-            $(this).parent().remove();
-        });
-
+        //获取从父页面传来的班级id
         var url = location.search;
         var s = url.slice(5);
 
         $.get("/user/getUsersByClassNoGroup",{s},function (msg) {
             var users = msg['users'];
             $.each(users,function (i,each) {
-                $("#right").append('<button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">'+each['name']+'</button>');
+                $("#right").append('<button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="" id="'+each['id']+'">'+each['name']+'</button>');
             })
         });
 
@@ -154,21 +152,17 @@
                 $("#grouping").attr("text",num);
                 $.each(groups,function (i,each) {
                     var tt="#tab-"+(i+1);
-                    $('#className').append($("<li>").addClass("group"+(i+1)+"").addClass(""+each['id']+"").append($("<a>").attr("data-toggle","tab").attr("href",tt).text(""+each['name']+""))
-                        .append($("<button>").addClass("btn btn-outline btn-danger btn-xs buttonCss deleteGroup").text("删除该组")));
-                    $('.tab-content').append($("<div>").attr("id","tab-"+(i+1)).addClass("tab-pane").addClass(""+each['id']+"").append($("<div>").addClass("panel-body").attr("id",each['id'])));
+                    $('#className').append($("<li>").addClass("group"+(i+1)+"").addClass(""+each['id']+"").append($("<a>").attr("data-toggle","tab").attr("href",tt).text(""+each['name']+"")));
+                    $('.tab-content').append($("<div>").attr("id","tab-"+(i+1)).addClass("tab-pane").addClass(""+each['id']+"").append($("<div>").addClass("panel-body").attr("id",each['id'])
+                        .append($("<div>").append($("<button>").addClass("btn btn-outline btn-danger btn-xs buttonCss deleteGroup").text("删除该组")))));
                 });
 
                 var ll = $("#className").find("li").length;
-                console.info(ll);
-
                 $("#grouping").click(function () {
                     var num =  $("#inputNum").val();
                     $.get("/office/addGroup",{num,ll,s},function () {
-                        $("#className").find("li").remove();
-                        $(".tab-content ").find("div").remove();
-                        //getGroup();
                     });
+                    window.location.reload();
                     /*var num =  $("#inputNum").val();
                     var num2 = $(this).attr("text");
                     if (num2!=null){
@@ -205,14 +199,35 @@
             });
         }
 
+        $("body").on("click",".deleteGroup",function () {
+            var gid = $(this).parent().parent().attr("id");
+            layer.confirm('您确认要删除吗？', {
+                btn: ['是滴','再想想'] //按钮
+            }, function(){
+                $.get("/office/deleteGroup",{gid},function () {
+                    $("."+gid+"").remove();
+                    layer.msg('删除成功', {icon: 1});
+                });
+            }, function(){
+                layer.msg('也可以这样', {
+                    time: 1000
+                });
+            });
+        });
+
         $(getGroup());
 
-
-
-
-        $.get("/user/getUserByClassId",{},function (msg) {
+        $.get("/user/getUsersByGroup",{s},function (msg) {
             var users = msg['users'];
-        })
+            $.each(users,function (i,each) {
+                var groupId = each['groupId'];
+                $("ul>li").each(function (index) {
+                    if ($(this).hasClass(groupId)){
+                        $("#"+groupId+"").append('<button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" id="'+each['id']+'" type="button" name="">'+each['name']+'</button>')
+                    }
+                });
+            });
+        });
     });
 </script>
 </body>

@@ -239,7 +239,7 @@
       is_del = #{isDel,jdbcType=INTEGER}
     where ID = #{id,jdbcType=VARCHAR}
   </update>-->
-  <update id="updateByExampleSelective" parameterType="com.tosit.ssm.entity.UserOffice">
+  <update id="updateByPrimaryKey" parameterType="com.tosit.ssm.entity.UserOffice">
     update user_office
     <set>
       <if test="record.id != null">
@@ -334,4 +334,14 @@
       </if>
     </trim>
   </insert>
+
+  <select id="selectIdByUidAndOid" parameterType="com.tosit.ssm.entity.UserOffice" resultMap="BaseResultMap">
+      SELECT ID
+       FROM user_office WHERE user_id=#{userOffice.userId} AND office_id=#{userOffice.officeId};
+  </select>
+
+  <select id="selectIdByOid" parameterType="com.tosit.ssm.entity.UserOffice" resultMap="BaseResultMap">
+    SELECT ID
+    FROM user_office WHERE office_id=#{office.id};
+  </select>
 </mapper>

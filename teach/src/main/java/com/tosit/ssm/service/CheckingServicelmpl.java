@@ -85,4 +85,8 @@ public class CheckingServicelmpl implements CheckingService{
         }
 //        kaoqinRuleDetailMapper.insert();
     }
+
+    public List<KaoqinRule> selectAllRule(String id) {
+        return kaoqinRuleMapper.selectRule(id);
+    }
 }

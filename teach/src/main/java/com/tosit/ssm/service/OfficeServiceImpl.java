@@ -44,4 +44,15 @@ public class OfficeServiceImpl implements OfficeService{
         return officeMapper.selectGroupByClassId(id);
     }
 
+    public int deleteOffice(Office office) {
+        return officeMapper.updateByPrimaryKey(office);
+    }
+
+    public Office findOfficeById(String id) {
+        return officeMapper.selectByPrimaryKey(id);
+    }
+
+    public List<Office> findIdByParent(Office office) {
+        return officeMapper.selectIdByParent(office);
+    }
 }

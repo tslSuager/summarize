@@ -61,3 +61,9 @@
 <script src="/static/js/demo/form-advanced-demo.min.js"></script>
 </body>
 </html>
+
+<script type="text/javascript">
+    $.get("",{},function (msg) {
+        
+    })
+</script>

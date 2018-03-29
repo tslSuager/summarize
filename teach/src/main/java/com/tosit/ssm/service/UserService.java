@@ -73,5 +73,55 @@ public interface UserService {
      */
     List<User> findClassUser(String officeId);
 
+    /**
+     * 查询某个班的学生包括组号
+     * @param office
+     * @return
+     */
     List<UserVO> findUserWithGroup(Office office);
+
+    /**
+     * 查询所有没有与某班级关联的教员
+     * @param office
+     * @return
+     */
+    List<User> findAllTeacherNoThisClass(Office office);
+
+    /**
+     * 添加一个学生到组织
+     * @param userOffice
+     */
+    void insertUserOfficeByGroup(UserOffice userOffice);
+
+    /**
+     * 删除组织内的学生
+     * @param userOffice
+     */
+    void deleteUserOfficeByGroup(UserOffice userOffice);
+
+    /**
+     * 按照学生id和office id 查找UserOffice关联表id
+     * @param userOffice
+     */
+    UserOffice findUserOfficeId(UserOffice userOffice);
+
+    /**
+     * 按照组织Id查找该组织所有的关联表
+     * @param office
+     * @return
+     */
+    List<UserOffice> findIdByOid(Office office);
+
+    /**
+     * 按照班级id查找该班没有关联考勤规则的学生
+     * @param id
+     */
+    List<User> findUserNoRuleByClass(String id);
+
+    /**
+     * 按照班级id查找该班关联了考勤规则的学生
+     * @param office
+     * @return
+     */
+    List<User> findUserWithRuleByClass(Office office);
 }

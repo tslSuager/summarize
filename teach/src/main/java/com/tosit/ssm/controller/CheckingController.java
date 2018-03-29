@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.tosit.ssm.common.util.json.JSONModel;
 import com.tosit.ssm.entity.*;
 import com.tosit.ssm.service.CheckingService;
+import com.tosit.ssm.service.CheckingServicelmpl;
 import com.tosit.ssm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -182,4 +183,12 @@ public class CheckingController {
         return JSONModel.getMap();
     }
 
+    @RequestMapping("/getAllRule")
+    @ResponseBody
+    public Object getAllRule(){
+        String id = null;
+        List<KaoqinRule> kaoqinRules = checkingService.selectAllRule(id);
+        JSONModel.put("Rules",kaoqinRules);
+        return JSONModel.put();
+    }
 }

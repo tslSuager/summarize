@@ -67,4 +67,11 @@ public interface CheckingService {
      */
     int updateByPrimaryKey(KaoqinResult record);
     public void addKaoQinRule(KaoqinRule kaoqinRule, KaoqindetailVO kaoqindetailVO);
+
+    /**
+     * 查找所有有效地考勤规则
+     * @param id
+     * @return
+     */
+    List<KaoqinRule> selectAllRule(String id);
 }

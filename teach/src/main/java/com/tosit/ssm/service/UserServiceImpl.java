@@ -1,11 +1,9 @@
 package com.tosit.ssm.service;
 
-import com.tosit.ssm.entity.Office;
-import com.tosit.ssm.entity.Experience;
-import com.tosit.ssm.entity.User;
-import com.tosit.ssm.entity.UserVO;
+import com.tosit.ssm.entity.*;
 import com.tosit.ssm.mapper.ExperienceMapper;
 import com.tosit.ssm.mapper.UserMapper;
+import com.tosit.ssm.mapper.UserOfficeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +16,8 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
     @Autowired
     private ExperienceMapper experienceMapper;
+    @Autowired
+    private UserOfficeMapper userOfficeMapper;
 
     @Override
     public User selectByPrimaryKey(String userId) {
@@ -91,13 +91,39 @@ public class UserServiceImpl implements UserService {
         return userMapper.selectByTimeAreaNClass(startDate,endDate,office);
     }
 
-    @Override
     public List<User> findUserWithClassNotInGroup(Office office) {
         return userMapper.selectByClassGroup(office);
     }
 
-    @Override
     public List<UserVO> findUserWithGroup(Office office) {
         return userMapper.selectUsersWithGroup(office);
+    }
+
+    public List<User> findAllTeacherNoThisClass(Office office) {
+        return userMapper.selectAllTeacherNoThisClass(office);
+    }
+
+    public void insertUserOfficeByGroup(UserOffice userOffice) {
+        userOfficeMapper.insertUserOffice(userOffice);
+    }
+
+    public void deleteUserOfficeByGroup(UserOffice userOffice) {
+        userOfficeMapper.updateByPrimaryKey(userOffice);
+    }
+
+    public UserOffice findUserOfficeId(UserOffice userOffice) {
+        return userOfficeMapper.selectIdByUidAndOid(userOffice);
+    }
+
+    public List<UserOffice> findIdByOid(Office office) {
+        return userOfficeMapper.selectIdByOid(office);
+    }
+
+    public List<User> findUserNoRuleByClass(String id) {
+        return userMapper.selectNoGuize(id);
+    }
+
+    public List<User> findUserWithRuleByClass(Office office) {
+        return userMapper.selectByClassChecking(office);
     }
 }

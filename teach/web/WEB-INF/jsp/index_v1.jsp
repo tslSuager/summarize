@@ -176,10 +176,14 @@
              * 点击删除班级按钮删除某班级
              */
             $('body').on("click",".deleteClass",function () {
+                var classId = $(this).parent().parent().attr("id");
                 layer.confirm('您确认要删除吗？', {
                     btn: ['是滴','再想想'] //按钮
                 }, function(){
-                    layer.msg('删除成功', {icon: 1});
+                    $.get("/office/deleteClass",{classId},function () {
+                        layer.msg('删除成功', {icon: 1});
+                        $("#"+classId+"").remove();
+                    });
                 }, function(){
                     layer.msg('也可以这样', {
                         time: 1000
@@ -203,7 +207,7 @@
                         var body = layer.getChildFrame('body', index);
                         var school = body.find("#pullListTree").find("select").eq(1).val();
                         var name = body.find("#name").val();
-
+                        console.info(body);
                         function p(s) {
                             return s < 10 ? '0' + s: s;
                         }
@@ -273,9 +277,32 @@
                     content: '/classInfo.jsp?cid='+cid,
                     btn:['完成','算了'],
                     yes:function (index,layero) {
+                        var body = layer.getChildFrame('body', index);
+                        var stus1 = body.find("#right").find(".btn-success");
+                        var stus2 = body.find("#left").find(".btn-success");
+                        var num1 = stus1.length;
+                        var num2 = stus2.length;
+                        console.info(num1);
+                        console.info(num2);
                         layer.confirm('确定修改吗',{
                             btn:['确定','再想想']
                         },function () {
+                            if (num2>0){
+                                for (var i = 0;i<num2;i++){
+                                    var id = stus2[i].id;
+                                    var gid = cid;
+                                    $.get("/user/addStuToGroup",{id,gid},function (msg) {
+                                    });
+                                }
+                            }
+                            if (num1>0){
+                                for (var i = 0;i<num1;i++){
+                                    var id = stus1[i].id;
+                                    var gid = cid;
+                                    $.get("/user/deleteStuByGroup",{id,gid},function (msg) {
+                                    });
+                                }
+                            }
                             layer.close(index);
                             layer.msg('修改成功');
                         },function () {
@@ -295,16 +322,37 @@
                 var cid = $(this).parent().parent().attr("id");
                 layer.open({
                     type: 2,
-                    title: '班级信息',
+                    title: '小组信息',
                     shadeClose: true,
                     shade: 0,
                     area: ['100%', '100%'],
                     content: '/groupInfo.jsp?cid='+cid,
                     btn:['完成','算了'],
                     yes:function (index,layero) {
+                        var body = layer.getChildFrame('body', index);
+                        var stus1 = body.find("#right").find(".btn-success");
+                        var stus2 = body.find("#left").find(".btn-success");
+                        var num1 = stus1.length;
+                        var num2 = stus2.length;
                         layer.confirm('确定修改吗',{
                             btn:['确定','再想想']
                         },function () {
+                            if (num2>0){
+                                for (var i = 0;i<num2;i++){
+                                    var id = stus2[i].id;
+                                    var gid = body.find("#"+id+"").parent().attr("id");
+                                    $.get("/user/addStuToGroup",{id,gid},function (msg) {
+                                    });
+                                }
+                            }
+                            if (num1>0){
+                                for (var i = 0;i<num1;i++){
+                                    var id = stus1[i].id;
+                                    var gid = stus1[i].name;
+                                    $.get("/user/deleteStuByGroup",{id,gid},function (msg) {
+                                    });
+                                }
+                            }
                             layer.close(index);
                             layer.msg('修改成功');
                         },function () {
@@ -321,16 +369,45 @@
              * 点击匹配考勤规则按钮，跳转页面，分配改班级学生的考勤规则
              */
             $("body").on("click",".matchAttendance",function () {
+                var cid = $(this).parent().parent().attr("id");
                 layer.open({
                     type: 2,
                     title: '匹配考勤规则',
                     shadeClose: true,
                     shade: 0.8,
                     area: ['100%', '100%'],
-                    content: '/matchClassAttendance.jsp',
+                    content: '/matchClassAttendance.jsp?cid='+cid,
                     btn:['完成','算了'],
-                    btn1:function (index,layero) {
-                        layer.msg('添加成功');
+                    yes:function (index,layero) {
+                        var body = layer.getChildFrame('body', index);
+                        var stus1 = body.find("#right").find(".btn-success");
+                        var stus2 = body.find("#left").find(".btn-success");
+                        var num1 = stus1.length;
+                        var num2 = stus2.length;
+                        layer.confirm('确定修改吗',{
+                            btn:['确定','再想想']
+                        },function () {
+                            if (num2>0){
+                                for (var i = 0;i<num2;i++){
+                                    var id = stus2[i].id;
+                                    var rid = body.find("#"+id+"").parent().attr("id");
+                                    $.get("/user/updateStuWithRule",{id,rid},function (msg) {
+                                    });
+                                }
+                            }
+                            if (num1>0){
+                                for (var i = 0;i<num1;i++){
+                                    var id = stus1[i].id;
+                                    var rid =null;
+                                    $.get("/user/updateStuWithRule",{id,rid},function (msg) {
+                                    });
+                                }
+                            }
+                            layer.close(index);
+                            layer.msg('修改成功');
+                        },function () {
+                            layer.msg('好好想想');
+                        });
                     },
                     btn2:function (index,layero) {
                         layer.close(index);
@@ -342,6 +419,7 @@
              * 点击修改班级按钮，可修改班级名称
              */
             $("body").on("click",".reviseClass",function () {
+                var cid = $(this).parent().parent().attr("id");
                 layer.open({
                     type: 2,
                     title: '修改班级',
@@ -351,6 +429,11 @@
                     content: '/reviseClass.jsp',
                     btn:['确认绑定','算了'],
                     btn1:function (index,layero) {
+                        var body = layer.getChildFrame('body', index);
+                        var name = body.find("input").val();
+                        $.get("/office/reviseClassName",{name,cid},function () {
+                        });
+                        $("#"+cid+"").find("td").eq(0).text(name);
                         layer.msg('绑定成功');
                     },
                     btn2:function (index,layero) {
@@ -384,15 +467,26 @@
              * 点击增加教师按钮，为该班级添加老师
              */
             $("body").on("click",".addTeacher",function () {
+                var cid = $(this).parent().parent().attr("id");
                 layer.open({
                     type: 2,
                     title: '添加教师',
                     shadeClose: true,
                     shade: 0.8,
                     area: ['30%', '50%'],
-                    content: '/page/addTeacher',
+                    content: '/addTeacher.jsp?cid='+cid,
                     btn:['确认添加','算了'],
-                    btn1:function (index,layero) {
+                    yes:function (index,layero) {
+                        var body = layer.getChildFrame('body', index);
+                        var teacher = body.find(".btn-warning");
+                        var num = teacher.length;
+                        for (var i=0;i<num;i++){
+                            var id = teacher[i].id;
+                            $.get("/user/addTeacherToClass",{id,cid},function (msg) {
+                            });
+                        }
+                        console.info(num);
+                        layer.close(index);
                         layer.msg('添加成功');
                     },
                     btn2:function (index,layero) {

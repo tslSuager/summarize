@@ -57,30 +57,6 @@
                     <div class="col-sm-12">
                         <div class="ibox float-e-margins">
                             <div class="ibox-content" id="left">
-                                <%--<button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>--%>
                             </div>
                             <div>
                                 <div class="col-sm-8"></div>
@@ -120,7 +96,7 @@
                 <div class="form-group col-sm-4">
                     <div class="form-group" id="data_5">
                         <div class="input-daterange input-group" id="datepicker">
-                            <input type="text" class="input-sm form-control" name="start" value="2018-3-9" id="startDate"/>
+                            <input type="text" class="input-sm form-control" name="start" value="2018-3-1" id="startDate"/>
                             <span class="input-group-addon">到</span>
                             <input type="text" class="input-sm form-control" name="end" value="2018-3-29" id="endDate"/>
                         </div>
@@ -137,19 +113,6 @@
                 <div class="col-sm-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-content" id="right">
-                            <%--<button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                            <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                            <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                            <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                            <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                            <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                            <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                            <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                            <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                            <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                            <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                            <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                            <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>--%>
                         </div>
                     </div>
                 </div>
@@ -187,7 +150,7 @@
 
         $("body").on("click",".chooseStu",function () {
             if ($(this).hasClass("btn-info")){
-                $(this).removeClass("btn-info").addClass("btn-warning").attr("id",Math.random());
+                $(this).removeClass("btn-info").addClass("btn-warning");
             }else if($(this).hasClass("btn-warning")){
                 $(this).removeClass("btn-warning").addClass("btn-info").removeAttr("id");
             }
@@ -210,28 +173,39 @@
             var endDate = $("#endDate").val();
             var pId = $("#pullListTree").data("selectAreaId");
             $.get("/user/getUserByDateAreaNoClass",{startDate,endDate,pId},function (msg) {
-                var users = msg['users'];
-                $.each(users,function (i,each) {
-                    $("#right").append('<button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">'+each['name']+'</button>');
-                });
+                console.info(msg['message']);
+                var user = msg['users'];
+                if (msg['message']== 'error'){
+                    layer.confirm('必须选择区域否则无法查询数据', {
+                        btn: ['好的'] //按钮
+                    });
+                }else {
+                    $("#right").find("button").remove();
+                    $.each(user,function (i,each) {
+                        $("#right").append('<button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="" id="'+each['id']+'">'+each['name']+'</button>');
+                    });
+                }
             });
         });
 
         var startDate = $("#startDate").val();
         var endDate = $("#endDate").val();
+
         var url = location.search;
         var s = url.slice(5);
+        console.info(s);
+
         var pId = $("#pullListTree").data("selectAreaId");
-        $.get("/user/getUserByDateAreaNoClass",{startDate,endDate,pId},function (msg) {
+        $.get("/user/getUserByDateAreaNoClass",{startDate,endDate,s},function (msg) {
             var users = msg['users'];
             $.each(users,function (i,each) {
-                $("#right").append('<button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">'+each['name']+'</button>');
+                $("#right").append('<button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="" id="'+each['id']+'">'+each['name']+'</button>');
             });
         });
         $.get("/user/getUserByClassId",{s},function (msg) {
             var users = msg['users'];
             $.each(users,function (i,each) {
-                $("#left").append('<button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">'+each['name']+'</button>');
+                $("#left").append('<button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="" id="'+each['id']+'">'+each['name']+'</button>');
             })
         });
 </script>
