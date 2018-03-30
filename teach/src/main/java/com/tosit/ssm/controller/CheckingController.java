@@ -14,12 +14,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/checking")
@@ -29,14 +28,6 @@ public class CheckingController {
     @Autowired
     private UserService userService;
     private SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
-
-
-//    @InitBinder
-//    protected void initBinder(WebDataBinder binder) {
-//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//        dateFormat.setLenient(false);
-//        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));//第二个参数是控制是否支持传入的值是空，这个值很关键，如果指定为false，那么如果前台没有传值的话就会报错
-//    }
     /**
      * 添加考勤规则  当为方案三方案四的时候第一条记录不要
      * @return 返回成功或者失败（具体的返回值到时候常量类定义了再说）
@@ -189,6 +180,46 @@ public class CheckingController {
         checkingService.updateByPrimaryKey(kaoqinResult);
 
         return JSONModel.getMap();
+    }
+    /**
+     * 进入处理信息页面
+     * @param officeId 班级ID
+     * @return
+     */
+    @RequestMapping("/getKaoqinRemarkAndQingJiaRecord")
+    @ResponseBody
+    public Object getKaoqinRemarkAndQingJiaRecord(String officeId){
+        List<KaoqinResult> kaoqinResults= checkingService.findKaoqinRemarkAndQingJiaRecord(officeId);
+       return kaoqinResults;
+    }
+
+    /**
+     * 查询所有的考勤规则和详情
+     * @return
+     */
+    @RequestMapping("/getKaoqinAllRules")
+    @ResponseBody
+    public Object getKaoqinAllRules(){
+        List<KaoqinRule> kaoqinRulesIncludeDetail = checkingService.findKaoqinRulesIncludeDetail();
+        return kaoqinRulesIncludeDetail;
+    }
+
+    /**
+     * 为指定得考勤规则添加考勤详情
+     * @return
+     */
+    @RequestMapping("/addKaoqinDetail")
+    public String addKaoqinDetail(KaoqinRule kaoqinRule){
+        kaoqinRule.getKaoqinRuleDetails().get(0).setKaoqinRuleId(kaoqinRule.getId());
+        kaoqinRule.getKaoqinRuleDetails().get(0).setId(UUID.randomUUID().toString());
+        checkingService.addKaoQinRuleDetail(kaoqinRule);
+       return "/kaoqin_rule_display";
+    }
+    @RequestMapping(value = "/updateKaoqinDetail" ,method = RequestMethod.POST)
+    @ResponseBody
+    public Object updateKaoqinDetail(KaoqinRuleDetail kaoqinRuleDetail){
+        checkingService.updateKaoqinDetail(kaoqinRuleDetail);
+        return "success";
     }
 
 }

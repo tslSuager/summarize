@@ -84,6 +84,10 @@
                             <a class="J_menuItem" href="/page/matchStudentAttendance">    考勤规则和個人关联
                             </a>
                         </li>
+                        <li>
+                            <a class="J_menuItem" href="/page/kaoqin_rule_display">    查看考勤规则
+                            </a>
+                        </li>
                     </ul>
 
                 </li>

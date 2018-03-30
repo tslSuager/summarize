@@ -12,6 +12,47 @@
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
   </resultMap>
+  <resultMap id="KaoqinRuleAndDetailMap" type="com.tosit.ssm.entity.KaoqinRule" >
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="ruleName" jdbcType="VARCHAR" property="rulename" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="rule_type" jdbcType="INTEGER" property="ruleType" />
+    <result column="is_default" jdbcType="INTEGER" property="isDefault" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+
+    <collection property="kaoqinRuleDetails" ofType="com.tosit.ssm.entity.KaoqinRuleDetail">
+      <id column="krd_ID" jdbcType="VARCHAR" property="id" />
+      <result column="krd_kaoqin_rule_id" jdbcType="VARCHAR" property="kaoqinRuleId" />
+      <result column="krd_week_day" jdbcType="INTEGER" property="weekDay" />
+      <result column="krd_date" jdbcType="DATE" property="date" />
+      <result column="krd_brush_startTime1" jdbcType="TIME" property="brushStarttime1" />
+      <result column="krd_brush_endTime1" jdbcType="TIME" property="brushEndtime1" />
+      <result column="krd_time1_wucha" jdbcType="INTEGER" property="time1Wucha" />
+      <result column="krd_brush_startTime2" jdbcType="TIME" property="brushStarttime2" />
+      <result column="krd_brush_endTime2" jdbcType="TIME" property="brushEndtime2" />
+      <result column="krd_time1_wucha2" jdbcType="INTEGER" property="time1Wucha2" />
+      <result column="krd_brush_startTime3" jdbcType="TIME" property="brushStarttime3" />
+      <result column="krd_brush_endTime3" jdbcType="TIME" property="brushEndtime3" />
+      <result column="krd_time1_wucha3" jdbcType="INTEGER" property="time1Wucha3" />
+      <result column="krd_brush_startTime4" jdbcType="TIME" property="brushStarttime4" />
+      <result column="krd_brush_endTime4" jdbcType="TIME" property="brushEndtime4" />
+      <result column="krd_time1_wucha4" jdbcType="INTEGER" property="time1Wucha4" />
+      <result column="krd_remarks" jdbcType="VARCHAR" property="remarks" />
+      <result column="krd_create_time" jdbcType="TIMESTAMP" property="createTime" />
+      <result column="krd_create_by" jdbcType="VARCHAR" property="createBy" />
+      <result column="krd_update_time" jdbcType="TIMESTAMP" property="updateTime" />
+      <result column="krd_update_by" jdbcType="VARCHAR" property="updateBy" />
+      <result column="krd_is_del" jdbcType="INTEGER" property="isDel" />
+      <result column="krd_brush_count" jdbcType="INTEGER" property="brushCount" />
+      <result column="krd_is_youxiao" jdbcType="INTEGER" property="isYouxiao" />
+      <result column="krd_col_1" jdbcType="VARCHAR" property="col1" />
+      <result column="krd_col_2" jdbcType="VARCHAR" property="col2" />
+      <result column="krd_col_3" jdbcType="VARCHAR" property="col3" />
+    </collection>
+  </resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -74,7 +115,36 @@
     ID, ruleName, remarks, rule_type, is_default, create_time, create_by, update_time, 
     update_by
   </sql>
-
+  <!-- 包含考情结果详情的字段名 考勤详情表别名为“krd”-->
+  <sql id="Base_Column_KaoqinDetails_List">
+    krd.ID  'krd_ID',
+    krd.kaoqin_rule_id 'krd_kaoqin_rule_id',
+    krd.week_day 'krd_week_day',
+    krd.date 'krd_date',
+    krd.brush_startTime1 'krd_brush_startTime1',
+    krd.brush_endTime1 'krd_brush_endTime1',
+    krd.time1_wucha 'krd_time1_wucha',
+    krd.brush_startTime2 'krd_brush_startTime2',
+    krd.brush_endTime2 'krd_brush_endTime2',
+    krd.time1_wucha2 'krd_time1_wucha2',
+    krd.brush_startTime3 'krd_brush_startTime3',
+    krd.brush_endTime3 'krd_brush_endTime3',
+    krd.time1_wucha3 'krd_time1_wucha3',
+    krd.brush_startTime4 'krd_brush_startTime4',
+    krd.brush_endTime4 'krd_brush_endTime4',
+    krd.time1_wucha4 'krd_time1_wucha4',
+    krd.remarks 'krd_remarks',
+    krd.create_time 'krd_create_time',
+    krd.create_by 'krd_create_by',
+    krd.update_time 'krd_update_time',
+    krd.update_by 'krd_update_by',
+    krd.is_del 'krd_is_del',
+    krd.brush_count 'krd_brush_count',
+    krd.is_youxiao 'krd_is_youxiao',
+    krd.col_1 'krd_col_1',
+    krd.col_2 'krd_col_2',
+    krd.col_3 'krd_col_3'
+  </sql>
   <!--<select id="selectByExample" parameterType="com.tosit.ssm.entity.KaoqinRuleExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -369,5 +439,13 @@
     <if test="id != null">
       AND ID = #{id}
     </if>
+  </select>
+  <select id="selcetKaoqinRuleAndDetails" resultMap="KaoqinRuleAndDetailMap">
+    SELECT  kr.ID,kr.ruleName,kr.remarks,kr.rule_type,kr.is_default,kr.create_time,kr.create_by,kr.update_time,kr.
+    update_by, <include refid="Base_Column_KaoqinDetails_List"/>
+    FROM kaoqin_rule kr
+    LEFT JOIN kaoqin_rule_detail krd
+    ON kr.ID = krd.kaoqin_rule_id
+    WHERE krd.is_del=1 AND  kr.is_youxiao=1
   </select>
 </mapper>

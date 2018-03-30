@@ -277,7 +277,6 @@
 				}
 			}
 
-
 		</script>
 		
 		<script src="/static/js/jquery.min.js?v=2.1.4"></script>
@@ -295,3 +294,17 @@
 	<!-- Mirrored from www.zi-han.net/theme/hplus/table_bootstrap.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:06 GMT -->
 
 </html>
+<script>
+	$(function () {
+		initInfo("001001001");
+    })
+	function initInfo(officeId) {
+        $.ajax({
+            url: "/checking/getKaoqinRemarkAndQingJiaRecord?officeId="+officeId,
+			dataType:"json",
+            success: function(json){
+
+            }
+        });
+    }
+</script>
