@@ -33,7 +33,7 @@
 
 <div class="modal-dialog">
     <div class="modal-header">
-        <h2 class="modal-title" style="text-align: center">新建计划</h2>
+        <h2 class="modal-title" style="text-align: center">修改计划</h2>
     </div>
     <form style="margin-left: 80px;margin-top: 50px">
         <small class="font-bold">

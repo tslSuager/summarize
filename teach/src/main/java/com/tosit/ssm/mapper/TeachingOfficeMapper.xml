@@ -367,4 +367,31 @@
     </set>
     where ID = #{id,jdbcType=VARCHAR}
   </update>
+  <update id="updateByTeachingId" parameterType="com.tosit.ssm.entity.TeachingOffice">
+    update teaching_office
+    <set>
+      <if test="officeId != null">
+        office_id = #{officeId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null">
+        is_del = #{isDel,jdbcType=INTEGER},
+      </if>
+    </set>
+    where teaching_id = #{teachingId,jdbcType=VARCHAR}
+  </update>
 </mapper>

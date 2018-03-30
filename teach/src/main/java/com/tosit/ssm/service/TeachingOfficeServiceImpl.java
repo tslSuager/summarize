@@ -1,5 +1,6 @@
 package com.tosit.ssm.service;
 
+import com.tosit.ssm.entity.Teaching;
 import com.tosit.ssm.entity.TeachingOffice;
 import com.tosit.ssm.mapper.TeachingOfficeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,5 +19,10 @@ public class TeachingOfficeServiceImpl implements TeachingOfficeService{
     @Override
     public int updateByPrimaryKey(TeachingOffice record) {
         return teachingOfficeMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public int updateByTeachingId(String teachingId) {
+        return teachingOfficeMapper.updateByTeachingId(teachingId);
     }
 }

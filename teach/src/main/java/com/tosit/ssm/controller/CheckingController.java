@@ -99,7 +99,7 @@ public class CheckingController {
     @ResponseBody
     public Object ViewKaoqin(String officeId, String uId, Model model){
         //查看某个班迟到和旷工的考勤结果
-        List<KaoqinResultVO> kaoqinResults = checkingService.selectByClassLate(officeId);
+        List<KaoqinResultVO> kaoqinResults = checkingService.selectByClass(officeId);
         JSONModel.put("kaoqinResults",kaoqinResults);
         //查找某个教员管理的所有班级
         List<Office> offices = checkingService.selectOfficeByManage(uId);
@@ -166,7 +166,7 @@ public class CheckingController {
     @ResponseBody
     public Object DealKaoqin(String officeId,String user_Id,Integer stauts,String kaoqin_remark_content,Integer kaoqin_remark_dispose_Result,Integer kaoqin_remark_type){
         //获取某个班的申诉或请假的考勤结果
-        List<KaoqinResult> kaoqinResults = checkingService.selectByClass(officeId);
+        List<KaoqinResultVO> kaoqinResults = checkingService.selectByClass(officeId);
         JSONModel.put("kaoqinResults",kaoqinResults);
 
         //修改某人申述请假的状态和回复的字段
@@ -189,7 +189,7 @@ public class CheckingController {
     @RequestMapping("/getKaoqinRemarkAndQingJiaRecord")
     @ResponseBody
     public Object getKaoqinRemarkAndQingJiaRecord(String officeId){
-        List<KaoqinResult> kaoqinResults= checkingService.findKaoqinRemarkAndQingJiaRecord(officeId);
+        List<KaoqinResultVO> kaoqinResults= checkingService.findKaoqinRemarkAndQingJiaRecord(officeId);
        return kaoqinResults;
     }
 

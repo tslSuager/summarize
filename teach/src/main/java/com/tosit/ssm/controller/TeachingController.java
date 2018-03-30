@@ -52,6 +52,7 @@ public class TeachingController {
         teaching.setType(1);
         teaching.setIsDel(1);
         teaching.setPlanname(planName);
+        teaching.setCreateTime(new Date());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date startTime = (simpleDateFormat.parse(start));
@@ -84,12 +85,20 @@ public class TeachingController {
         return "/jiaoan/show_plan";
     }
 
-
+    /**
+     * 修改某条计划的内容(可以修改计划名，开始时间，结束时间，备注内容)
+     * @param jihuaId
+     * @param planName
+     * @param starttime
+     * @param endtime
+     * @param remarks
+     * @return
+     */
     @RequestMapping("/updateTeaching")
-    public String UpdateTeaching(String jihuaId,String planname,String starttime,String endtime,String remarks){
+    public String UpdateTeaching(String jihuaId,String planName,String starttime,String endtime,String remarks){
         Teaching teaching = new Teaching();
         teaching.setId(jihuaId);
-        teaching.setPlanname(planname);
+        teaching.setPlanname(planName);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date startTime = (simpleDateFormat.parse(starttime));
@@ -100,8 +109,32 @@ public class TeachingController {
             e.printStackTrace();
         }
         teaching.setRemarks(remarks);
+        teaching.setUpdateTime(new Date());
         teachingService.updateByPrimaryKey(teaching);
-        return "/update_plan.jsp";
+        /*TeachingOffice teachingOffice = new TeachingOffice();
+        teachingOffice.setUpdateTime(new Date());
+        teachingOfficeService.updateByTeachingId(jihuaId);*/
+        return "/jiaoan/show_plan";
+    }
+
+    /**
+     * 删除一条计划(逻辑删除)
+     * @param jihuaId
+     * @return
+     */
+    @RequestMapping("/deleteTeaching")
+    public String deleteTeaching(String jihuaId){
+        Teaching teaching = new Teaching();
+        teaching.setId(jihuaId);
+        teaching.setIsDel(0);
+        teachingService.updateByPrimaryKey(teaching);
+
+        /*TeachingOffice teachingOffice = new TeachingOffice();
+        teachingOffice.setUpdateTime(new Date());
+        teachingOffice.setIsDel(0);
+        teachingOfficeService.updateByTeachingId(jihuaId);*/
+
+        return "/jiaoan/show_plan";
     }
 
     /**
@@ -121,6 +154,7 @@ public class TeachingController {
         String jieduanId = UUID.randomUUID().toString().replaceAll("-","");
         teaching.setId(jieduanId);
         teaching.setPlanname(planname);
+        teaching.setCreateTime(new Date());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date startTime = simpleDateFormat.parse(start);
@@ -173,6 +207,7 @@ public class TeachingController {
         teaching.setParentId(jieduanId);
         teaching.setType(3);
         teaching.setPlanname(renwuname);
+        teaching.setCreateTime(new Date());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date startTime = simpleDateFormat.parse(renwustart);

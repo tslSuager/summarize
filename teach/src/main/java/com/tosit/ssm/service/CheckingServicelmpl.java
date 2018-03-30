@@ -35,7 +35,7 @@ public class CheckingServicelmpl implements CheckingService{
     }
 
     @Override
-    public List<KaoqinResult> selectByClassLate(String officeId) {
+    public List<KaoqinResultVO> selectByClassLate(String officeId) {
         return kaoqinResultMapper.selectByClassLate(officeId);
     }
 
@@ -99,7 +99,7 @@ public class CheckingServicelmpl implements CheckingService{
      * @return 返回值是一个考勤结果集合
      */
     @Override
-    public List<KaoqinResult> findKaoqinRemarkAndQingJiaRecord(String officeId) {
+    public List<KaoqinResultVO> findKaoqinRemarkAndQingJiaRecord(String officeId) {
         return kaoqinResultMapper.selectByClass(officeId);
     }
 

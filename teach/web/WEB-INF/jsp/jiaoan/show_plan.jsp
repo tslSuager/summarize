@@ -157,7 +157,7 @@
                                         <%--<td style="text-align: center">未完成</td>--%>
                                     <td style="text-align: center;width: 220px">
                                         <button type="button" class="btn btn-outline btn-default updateplan"
-                                                name="${t.id}" id="${t.planname}" style="${t.startTime}" is="${t.endTime}" about="${t.remarks}">
+                                                name="${t.id}" id="${t.planname}">
                                             <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i>
                                         </button>
                                         </button>
@@ -165,8 +165,9 @@
                                                 name="${t.id}">
                                             <i class="glyphicon glyphicon-check" aria-hidden="true"></i>
                                         </button>
-                                        <button type="button" class="btn btn-outline btn-default"
-                                                onClick="delete_plan(this,'001')" href="javascript:;" title="删除">
+                                        <button type="button" class="btn btn-outline btn-default deleteplan"
+                                                title="删除"
+                                                name="${t.id}" id="${t.planname}">
                                             <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
                                         </button>
                                     </td>
@@ -210,12 +211,16 @@
             });
         });
 
+        /**
+         * 点击修改某条计划内容
+         */
         $.each($(".updateplan"),function () {
             $(this).click(function () {
                 var jihuaId = $(this).attr("name");
+                var planName = $(this).attr("id");
                 layer.open({
                     type: 2,
-                    title: '修改计划',
+                    title: '修改计划：'+'&nbsp;&nbsp;&nbsp;&nbsp;'+planName,
                     content: '/update_plan.jsp',
                     btn: ['完成', '取消'],
                     yes: function (index) {
@@ -230,7 +235,6 @@
                         $.get("/teaching/updateTeaching?jihuaId="+jihuaId, {planName, starttime, endtime, remarks}, function (msg) {
                             window.location.href = "/teaching/viewTeaching";
                         });
-
                     },
                     btn2: function (index) {
                         layer.close(index);
@@ -238,6 +242,22 @@
                     shade: false,
                     area: ['800px', '600px']
                 })
+            });
+        });
+
+        /**
+         * 点击删除某条计划（逻辑删除）
+         */
+        $.each($(".deleteplan"),function () {
+            $(this).click(function () {
+                var jihuaId = $(this).attr("name");
+                var planName = $(this).attr("id");
+                layer.confirm('确认要删除计划'+'"'+planName+'"'+'吗？', function (index) {
+                    $.get("/teaching/deleteTeaching",{jihuaId}, function (msg) {
+                        window.location.href = "/teaching/viewTeaching";
+                    });
+                    layer.msg('已删除', {icon: 1, time: 1000});
+                });
             });
         });
 

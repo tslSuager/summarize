@@ -43,7 +43,7 @@ public interface KaoqinResultMapper {
      * @param officeId
      * @return 返回值是一个考勤结果集合
      */
-    List<KaoqinResultVO> selectByClass(@Param("officeId") String officeId);
+    List <KaoqinResultVO> selectByClass(@Param("officeId") String officeId);
 
     /**
      * 获取某个班的申述或请假总条数
@@ -64,5 +64,5 @@ public interface KaoqinResultMapper {
      * @param officeId
      * @return 返回一个考勤结果集合
      */
-    List<KaoqinResult> selectByClassLate(@Param("officeId") String officeId);
+    List<KaoqinResultVO> selectByClassLate(@Param("officeId") String officeId);
 }

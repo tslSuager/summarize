@@ -37,7 +37,7 @@ public interface CheckingService {
      * @param officeId
      * @return 返回一个考勤结果集合
      */
-    List<KaoqinResult> selectByClassLate(String officeId);
+    List<KaoqinResultVO> selectByClassLate(String officeId);
 
     /**
      * 查找某个教员管理的某个班级
@@ -79,7 +79,7 @@ public interface CheckingService {
      * @param officeId
      * @return 返回值是一个考勤结果集合
      */
-    List<KaoqinResult> findKaoqinRemarkAndQingJiaRecord(String officeId);
+    List<KaoqinResultVO> findKaoqinRemarkAndQingJiaRecord(String officeId);
 
     /**
      * 获取所有的考勤规则和相关详情
