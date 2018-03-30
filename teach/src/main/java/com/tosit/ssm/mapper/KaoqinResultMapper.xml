@@ -326,7 +326,7 @@
     kr.is_del = 1
   </select>
 
-  <select id="selectByClassLate" parameterType="string" resultType="com.tosit.ssm.entity.KaoqinResultVO">
+  <select id="selectByClassLate" parameterType="string" resultType="com.tosit.ssm.entity.KaoqinResult">
     SELECT
      kr.id,u.name 'username',kr.date,kr.user_id,kr.status,kr.remark,kr.last_time,kr.createResultTime,kr.kaoqin_remark_status,
       kaoqin_remark_type,kr.kaoqin_remark_content,kr.kaoqin_remark_disposeUser,kr.kaoqin_remark_disposeTime,

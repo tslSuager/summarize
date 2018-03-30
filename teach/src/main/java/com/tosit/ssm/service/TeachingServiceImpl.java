@@ -37,4 +37,9 @@ public class TeachingServiceImpl implements TeachingService{
         return teachingMapper.selectRenwuByJieduan(teachingId);
     }
 
+    @Override
+    public int updateByPrimaryKey(Teaching record) {
+        return teachingMapper.updateByPrimaryKey(record);
+    }
+
 }

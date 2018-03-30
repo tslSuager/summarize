@@ -108,7 +108,8 @@
                     </div>
                     <div class="fixed-table-body">
                         <div class="fixed-table-loading" style="top: 37px; display: none;">正在努力地加载数据中，请稍候……</div>
-                        <table data-toggle="table" data-mobile-responsive="true" class="table table-hover table-bordered">
+                        <table data-toggle="table" data-mobile-responsive="true"
+                               class="table table-hover table-bordered">
                             <thead>
                             <tr>
                                 <th style="text-align: center" data-field="name" tabindex="0">
@@ -134,10 +135,10 @@
                                 <th style="text-align: center" data-field="name" tabindex="0">
                                     <div class="th-inner ">备注说明</div>
                                 </th>
-                               <%-- <th style="text-align: center" data-field="name" tabindex="0">
-                                    <div class="th-inner ">状态</div>
+                                <%-- <th style="text-align: center" data-field="name" tabindex="0">
+                                     <div class="th-inner ">状态</div>
 
-                                </th>--%>
+                                 </th>--%>
                                 <th style="text-align: center" data-field="name" tabindex="0">
                                     <div class="th-inner ">操作</div>
                                 </th>
@@ -145,28 +146,31 @@
                             </thead>
                             <tbody>
                             <c:forEach items="${teachings}" var="t" varStatus="px">
-                            <tr class="no-records-found planT" data-toggle="tooltip" data-placement="top" title=""
-                                data-original-title="这里是提示内容">
-                                <td style="text-align: center">${px.count}</td>
-                                <td style="text-align: center">${t.planname}</td>
-                                <td style="text-align: center">${t.officeName}</td>
-                                <td style="text-align: center">${t.startTime}</td>
-                                <td style="text-align: center">${t.endTime}</td>
-                                <td style="text-align: center">${t.remarks}</td>
-                                <%--<td style="text-align: center">未完成</td>--%>
-                                <td style="text-align: center;width: 220px">
-                                    <button type="button" class="btn btn-outline btn-default">
-                                        <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i>
-                                    </button>
-                                    </button>
-                                    <button type="button" class="btn btn-outline btn-default viewplan" name="${t.id}">
-                                        <i class="glyphicon glyphicon-check" aria-hidden="true"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-outline btn-default" onClick="delete_plan(this,'001')" href="javascript:;" title="删除">
-                                        <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
-                                    </button>
-                                </td>
-                            </tr>
+                                <tr class="no-records-found planT" data-toggle="tooltip" data-placement="top" title=""
+                                    data-original-title="这里是提示内容">
+                                    <td style="text-align: center">${px.count}</td>
+                                    <td style="text-align: center">${t.planname}</td>
+                                    <td style="text-align: center">${t.officeName}</td>
+                                    <td style="text-align: center">${t.startTime}</td>
+                                    <td style="text-align: center">${t.endTime}</td>
+                                    <td style="text-align: center">${t.remarks}</td>
+                                        <%--<td style="text-align: center">未完成</td>--%>
+                                    <td style="text-align: center;width: 220px">
+                                        <button type="button" class="btn btn-outline btn-default updateplan"
+                                                name="${t.id}" id="${t.planname}" style="${t.startTime}" is="${t.endTime}" about="${t.remarks}">
+                                            <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i>
+                                        </button>
+                                        </button>
+                                        <button type="button" class="btn btn-outline btn-default viewplan"
+                                                name="${t.id}">
+                                            <i class="glyphicon glyphicon-check" aria-hidden="true"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-outline btn-default"
+                                                onClick="delete_plan(this,'001')" href="javascript:;" title="删除">
+                                            <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
+                                        </button>
+                                    </td>
+                                </tr>
                             </c:forEach>
 
 
@@ -200,11 +204,42 @@
             $(this).click(function () {
                 var jihuaId = $(this).attr("name");
                 //此处写跳转到具体计划的详细阶段与任务界面
-                console.info(jihuaId);
-                <%--window.location.href="${pageContext.request.contextPath}/teaching/viewJieduan?jihuaId="+jihuaId;--%>
-                window.location.href="${pageContext.request.contextPath}/page/jiaoan/jiaoxueplan_addjieduan?jihuaId="+jihuaId;
-            })
-        })
+                <%--window.location.href="${pageContext.request.contextPath}/teaching/toviewJieduan?jihuaId="+jihuaId;--%>
+                window.location.href="/jiaoxueplan_addjieduan.jsp?jihuaId="+jihuaId;
+
+            });
+        });
+
+        $.each($(".updateplan"),function () {
+            $(this).click(function () {
+                var jihuaId = $(this).attr("name");
+                layer.open({
+                    type: 2,
+                    title: '修改计划',
+                    content: '/update_plan.jsp',
+                    btn: ['完成', '取消'],
+                    yes: function (index) {
+                        /**
+                         *点击“完成”按钮，为某个班级修改一条教学计划
+                         */
+                        var body = layer.getChildFrame("body",index);
+                        var planName = body.find("#planName").val();
+                        var starttime = body.find("#start").val();
+                        var endtime = body.find("#end").val();
+                        var remarks = body.find("#remarks").val();
+                        $.get("/teaching/updateTeaching?jihuaId="+jihuaId, {planName, starttime, endtime, remarks}, function (msg) {
+                            window.location.href = "/teaching/viewTeaching";
+                        });
+
+                    },
+                    btn2: function (index) {
+                        layer.close(index);
+                    },
+                    shade: false,
+                    area: ['800px', '600px']
+                })
+            });
+        });
 
         $("#new_plan").click(function () {
             layer.open({
@@ -215,22 +250,22 @@
                 /*yes:function (index) {
                     window.location.href = "/page/jiaoan/jiaoxueplan_addjieduan";
                 },*/
-                yes:function (index) {
+                yes: function (index) {
                     /**
                      *点击“完成”按钮，为某个班级添加一条新的教学计划
                      */
-                    var body = layer.getChildFrame('body',index);
+                    var body = layer.getChildFrame('body', index);
                     var planName = body.find("#planName").val();
                     var banji = body.find("#pullListTree").find("select").val();
                     var start = body.find("#start").val();
                     var end = body.find("#end").val();
                     var remarks = body.find("#remarks").val();
-                    $.get("/teaching/insertTeaching",{planName,banji,start,end,remarks},function (msg) {
-                        window.location.href ="/teaching/viewTeaching";
+                    $.get("/teaching/insertTeaching", {planName, banji, start, end, remarks}, function (msg) {
+                        window.location.href = "/teaching/viewTeaching";
                     });
 
                 },
-                btn2:function (index) {
+                btn2: function (index) {
                     layer.close(index);
                 },
                 shade: false,
@@ -258,7 +293,7 @@
             });
         }
 
-    })
+    });
 
 </script>
 </body>

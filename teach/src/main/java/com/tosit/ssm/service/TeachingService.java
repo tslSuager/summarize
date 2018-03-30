@@ -36,4 +36,11 @@ public interface TeachingService {
      * @return 返回多个任务
      */
     List<Teaching> selectRenwuByJieduan(@Param("teachingId")String teachingId);
+
+    /**
+     * 更新一个教学表
+     * @param record 一个含有id的教学表对象
+     * @return
+     */
+    int updateByPrimaryKey(Teaching record);
 }
