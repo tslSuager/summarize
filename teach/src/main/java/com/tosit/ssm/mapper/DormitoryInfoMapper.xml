@@ -3,7 +3,7 @@
 <mapper namespace="com.tosit.ssm.mapper.DormitoryInfoMapper">
   <resultMap id="BaseResultMap" type="com.tosit.ssm.entity.DormitoryInfo">
     <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="dormitory_number" jdbcType="INTEGER" property="dormitoryNumber" />
+    <result column="dormitory_name" jdbcType="VARCHAR" property="dormitoryName" />
     <result column="max_num" jdbcType="INTEGER" property="maxNum" />
     <result column="cur_num" jdbcType="INTEGER" property="curNum" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
@@ -11,6 +11,7 @@
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_by2" jdbcType="VARCHAR" property="updateBy2" />
+    <result column="is_del" jdbcType="INTEGER" property="isDel" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -71,8 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, dormitory_number, max_num, cur_num, remark, create_by, update_time, create_time, 
-    update_by2
+    id, dormitory_name, max_num, cur_num, remark, create_by, update_time, create_time, 
+    update_by2,is_del
   </sql>
   <select id="selectByExample" parameterType="com.tosit.ssm.entity.DormitoryInfoExample" resultMap="BaseResultMap">
     select
@@ -104,24 +105,14 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.tosit.ssm.entity.DormitoryInfo">
-    insert into dormitory_info (id, dormitory_number, max_num, 
-      cur_num, remark, create_by, 
-      update_time, create_time, update_by2
-      )
-    values (#{id,jdbcType=VARCHAR}, #{dormitoryNumber,jdbcType=INTEGER}, #{maxNum,jdbcType=INTEGER}, 
-      #{curNum,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{updateBy2,jdbcType=VARCHAR}
-      )
-  </insert>
   <insert id="insertSelective" parameterType="com.tosit.ssm.entity.DormitoryInfo">
     insert into dormitory_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="dormitoryNumber != null">
-        dormitory_number,
+      <if test="dormitoryName != null">
+        dormitory_name,
       </if>
       <if test="maxNum != null">
         max_num,
@@ -149,8 +140,8 @@
       <if test="id != null">
         #{id,jdbcType=VARCHAR},
       </if>
-      <if test="dormitoryNumber != null">
-        #{dormitoryNumber,jdbcType=INTEGER},
+      <if test="dormitoryName != null">
+        #{dormitoryName,jdbcType=VARCHAR},
       </if>
       <if test="maxNum != null">
         #{maxNum,jdbcType=INTEGER},
@@ -187,8 +178,8 @@
       <if test="record.id != null">
         id = #{record.id,jdbcType=VARCHAR},
       </if>
-      <if test="record.dormitoryNumber != null">
-        dormitory_number = #{record.dormitoryNumber,jdbcType=INTEGER},
+      <if test="record.dormitoryName != null">
+        dormitory_name = #{record.dormitoryName,jdbcType=VARCHAR},
       </if>
       <if test="record.maxNum != null">
         max_num = #{record.maxNum,jdbcType=INTEGER},
@@ -219,7 +210,7 @@
   <update id="updateByExample" parameterType="map">
     update dormitory_info
     set id = #{record.id,jdbcType=VARCHAR},
-      dormitory_number = #{record.dormitoryNumber,jdbcType=INTEGER},
+      dormitory_name = #{record.dormitoryName,jdbcType=VARCHAR},
       max_num = #{record.maxNum,jdbcType=INTEGER},
       cur_num = #{record.curNum,jdbcType=INTEGER},
       remark = #{record.remark,jdbcType=VARCHAR},
@@ -234,8 +225,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.tosit.ssm.entity.DormitoryInfo">
     update dormitory_info
     <set>
-      <if test="dormitoryNumber != null">
-        dormitory_number = #{dormitoryNumber,jdbcType=INTEGER},
+      <if test="dormitoryName != null">
+        dormitory_name = #{dormitoryName,jdbcType=VARCHAR},
       </if>
       <if test="maxNum != null">
         max_num = #{maxNum,jdbcType=INTEGER},
@@ -261,16 +252,123 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  <!--<update id="updateByPrimaryKey" parameterType="com.tosit.ssm.entity.DormitoryInfo">-->
+    <!--update dormitory_info-->
+    <!--set dormitory_name = #{dormitoryName,jdbcType=VARCHAR},-->
+      <!--max_num = #{maxNum,jdbcType=INTEGER},-->
+      <!--cur_num = #{curNum,jdbcType=INTEGER},-->
+      <!--remark = #{remark,jdbcType=VARCHAR},-->
+      <!--create_by = #{createBy,jdbcType=VARCHAR},-->
+      <!--update_time = #{updateTime,jdbcType=TIMESTAMP},-->
+      <!--create_time = #{createTime,jdbcType=TIMESTAMP},-->
+      <!--update_by2 = #{updateBy2,jdbcType=VARCHAR}-->
+    <!--where id = #{id,jdbcType=VARCHAR}-->
+  <!--</update>-->
+
+
+
+
+
+
+
+  <insert id="insertDormitoryInfo" parameterType="com.tosit.ssm.entity.DormitoryInfo">
+    insert into dormitory_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="dormitoryName != null">
+        dormitory_name,
+      </if>
+      <if test="maxNum != null">
+        max_num,
+      </if>
+      <if test="curNum != null">
+        cur_num,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateBy2 != null">
+        update_by2,
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="dormitoryName != null">
+        #{dormitoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="maxNum != null">
+        #{maxNum,jdbcType=INTEGER},
+      </if>
+      <if test="curNum != null">
+        #{curNum,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy2 != null">
+        #{updateBy2,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+    </trim>
+  </insert>
   <update id="updateByPrimaryKey" parameterType="com.tosit.ssm.entity.DormitoryInfo">
     update dormitory_info
-    set dormitory_number = #{dormitoryNumber,jdbcType=INTEGER},
-      max_num = #{maxNum,jdbcType=INTEGER},
-      cur_num = #{curNum,jdbcType=INTEGER},
-      remark = #{remark,jdbcType=VARCHAR},
-      create_by = #{createBy,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_by2 = #{updateBy2,jdbcType=VARCHAR}
+    <set>
+      <if test="dormitoryName != null">
+        dormitory_name = #{dormitoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="maxNum != null">
+        max_num = #{maxNum,jdbcType=INTEGER},
+      </if>
+      <if test="curNum != null">
+        cur_num = #{curNum,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy2 != null">
+        update_by2 = #{updateBy2,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+    </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

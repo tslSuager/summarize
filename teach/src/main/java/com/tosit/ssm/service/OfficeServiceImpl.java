@@ -31,6 +31,11 @@ public class OfficeServiceImpl implements OfficeService{
     public List<Office> findClassByTeacherAndDate(Office office){
         return officeMapper.selectOfficeByMasterAndDate(office);
     }
+    @Override
+    public List<Office> selectOfficeByManage(String userId) {
+        return officeMapper.selectOfficeByManage(userId);
+    }
+
 
     public List<Office> findClassByTeacherAndSchool(Office office){
         return officeMapper.selectOfficeByMasterAndSchool(office);

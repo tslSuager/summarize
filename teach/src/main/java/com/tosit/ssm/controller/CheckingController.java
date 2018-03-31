@@ -1,23 +1,25 @@
 package com.tosit.ssm.controller;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.alibaba.fastjson.annotation.JSONField;
 import com.tosit.ssm.common.util.json.JSONModel;
 import com.tosit.ssm.entity.*;
 import com.tosit.ssm.service.CheckingService;
 import com.tosit.ssm.service.CheckingServicelmpl;
 import com.tosit.ssm.service.UserService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/checking")
@@ -43,28 +45,26 @@ public class CheckingController {
      * 获取某人某天的考勤记录，和以前的考勤的结果（包括请假和备注）
      * @return
      */
-    @RequestMapping("/ShowAllRecordsByIdByDate")
+    @RequestMapping(value = "/ShowAllRecordsByIdByDate")
     @ResponseBody
-    public Object ShowRecords(String user_id,Timestamp brushTime){
+    public Object ShowRecords(KaoqinRecords kaoqinRecords){
+        System.out.println(kaoqinRecords);
         //某个人的表现分的经历
-        List<Experience> experiences = userService.selectByIdToType("u001");
+        List<Experience> experiences = userService.selectByIdToType(kaoqinRecords.getUserId());
         JSONModel.put("experiences",experiences);
-        //某个人某天的所有考勤记录
-        /*KaoqinRecords kaoqinRecords = new KaoqinRecords();
-        kaoqinRecords.setUserId("u001");
-        kaoqinRecords.setBrushtime();
-        System.out.println(checkingService.toString());
+
+
         List<KaoqinRecords> kaoqinRecordsByIdByDate = checkingService.findKaoqinRecordsByIdByDate(kaoqinRecords);
-        JSONModel.put("records",kaoqinRecordsByIdByDate);*/
+        JSONModel.put("records",kaoqinRecordsByIdByDate);
 
         //某个人的所有考勤结果
-        List<KaoqinResult> kaoqinresults = checkingService.findOneById("u001");
+        List<KaoqinResult> kaoqinresults = checkingService.findOneById(kaoqinRecords.getUserId());
         JSONModel.put("result",kaoqinresults);
 
 
 
         //某个人的所有信息
-        User user = userService.selectByPrimaryKey("u001");
+        User user = userService.selectByPrimaryKey(kaoqinRecords.getUserId());
         JSONModel.put("user",user);
 
         return JSONModel.getMap();
@@ -181,6 +181,46 @@ public class CheckingController {
         checkingService.updateByPrimaryKey(kaoqinResult);
 
         return JSONModel.getMap();
+    }
+    /**
+     * 进入处理信息页面
+     * @param officeId 班级ID
+     * @return
+     */
+    @RequestMapping("/getKaoqinRemarkAndQingJiaRecord")
+    @ResponseBody
+    public Object getKaoqinRemarkAndQingJiaRecord(String officeId){
+        List<KaoqinResult> kaoqinResults= checkingService.findKaoqinRemarkAndQingJiaRecord(officeId);
+       return kaoqinResults;
+    }
+
+    /**
+     * 查询所有的考勤规则和详情
+     * @return
+     */
+    @RequestMapping("/getKaoqinAllRules")
+    @ResponseBody
+    public Object getKaoqinAllRules(){
+        List<KaoqinRule> kaoqinRulesIncludeDetail = checkingService.findKaoqinRulesIncludeDetail();
+        return kaoqinRulesIncludeDetail;
+    }
+
+    /**
+     * 为指定得考勤规则添加考勤详情
+     * @return
+     */
+    @RequestMapping("/addKaoqinDetail")
+    public String addKaoqinDetail(KaoqinRule kaoqinRule){
+        kaoqinRule.getKaoqinRuleDetails().get(0).setKaoqinRuleId(kaoqinRule.getId());
+        kaoqinRule.getKaoqinRuleDetails().get(0).setId(UUID.randomUUID().toString());
+        checkingService.addKaoQinRuleDetail(kaoqinRule);
+       return "/kaoqin_rule_display";
+    }
+    @RequestMapping(value = "/updateKaoqinDetail" ,method = RequestMethod.POST)
+    @ResponseBody
+    public Object updateKaoqinDetail(KaoqinRuleDetail kaoqinRuleDetail){
+        checkingService.updateKaoqinDetail(kaoqinRuleDetail);
+        return "success";
     }
 
     @RequestMapping("/getAllRule")

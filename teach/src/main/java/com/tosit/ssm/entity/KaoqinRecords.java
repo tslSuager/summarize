@@ -1,5 +1,6 @@
 package com.tosit.ssm.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -12,7 +13,7 @@ public class KaoqinRecords {
     private String name;
 
     private Integer sequenceNumber;
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+//    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date brushtime;
 
     private String checkType;
@@ -133,5 +134,24 @@ public class KaoqinRecords {
 
     public void setUserId(String userId) {
         this.userId = userId == null ? null : userId.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "KaoqinRecords{" +
+                "id='" + id + '\'' +
+                ", keyNumber='" + keyNumber + '\'' +
+                ", name='" + name + '\'' +
+                ", sequenceNumber=" + sequenceNumber +
+                ", brushtime=" + brushtime +
+                ", checkType='" + checkType + '\'' +
+                ", machineNumber='" + machineNumber + '\'' +
+                ", machineName='" + machineName + '\'' +
+                ", kaoqinResultId='" + kaoqinResultId + '\'' +
+                ", result=" + result +
+                ", resultText='" + resultText + '\'' +
+                ", isYouxiao=" + isYouxiao +
+                ", userId='" + userId + '\'' +
+                '}';
     }
 }

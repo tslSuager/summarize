@@ -84,6 +84,10 @@
                             <a class="J_menuItem" href="/page/matchStudentAttendance">    考勤规则和個人关联
                             </a>
                         </li>
+                        <li>
+                            <a class="J_menuItem" href="/page/kaoqin_rule_display">    查看考勤规则
+                            </a>
+                        </li>
                     </ul>
 
                 </li>
@@ -120,6 +124,9 @@
                             <a class="J_menuItem" href="/page/qinshiInfo_admin">寝室的水电气查看和修改</a>
                         </li>
 
+                        <li>
+                            <a class="J_menuItem" href="/page/materiel_info">寝室的物料查看和修改</a>
+                        </li>
                     </ul>
 
                 </li>
@@ -144,7 +151,7 @@
                             <a class="J_menuItem" href="/page/jiaoan/jiaoxueplanstu">教学计划完成状况（stu）</a>
                         </li>
                         <li>
-                            <a class="J_menuItem" href="/page/jiaoan/show_plan">教学计划的录入</a>
+                            <a class="J_menuItem" href="${pageContext.request.contextPath}/teaching/viewTeaching">教学计划的录入</a>
                         </li>
                         <li>
                             <a class="J_menuItem" href="/page/jiaoan/zuoye">批改作业（教員）</a>

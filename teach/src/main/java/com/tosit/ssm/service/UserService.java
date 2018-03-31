@@ -38,7 +38,8 @@ public interface UserService {
     int modifyUser(User user);
     /**
      * 得到某个人未关联考勤工号的人
-     * @param id  班级id
+     *
+     * @param id 班级id
      * @return
      */
     List<User> findUserByClassIdNoKaoqinNum(String id);
@@ -124,4 +125,14 @@ public interface UserService {
      * @return
      */
     List<User> findUserWithRuleByClass(Office office);
+
+
+    /**
+     * 通过用户名 获取user
+     *
+     * @param username 用户名
+     * @return 返回用户集合
+     */
+    User findsUserByUserName(String username);
+
 }

@@ -7,6 +7,13 @@ import com.tosit.ssm.entity.UserOffice;
 import com.tosit.ssm.entity.UserVO;
 import com.tosit.ssm.service.OfficeService;
 import com.tosit.ssm.service.UserService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +26,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.UUID;
 
@@ -29,12 +37,39 @@ public class UserController {
     private UserService userService;
     @Autowired
     private OfficeService officeService;
+
+
     @ResponseBody
     @RequestMapping("/getAllUser")
     public Object getUsers(){
 //        List<User> users= userService.getUsers();
         return  null;
     }
+    @RequestMapping("/login")
+    public String login(String username, String password, HttpSession session) {
+        System.out.println("开始登陆");
+        Subject subject = SecurityUtils.getSubject();
+        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+        try {
+            //执行认证提交
+            subject.login(token);
+        } catch (AuthenticationException e) {
+           if (e instanceof UnknownAccountException){
+               session.setAttribute("msg","用户不存在");
+               return "login";
+           }
+            if (e instanceof IncorrectCredentialsException) {
+                session.setAttribute("msg","密码错误");
+                return "login";
+            }
+        }
+        //是否认证通过
+        boolean isAuthenticated =  subject.isAuthenticated();
+        System.out.println("是否认证通过：" + isAuthenticated);
+        return "center";
+    }
+
+
 
     /**
      * 得到指定用户

@@ -303,6 +303,22 @@ public class OfficecController {
         officeService.deleteOffice(office);
     }
 
+    /**
+     * 查找某个教员管理的所有班级
+     * @return
+     */
+    @GetMapping("/getAllOffice")
+    @ResponseBody
+    public Object getAllOffice(HttpServletRequest request) {
+        String userId = request.getParameter("userId");
+        List<Office> offices = officeService.selectOfficeByManage(userId);
+        for (Office classes:offices
+             ) {
+            System.out.println(classes);
+        }
+        JSONModel.put("allArea",offices);
+        return JSONModel.put();
+    }
 
     @RequestMapping("/reviseClassName")
     @ResponseBody

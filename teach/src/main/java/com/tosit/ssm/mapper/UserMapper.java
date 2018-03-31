@@ -1,6 +1,10 @@
 package com.tosit.ssm.mapper;
 
 import com.tosit.ssm.entity.*;
+import com.tosit.ssm.entity.KaoqinRule;
+import com.tosit.ssm.entity.Office;
+import com.tosit.ssm.entity.User;
+import com.tosit.ssm.entity.UserExample;
 
 import java.util.Date;
 import java.util.List;
@@ -101,6 +105,8 @@ public interface UserMapper {
     List<User> selectKaoqinOrShensu(@Param("id") String officeId);
 
 
+
+
     /**
      * 查看未分班但与某个考勤规则关联了的人
      * @param kaoqinRule 包括考勤规则id的kaoqinRule对象
@@ -143,6 +149,7 @@ public interface UserMapper {
 
 
 
+
     /**
      * 获取某个班未分组的人
      *
@@ -163,11 +170,18 @@ public interface UserMapper {
     /**
      * 获取某个组的人
      *
-     *  * @param office 包括组id的office对象
+     * @param office 包括组id的office对象
      * @return
      */
     List<User> selectByGroup(Office office);
 
+    /**
+     * 通过用户名 获取user
+     *
+     * @param username 用户名
+     * @return 返回用户集合
+     */
+    User selectByUsername(String username);
 
     /**
      * 获取某个班的学生包括组号

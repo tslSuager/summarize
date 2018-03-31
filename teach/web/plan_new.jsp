@@ -32,78 +32,48 @@
 <body>
 
 <div class="modal-dialog">
-    <%--<div class="modal-content animated bounceInRight">--%>
-        <div class="modal-header">
-            <%--<button type="button" class="close_this close" data-dismiss="modal"><span
-                    aria-hidden="true">×</span><span class="sr-only">关闭</span>
-            </button>--%>
-             <%--<i class="fa fa-laptop modal-icon"></i>--%>
-            <h2 class="modal-title" style="text-align: center">新建计划</h2>
-        </div>
-        <form style="margin-left: 80px;margin-top: 50px">
-            <small class="font-bold">
-                <div>
-                    <div style="margin-top: 5px">
-                        <label class="col-sm-3 text-center control-label"
-                               style="margin-top: 5px;margin-bottom: 5px;margin-left: 20px">班级 :</label>
-                        <select class="form-control m-b" style="width: 320px" name="account">
-                            <option>JAVA一班</option>
-                            <option>JAVA二班</option>
-                            <option>android一班</option>
-                            <option>android二班</option>
-                        </select>
-                    </div>
+    <div class="modal-header">
+        <h2 class="modal-title" style="text-align: center">新建计划</h2>
+    </div>
+    <form style="margin-left: 80px;margin-top: 50px" action="/teaching/insertTeaching" method="post" id="form1">
+        <small class="font-bold">
+            <%--id="pullListTree" style="display: inline;margin-left: 30px;width: 320px"--%>
+            <div style="margin-top: 5px;margin-left: 45px;width: 1400px" id="pullListTree" class="">
+
+            </div>
+
+            <%--计划名--%>
+            <div>
+                <div style="margin-top: 5px">
+                    <label class="col-sm-3 text-center control-label" style="margin-top: 8px;margin-left: 10px">计划名
+                        :</label>
+                    <input type="text" name="planName" class="form-control" style="width: 320px" id="planName">
                 </div>
-                <div>
-                    <div style="margin-top: 5px">
-                        <label class="col-sm-3 text-center control-label" style="margin-top: 8px;margin-left: 10px">计划名
-                            :</label>
-                        <input type="text" class="form-control" style="width: 320px">
-                    </div>
+            </div>
+
+            <%--开始结束时间--%>
+            <div class="form-group" id="data_5" style="margin: 10px auto;width: 600px;">
+                <div class="input-daterange input-group" id="datepicker">
+                    <label class="col-sm-3 text-center control-label" style="margin-top: 5px">开始时间 :</label>
+                    <input type="text" class="input-sm form-control" name="start" value="2017-11-11"
+                           style="width: 320px" id="start"/>
+                    <label class="col-sm-3 text-center control-label" style="margin-top: 15px">结束时间 :</label>
+                    <input type="text" class="input-sm form-control" name="end"  value="2017-11-17"
+                           style="width: 320px;margin-top: 10px" id="end"/>
                 </div>
+            </div>
 
-                <%--<div>
-                    <div style="margin-top: 5px">
-                        <label class="col-sm-3 text-center control-label" style="margin-top: 5px">开始时间 :</label>
-                        <div class="input-group date">
-                            <input type="text" class="input-sm form-control" name="start" value="2017-11-11" style="width: 320px"/>
-                        </div>
-                    </div>
+            <%--备注说明--%>
+            <div>
+                <div style="margin-top: 5px">
+                    <label class="col-sm-3 text-center control-label" style="margin-top: 5px">备注说明 :</label>
+                    <textarea class="form-control layer-date" name="remarks" style="width: 320px" rows="5" id="remarks"></textarea>
                 </div>
+            </div>
 
-                <div>
-                    <div style="margin-top: 5px;margin-bottom: 5px">
-                        <label class="col-sm-3 text-center control-label" style="margin-top: 5px">结束时间 :</label>
-                        <input type="text" class="input-sm form-control" name="end" value="2017-11-17" style="width: 320px"/>
-                    </div>
-                </div>--%>
-                <div class="form-group" id="data_5" style="margin: 10px auto;width: 600px;">
-                    <div class="input-daterange input-group" id="datepicker">
-                        <label class="col-sm-3 text-center control-label" style="margin-top: 5px">开始时间 :</label>
-                        <input type="text" class="input-sm form-control" name="start" value="2017-11-11"
-                               style="width: 320px"/>
-                        <label class="col-sm-3 text-center control-label" style="margin-top: 15px">结束时间 :</label>
-                        <input type="text" class="input-sm form-control" name="end" value="2017-11-17"
-                               style="width: 320px;margin-top: 10px"/>
-                    </div>
+        </small>
+    </form>
 
-                </div>
-
-
-                <div>
-                    <div style="margin-top: 5px">
-                        <label class="col-sm-3 text-center control-label" style="margin-top: 5px">备注说明 :</label>
-                        <input class="form-control layer-date " style="width: 320px">
-                    </div>
-                </div>
-
-            </small>
-        </form>
-        <%-- <div class="modal-footer">
-             <button type="button" class="btn btn-white close_this" data-dismiss="modal">关闭</button>
-             <button type="button" class="btn btn-primary">保存</button>
-         </div>--%>
-    <%--</div>--%>
 </div>
 <small class="font-bold">
 </small>
@@ -111,26 +81,32 @@
 </html>
 
 <script src="/static/js/jquery.min.js?v=2.1.4"></script>
+<script src="/static/js/jquery.min.js"></script>
+<script id="welcome-template" type="text/x-handlebars-template"/>
 <script src="/static/js/bootstrap.min.js?v=3.3.6"></script>
-<script src="/static/js/content.min.js?v=1.0.0"></script>
-<script src="/static/js/plugins/chosen/chosen.jquery.js"></script>
-<script src="/static/js/plugins/jsKnob/jquery.knob.js"></script>
-<script src="/static/js/plugins/jasny/jasny-bootstrap.min.js"></script>
+<script src="/static/js/pullListTree.js"></script>
 <script src="/static/js/plugins/datapicker/bootstrap-datepicker.js"></script>
-<script src="/static/js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
-<script src="/static/js/plugins/nouslider/jquery.nouislider.min.js"></script>
-<script src="/static/js/plugins/switchery/switchery.js"></script>
-<script src="/static/js/plugins/ionRangeSlider/ion.rangeSlider.min.js"></script>
-<script src="/static/js/plugins/iCheck/icheck.min.js"></script>
-<script src="/static/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 <script src="/static/js/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
 <script src="/static/js/plugins/clockpicker/clockpicker.js"></script>
+<script src="/static/js/plugins/chosen/chosen.jquery.js"></script>
+<script src="/static/js/plugins/iCheck/icheck.min.js"></script>
 <script src="/static/js/plugins/cropper/cropper.min.js"></script>
-<script src="/static/js/demo/form-advanced-demo.min.js"></script>
-<script src="/static/js/plugins/summernote/summernote.min.js"></script>
-<script src="/static/js/plugins/summernote/summernote-zh-CN.js"></script>
-<script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+<script src="/static/js/plugins/ionRangeSlider/ion.rangeSlider.min.js"></script>
+
 
 <script>
+    $(function () {
+        initPullListTree("/office/getAllOffice?userId=u013",3, 1,function (oneself) {
+//            console.info(oneself);
+        });//一个参数 开始的级别  第二参数 有几个下拉框
+//        $("#pullListTree").data("selectAreaId")
+        $("#dddd").click(function () {
+            alert($("#pullListTree").data("selectArea"));
+        });
+
+
+    });
 
 </script>
+
+<script src="/static/js/demo/form-advanced-demo.min.js"></script>

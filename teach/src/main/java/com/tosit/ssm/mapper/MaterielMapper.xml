@@ -10,6 +10,7 @@
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_by2" jdbcType="VARCHAR" property="updateBy2" />
+    <result column="is_del" jdbcType="INTEGER" property="isDel" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -70,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, dormitory_id, name, count, create_by, update_time, create_time, update_by2
+    id, dormitory_id, name, count, create_by, update_time, create_time, update_by2,is_del
   </sql>
   <select id="selectByExample" parameterType="com.tosit.ssm.entity.MaterielExample" resultMap="BaseResultMap">
     select
@@ -244,15 +245,108 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <insert id="insertMateriel" parameterType="com.tosit.ssm.entity.Materiel">
+    insert into materiel
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="dormitoryId != null">
+        dormitory_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="count != null">
+        count,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateBy2 != null">
+        update_by2,
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="dormitoryId != null">
+        #{dormitoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="count != null">
+        #{count,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy2 != null">
+        #{updateBy2,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+    </trim>
+  </insert>
   <update id="updateByPrimaryKey" parameterType="com.tosit.ssm.entity.Materiel">
     update materiel
-    set dormitory_id = #{dormitoryId,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
-      count = #{count,jdbcType=INTEGER},
-      create_by = #{createBy,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_by2 = #{updateBy2,jdbcType=VARCHAR}
+    <set>
+      <if test="dormitoryId != null">
+        dormitory_id = #{dormitoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="count != null">
+        count = #{count,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy2 != null">
+        update_by2 = #{updateBy2,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+    </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

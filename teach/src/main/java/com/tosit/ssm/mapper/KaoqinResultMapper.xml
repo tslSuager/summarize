@@ -28,6 +28,34 @@
     <result column="is_del" jdbcType="INTEGER" property="isDel" />
   </resultMap>
 
+  <resultMap id="SecondResultMap" type="com.tosit.ssm.entity.KaoqinResultVO">
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="date" jdbcType="DATE" property="date" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="last_time" jdbcType="TIMESTAMP" property="lastTime" />
+    <result column="createResultTime" jdbcType="TIMESTAMP" property="createresulttime" />
+    <result column="kaoqin_remark_status" jdbcType="INTEGER" property="kaoqinRemarkStatus" />
+    <result column="kaoqin_remark_type" jdbcType="INTEGER" property="kaoqinRemarkType" />
+    <result column="kaoqin_remark_content" jdbcType="VARCHAR" property="kaoqinRemarkContent" />
+    <result column="kaoqin_remark_disposeUser" jdbcType="VARCHAR" property="kaoqinRemarkDisposeuser" />
+    <result column="kaoqin_remark_disposeTime" jdbcType="TIMESTAMP" property="kaoqinRemarkDisposetime" />
+    <result column="kaoqin_remark_dispose_Result" jdbcType="INTEGER" property="kaoqinRemarkDisposeResult" />
+    <result column="kaoqin_shenshu_status" jdbcType="INTEGER" property="kaoqinShenshuStatus" />
+    <result column="kaoqin_shenshu_type" jdbcType="INTEGER" property="kaoqinShenshuType" />
+    <result column="kaoqin_shenshu_content" jdbcType="VARCHAR" property="kaoqinShenshuContent" />
+    <result column="kaoqin_shenshu_disposeUser" jdbcType="VARCHAR" property="kaoqinShenshuDisposeuser" />
+    <result column="kaoqin_shenshu_disposeTime" jdbcType="TIMESTAMP" property="kaoqinShenshuDisposetime" />
+    <result column="kaoqin_shenshu_disposeResult" jdbcType="INTEGER" property="kaoqinShenshuDisposeresult" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="is_del" jdbcType="INTEGER" property="isDel" />
+    <result column="username" jdbcType="VARCHAR" property="username"/>
+    <result column="officename" jdbcType="VARCHAR" property="officename"/>
+  </resultMap>
 
   <sql id="Base_Column_List">
     date, user_id, status, remark, last_time, createResultTime, kaoqin_remark_status,
@@ -270,13 +298,18 @@
       </if>
     </trim>
   </insert>
-
-  <select id="selectByClass" parameterType="string" resultMap="BaseResultMap">
+  <!--kr.id ,kr.date,kr.user_id,kr.status,kr.remark,kr.last_time,kr.createResultTime,kr.kaoqin_remark_status,kr.kaoqin_remark_type,kr.kaoqin_remark_content,kr.kaoqin_remark_disposeUser,kr.kaoqin_remark_disposeTime,
+  kr.kaoqin_remark_dispose_Result,kr.kaoqin_shenshu_status,kr.kaoqin_shenshu_type,kr.kaoqin_shenshu_content,kr.kaoqin_shenshu_disposeUser,kr.kaoqin_shenshu_disposeTime,kr.kaoqin_shenshu_disposeResult,
+  kr.create_time,kr.create_by,kr.update_time,kr.update_by,kr.is_del,kr.kaoqin_shenshu_reply,kr.kaoqin_remark_reply,kr.kaoqin_shenshu_reqtime,kr.kaoqin_remark_reqtime,-->
+  <select id="selectByClass" parameterType="string" resultMap="SecondResultMap">
     SELECT
-     kr.id,<include refid="Base_Column_List" />
+     kr.id,kr.date,kr.user_id,kr.status,kr.remark,kr.last_time,kr.createResultTime,kr.kaoqin_remark_status,kr.kaoqin_remark_type,kr.kaoqin_remark_content,kr.kaoqin_remark_disposeUser,kr.kaoqin_remark_disposeTime,
+    kr.kaoqin_remark_dispose_Result,kr.kaoqin_shenshu_status,kr.kaoqin_shenshu_type,kr.kaoqin_shenshu_content,kr.kaoqin_shenshu_disposeUser,kr.kaoqin_shenshu_disposeTime,kr.kaoqin_shenshu_disposeResult,
+      kr.create_time,kr.create_by,kr.update_time,kr.update_by,kr.is_del,kr.kaoqin_shenshu_reply,kr.kaoqin_remark_reply,kr.kaoqin_shenshu_reqtime,kr.kaoqin_remark_reqtime
+     kr.*,u.name`username`,o.name`officename`
     FROM
-    user_office uo LEFT JOIN kaoqin_result kr ON uo.user_id = kr.user_id
-    WHERE uo.office_id = #{officeId} AND kr.is_del = 1 AND uo.is_del=1 OR kr.kaoqin_remark_status!='' OR kr.kaoqin_shenshu_status!=''
+    user_office uo LEFT JOIN kaoqin_result kr ON uo.user_id = kr.user_id LEFT JOIN user u ON kr.user_id = u.id LEFT JOIN office o ON o.id = uo.office_id
+    WHERE uo.office_id = #{officeId} AND kr.is_del = 1 AND uo.is_del=1 AND kr.status= 0 AND o.office_type=3
   </select>
 
   <select id="countByClass" parameterType="string" resultMap="BaseResultMap">
