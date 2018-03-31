@@ -50,7 +50,7 @@ public class CheckingServicelmpl implements CheckingService{
     }
 
     @Override
-    public List<KaoqinResult> selectByClass(String officeId) {
+    public List<KaoqinResultVO> selectByClass(String officeId) {
         return kaoqinResultMapper.selectByClass(officeId);
     }
 
@@ -103,7 +103,7 @@ public class CheckingServicelmpl implements CheckingService{
      * @return 返回值是一个考勤结果集合
      */
     @Override
-    public List<KaoqinResult> findKaoqinRemarkAndQingJiaRecord(String officeId) {
+    public List<KaoqinResultVO> findKaoqinRemarkAndQingJiaRecord(String officeId) {
         return kaoqinResultMapper.selectByClass(officeId);
     }
 

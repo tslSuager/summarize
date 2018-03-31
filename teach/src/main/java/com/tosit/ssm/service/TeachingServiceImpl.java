@@ -46,4 +46,9 @@ public class TeachingServiceImpl implements TeachingService{
     public List<Teaching> findAllTeaching() {
         return teachingMapper.selectAllTeaching();
     }
+    @Override
+    public int updateByPrimaryKey(Teaching record) {
+        return teachingMapper.updateByPrimaryKey(record);
+    }
+
 }

@@ -33,14 +33,11 @@
 
 <div class="modal-dialog">
     <div class="modal-header">
-        <h2 class="modal-title" style="text-align: center">新建计划</h2>
+        <h2 class="modal-title" style="text-align: center">修改计划</h2>
     </div>
     <form style="margin-left: 80px;margin-top: 50px">
         <small class="font-bold">
             <%--id="pullListTree" style="display: inline;margin-left: 30px;width: 320px"--%>
-            <div style="margin-top: 5px;margin-left: 45px;width: 1400px" id="pullListTree" class="">
-
-            </div>
 
             <%--计划名--%>
             <div>
@@ -80,6 +77,18 @@
 </body>
 </html>
 
+<script>
+    $(function () {
+        /**
+         * 获取某一条计划的详细信息（但是查询得到的计划不是返回的JSON，不能用Ajax）
+         * @type {*|jQuery|HTMLElement}
+         */
+        /*$.get("/teaching/viewTeaching", {planName, banji, start, end, remarks}, function (msg) {
+            '/teaching/updateTeaching?jihuaId='+jihuaId+'&planame='+planname+'&starttime='+starttime+'&endtime='+endtime+'&remarks='+remarks
+        });*/
+    });
+</script>
+
 <script src="/static/js/jquery.min.js?v=2.1.4"></script>
 <script src="/static/js/jquery.min.js"></script>
 <script id="welcome-template" type="text/x-handlebars-template"/>
@@ -93,20 +102,5 @@
 <script src="/static/js/plugins/cropper/cropper.min.js"></script>
 <script src="/static/js/plugins/ionRangeSlider/ion.rangeSlider.min.js"></script>
 
-
-<script>
-    $(function () {
-        initPullListTree("/office/getAllOffice?userId=u013",3, 1,function (oneself) {
-//            console.info(oneself);
-        });//一个参数 开始的级别  第二参数 有几个下拉框
-//        $("#pullListTree").data("selectAreaId")
-        $("#dddd").click(function () {
-            alert($("#pullListTree").data("selectArea"));
-        });
-
-
-    });
-
-</script>
 
 <script src="/static/js/demo/form-advanced-demo.min.js"></script>

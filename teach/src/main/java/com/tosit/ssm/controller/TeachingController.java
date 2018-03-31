@@ -8,14 +8,11 @@ import com.tosit.ssm.entity.TeachingVO;
 import com.tosit.ssm.service.TeachingOfficeService;
 import com.tosit.ssm.service.TeachingService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -55,6 +52,7 @@ public class TeachingController {
         teaching.setType(1);
         teaching.setIsDel(1);
         teaching.setPlanname(planName);
+        teaching.setCreateTime(new Date());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date startTime = (simpleDateFormat.parse(start));
@@ -87,6 +85,57 @@ public class TeachingController {
         return "/jiaoan/show_plan";
     }
 
+    /**
+     * 修改某条计划的内容(可以修改计划名，开始时间，结束时间，备注内容)
+     * @param jihuaId
+     * @param planName
+     * @param starttime
+     * @param endtime
+     * @param remarks
+     * @return
+     */
+    @RequestMapping("/updateTeaching")
+    public String UpdateTeaching(String jihuaId,String planName,String starttime,String endtime,String remarks){
+        Teaching teaching = new Teaching();
+        teaching.setId(jihuaId);
+        teaching.setPlanname(planName);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date startTime = (simpleDateFormat.parse(starttime));
+            teaching.setStartTime(startTime);
+            Date endTime = (simpleDateFormat.parse(endtime));
+            teaching.setEndTime(endTime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        teaching.setRemarks(remarks);
+        teaching.setUpdateTime(new Date());
+        teachingService.updateByPrimaryKey(teaching);
+        /*TeachingOffice teachingOffice = new TeachingOffice();
+        teachingOffice.setUpdateTime(new Date());
+        teachingOfficeService.updateByTeachingId(jihuaId);*/
+        return "/jiaoan/show_plan";
+    }
+
+    /**
+     * 删除一条计划(逻辑删除)
+     * @param jihuaId
+     * @return
+     */
+    @RequestMapping("/deleteTeaching")
+    public String deleteTeaching(String jihuaId){
+        Teaching teaching = new Teaching();
+        teaching.setId(jihuaId);
+        teaching.setIsDel(0);
+        teachingService.updateByPrimaryKey(teaching);
+
+        /*TeachingOffice teachingOffice = new TeachingOffice();
+        teachingOffice.setUpdateTime(new Date());
+        teachingOffice.setIsDel(0);
+        teachingOfficeService.updateByTeachingId(jihuaId);*/
+
+        return "/jiaoan/show_plan";
+    }
 
     /**
      * 为一条计划添加一个阶段
@@ -97,22 +146,21 @@ public class TeachingController {
      * @param remarks
      * @return
      */
+    @ResponseBody
     @RequestMapping("/insertJieduan")
-    public String InsertJieduan(String jihuaId, String planname, String start, String end, String remarks){
+    public Object InsertJieduan(String jihuaId, String planname, String start, String end, String remarks){
         Teaching teaching = new Teaching();
         teaching.setParentId(jihuaId);
         String jieduanId = UUID.randomUUID().toString().replaceAll("-","");
         teaching.setId(jieduanId);
         teaching.setPlanname(planname);
+        teaching.setCreateTime(new Date());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date startTime = simpleDateFormat.parse(start);
             teaching.setStartTime(startTime);
             Date endTime = simpleDateFormat.parse(end);
             teaching.setEndTime(endTime);
-            Date createTime = new Date();
-            simpleDateFormat.parse(String.valueOf(createTime));
-            teaching.setCreateTime(createTime);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -120,40 +168,60 @@ public class TeachingController {
         teaching.setIsDel(1);
         teaching.setType(2);
         teachingService.insertTeaching(teaching);
-        return "/jiaoan/jiaoxueplan_addjieduan";
+        JSONModel.put("newjieduan",teaching);
+        return JSONModel.put();
     }
 
     /**
      * 查看一条计划的所有阶段
-     * @param request
      * @param jihuaId
      * @return
      */
-    @ResponseBody
     @RequestMapping("/viewJieduan")
-    public Object ViewJieduan(HttpServletRequest request,String jihuaId){
+    @ResponseBody
+    public Object ViewJieduan(String jihuaId){
         List<Teaching> jieduans = teachingService.selectJieduanByTeaching(jihuaId);
         for (Teaching j:jieduans
              ) {
             System.out.println(j);
         }
-        request.setAttribute("jieduans",JSON.toJSON(jieduans));
-        request.setAttribute("jihuaId",jihuaId);
-        return jieduans;
+        JSONModel.put("jieduans",jieduans);
+        return JSONModel.put();
     }
 
 
+    /**
+     * 为某个阶段添加一条任务
+     * @param jieduanId
+     * @param renwuname
+     * @param renwustart
+     * @param renwuend
+     * @param renwuremarks
+     * @return
+     */
+    @ResponseBody
     @RequestMapping("/insertRenwu")
-    public String InsertRenwu(String jieduanId, String renwuname, String renwustart, String renwuend, String renwuremarks){
+    public Object InsertRenwu(String jieduanId, String renwuname, String renwustart, String renwuend, String renwuremarks){
         Teaching teaching = new Teaching();
-        teaching.setId("zzz");
+        teaching.setId(UUID.randomUUID().toString().replaceAll("-",""));
         teaching.setParentId(jieduanId);
         teaching.setType(3);
         teaching.setPlanname(renwuname);
+        teaching.setCreateTime(new Date());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date startTime = simpleDateFormat.parse(renwustart);
+            teaching.setStartTime(startTime);
+            Date endTime = simpleDateFormat.parse(renwuend);
+            teaching.setEndTime(endTime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         teaching.setIsDel(1);
-        
-
-        return null;
+        teaching.setRemarks(renwuremarks);
+        teachingService.insertTeaching(teaching);
+        JSONModel.put("newrenwu",teaching);
+        return JSONModel.put();
     }
 
     /**
@@ -210,4 +278,19 @@ public class TeachingController {
         teachingOffice.setIsDel(1);
         teachingOfficeService.insertTeachingOffice(teachingOffice);
     }
+    /**
+     * 为某个任务添加一个task任务详情
+     * @param renwuId
+     * @param renwuname
+     * @param renwustart
+     * @param renwuend
+     * @param renwuremarks
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/insertRenwuDetail")
+    public Object InsertRenwuDetail(String renwuId, String renwuname, String renwustart, String renwuend, String renwuremarks){
+        return null;
+    }
+
 }

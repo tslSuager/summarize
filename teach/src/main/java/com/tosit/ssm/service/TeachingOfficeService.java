@@ -1,5 +1,6 @@
 package com.tosit.ssm.service;
 
+import com.tosit.ssm.entity.Teaching;
 import com.tosit.ssm.entity.TeachingOffice;
 
 public interface TeachingOfficeService {
@@ -16,4 +17,12 @@ public interface TeachingOfficeService {
      * @return
      */
     int updateByPrimaryKey(TeachingOffice record);
+
+    /**
+     * 根据教学计划id修改教学组织关联表
+     * @param
+     * @return
+     */
+    int updateByTeachingId(String teachingId);
+
 }
