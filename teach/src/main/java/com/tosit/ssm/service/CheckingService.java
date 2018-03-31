@@ -67,4 +67,8 @@ public interface CheckingService {
      */
     int updateByPrimaryKey(KaoqinResult record);
     public void addKaoQinRule(KaoqinRule kaoqinRule, KaoqindetailVO kaoqindetailVO);
+
+    String modifyChecking(KaoqinResult data);
+
+    String createLeave(KaoqinResult kaoqinResult);
 }

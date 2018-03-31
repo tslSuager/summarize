@@ -85,4 +85,24 @@ public class CheckingServicelmpl implements CheckingService{
         }
 //        kaoqinRuleDetailMapper.insert();
     }
+
+    @Override
+    public String modifyChecking(KaoqinResult data) {
+        Integer i = kaoqinResultMapper.updateByPrimaryKey(data);
+        String status="success";
+        if (i == null) {
+            status="fail";
+        }
+        return status;
+    }
+
+    @Override
+    public String createLeave(KaoqinResult kaoqinResult) {
+        Integer i = kaoqinResultMapper.insertKaoqinResult(kaoqinResult);
+        String status="success";
+        if (i == null) {
+            status="fail";
+        }
+        return status;
+    }
 }

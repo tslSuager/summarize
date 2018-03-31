@@ -362,16 +362,16 @@ public class ImportExcel {
      */
     public static void main(String[] args) throws Throwable {
 
-//		ImportExcel ei = new ImportExcel("C:\\Users\\1234\\Desktop\\学生统计名单_保卫处软件146.xls", 1);
-//
-//		for (int i = ei.getDataRowNum(); i < ei.getLastDataRowNum(); i++) {
-//			Row row = ei.getRow(i);
-//			for (int j = 0; j < ei.getLastCellNum(); j++) {
-//				Object val = ei.getCellValue(row, j);
-//				System.out.print(val+", ");
-//			}
-//			System.out.print("\n");
-//		}
+		ImportExcel ei = new ImportExcel("C:\\Users\\1234\\Desktop\\学生统计名单_保卫处软件146.xls", 1);
+
+		for (int i = ei.getDataRowNum(); i < ei.getLastDataRowNum(); i++) {
+			Row row = ei.getRow(i);
+			for (int j = 0; j < ei.getLastCellNum(); j++) {
+				Object val = ei.getCellValue(row, j);
+				System.out.print(val+", ");
+			}
+			System.out.print("\n");
+		}
 
     }
 

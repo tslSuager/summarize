@@ -27,6 +27,9 @@
                              <value>yyyy-MM-dd hh:mm:ss</value>
                          </property>
                          -->
+                        <property name="dateFormat">
+                            <value>yyyy-MM-dd hh:mm:ss</value>
+                        </property>
                         <property name="serializerFeatures">
                             <list>
                                 <!-- <value>WriteNonStringValueAsString</value>-->
@@ -35,12 +38,11 @@
                                 <!-- <value>WriteNullStringAsEmpty</value>-->
                                 <value>WriteNullBooleanAsFalse</value>
                                 <value>WriteNullNumberAsZero</value>
+                                <!-- Date的日期转换器 -->
                                 <value>WriteDateUseDateFormat</value>
                             </list>
                         </property>
-
                     </bean>
-
                 </property>
             </bean>
         </mvc:message-converters>
