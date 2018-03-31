@@ -2,9 +2,10 @@ package com.tosit.ssm.common.handlethread;
 
 import java.util.*;
 
-public class StartHandleTread {
+public class StartGainRecordTread {
+
 
     public static void main(String[] args) {
-        CheckingThread.getInstance().startTiming(0,1);
+        GainRecordThread.getInstance().startTiming(1000);
     }
 }
