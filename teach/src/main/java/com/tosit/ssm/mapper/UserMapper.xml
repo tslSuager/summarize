@@ -1264,11 +1264,18 @@ WHERE o.parent_id = #{office.id} and o.is_del=1 and u.is_del=1 and uo.is_del=1 A
 );
   </select>
 
-
   <select id="selectByUsername" parameterType="string" resultMap="BaseResultMap">
     SELECT
     <include refid="Base_Column_List"/>
     FROM user u WHERE u.loginName=#{username}
+  </select>
+
+  <select id="selectStuNoLoginNameByClass" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT *
+FROM user u
+JOIN user_office uo
+ON u.ID = uo.user_id
+WHERE uo.office_id = #{VALUE } AND u.loginName IS NULL ;
   </select>
 
 </mapper>

@@ -136,4 +136,8 @@ public class UserServiceImpl implements UserService {
     public User findsUserByUserName(String username) {
         return userMapper.selectByUsername(username);
     }
+
+    public List<User> findStuNoLoginNameByClass(String id) {
+        return userMapper.selectStuNoLoginNameByClass(id);
+    }
 }

@@ -135,4 +135,10 @@ public interface UserService {
      */
     User findsUserByUserName(String username);
 
+    /**
+     * 查找某班没有注册用户的学生
+     * @param id
+     * @return
+     */
+    List<User> findStuNoLoginNameByClass(String id);
 }

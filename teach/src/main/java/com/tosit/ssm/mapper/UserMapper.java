@@ -196,4 +196,10 @@ public interface UserMapper {
      */
     List<User> selectAllTeacherNoThisClass(@Param("office") Office office);
 
+    /**
+     * 获取某班没有生成账号的学生
+     * @param id
+     * @return
+     */
+    List<User> selectStuNoLoginNameByClass(String id);
 }

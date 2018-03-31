@@ -239,8 +239,8 @@
                                 '                                <td>\n' +
                                 '                                    <div class="col-sm-6">\n' +
                                 '                                       <select class="form-control" name="select">\n' +
-                                '                                           <option>按学号</option>\n' +
-                                '                                           <option>按手机号</option>\n' +
+                                '                                           <option class="11">按学号</option>\n' +
+                                '                                           <option class="22">按手机号</option>\n' +
                                 '                                       </select>\n' +
                                 '                                   </div>\n' +
                                 '                                   <div class="col-sm-2"><button class="btn btn-outline btn-info createNumber btn-xs" type="button" style="margin-top: 4px">生成账号</button></div>\n' +
@@ -446,17 +446,29 @@
              * 点击匹配教学计划按钮，跳转页面，可为该班级匹配教学计划
              */
             $("body").on("click",".matchTeachingPlan",function () {
+                var cid = $(this).parent().parent().attr("id");
                 layer.open({
                     type: 2,
                     title: '教学计划',
                     shadeClose: true,
                     shade: 0.8,
                     area: ['30%', '50%'],
-                    content: '/mathcTeachingPlan.jsp',
+                    content: '/mathcTeachingPlan.jsp?cid='+cid,
                     btn:['确认绑定','算了'],
-                    btn1:function (index,layero) {
-                        layer.msg('绑定成功');
-                    },
+                        yes:function (index,layero) {
+                            var body = layer.getChildFrame('body', index);
+                            layer.confirm('确定绑定吗',{
+                                btn:['确定','再想想']
+                            },function () {
+                                var id = body.find("option:selected").attr("id");
+                                $.get("/teaching/addTeachingToClass",{id,cid},function () {
+                                });
+                                layer.close(index);
+                                layer.msg('绑定成功');
+                            },function () {
+                                layer.msg('好好想想');
+                            });
+                        },
                     btn2:function (index,layero) {
                         layer.close(index);
                     }
@@ -515,9 +527,21 @@
                     }
                 });
             });
+
+            /**
+             * 点击创建账号为没有创建账号的学生创建账号
+             */
+            $("body").on("click",".createNumber",function () {
+                var cid = $(this).parent().parent().parent().attr("id");
+                var id = $("body").find("option:selected").text();
+                console.info(id);
+                $.get("/user/createNum",{cid,id},function (msg) {
+                    var message = msg['message'];
+                    console.info(message);
+                });
+            });
         });
     </script>
-
 </head>
 
 <body class="gray-bg">

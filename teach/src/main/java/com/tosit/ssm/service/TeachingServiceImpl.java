@@ -37,4 +37,13 @@ public class TeachingServiceImpl implements TeachingService{
         return teachingMapper.selectRenwuByJieduan(teachingId);
     }
 
+    @Override
+    public List<Teaching> findAllTeachingByClass(String cid) {
+        return teachingMapper.selectTeachingByClass(cid);
+    }
+
+    @Override
+    public List<Teaching> findAllTeaching() {
+        return teachingMapper.selectAllTeaching();
+    }
 }

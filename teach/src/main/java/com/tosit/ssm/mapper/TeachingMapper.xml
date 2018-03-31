@@ -654,5 +654,10 @@
 
   </select>
 
+  <select id="selectAllTeaching" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM teaching WHERE is_del=1 AND parent_id IS NULL AND parent_ids IS NULL ;
+  </select>
 
 </mapper>

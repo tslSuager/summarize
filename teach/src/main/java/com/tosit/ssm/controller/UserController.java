@@ -177,6 +177,7 @@ public class UserController {
             }
             office.setId(pId);
             List<User> users = userService.findUserByDateAreaNoClass(startDate, endDate, office);
+            JSONModel.put("message", "success");
             JSONModel.put("users", users);
             return JSONModel.put();
         }
@@ -366,5 +367,35 @@ public class UserController {
         user.setId(id);
         user.setKaoqinRuleid(rid);
         userService.modifyUser(user);
+    }
+
+    @RequestMapping("/createNum")
+    @ResponseBody
+    public Object createNum(HttpServletRequest request){
+        String cid = request.getParameter("cid");
+        String id = request.getParameter("id");
+        System.out.println(id);
+        List<User> stuNoLoginNameByClass = userService.findStuNoLoginNameByClass(cid);
+        if (stuNoLoginNameByClass.size()>0){
+            if (id=="bySnum"){
+                for (User u:
+                        stuNoLoginNameByClass) {
+                    u.setLoginname(u.getStuNumber());
+                    u.setPassword("hello123");
+                    userService.modifyUser(u);
+                }
+            }else if (id=="byTnum"){
+                for (User u:
+                        stuNoLoginNameByClass) {
+                    u.setLoginname(u.getPhone1());
+                    u.setPassword("hello123");
+                    userService.modifyUser(u);
+                }
+            }
+            return JSONModel.put("message","success");
+        }else {
+            JSONModel.put("message","error");
+            return JSONModel.put();
+        }
     }
 }

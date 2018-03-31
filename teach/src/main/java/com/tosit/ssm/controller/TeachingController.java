@@ -174,4 +174,40 @@ public class TeachingController {
         return renwus;
     }
 
+    /**
+     * 获取该班的教学计划或所有的教学计划
+     * @param request
+     * @return
+     */
+    @RequestMapping("/getAllTeaching")
+    @ResponseBody
+    public Object getAllTeaching(HttpServletRequest request){
+        String cid = request.getParameter("s");
+        List<Teaching> Cteachings = teachingService.findAllTeachingByClass(cid);
+        System.out.println(Cteachings.size());
+        if (Cteachings.size()>0){
+            JSONModel.put("message", "error");
+            return JSONModel.put();
+        }else {
+            List<Teaching> allTeaching = teachingService.findAllTeaching();
+            JSONModel.put("message", "success");
+            JSONModel.put("allTeaching",allTeaching);
+            return JSONModel.put();
+        }
+    }
+
+    /**
+     * 给班级匹配教学计划
+     * @param teachingOffice
+     * @param request
+     */
+    @RequestMapping("/addTeachingToClass")
+    @ResponseBody
+    public void addTeachingToClass(TeachingOffice teachingOffice,HttpServletRequest request){
+        teachingOffice.setOfficeId(request.getParameter("cid"));
+        teachingOffice.setTeachingId(request.getParameter("id"));
+        teachingOffice.setId(UUID.randomUUID().toString().replaceAll("-",""));
+        teachingOffice.setIsDel(1);
+        teachingOfficeService.insertTeachingOffice(teachingOffice);
+    }
 }

@@ -36,4 +36,17 @@ public interface TeachingService {
      * @return 返回多个任务
      */
     List<Teaching> selectRenwuByJieduan(@Param("teachingId")String teachingId);
+
+    /**
+     * 查看某班的教学计划
+     * @param cid
+     * @return
+     */
+    List<Teaching> findAllTeachingByClass(String cid);
+
+    /**
+     * 查看所有的教学计划
+     * @return
+     */
+    List<Teaching> findAllTeaching();
 }
