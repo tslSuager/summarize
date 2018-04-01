@@ -34,7 +34,7 @@
                                 <value>WriteMapNullValue</value>
                                 <!-- <value>WriteNullStringAsEmpty</value>-->
                                 <value>WriteNullBooleanAsFalse</value>
-                                <value>WriteNullNumberAsZero</value>
+                                <!--<value>WriteNullNumberAsZero</value>-->
                                 <value>WriteDateUseDateFormat</value>
                             </list>
                         </property>
