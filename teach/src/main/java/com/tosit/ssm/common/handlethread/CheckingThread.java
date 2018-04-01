@@ -30,7 +30,7 @@ public class CheckingThread extends Thread {
 
 
     public static CheckingThread getInstance() {
-        synchronized (StartGainRecordTread.class) {
+        synchronized (CheckingThread.class) {
             if (checkingThread == null) {
                 checkingThread = new CheckingThread();
             }

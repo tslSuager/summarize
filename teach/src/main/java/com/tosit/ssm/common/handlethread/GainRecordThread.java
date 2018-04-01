@@ -7,8 +7,6 @@ import java.util.*;
 
 public class GainRecordThread extends Thread {
     public static GainRecordThread checkingThread = null;
-
-
     Timer timer=null;
 
     @Autowired
@@ -30,7 +28,7 @@ public class GainRecordThread extends Thread {
 
 
     public static GainRecordThread getInstance() {
-        synchronized (StartGainRecordTread.class) {
+        synchronized (GainRecordThread.class) {
             if (checkingThread == null) {
                 checkingThread = new GainRecordThread();
             }
