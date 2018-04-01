@@ -65,7 +65,7 @@ public class CheckingController {
 
 
     /**
-     * 添加考勤规则  当为方案三方案四的时候第一条记录不要
+     * 添加考勤规则
      * @return 返回成功或者失败（具体的返回值到时候常量类定义了再说）
      */
     @RequestMapping(value = "/addKaoQinRule")
@@ -136,7 +136,7 @@ public class CheckingController {
     @ResponseBody
     public Object ViewKaoqin(String officeId, String uId, Model model){
         //查看某个班迟到和旷工的考勤结果
-        List<KaoqinResultVO> kaoqinResults = checkingService.selectByClass(officeId);
+        List<KaoqinResultVO> kaoqinResults = checkingService.selectByClassLate(officeId);
         JSONModel.put("kaoqinResults",kaoqinResults);
         //查找某个教员管理的所有班级
         List<Office> offices = checkingService.selectOfficeByManage(uId);
@@ -201,33 +201,31 @@ public class CheckingController {
      */
     @RequestMapping("/dealKaoqin")
     @ResponseBody
-    public Object DealKaoqin(String officeId,String user_Id,Integer stauts,String kaoqin_remark_content,Integer kaoqin_remark_dispose_Result,Integer kaoqin_remark_type){
+    public Object DealKaoqin(String officeId){
         //获取某个班的申诉或请假的考勤结果
         List<KaoqinResultVO> kaoqinResults = checkingService.selectByClass(officeId);
+
         JSONModel.put("kaoqinResults",kaoqinResults);
-
         //修改某人申述请假的状态和回复的字段
-        KaoqinResult kaoqinResult = new KaoqinResult();
-        kaoqinResult.setUserId(user_Id);
-        if(kaoqin_remark_type==1){
-            //数据库问题没写完
-        }
-        kaoqinResult.setKaoqinRemarkDisposeResult(kaoqin_remark_dispose_Result);
-        kaoqinResult.setKaoqinRemarkContent(kaoqin_remark_content);
-        checkingService.updateByPrimaryKey(kaoqinResult);
-
+       /* KaoqinResult kaoqinResult = new KaoqinResult();
+        checkingService.updateByPrimaryKey(kaoqinResult);*/
         return JSONModel.getMap();
     }
     /**
-     * 进入处理信息页面
-     * @param officeId 班级ID
+     * 进入处理信息页面,对请求进行处理
+     * @param kaoqinResult 班级ID
      * @return
      */
-    @RequestMapping("/getKaoqinRemarkAndQingJiaRecord")
-    @ResponseBody
-    public Object getKaoqinRemarkAndQingJiaRecord(String officeId){
-        List<KaoqinResultVO> kaoqinResults= checkingService.findKaoqinRemarkAndQingJiaRecord(officeId);
-       return kaoqinResults;
+    @RequestMapping(value = "/dealRequest",method = RequestMethod.POST)
+    public String dealRequest(KaoqinResult kaoqinResult){
+        //修改某人申述请假的状态和回复的字段
+        if (kaoqinResult.getKaoqinRemarkDisposeResult() !=null){
+            kaoqinResult.setKaoqinRemarkDisposetime(new Date());
+        }else if (kaoqinResult.getKaoqinShenshuDisposeresult() !=null){
+            kaoqinResult.setKaoqinShenshuDisposetime(new Date());
+        }
+        checkingService.updateByPrimaryKey(kaoqinResult);
+        return "table_bootstrap";
     }
 
     /**

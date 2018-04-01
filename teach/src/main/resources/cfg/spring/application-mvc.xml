@@ -27,9 +27,6 @@
                              <value>yyyy-MM-dd hh:mm:ss</value>
                          </property>
                          -->
-                        <property name="dateFormat">
-                            <value>yyyy-MM-dd hh:mm:ss</value>
-                        </property>
                         <property name="serializerFeatures">
                             <list>
                                 <!-- <value>WriteNonStringValueAsString</value>-->
