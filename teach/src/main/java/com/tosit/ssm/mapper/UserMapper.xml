@@ -43,6 +43,13 @@
     <result column="checkin_time" jdbcType="TIMESTAMP" property="checkinTime" />
     <result column="checkout_time" jdbcType="TIMESTAMP" property="checkoutTime" />
   </resultMap>
+
+  <resultMap id="VOResultMap" type="com.tosit.ssm.entity.UserVO">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result property="GroupId" jdbcType="VARCHAR" column="groupId"/>
+  </resultMap>
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -114,7 +121,7 @@
     FROM user_office uo
     LEFT JOIN `user` u
     ON uo.user_id = u.ID
-    WHERE uo.office_id = #{id};
+    WHERE uo.office_id = #{id} AND u.user_type=4 AND uo.is_del=1 AND u.is_del=1;
   </select>
 
   <select id="selectByExample" parameterType="com.tosit.ssm.entity.UserExample" resultMap="BaseResultMap">
@@ -1119,8 +1126,7 @@ SELECT
     on us.id =uo.user_id
     JOIN office f
     on uo.office_id =f.id where f.office_type = 3 and us.is_del=1 and f.is_del= 1 and uo.is_del=1)) and us.kaoqin_ruleID is  null and
-    u.is_del=0
-    ;
+    u.is_del=0 AND u.user_type = 4;
   </select>
 
 
@@ -1128,10 +1134,10 @@ SELECT
   <select id="selectNoGuize" parameterType="com.tosit.ssm.entity.User" resultMap="BaseResultMap">
     SELECT
     <include refid="Base_Column_List"/>
-    FROM user_office uo
-    LEFT JOIN `user` u
-    ON uo.user_id = u.ID
-    WHERE uo.office_id = #{id} AND kaoqin_ruleID!='';
+    FROM user u
+    JOIN user_office uo
+    ON u.ID = uo.user_id
+    WHERE uo.office_id = #{id} AND u.user_type=4 AND u.kaoqin_ruleID IS NULL ;
   </select>
 
 
@@ -1142,7 +1148,7 @@ SELECT
   SELECT uo.user_id FROM user_office uo
   LEFT JOIN kaoqin_result kr
   ON kr.user_id=uo.user_id
-  WHERE kr.status=0 AND uo.office_id = #{id} AND kr.is_del=1 AND uo.is_del=1 )AND is_del=1 ;
+  WHERE kr.status=0 AND uo.office_id = #{id} AND kr.is_del=1 AND uo.is_del=1 )AND is_del=1 AND u.user_type=4;
   </select>
 
   <select id="selectKaoqinOrShensu" parameterType="string" resultMap="BaseResultMap">
@@ -1156,7 +1162,7 @@ SELECT
     (kr.kaoqin_remark_type=1 AND kr.kaoqin_remark_status  )
     OR
     kr.kaoqin_shenshu_status is not null
-    AND uo.office_id = #{id} AND kr.is_del=1) AND is_del=1;
+    AND uo.office_id = #{id} AND kr.is_del=1) AND is_del=1 AND u.user_type=4;
   </select>
 
 
@@ -1164,24 +1170,24 @@ SELECT
     SELECT
      <include refid="Base_Column_List"/>
     FROM user u join user_office uo on u.id=uo.user_id
-    join   office f on uo.office_id=f.id where f.id=#{office.id} and f.is_del=1 and u.is_del=1 and uo.is_del=1 and u.id not in
+    join   office f on uo.office_id=f.id where f.id=#{office.id} and f.is_del=1 and u.is_del=1 and uo.is_del=1 AND u.user_type=4 and u.id not in
      (SELECT
     uu.id   FROM user uu join user_office uoo on uu.id=uoo.user_id
-    join   office ff on uoo.office_id=ff.id where ff.parent_id=#{office.id} and ff.is_del=1 and uu.is_del=1 and uoo.is_del=1)
+    join   office ff on uoo.office_id=ff.id where ff.parent_id=#{office.id} and ff.is_del=1 and uu.is_del=1 and uoo.is_del=1 AND uu.user_type=4)
   </select>
 
   <select id="selectByClass" parameterType="com.tosit.ssm.entity.Office" resultMap="BaseResultMap">
     SELECT
      <include refid="Base_Column_List"/>
     FROM user u join user_office uo on u.id=uo.user_id
-    join   office f on uo.office_id=f.id where f.id=#{office.id} and f.is_del=1 and u.is_del=1 and uo.is_del=1
+    join   office f on uo.office_id=f.id where f.id=#{office.id} and f.is_del=1 and u.is_del=1 and uo.is_del=1 AND u.user_type=4
   </select>
 
   <select id="selectByGroup" parameterType="com.tosit.ssm.entity.Office" resultMap="BaseResultMap">
     SELECT
      <include refid="Base_Column_List"/>
     FROM user u join user_office uo on u.id=uo.user_id
-    join   office f on uo.office_id=f.id where f.id=#{office.id} and f.is_del=1 and u.is_del=1 and uo.is_del=1
+    join   office f on uo.office_id=f.id where f.id=#{office.id} and f.is_del=1 and u.is_del=1 and uo.is_del=1 AND u.user_type=4
   </select>
 
   <select id="selectByTimeAreaNClass" parameterType="map" resultMap="BaseResultMap">
@@ -1189,13 +1195,13 @@ SELECT
      <include refid="Base_Column_List"/>
     FROM user u join user_office uo on u.id=uo.user_id
     join   office f on uo.office_id=f.id where f.id=#{office.id}
-    and f.is_del=1 and u.is_del=1 and uo.is_del=1
-     and  DATE_FORMAT(u.create_time,'%Y:%c:%e')>= DATE_FORMAT(#{startDate},'%Y:%c:%e')
-       and DATE_FORMAT(#{endDate},'%Y:%c:%e')  >= DATE_FORMAT(u.create_time,'%Y:%c:%e')
+    and f.is_del=1 and u.is_del=1 and uo.is_del=1 AND u.user_type=4
+     and  u.create_time >= DATE_FORMAT(#{startDate},'%Y-%m-%d %H:%i:%s')
+       and DATE_FORMAT(#{endDate},'%Y-%m-%d %H:%i:%s')  >= u.create_time
      and u.id not in(
     SELECT
     uu.id   FROM user uu join user_office uoo on uu.id=uoo.user_id
-    join   office ff on uoo.office_id=ff.id where ff.office_type=3 and ff.is_del=1 and uu.is_del=1 and uoo.is_del=1
+    join   office ff on uoo.office_id=ff.id where ff.office_type=3 and ff.is_del=1 and uu.is_del=1 and uoo.is_del=1 AND uu.user_type=4
     )
      </select>
 
@@ -1203,7 +1209,7 @@ SELECT
      SELECT
      <include refid="Base_Column_List"/>
     FROM user u join user_office uo on u.id=uo.user_id
-    join   office f on uo.office_id=f.id where f.id=#{office.id} and f.is_del=1 and u.is_del=1 and uo.is_del=1 and u.id not in(
+    join   office f on uo.office_id=f.id where f.id=#{office.id} and f.is_del=1 and u.is_del=1 and uo.is_del=1 AND u.user_type=4 and u.id not in(
     SELECT
     uu.id   FROM user uu join user_office uoo on uu.id=uoo.user_id
     join   office ff on uoo.office_id=ff.id where ff.office_type=3 and ff.is_del=1 and uu.is_del=1 and uoo.is_del=1
@@ -1215,8 +1221,8 @@ SELECT
     SELECT
      <include refid="Base_Column_List"/>
     FROM user u join user_office uo on u.id=uo.user_id
-    join   office f on uo.office_id=f.id where f.id=#{office.id}
-    and f.is_del=1 and u.is_del=1 and uo.is_del=1
+    join   office f on uo.office_id=f.id where f.id=#{id}
+    and f.is_del=1 and u.is_del=1 and uo.is_del=1 AND u.user_type=4
     and u.kaoqin_code is null
   </select>
 
@@ -1225,7 +1231,7 @@ SELECT
      <include refid="Base_Column_List"/>
     FROM user u join user_office uo on u.id=uo.user_id
     join   office f on uo.office_id=f.id where f.id=#{office.id}
-    and f.is_del=1 and u.is_del=1 and uo.is_del=1
+    and f.is_del=1 and u.is_del=1 and uo.is_del=1 AND u.user_type=4
     and u.kaoqin_ruleID is not null
   </select>
 
@@ -1234,7 +1240,7 @@ SELECT
      <include refid="Base_Column_List"/>
     FROM user u join user_office uo on u.id=uo.user_id
     join   office f on uo.office_id=f.id where u.kaoqin_ruleID=#{kaoqinRule.id}
-    and f.is_del=1 and u.is_del=1 and uo.is_del=1
+    and f.is_del=1 and u.is_del=1 and uo.is_del=1 AND u.user_type=4
     and u.id  not in
     (
     SELECT
@@ -1243,10 +1249,33 @@ SELECT
     )
   </select>
 
+  <select id="selectUsersWithGroup" parameterType="com.tosit.ssm.entity.Office" resultMap="VOResultMap">
+    SELECT u.ID,u.name,o.ID `groupId`
+FROM user u JOIN user_office uo ON u.ID=uo.user_id
+  JOIN office o ON uo.office_id=o.ID
+WHERE o.parent_id = #{office.id} and o.is_del=1 and u.is_del=1 and uo.is_del=1 AND u.user_type=4;
+  </select>
+
+  <select id="selectAllTeacherNoThisClass" parameterType="com.tosit.ssm.entity.Office" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM user u WHERE u.user_type=3 AND u.is_del=1 AND u.ID NOT IN (
+    SELECT uo.user_id FROM user_office uo WHERE uo.office_id = #{office.id}
+);
+  </select>
+
   <select id="selectByUsername" parameterType="string" resultMap="BaseResultMap">
     SELECT
     <include refid="Base_Column_List"/>
     FROM user u WHERE u.loginName=#{username}
+  </select>
+
+  <select id="selectStuNoLoginNameByClass" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT *
+FROM user u
+JOIN user_office uo
+ON u.ID = uo.user_id
+WHERE uo.office_id = #{VALUE } AND u.loginName IS NULL ;
   </select>
 
 </mapper>

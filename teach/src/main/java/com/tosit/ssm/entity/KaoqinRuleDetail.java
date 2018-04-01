@@ -10,7 +10,7 @@ public class KaoqinRuleDetail {
     private String kaoqinRuleId;
 
     private Integer weekDay;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
     @DateTimeFormat(pattern = "HH:mm")
     private Date brushStarttime1;

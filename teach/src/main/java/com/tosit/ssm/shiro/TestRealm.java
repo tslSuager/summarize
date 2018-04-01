@@ -2,15 +2,11 @@ package com.tosit.ssm.shiro;
 
 import com.tosit.ssm.entity.User;
 import com.tosit.ssm.service.UserService;
-import com.tosit.ssm.service.UserServiceImpl;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
-import org.apache.shiro.realm.Realm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.List;
 
 public class TestRealm extends AuthorizingRealm{
     @Autowired

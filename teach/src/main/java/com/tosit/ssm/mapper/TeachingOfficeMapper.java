@@ -1,5 +1,6 @@
 package com.tosit.ssm.mapper;
 
+import com.tosit.ssm.entity.Teaching;
 import com.tosit.ssm.entity.TeachingOffice;
 import com.tosit.ssm.entity.TeachingOfficeExample;
 import java.util.List;
@@ -25,9 +26,17 @@ public interface TeachingOfficeMapper {
     int insertTeachingOffice(TeachingOffice record);
 
     /**
-     * 修改教学组织关联表
+     * 根据主键id修改教学组织关联表
      * @param record 一个包含id的教学组织关联表对象
      * @return
      */
     int updateByPrimaryKey(TeachingOffice record);
+
+    /**
+     * 根据教学计划id修改教学组织关联表
+     * @param
+     * @return
+     */
+    int updateByTeachingId(@Param("teachingId") String teachingId);
+
 }

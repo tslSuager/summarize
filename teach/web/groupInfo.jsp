@@ -95,28 +95,9 @@
         <div class="ibox float-e-margins">
             <div class="ibox-content">
                 <h4>班级学生列表</h4>
-                <div class="input-group">
-                    <input type="text" class="form-control">
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-primary">搜索</button>
-                    </span>
-                </div>
                 <div class="col-sm-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-content" id="right">
-                            <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                            <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                            <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                            <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                            <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即夜壶</button>
-                            <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即壶</button>
-                            <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                            <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                            <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                            <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即壶</button>
-                            <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即</button>
-                            <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                            <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
                         </div>
                     </div>
                 </div>
@@ -132,11 +113,12 @@
 <script src="static/js/welcome.min.js"></script>
 <script type="text/javascript">
     $(function () {
-        $(".chooseStu").click(function () {
+        $("body").on("click",".chooseStu",function () {
             if ($(this).hasClass("btn-info")){
-                $(this).removeClass("btn-info").addClass("btn-warning").attr("id",Math.random());
+                var id = $(this).parent().attr("id");
+                $(this).attr("name",id).removeClass("btn-info").addClass("btn-warning");
             }else if($(this).hasClass("btn-warning")){
-                $(this).removeClass("btn-warning").addClass("btn-info").removeAttr("id");
+                $(this).removeClass("btn-warning").addClass("btn-info").removeAttr("id").removeAttrs("name");
             }
         });
         $("#addStu").click(function () {
@@ -151,42 +133,100 @@
             $("#right").find(".btn-warning").removeClass("btn-warning").addClass("btn-success");
             $("#left").find(".btn-warning").remove();
         });
-        $("#grouping").click(function () {
-            var num =  $("#inputNum").val();
-            var num2 = $(this).attr("text");
-            if (num2!=null){
-                for (var j=(parseInt(num)+parseInt(1));j<=(parseInt(num)+parseInt(num2));j++){
-                    var tt="#tab-"+j;
-                    if (j===1){
-                        $('#className').append($("<li>").addClass("active group1").append($("<a>").attr("data-toggle","tab").attr("href",tt).text("第"+j+"组"))
-                            .append($("<button>").addClass("btn btn-outline btn-danger btn-xs buttonCss deleteGroup").text("删除该组")));
-                        $('.tab-content').append($("<div>").attr("id","tab-"+j).addClass("tab-pane active").append($("<div>").addClass("panel-body").attr("id","group"+j)));
-                    }else {
-                        $('#className').append($("<li>").addClass("group"+j+"").append($("<a>").attr("data-toggle","tab").attr("href",tt).text("第"+j+"组"))
-                            .append($("<button>").addClass("btn btn-outline btn-danger btn-xs buttonCss deleteGroup").text("删除该组")));
-                        $('.tab-content').append($("<div>").attr("id","tab-"+j).addClass("tab-pane").append($("<div>").addClass("panel-body").attr("id","group"+j)));
-                    }
-                }
-            }
-            else {
-                for (var i=1;i<=num;i++){
-                    var ss="#tab-"+i;
-                    if (i===1){
-                        $('#className').append($("<li>").addClass("active group1").append($("<a>").attr("data-toggle","tab").attr("href",ss).text("第"+i+"组"))
-                            .append($("<button>").addClass("btn btn-outline btn-danger btn-xs buttonCss deleteGroup").text("删除该组")));
-                        $('.tab-content').append($("<div>").attr("id","tab-"+i).addClass("tab-pane active").append($("<div>").addClass("panel-body").attr("id","group"+i)
-                            ));
-                    }else {
-                        $('#className').append($("<li>").addClass("group"+i+"").append($("<a>").attr("data-toggle","tab").attr("href",ss).text("第"+i+"组"))
-                            .append($("<button>").addClass("btn btn-outline btn-danger btn-xs buttonCss deleteGroup").text("删除该组")));
-                        $('.tab-content').append($("<div>").attr("id","tab-"+i).addClass("tab-pane").append($("<div>").addClass("panel-body").attr("id","group"+i)));
-                    }
-                }
-            }
-            $(this).attr("text",num);
+
+        //获取从父页面传来的班级id
+        var url = location.search;
+        var s = url.slice(5);
+
+        $.get("/user/getUsersByClassNoGroup",{s},function (msg) {
+            var users = msg['users'];
+            $.each(users,function (i,each) {
+                $("#right").append('<button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="" id="'+each['id']+'">'+each['name']+'</button>');
+            })
         });
+
+         function getGroup() {
+            $.get("/office/getGroupByClass",{s},function (msg) {
+                var groups = msg['groups'];
+                var num = groups.length;
+                $("#grouping").attr("text",num);
+                $.each(groups,function (i,each) {
+                    var tt="#tab-"+(i+1);
+                    $('#className').append($("<li>").addClass("group"+(i+1)+"").addClass(""+each['id']+"").append($("<a>").attr("data-toggle","tab").attr("href",tt).text(""+each['name']+"")));
+                    $('.tab-content').append($("<div>").attr("id","tab-"+(i+1)).addClass("tab-pane").addClass(""+each['id']+"").append($("<div>").addClass("panel-body").attr("id",each['id'])
+                        .append($("<div>").append($("<button>").addClass("btn btn-outline btn-danger btn-xs buttonCss deleteGroup").text("删除该组")))));
+                });
+
+                var ll = $("#className").find("li").length;
+                $("#grouping").click(function () {
+                    var num =  $("#inputNum").val();
+                    $.get("/office/addGroup",{num,ll,s},function () {
+                    });
+                    window.location.reload();
+                    /*var num =  $("#inputNum").val();
+                    var num2 = $(this).attr("text");
+                    if (num2!=null){
+                        for (var j=(parseInt(num2)+parseInt(1));j<=(parseInt(num)+parseInt(num2));j++){
+                            var tt="#tab-"+j;
+                            if (j===1){
+                                $('#className').append($("<li>").addClass("active group1").append($("<a>").attr("data-toggle","tab").attr("href",tt).text("第"+j+"组"))
+                                    .append($("<button>").addClass("btn btn-outline btn-danger btn-xs buttonCss deleteGroup").text("删除该组")));
+                                $('.tab-content').append($("<div>").attr("id","tab-"+j).addClass("tab-pane active").append($("<div>").addClass("panel-body").attr("id","group"+j)));
+                            }else {
+                                $('#className').append($("<li>").addClass("group"+j+"").append($("<a>").attr("data-toggle","tab").attr("href",tt).text("第"+j+"组"))
+                                    .append($("<button>").addClass("btn btn-outline btn-danger btn-xs buttonCss deleteGroup").text("删除该组")));
+                                $('.tab-content').append($("<div>").attr("id","tab-"+j).addClass("tab-pane").append($("<div>").addClass("panel-body").attr("id","group"+j)));
+                            }
+                        }
+                    }
+                    else {
+                        for (var i=1;i<=num;i++){
+                            var ss="#tab-"+i;
+                            if (i===1){
+                                $('#className').append($("<li>").addClass("active group1").append($("<a>").attr("data-toggle","tab").attr("href",ss).text("第"+i+"组"))
+                                    .append($("<button>").addClass("btn btn-outline btn-danger btn-xs buttonCss deleteGroup").text("删除该组")));
+                                $('.tab-content').append($("<div>").attr("id","tab-"+i).addClass("tab-pane active").append($("<div>").addClass("panel-body").attr("id","group"+i)
+                                    ));
+                            }else {
+                                $('#className').append($("<li>").addClass("group"+i+"").append($("<a>").attr("data-toggle","tab").attr("href",ss).text("第"+i+"组"))
+                                    .append($("<button>").addClass("btn btn-outline btn-danger btn-xs buttonCss deleteGroup").text("删除该组")));
+                                $('.tab-content').append($("<div>").attr("id","tab-"+i).addClass("tab-pane").append($("<div>").addClass("panel-body").attr("id","group"+i)));
+                            }
+                        }
+                    }
+                    $(this).attr("text",(parseInt(num)+parseInt(num2)));*/
+                });
+            });
+        }
+
         $("body").on("click",".deleteGroup",function () {
-            $(this).parent().remove();
+            var gid = $(this).parent().parent().attr("id");
+            layer.confirm('您确认要删除吗？', {
+                btn: ['是滴','再想想'] //按钮
+            }, function(){
+                $.get("/office/deleteGroup",{gid},function () {
+                    $("."+gid+"").remove();
+                    layer.msg('删除成功', {icon: 1});
+                });
+            }, function(){
+                layer.msg('也可以这样', {
+                    time: 1000
+                });
+            });
+        });
+
+        $(getGroup());
+
+        $.get("/user/getUsersByGroup",{s},function (msg) {
+            var users = msg['users'];
+            $.each(users,function (i,each) {
+                var groupId = each['groupId'];
+                $("ul>li").each(function (index) {
+                    if ($(this).hasClass(groupId)){
+                        $("#"+groupId+"").append('<button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" id="'+each['id']+'" type="button" name="">'+each['name']+'</button>')
+                    }
+                });
+            });
         });
     });
 </script>

@@ -3,6 +3,7 @@ package com.tosit.ssm.controller;
 import com.tosit.ssm.common.util.json.JSONModel;
 import com.tosit.ssm.entity.*;
 import com.tosit.ssm.service.CheckingService;
+import com.tosit.ssm.service.CheckingServicelmpl;
 import com.tosit.ssm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.datetime.DateFormatter;
@@ -135,7 +136,7 @@ public class CheckingController {
     @ResponseBody
     public Object ViewKaoqin(String officeId, String uId, Model model){
         //查看某个班迟到和旷工的考勤结果
-        List<KaoqinResultVO> kaoqinResults = checkingService.selectByClassLate(officeId);
+        List<KaoqinResultVO> kaoqinResults = checkingService.selectByClass(officeId);
         JSONModel.put("kaoqinResults",kaoqinResults);
         //查找某个教员管理的所有班级
         List<Office> offices = checkingService.selectOfficeByManage(uId);
@@ -202,7 +203,7 @@ public class CheckingController {
     @ResponseBody
     public Object DealKaoqin(String officeId,String user_Id,Integer stauts,String kaoqin_remark_content,Integer kaoqin_remark_dispose_Result,Integer kaoqin_remark_type){
         //获取某个班的申诉或请假的考勤结果
-        List<KaoqinResult> kaoqinResults = checkingService.selectByClass(officeId);
+        List<KaoqinResultVO> kaoqinResults = checkingService.selectByClass(officeId);
         JSONModel.put("kaoqinResults",kaoqinResults);
 
         //修改某人申述请假的状态和回复的字段
@@ -217,5 +218,53 @@ public class CheckingController {
 
         return JSONModel.getMap();
     }
+    /**
+     * 进入处理信息页面
+     * @param officeId 班级ID
+     * @return
+     */
+    @RequestMapping("/getKaoqinRemarkAndQingJiaRecord")
+    @ResponseBody
+    public Object getKaoqinRemarkAndQingJiaRecord(String officeId){
+        List<KaoqinResultVO> kaoqinResults= checkingService.findKaoqinRemarkAndQingJiaRecord(officeId);
+       return kaoqinResults;
+    }
 
+    /**
+     * 查询所有的考勤规则和详情
+     * @return
+     */
+    @RequestMapping("/getKaoqinAllRules")
+    @ResponseBody
+    public Object getKaoqinAllRules(){
+        List<KaoqinRule> kaoqinRulesIncludeDetail = checkingService.findKaoqinRulesIncludeDetail();
+        return kaoqinRulesIncludeDetail;
+    }
+
+    /**
+     * 为指定得考勤规则添加考勤详情
+     * @return
+     */
+    @RequestMapping("/addKaoqinDetail")
+    public String addKaoqinDetail(KaoqinRule kaoqinRule){
+        kaoqinRule.getKaoqinRuleDetails().get(0).setKaoqinRuleId(kaoqinRule.getId());
+        kaoqinRule.getKaoqinRuleDetails().get(0).setId(UUID.randomUUID().toString());
+        checkingService.addKaoQinRuleDetail(kaoqinRule);
+       return "/kaoqin_rule_display";
+    }
+    @RequestMapping(value = "/updateKaoqinDetail" ,method = RequestMethod.POST)
+    @ResponseBody
+    public Object updateKaoqinDetail(KaoqinRuleDetail kaoqinRuleDetail){
+        checkingService.updateKaoqinDetail(kaoqinRuleDetail);
+        return "success";
+    }
+
+    @RequestMapping("/getAllRule")
+    @ResponseBody
+    public Object getAllRule(){
+        String id = null;
+        List<KaoqinRule> kaoqinRules = checkingService.selectAllRule(id);
+        JSONModel.put("Rules",kaoqinRules);
+        return JSONModel.put();
+    }
 }

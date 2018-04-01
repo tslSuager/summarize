@@ -935,7 +935,7 @@
                                     <td>
                                         <label class="col-sm-1 control-label labelleft"
                                                style="width: 100px;">日期:</label>
-                                        <input type="text" name="date" hidden value="">
+                                        <input type="text"  hidden value="">
                                     </td>
                                     <td>
                                     <span class="checkbox i-checks">
@@ -954,23 +954,23 @@
                                     </td>
                                     <td><input style="width: 100px;"
                                                class="form-control layer-date labelright single-input"
-                                               name="brushStarttime1" value="" placeholder="起始时间">&nbsp;&nbsp;
+                                                value="" placeholder="起始时间">&nbsp;&nbsp;
                                     </td>
                                     <td><input style="width: 100px;"
                                                class="form-control layer-date labelright single-input"
-                                               name="brushEndtime1" value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " name="time1Wucha"
+                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright "
                                                value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第二次打卡时间：</label>
                                     </td>
                                     <td><input style="width: 100px;"
                                                class="form-control layer-date labelright single-input"
-                                               name="brushStarttime2" value="" placeholder="起始时间">&nbsp;&nbsp;
+                                               value="" placeholder="起始时间">&nbsp;&nbsp;
                                     </td>
                                     <td><input style="width: 100px;"
                                                class="form-control layer-date labelright single-input"
-                                               name="brushEndtime2" value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " name="time1Wucha2"
+                                               value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright "
                                                value="" placeholder="矿工标准"></td>
                                 </tr>
 
@@ -1012,7 +1012,7 @@
                             <table class="table-bordered " style="width: 2100px">
                                 <tr class="four" hidden>
                                     <td><label class="col-sm-1 control-label" <%--style="width: 100px;"--%>>日期</label>
-                                        <input type="text" hidden name="date" value="">
+                                        <input type="text" hidden  value="">
                                     </td>
                                     <td><span class="checkbox i-checks">
                                         <label class="">
@@ -1027,45 +1027,45 @@
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;"
                                                class="form-control layer-date  single-input"
-                                               name="brushStarttime1" value="" placeholder="起始时间">
+                                                value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;"
                                                class="form-control layer-date  single-input"
-                                               name="brushEndtime1" value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " name="time1Wucha"
+                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright "
                                                value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第二次打卡时间：</label>
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;"
                                                class="form-control layer-date  single-input"
-                                               name="brushStarttime2" value="" placeholder="起始时间">
+                                                value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;"
                                                class="form-control layer-date  single-input"
-                                               name="brushEndtime2" value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " name="time1Wucha2"
+                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright "
                                                value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第三次打卡时间：</label>
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;"
                                                class="form-control layer-date  single-input"
-                                               name="brushStarttime3" value="" placeholder="起始时间">
+                                               value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;"
                                                class="form-control layer-date  single-input"
-                                               name="brushEndtime3" value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " name="time1Wucha3"
+                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright "
                                                value="" placeholder="矿工标准"></td>
                                     <td><label class=" labelleft control-label" style="width: 120px;">第四次打卡时间：</label>
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px; width: 100px;"
                                                class="form-control layer-date  single-input"
-                                               name="brushStarttime4" value="" placeholder="起始时间">
+                                                value="" placeholder="起始时间">
                                     </td>
                                     <td><input style="margin-left:4px; margin-right:4px;width: 100px;"
                                                class="form-control layer-date  single-input"
-                                               name="brushEndtime4" value="" placeholder="结束时间"></td>
-                                    <td><input style="width: 85px;" class="form-control  labelright " name="time1Wucha4"
+                                                value="" placeholder="结束时间"></td>
+                                    <td><input style="width: 85px;" class="form-control  labelright "
                                                value="" placeholder="矿工标准"></td>
                                 </tr>
                                 <tr id="four_line" hidden></tr>
@@ -1269,7 +1269,7 @@
         //设置日期
         for (var i = 1; i < $three.length; i++) {
             $($three[i]).find("label").eq(0).html(dates[i - 1]);//设置展示的日期
-            $($three[i]).find("input").eq(0).attr("name", "krd[" + i + "].date");//这是设置日期name属性
+            $($three[i]).find("input").eq(0).attr("name", "krd[" + i + "].date").val(dates[i - 1]);//这是设置日期name属性
 
 
             $($three[i]).find("input").eq(2).attr("name", "krd[" + i + "].brushStarttime1");//设置第一次打卡开始时间
