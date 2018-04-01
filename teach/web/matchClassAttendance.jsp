@@ -53,52 +53,8 @@
                                 <div class="tabs-container">
                                     <div class="tabs-left">
                                         <ul class="nav nav-tabs" id="className">
-                                            <li class="active"><a data-toggle="tab" href="#tab-1"> 规则一</a>
-                                            </li>
-                                            <li class=""><a data-toggle="tab" href="#tab-2"> 规则二</a>
-                                            </li>
-                                            <li class=""><a data-toggle="tab" href="#tab-3"> 规则三</a>
-                                            </li>
                                         </ul>
                                         <div class="tab-content ">
-                                            <div id="tab-1" class="tab-pane active">
-                                                <div class="panel-body" id="class1">
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                </div>
-                                            </div>
-                                            <div id="tab-2" class="tab-pane" >
-                                                <div class="panel-body" id="class2">
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                </div>
-                                            </div>
-                                            <div id="tab-3" class="tab-pane" >
-                                                <div class="panel-body" id="class3">
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                    <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -133,28 +89,9 @@
         <div class="ibox float-e-margins">
             <div class="ibox-content">
                 <h4>班级学生列表</h4>
-                <div class="input-group">
-                    <input type="text" class="form-control">
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-primary">搜索</button>
-                    </span>
-                </div>
                 <div class="col-sm-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-content" id="right">
-                            <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                            <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                            <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                            <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                            <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即夜壶</button>
-                            <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即壶</button>
-                            <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                            <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                            <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                            <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即壶</button>
-                            <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即</button>
-                            <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                            <button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="">即可夜壶</button>
                         </div>
                     </div>
                 </div>
@@ -182,9 +119,9 @@
 <script src="/static/js/demo/form-advanced-demo.min.js"></script>
 
 <script type="text/javascript">
-    $(".chooseStu").click(function () {
+    $("body").on("click",(".chooseStu"),function () {
         if ($(this).hasClass("btn-info")){
-            $(this).removeClass("btn-info").addClass("btn-warning").attr("id",Math.random());
+            $(this).removeClass("btn-info").addClass("btn-warning");
         }else if($(this).hasClass("btn-warning")){
             $(this).removeClass("btn-warning").addClass("btn-info").removeAttr("id");
         }
@@ -201,6 +138,43 @@
         $("#right").find(".btn-warning").removeClass("btn-warning").addClass("btn-success");
         $("#left").find(".btn-warning").remove();
     });
+
+    //获取从父页面传来的班级id
+    var url = location.search;
+    var s = url.slice(5);
+
+    $.get("/user/getUserNoRuleByClass",{s},function (msg) {
+        var users = msg['users'];
+        $.each(users,function (i,each) {
+            $("#right").append('<button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="" id="'+each['id']+'">'+each['name']+'</button>');
+        })
+    });
+
+    $.get("/checking/getAllRule",{},function (msg) {
+        var rules= msg['Rules'];
+        $.each(rules,function (i,each) {
+            var tt="#tab-"+(i+1);
+            $('#className').append($("<li>").addClass("group"+(i+1)+"").addClass(""+each['id']+"").append($("<a>").attr("data-toggle","tab").attr("href",tt).text("规则"+(parseInt(i)+parseInt(1))+"")));
+            $('.tab-content').append($("<div>").attr("id","tab-"+(i+1)).addClass("tab-pane").addClass(""+each['id']+"").append($("<div>").addClass("panel-body").attr("id",each['id'])
+                .append($("<div>").append($("<button>").addClass("btn btn-outline btn-danger btn-xs buttonCss toRuleDetail").text("查看规则详情")))));
+        });
+    });
+
+    $.get("/user/gerUserWithRuleByClass",{s},function (msg) {
+        var users = msg['users'];
+        $.each(users,function (i,each) {
+            var kaoqinId = each['kaoqinRuleid'];
+            $("#"+kaoqinId+"").append('<button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" id="'+each['id']+'" type="button" name="">'+each['name']+'</button>')
+            /*$("ul>li").each(function (index) {
+                if ($(this).hasClass(kaoqinId)){
+                    $("#"+kaoqinId+"").append('<button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" id="'+each['id']+'" type="button" name="">'+each['name']+'</button>')
+                }
+            });*/
+        });
+    })
+
+
+
 </script>
 
 </body>

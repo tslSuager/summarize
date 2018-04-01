@@ -636,7 +636,7 @@
     SELECT
     <include refid="Base_Column_List"/>
     FROM office
-    WHERE is_del =1  AND office_type = 3 AND (create_time BETWEEN DATE_FORMAT(#{createTime},'%Y-%m-%d %H:%i:%s') AND DATE_FORMAT(#{uploadTime},'%Y-%m-%d %H:%i:%s') )
+    WHERE is_del =1  AND office_type = 3 AND (create_time BETWEEN DATE_FORMAT(#{createTime},'%Y-%m-%d %H:%i:%s') AND DATE_FORMAT(#{updateTime},'%Y-%m-%d %H:%i:%s') )
     AND   ID IN (SELECT office_id from user_office WHERE user_id = #{master})
   </select>
 
@@ -645,6 +645,12 @@
     <include refid="Base_Column_List"/>
     from office
     WHERE is_del = 1
+  </select>
+
+  <select id="selectIdByParent" parameterType="com.tosit.ssm.entity.Office" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM office WHERE parent_id=#{office.id};
   </select>
 
 </mapper>

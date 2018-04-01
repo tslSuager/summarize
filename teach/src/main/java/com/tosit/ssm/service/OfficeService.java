@@ -7,10 +7,57 @@ import java.util.List;
 
 public interface OfficeService {
      void createOffice(Office office);
-        List<Office> getArea();
+
+    List<Office> getArea();
+
+    /**
+     * 查询某个教员某个时间段内的所有班级
+     * @param office
+     * @return
+     */
+    List<Office> findClassByTeacherAndDate(Office office);
+
+    /**
+     * 查询某个教员某个学校的班
+     * @param office
+     * @return
+     */
+    List<Office> findClassByTeacherAndSchool(Office office);
+
+    /**
+     * 新建一个office
+     * @param office
+     */
+    void addOffice(Office office);
+    List<Office> getAllArea();
+
+    /**
+     * 查询某个班的所有组
+     * @param id
+     * @return
+     */
+    List<Office> findGroupByClassId(String id);
         public  List<Office> getAllClass();
 
-    List<Office> getAllArea();
+    /**
+     * 删除某个组织
+     * @param office
+     */
+    int deleteOffice(Office office);
+
+    /**
+     *通过Id查找某组织
+     * @param id
+     * @return
+     */
+    Office findOfficeById(String id);
+
+    /**
+     * 查找某组织的子Id
+     * @param office
+     * @return
+     */
+    List<Office> findIdByParent(Office office);
 
     /**
      * 查找某个教员管理的某个班级

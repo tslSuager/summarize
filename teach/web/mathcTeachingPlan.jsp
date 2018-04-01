@@ -31,20 +31,23 @@
 <body>
 <div class="row">
     <div class="form-group draggable">
-        <div class="col-sm-9">
+        <div class="col-sm-9" id="teaching">
+
             <select class="form-control" name="">
-                <option>教学计划 1</option>
+                <%--<option>教学计划 1</option>
                 <option>教学计划 2</option>
                 <option>教学计划 3</option>
-                <option>教学计划 4</option>
+                <option>教学计划 4</option>--%>
             </select>
         </div>
     </div>
 </div>
 
 <script src="/static/js/jquery.min.js?v=2.1.4"></script>
+<script src="/static/js/jquery.min.js"></script>
 <script src="/static/js/bootstrap.min.js?v=3.3.6"></script>
-<script src="/static/js/content.min.js?v=1.0.0"></script>
+<script src="/static/js/plugins/layer/layer.min.js"></script>
+<script src="/static/js/content.min.js"></script>
 <script src="/static/js/plugins/chosen/chosen.jquery.js"></script>
 <script src="/static/js/plugins/jsKnob/jquery.knob.js"></script>
 <script src="/static/js/plugins/jasny/jasny-bootstrap.min.js"></script>
@@ -59,5 +62,27 @@
 <script src="/static/js/plugins/clockpicker/clockpicker.js"></script>
 <script src="/static/js/plugins/cropper/cropper.min.js"></script>
 <script src="/static/js/demo/form-advanced-demo.min.js"></script>
+<script src="/static/js/welcome.min.js"></script>
 </body>
 </html>
+
+<script type="text/javascript">
+
+    //获取从父页面传来的班级id
+    var url = location.search;
+    var s = url.slice(5);
+
+    $.get("/teaching/getAllTeaching",{s},function (msg) {
+        var message = msg['message'];
+        var allTeaching =msg['allTeaching'];
+        if (message=='error'){
+            alert("该班级已匹配教学计划");
+            var index = parent.layer.getFrameIndex(window.name);
+            parent.layer.close(index);
+        }else if (allTeaching!=null){
+            $.each(allTeaching,function (i,each) {
+                $("#teaching").find("select").append('<option id="'+each['id']+'">'+each['planname']+'</option>');
+            });
+        }
+    })
+</script>

@@ -4,6 +4,7 @@ import com.alibaba.fastjson.annotation.JSONField;
 import com.tosit.ssm.common.util.json.JSONModel;
 import com.tosit.ssm.entity.*;
 import com.tosit.ssm.service.CheckingService;
+import com.tosit.ssm.service.CheckingServicelmpl;
 import com.tosit.ssm.service.UserService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -175,7 +176,6 @@ public class CheckingController {
         checkingService.updateByPrimaryKey(kaoqinResult);*/
         return JSONModel.getMap();
     }
-
     /**
      * 进入处理信息页面,对请求进行处理
      * @param kaoqinResult 班级ID
@@ -192,6 +192,7 @@ public class CheckingController {
         checkingService.updateByPrimaryKey(kaoqinResult);
         return "table_bootstrap";
     }
+
     /**
      * 查询所有的考勤规则和详情
      * @return
@@ -221,6 +222,12 @@ public class CheckingController {
         return "success";
     }
 
-
-
+    @RequestMapping("/getAllRule")
+    @ResponseBody
+    public Object getAllRule(){
+        String id = null;
+        List<KaoqinRule> kaoqinRules = checkingService.selectAllRule(id);
+        JSONModel.put("Rules",kaoqinRules);
+        return JSONModel.put();
+    }
 }

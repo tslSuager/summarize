@@ -75,6 +75,13 @@ public interface CheckingService {
     public void addKaoQinRule(KaoqinRule kaoqinRule, KaoqindetailVO kaoqindetailVO);
 
     /**
+     * 查找所有有效地考勤规则
+     * @param id
+     * @return
+     */
+    List<KaoqinRule> selectAllRule(String id);
+
+    /**
      * 获取某个班的申述或请假记录的集合
      * @param officeId
      * @return 返回值是一个考勤结果集合

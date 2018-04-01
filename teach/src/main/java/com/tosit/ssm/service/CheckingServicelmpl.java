@@ -77,7 +77,6 @@ public class CheckingServicelmpl implements CheckingService {
         kaoqinResultMapper.updateByPrimaryKey(record);
         return 0;
     }
-
     @Autowired
     private KaoqinRuleMapper kaoqinRuleMapper;
     @Autowired
@@ -110,6 +109,10 @@ public class CheckingServicelmpl implements CheckingService {
             int row = kaoqinRuleDetailMapper.insertKaoqinRuleDetail(k);
         }
 //        kaoqinRuleDetailMapper.insert();
+    }
+
+    public List<KaoqinRule> selectAllRule(String id) {
+        return kaoqinRuleMapper.selectRule(id);
     }
 
     /**

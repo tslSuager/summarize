@@ -1,13 +1,13 @@
 package com.tosit.ssm.service;
 
-import com.tosit.ssm.entity.Office;
-import com.tosit.ssm.entity.Experience;
-import com.tosit.ssm.entity.User;
+import com.tosit.ssm.entity.*;
 import com.tosit.ssm.mapper.ExperienceMapper;
 import com.tosit.ssm.mapper.UserMapper;
+import com.tosit.ssm.mapper.UserOfficeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -16,6 +16,8 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
     @Autowired
     private ExperienceMapper experienceMapper;
+    @Autowired
+    private UserOfficeMapper userOfficeMapper;
 
     @Override
     public User selectByPrimaryKey(String userId) {
@@ -78,6 +80,52 @@ public class UserServiceImpl implements UserService {
     public List<User> findClassUser(String officeId) {
         return userMapper.selectUserByOfficeId(officeId);
     }
+
+    @Override
+    public List<User> findUserByOfficeId(String id) {
+        return userMapper.selectUserByOfficeId(id);
+    }
+
+    @Override
+    public List<User> findUserByDateAreaNoClass(Date startDate, Date endDate, Office office) {
+        return userMapper.selectByTimeAreaNClass(startDate,endDate,office);
+    }
+
+    public List<User> findUserWithClassNotInGroup(Office office) {
+        return userMapper.selectByClassGroup(office);
+    }
+
+    public List<UserVO> findUserWithGroup(Office office) {
+        return userMapper.selectUsersWithGroup(office);
+    }
+
+    public List<User> findAllTeacherNoThisClass(Office office) {
+        return userMapper.selectAllTeacherNoThisClass(office);
+    }
+
+    public void insertUserOfficeByGroup(UserOffice userOffice) {
+        userOfficeMapper.insertUserOffice(userOffice);
+    }
+
+    public void deleteUserOfficeByGroup(UserOffice userOffice) {
+        userOfficeMapper.updateByPrimaryKey(userOffice);
+    }
+
+    public UserOffice findUserOfficeId(UserOffice userOffice) {
+        return userOfficeMapper.selectIdByUidAndOid(userOffice);
+    }
+
+    public List<UserOffice> findIdByOid(Office office) {
+        return userOfficeMapper.selectIdByOid(office);
+    }
+
+    public List<User> findUserNoRuleByClass(String id) {
+        return userMapper.selectNoGuize(id);
+    }
+
+    public List<User> findUserWithRuleByClass(Office office) {
+        return userMapper.selectByClassChecking(office);
+    }
     /**
      * 通过用户名 获取user
      *
@@ -87,5 +135,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findsUserByUserName(String username) {
         return userMapper.selectByUsername(username);
+    }
+
+    public List<User> findStuNoLoginNameByClass(String id) {
+        return userMapper.selectStuNoLoginNameByClass(id);
     }
 }
