@@ -236,7 +236,10 @@
                 drop: function (g, h) {
                     var f = $(this).data("eventObject");
                     var e = $.extend({}, f);//事件就是一个{}
-                    if (g >= new Date()) {
+                    console.info(g);
+                    console.info(addDate(g,1));
+
+                    if (g >= new Date()||(g <= new Date()&&addDate(g,1)>=new Date()&&f.title=="备注")) {
                         layer.open({
                             type: 2,
                             title: f.title + "理由",
@@ -400,9 +403,15 @@
             })
 
         }, "json");
+        function addDate(date, days) {
+            if (days == undefined || days == '') {
+                days = 1;
+            }
+            var date = new Date(date);
+            date.setDate(date.getDate() + days);
+            return date;
+        }
     });
-
-
 </script>
 <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
 </body>
