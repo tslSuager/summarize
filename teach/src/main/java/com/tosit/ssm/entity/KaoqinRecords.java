@@ -13,7 +13,7 @@ public class KaoqinRecords {
     private String name;
 
     private Integer sequenceNumber;
-//    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JSONField(format = "yyyy-MM-dd")
     private Date brushtime;
 
     private String checkType;

@@ -246,6 +246,10 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
+  <select id="selectAllMaterType" resultMap="BaseResultMap">
+    SELECT DISTINCT NAME  FROM materiel
+  </select>
+
 
 
 

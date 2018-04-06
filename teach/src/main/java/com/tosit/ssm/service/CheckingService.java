@@ -74,6 +74,10 @@ public interface CheckingService {
      */
     public void addKaoQinRule(KaoqinRule kaoqinRule, KaoqindetailVO kaoqindetailVO);
 
+    String modifyChecking(KaoqinResult data);
+
+    String createLeave(KaoqinResult kaoqinResult);
+
     /**
      * 查找所有有效地考勤规则
      * @param id

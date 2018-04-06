@@ -7,6 +7,7 @@ import com.google.common.collect.Lists;
 import com.tosit.ssm.common.util.Encodes;
 import com.tosit.ssm.common.util.Reflections;
 import com.tosit.ssm.common.util.excel.annotation.ExcelField;
+import com.tosit.ssm.entity.DormitoryInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
@@ -437,7 +438,7 @@ public class ExportExcel {
 	 * 导出测试
 	 */
 	public static void main(String[] args) throws Throwable {
-
+//		new ExportExcel("tile", DormitoryInfo.class,1);
 		List<String> headerList = Lists.newArrayList();
 		for (int i = 1; i <= 10; i++) {
 			headerList.add("表头"+i);

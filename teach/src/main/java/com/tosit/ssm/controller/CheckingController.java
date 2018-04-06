@@ -1,15 +1,12 @@
 package com.tosit.ssm.controller;
 
-import com.alibaba.fastjson.annotation.JSONField;
 import com.tosit.ssm.common.util.json.JSONModel;
 import com.tosit.ssm.entity.*;
 import com.tosit.ssm.service.CheckingService;
 import com.tosit.ssm.service.CheckingServicelmpl;
 import com.tosit.ssm.service.UserService;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.datetime.DateFormatter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -30,6 +27,43 @@ public class CheckingController {
     @Autowired
     private UserService userService;
     private SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
+
+    /**
+     * 提交申诉 请求
+     * @param userId 申诉人id
+     * @param data 申诉理由
+     * @param kaoqinShenSuReqtime 提交申诉时间
+     * @return
+     */
+    @RequestMapping(value = "/commitChecking")
+    @ResponseBody
+    public Object commitChecking(String userId,String data,Date kaoqinShenSuReqtime) {
+        KaoqinResult kaoqinResult = new KaoqinResult();
+        kaoqinResult.setId(userId);
+        kaoqinResult.setKaoqinShenshuStatus(2);
+        kaoqinResult.setKaoqinShenshuContent(data);
+        kaoqinResult.setKaoqinRemarkReqtime(kaoqinShenSuReqtime);
+        String status=checkingService.modifyChecking(kaoqinResult);
+        return JSONModel.put("status",status);
+    }
+
+    /**
+     *  提交请假请求
+     * @param kaoqinResult 包括 请假人，请求时间，请假理由，请假时间，请求类型
+     * @return
+     */
+    @RequestMapping(value = "/commitLeave")
+    @ResponseBody
+    public Object commitLeave( KaoqinResult kaoqinResult) {
+        kaoqinResult.setKaoqinShenshuStatus(0);
+        kaoqinResult.setId(UUID.randomUUID().toString().replaceAll("-",""));
+        kaoqinResult.setIsDel(1);
+        String status=checkingService.createLeave(kaoqinResult);
+        return JSONModel.put("status",status);
+    }
+
+
+
     /**
      * 添加考勤规则
      * @return 返回成功或者失败（具体的返回值到时候常量类定义了再说）
@@ -44,6 +78,7 @@ public class CheckingController {
 
     /**
      * 获取某人某天的考勤记录，和以前的考勤的结果（包括请假和备注）
+     *   @param   kaoqinRecords 包括请求人id，考勤时间
      * @return
      */
     @RequestMapping(value = "/ShowAllRecordsByIdByDate")

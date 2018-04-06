@@ -81,8 +81,6 @@ public class CheckingServicelmpl implements CheckingService {
     private KaoqinRuleMapper kaoqinRuleMapper;
     @Autowired
     private KaoqinRuleDetailMapper kaoqinRuleDetailMapper;
-
-
     /**
      * 添加考勤规则和规则详情
      * @param kaoqinRule 待插入的考情规则
@@ -108,6 +106,26 @@ public class CheckingServicelmpl implements CheckingService {
             int row = kaoqinRuleDetailMapper.insertKaoqinRuleDetail(k);
         }
 //        kaoqinRuleDetailMapper.insert();
+    }
+
+    @Override
+    public String modifyChecking(KaoqinResult data) {
+        Integer i = kaoqinResultMapper.updateByPrimaryKey(data);
+        String status="success";
+        if (i == null) {
+            status="fail";
+        }
+        return status;
+    }
+
+    @Override
+    public String createLeave(KaoqinResult kaoqinResult) {
+        Integer i = kaoqinResultMapper.insertKaoqinResult(kaoqinResult);
+        String status="success";
+        if (i == null) {
+            status="fail";
+        }
+        return status;
     }
 
     public List<KaoqinRule> selectAllRule(String id) {

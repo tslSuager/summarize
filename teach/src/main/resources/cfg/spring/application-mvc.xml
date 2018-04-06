@@ -34,13 +34,12 @@
                                 <value>WriteMapNullValue</value>
                                 <!-- <value>WriteNullStringAsEmpty</value>-->
                                 <value>WriteNullBooleanAsFalse</value>
-                                <!--<value>WriteNullNumberAsZero</value>-->
+                                <value>WriteNullNumberAsZero</value>
+                                <!-- Date的日期转换器 -->
                                 <value>WriteDateUseDateFormat</value>
                             </list>
                         </property>
-
                     </bean>
-
                 </property>
             </bean>
         </mvc:message-converters>

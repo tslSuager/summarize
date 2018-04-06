@@ -13,6 +13,27 @@
     <result column="update_by2" jdbcType="VARCHAR" property="updateBy2" />
     <result column="is_del" jdbcType="INTEGER" property="isDel" />
   </resultMap>
+  <resultMap id="materielMap" type="com.tosit.ssm.entity.DormitoryInfoVO">
+    <id column="id" jdbcType="VARCHAR" property="id"/>
+    <result column="dormitory_name" jdbcType="VARCHAR" property="dormitoryName"/>
+    <result column="max_num" jdbcType="INTEGER" property="maxNum"/>
+    <result column="cur_num" jdbcType="INTEGER" property="curNum"/>
+    <result column="remark" jdbcType="VARCHAR" property="remark"/>
+    <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    <result column="update_by2" jdbcType="VARCHAR" property="updateBy2"/>
+    <collection property="materiels" ofType="com.tosit.ssm.entity.Materiel">
+      <id column="m_id" jdbcType="VARCHAR" property="id"/>
+      <result column="dormitory_id" jdbcType="VARCHAR" property="dormitoryId"/>
+      <result column="name" jdbcType="VARCHAR" property="name"/>
+      <result column="count" jdbcType="INTEGER" property="count"/>
+      <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+      <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+      <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+      <result column="update_by2" jdbcType="VARCHAR" property="updateBy2"/>
+    </collection>
+  </resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -74,6 +95,10 @@
   <sql id="Base_Column_List">
     id, dormitory_name, max_num, cur_num, remark, create_by, update_time, create_time, 
     update_by2,is_del
+  </sql>
+  <sql id="materiel_Column_List">
+    di.id, di.dormitory_name, di.max_num, di.cur_num, di.remark, di.create_by, di.update_time, di.create_time,
+    di.update_by2,m.id m_id,m.dormitory_id, m.name, m.count, m.create_by, m.update_time, m.create_time, m.update_by2
   </sql>
   <select id="selectByExample" parameterType="com.tosit.ssm.entity.DormitoryInfoExample" resultMap="BaseResultMap">
     select
@@ -371,4 +396,19 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  <select id="selectDormitoryInfoById" parameterType="java.lang.String" resultMap="materielMap">
+    select
+    <include refid="materiel_Column_List"/>
+    from dormitory_info di
+    JOIN materiel m
+    on di.id = m.dormitory_id
+    where m.dormitory_id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectDormitorys"  resultMap="materielMap">
+    select
+    <include refid="materiel_Column_List"/>
+    from dormitory_info di
+    JOIN materiel m
+    on di.id = m.dormitory_id
+  </select>
 </mapper>

@@ -1,12 +1,13 @@
 package com.tosit.ssm.entity;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import com.alibaba.fastjson.annotation.JSONField;
+
 
 import java.util.Date;
 
 public class KaoqinResult {
     private String id;
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @JSONField(format = "yyyy-MM-dd")
     private Date date;
 
     private String userId;
@@ -14,9 +15,9 @@ public class KaoqinResult {
     private Integer status;
 
     private String remark;
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date lastTime;
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date createresulttime;
 
     private Integer kaoqinRemarkStatus;
@@ -26,7 +27,7 @@ public class KaoqinResult {
     private String kaoqinRemarkContent;
 
     private String kaoqinRemarkDisposeuser;
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date kaoqinRemarkDisposetime;
 
     private Integer kaoqinRemarkDisposeResult;
@@ -38,15 +39,15 @@ public class KaoqinResult {
     private String kaoqinShenshuContent;
 
     private String kaoqinShenshuDisposeuser;
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date kaoqinShenshuDisposetime;
 
     private Integer kaoqinShenshuDisposeresult;
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     private String createBy;
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
     private String updateBy;
@@ -56,9 +57,9 @@ public class KaoqinResult {
     private String kaoqinShenshuReply;
 
     private String kaoqinRemarkReply;
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date kaoqinShenshuReqtime;
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date kaoqinRemarkReqtime;
 
     public String getId() {
@@ -283,5 +284,39 @@ public class KaoqinResult {
 
     public void setKaoqinRemarkReqtime(Date kaoqinRemarkReqtime) {
         this.kaoqinRemarkReqtime = kaoqinRemarkReqtime;
+    }
+
+    @Override
+    public String toString() {
+        return "KaoqinResult{" +
+                "id='" + id + '\'' +
+                ", date=" + date +
+                ", userId='" + userId + '\'' +
+                ", status=" + status +
+                ", remark='" + remark + '\'' +
+                ", lastTime=" + lastTime +
+                ", createresulttime=" + createresulttime +
+                ", kaoqinRemarkStatus=" + kaoqinRemarkStatus +
+                ", kaoqinRemarkType=" + kaoqinRemarkType +
+                ", kaoqinRemarkContent='" + kaoqinRemarkContent + '\'' +
+                ", kaoqinRemarkDisposeuser='" + kaoqinRemarkDisposeuser + '\'' +
+                ", kaoqinRemarkDisposetime=" + kaoqinRemarkDisposetime +
+                ", kaoqinRemarkDisposeResult=" + kaoqinRemarkDisposeResult +
+                ", kaoqinShenshuStatus=" + kaoqinShenshuStatus +
+                ", kaoqinShenshuType=" + kaoqinShenshuType +
+                ", kaoqinShenshuContent='" + kaoqinShenshuContent + '\'' +
+                ", kaoqinShenshuDisposeuser='" + kaoqinShenshuDisposeuser + '\'' +
+                ", kaoqinShenshuDisposetime=" + kaoqinShenshuDisposetime +
+                ", kaoqinShenshuDisposeresult=" + kaoqinShenshuDisposeresult +
+                ", createTime=" + createTime +
+                ", createBy='" + createBy + '\'' +
+                ", updateTime=" + updateTime +
+                ", updateBy='" + updateBy + '\'' +
+                ", isDel=" + isDel +
+                ", kaoqinShenshuReply='" + kaoqinShenshuReply + '\'' +
+                ", kaoqinRemarkReply='" + kaoqinRemarkReply + '\'' +
+                ", kaoqinShenshuReqtime=" + kaoqinShenshuReqtime +
+                ", kaoqinRemarkReqtime=" + kaoqinRemarkReqtime +
+                '}';
     }
 }

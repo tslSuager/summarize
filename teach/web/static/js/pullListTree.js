@@ -1,6 +1,7 @@
 var initPullListTree = function (url,startlevel, count,fn) {
     $.get(url, {}, function (msg) {
-        for (var i = startlevel; (count + startlevel) > i; i++) {
+        for (var i = startlevel; i<(count+startlevel); i++) {
+
             switch (i) {
                 case (1):
                     $("#pullListTree").append($("<span>").html("区域："));
@@ -24,12 +25,32 @@ var initPullListTree = function (url,startlevel, count,fn) {
                     break;
             }
         }
+        var sds = 1;
         $.each(msg.allArea, function (i, e) {
             switch (e.officeType) {
                 case startlevel:
                     $("#pullListTree").find("select").eq(0).append($("<option>").attr("value", e.id).html(e.name));
-                    $("#pullListTree").data("selectAreaId",e.id);
-                    $("#pullListTree").data("selectAreaText",e.name);
+                    if (sds==1) {
+                        $("#pullListTree").data("selectAreaId",e.id);
+                        $("#pullListTree").data("selectAreaText",e.name);
+                        var son = 1;
+                        for(var em=son;em<count;em++) {
+                            parentid=$("#pullListTree").find("select").eq(em-1).val();
+                            var aaa = 1;
+                            $.each(msg.allArea, function (i, e1) {
+                                if (parentid === e1.parentId) {
+                                    console.info(e.name);
+                                    if (aaa == 1) {
+                                        $("#pullListTree").data("selectAreaId", e1.id);
+                                        $("#pullListTree").data("selectAreaText", e1.name);
+                                    }
+                                    $("#pullListTree").find("select").eq(em).append($("<option>").attr("value", e1.id).html(e1.name));
+                                    aaa++;
+                                }
+                            });
+                        }
+                    }
+                    sds++;
                     break;
             }
         });
@@ -38,21 +59,24 @@ var initPullListTree = function (url,startlevel, count,fn) {
             $("#pullListTree").find("select").eq(ss).change(function () {
                 var parentid = $(this).val();
                 var son = $(this).data("type")-startlevel+1;
-                for(var em=son;em<(count+startlevel-1);em++) {
+                for(var em=son;em<count;em++) {
                     $("#pullListTree").find("select").eq(em).empty();
                 }
-                var aaa = 1;
-                $.each(msg.allArea, function (i, e) {
-                    if (parentid === e.parentId) {
-                        if (aaa==1) {
-                            $("#pullListTree").data("selectAreaId",e.id);
-                            $("#pullListTree").data("selectAreaText",e.name);
+                for(var em=son;em<count;em++) {
+                    parentid=$("#pullListTree").find("select").eq(em-1).val();
+                    var aaa = 1;
+                    $.each(msg.allArea, function (i, e) {
+                        if (parentid === e.parentId) {
+                            if (aaa == 1) {
+                                $("#pullListTree").data("selectAreaId", e.id);
+                                $("#pullListTree").data("selectAreaText", e.name);
+                            }
+                            $("#pullListTree").find("select").eq(em).append($("<option>").attr("value", e.id).html(e.name));
+                            aaa++;
                         }
-                        $("#pullListTree").find("select").eq(son).append($("<option>").attr("value", e.id).html(e.name));
-                        aaa++;
-                    }
-                });
-                aaa = 0;
+                    });
+                }
+
             });
         }
         $("#pullListTree").find("select").eq(count-1).change(function () {
@@ -61,5 +85,6 @@ var initPullListTree = function (url,startlevel, count,fn) {
             fn($(this));
         });
     }, "json");
+
 
 }
