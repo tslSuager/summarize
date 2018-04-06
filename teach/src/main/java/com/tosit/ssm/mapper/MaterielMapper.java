@@ -5,7 +5,9 @@ import com.tosit.ssm.entity.Materiel;
 import com.tosit.ssm.entity.MaterielExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface MaterielMapper {
     long countByExample(MaterielExample example);
 
@@ -44,4 +46,9 @@ public interface MaterielMapper {
      * @return
      */
     int updateByPrimaryKey(Materiel record);
+    /**
+     * 查询有几种不同物料类型名字
+     * @return
+     */
+    List<Materiel> selectAllMaterType();
 }
