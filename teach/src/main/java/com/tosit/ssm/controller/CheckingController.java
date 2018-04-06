@@ -170,6 +170,7 @@ public class CheckingController {
         //获取某个班的申诉或请假的考勤结果
         List<KaoqinResultVO> kaoqinResults = checkingService.selectByClass(officeId);
 
+
         JSONModel.put("kaoqinResults",kaoqinResults);
         //修改某人申述请假的状态和回复的字段
        /* KaoqinResult kaoqinResult = new KaoqinResult();
