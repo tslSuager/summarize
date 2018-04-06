@@ -72,6 +72,7 @@
     var url = location.search;
     var s = url.slice(5);
 
+    //获得所有有效地教学计划
     $.get("/teaching/getAllTeaching",{s},function (msg) {
         var message = msg['message'];
         var allTeaching =msg['allTeaching'];

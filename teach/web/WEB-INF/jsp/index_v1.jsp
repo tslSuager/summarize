@@ -511,6 +511,9 @@
              * 点击初始成绩按钮，为该班学生初始化平时成绩
              */
             $("body").on("click",".initialization",function () {
+                var cid = $(this).parent().parent().attr("id");
+                var t = $(this);
+                console.info(t);
                 layer.open({
                     type: 2,
                     title: '初始成绩',
@@ -520,7 +523,17 @@
                     content: '/Initialization.jsp',
                     btn:['确认','算了'],
                     btn1:function (index,layero) {
-                        layer.msg('初始成功');
+                        var body = layer.getChildFrame('body', index);
+                        var Tgrade = body.find(".initScore").val();
+                        var Cgrade = body.find(".subScore").val();
+                        $.get("/user/InitGrade",{Tgrade,Cgrade,cid},function (msg) {
+                            var message = msg['message'];
+                            if (message=="success"){
+                                layer.msg('初始成功');
+                            }else {
+                                layer.msg('该班已初始化过成绩');
+                            }
+                        });
                     },
                     btn2:function (index,layero) {
                         layer.close(index);
@@ -533,11 +546,14 @@
              */
             $("body").on("click",".createNumber",function () {
                 var cid = $(this).parent().parent().parent().attr("id");
-                var id = $("body").find("option:selected").text();
-                console.info(id);
+                var id = $("body").find("option:selected").eq(2).text();
                 $.get("/user/createNum",{cid,id},function (msg) {
                     var message = msg['message'];
-                    console.info(message);
+                    if (message=='success'){
+                        parent.layer.msg('已注册成功');
+                    }else if (message=='error'){
+                        parent.layer.msg('该班所有成员已注册了账号无需注册');
+                    }
                 });
             });
         });

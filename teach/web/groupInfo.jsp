@@ -138,6 +138,7 @@
         var url = location.search;
         var s = url.slice(5);
 
+        //获得某班未分组的学生
         $.get("/user/getUsersByClassNoGroup",{s},function (msg) {
             var users = msg['users'];
             $.each(users,function (i,each) {
@@ -145,6 +146,7 @@
             })
         });
 
+        //点击分组进行分组
          function getGroup() {
             $.get("/office/getGroupByClass",{s},function (msg) {
                 var groups = msg['groups'];
@@ -199,6 +201,7 @@
             });
         }
 
+        //点击删除该组
         $("body").on("click",".deleteGroup",function () {
             var gid = $(this).parent().parent().attr("id");
             layer.confirm('您确认要删除吗？', {
@@ -215,8 +218,10 @@
             });
         });
 
+         //不记得了
         $(getGroup());
 
+        //获得小组的学生
         $.get("/user/getUsersByGroup",{s},function (msg) {
             var users = msg['users'];
             $.each(users,function (i,each) {

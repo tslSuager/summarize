@@ -107,7 +107,6 @@ public class OfficecController {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        //System.out.println("本月第一天和最后一天分别是 ： " + date1 + " and " + date2);
         office.setMaster("u016");
         office.setCreateTime(date1);
         office.setUpdateTime(date2);

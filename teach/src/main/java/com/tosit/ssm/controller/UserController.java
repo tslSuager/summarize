@@ -369,6 +369,11 @@ public class UserController {
         userService.modifyUser(user);
     }
 
+    /**
+     * 为某班没有账号的学生注册账号
+     * @param request
+     * @return
+     */
     @RequestMapping("/createNum")
     @ResponseBody
     public Object createNum(HttpServletRequest request){
@@ -377,25 +382,71 @@ public class UserController {
         System.out.println(id);
         List<User> stuNoLoginNameByClass = userService.findStuNoLoginNameByClass(cid);
         if (stuNoLoginNameByClass.size()>0){
-            if (id=="bySnum"){
+            if (id.equals("按学号")){
                 for (User u:
                         stuNoLoginNameByClass) {
                     u.setLoginname(u.getStuNumber());
                     u.setPassword("hello123");
                     userService.modifyUser(u);
+                    return JSONModel.put("message","success");
                 }
-            }else if (id=="byTnum"){
+            }else if (id.equals("按手机号")){
                 for (User u:
                         stuNoLoginNameByClass) {
                     u.setLoginname(u.getPhone1());
                     u.setPassword("hello123");
                     userService.modifyUser(u);
+                    return JSONModel.put("message","success");
                 }
             }
-            return JSONModel.put("message","success");
+            return JSONModel.put("message","OK");
         }else {
             JSONModel.put("message","error");
             return JSONModel.put();
         }
+    }
+
+    /**
+     * 给某班学生初始化表现分
+     * @param user
+     * @param request
+     * @return
+     */
+    @RequestMapping("/InitGrade")
+    @ResponseBody
+    public Object InitGrade(User user,HttpServletRequest request){
+        String Tgrade = request.getParameter("Tgrade");
+        String Cgrade = request.getParameter("Cgrade");
+        String cid = request.getParameter("cid");
+        List<User> users = userService.findUserByOfficeId(cid);
+        if (users.get(0).getGrade()!=null){
+            return JSONModel.put("message","error");
+        }
+        else {
+            for (User u:
+                    users) {
+                u.setGrade(Tgrade);
+                u.setCutGrade(Cgrade);
+                userService.modifyUser(u);
+            }
+            return JSONModel.put("message","success");
+        }
+    }
+
+    /**
+     * 给学生扣分
+     * @param request
+     */
+    @RequestMapping("/subGrade")
+    @ResponseBody
+    public void subGrade(HttpServletRequest request){
+        String id = request.getParameter("id");
+        User user = userService.selectByPrimaryKey(id);
+        String subGrade = user.getCutGrade();
+        String tGrabde = user.getGrade();
+        String newGrade = String.valueOf(Integer.parseInt(tGrabde)-Integer.parseInt(subGrade));
+        System.out.println(newGrade);
+        user.setGrade(newGrade);
+        userService.modifyUser(user);
     }
 }
