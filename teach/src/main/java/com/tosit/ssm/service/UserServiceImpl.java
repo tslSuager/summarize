@@ -16,6 +16,7 @@ import java.io.*;
 import java.io.File;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -178,6 +179,51 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void insert(File file) {
+        try {
+            FileInputStream fileInputStream = new FileInputStream(file);
+            XSSFWorkbook xssfSheets = new XSSFWorkbook(fileInputStream);
+            XSSFSheet sheet = xssfSheets.getSheetAt(0);
+            int rowNum = sheet.getLastRowNum();
+            for (int i=1;i<=rowNum;i++){
+                XSSFRow row = sheet.getRow(i);
+//                String kaoqinId = row.getCell(2).getStringCellValue();
+                User user = new User();
+                user.setId( UUID.randomUUID().toString());
+                row.getCell(0).setCellType(Cell.CELL_TYPE_STRING);
+                user.setLoginname(row.getCell(0).getStringCellValue());
+                user.setPassword("123");
+                row.getCell(1).setCellType(Cell.CELL_TYPE_STRING);
+                user.setName(row.getCell(1).getStringCellValue());
+                row.getCell(2).setCellType(Cell.CELL_TYPE_STRING);
+                user.setSex(row.getCell(2).getStringCellValue());
+                row.getCell(3).setCellType(Cell.CELL_TYPE_STRING);
+                user.setPersonno(row.getCell(3).getStringCellValue());
+                row.getCell(4).setCellType(Cell.CELL_TYPE_STRING);
+                user.setDaxue(row.getCell(4).getStringCellValue());
+                row.getCell(5).setCellType(Cell.CELL_TYPE_STRING);
+                user.setHomeAddress(row.getCell(5).getStringCellValue());
+                row.getCell(6).setCellType(Cell.CELL_TYPE_STRING);
+                user.setQq(row.getCell(6).getStringCellValue());
+                row.getCell(7).setCellType(Cell.CELL_TYPE_STRING);
+                user.setEmail(row.getCell(7).getStringCellValue());
+                row.getCell(8).setCellType(Cell.CELL_TYPE_STRING);
+                user.setPhone1(row.getCell(8).getStringCellValue());
+                row.getCell(9).setCellType(Cell.CELL_TYPE_STRING);
+                user.setDaxueZhuanye(row.getCell(9).getStringCellValue());
+                row.getCell(10).setCellType(Cell.CELL_TYPE_STRING);
+                user.setShixunZhuanye(row.getCell(10).getStringCellValue());
+                row.getCell(11).setCellType(Cell.CELL_TYPE_STRING);
+                user.setPeixunZhuanye(row.getCell(11).getStringCellValue());
+                userMapper.insert(user);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @Override
     public List<UserCkRuleRecord> findAllLeaveByTime(Date time) {
         return userMapper.selectAllLeaveByTime(time);
     }
@@ -186,4 +232,5 @@ public class UserServiceImpl implements UserService {
     public UserRole findRoleByName(String loginName) {
         return userMapper.selectRoleByUsername(loginName);
     }
+
 }

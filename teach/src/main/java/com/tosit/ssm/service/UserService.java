@@ -155,4 +155,6 @@ public interface UserService {
 
 
     UserRole findRoleByName(String loginName);
+
+    void insert(File file);
 }

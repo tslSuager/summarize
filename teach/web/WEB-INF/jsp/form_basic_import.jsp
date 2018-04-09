@@ -23,18 +23,19 @@
     <div class="col-sm-4"></div>
     <div class="col-sm-3">
         <div class="" style="margin-top: 25px">
+            <form action="/user/downloadMingdanModel">
             <a class="btn btn-primary" style="margin-right: 20px" href="/page/form_basic">单人信息录入</a>
-            <button class="btn btn-primary" >模板下载</button>
+
+            <button class="btn btn-primary" type="submit">模板下载</button>
+            </form>
         </div>
         <div style="margin-top: 25px">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>文件上传</h5>
                 </div>
-
                     <div class="ibox-content">
                         <div id="fileUploadContent" class="fileUploadContent"></div>
-
                         <button class="btn btn-primary" onclick="testUpload()" >提交</button>
                     </div>
 
@@ -57,17 +58,17 @@
 <script type="text/javascript" src="/static/plugins/fileUpload/js/fileUpload.js"></script>
 <script>
     $("#fileUploadContent").initUpload({
-        "uploadUrl":"/user/addUsers",//上传文件信息地址
+        "uploadUrl":"/user/uploadMingdanModel",//上传文件信息地址
         //"size":350,//文件大小限制，单位kb,默认不限制
         //"maxFileNumber":3,//文件个数限制，为整数
         //"filelSavePath":"",//文件上传地址，后台设置的根目录
         "beforeUpload":beforeUploadFun,//在上传前执行的函数
 //        "onUpload":onUploadFun,//在上传后执行的函数
         //autoCommit:true,//文件是否自动上传
-        "fileType":['xls','xlsx','doc','docx']//文件类型限制，默认不限制，注意写的是文件后缀
+        "fileType":['xls','xlsx']//文件类型限制，默认不限制，注意写的是文件后缀
     });
     function beforeUploadFun(opt){
-        opt.otherData =[{"name":"name","value":"zxm"}];
+        opt.otherData =[{"name":"file","value":"zxm"}];
     }
     function onUploadFun(opt,data){
         alert(data);
@@ -78,17 +79,21 @@
         var opt = uploadTools.getOpt("fileUploadContent");
         uploadEvent.uploadFileEvent(opt);
     }
+    function download() {
+        $("#download").click(function () {
+            $.ajax({
+                url:"/user/downloadMingdanModel",
+                success:function () {
+
+                }
+            })
+        })
+    }
+    $(function () {
+        download();
+    })
 </script>
 
-                    <%--<div class="ibox-tools">--%>
-                        <%--<a class="dropdown-toggle" data-toggle="dropdown" href="form_basic.jsp#">--%>
-                            <%--<button type="button" class="btn btn-primary btn-xs">单个上传</button>--%>
-                        <%--</a>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-            <%--</div>--%>
-            <%--<div class="ibox-content">--%>
-                <%--<div class="clo-sm-2" style="margin-left: 45%">--%>
-                    <%--<button class="btn btn-primary" style="margin-right: 10px">下载模板</button>--%>
+
 
 

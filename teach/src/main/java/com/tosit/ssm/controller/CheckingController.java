@@ -84,10 +84,9 @@ public class CheckingController {
      * @return 返回成功或者失败（具体的返回值到时候常量类定义了再说）
      */
     @RequestMapping(value = "/addKaoQinRule")
-    @ResponseBody
-    public Object addKaoQinRule(KaoqinRule kaoqinRule,KaoqindetailVO kaoqindetailList){
+    public String  addKaoQinRule(KaoqinRule kaoqinRule,KaoqindetailVO kaoqindetailList){
                 checkingService.addKaoQinRule(kaoqinRule,kaoqindetailList);
-        return "success";
+        return "kaoqin_rule_display";
     }
 
 

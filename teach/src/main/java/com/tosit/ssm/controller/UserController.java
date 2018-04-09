@@ -1,12 +1,17 @@
 package com.tosit.ssm.controller;
 
+import com.google.common.collect.Lists;
 import com.tosit.ssm.common.util.SysUtil;
+import com.tosit.ssm.common.util.excel.ExportExcel;
+import com.tosit.ssm.common.util.excel.ImportExcel;
 import com.tosit.ssm.common.util.json.JSONModel;
 import com.tosit.ssm.entity.*;
 import com.tosit.ssm.service.ExperienceService;
 import com.tosit.ssm.service.OfficeService;
 import com.tosit.ssm.service.UserService;
 import org.apache.ibatis.annotations.Param;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -15,18 +20,24 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.UUID;
@@ -40,7 +51,7 @@ public class UserController {
     private OfficeService officeService;
     @Autowired
     private ExperienceService experienceService;
-
+    private String Ext_Name = "xls,xlsx";
 
     @ResponseBody
     @RequestMapping("/getAllUser")
@@ -484,5 +495,54 @@ public class UserController {
         Date now = new Date();
         experience.setOccurTime(now);
         experienceService.addEx(experience);
+    }
+
+    /**
+     * 下载学员名单模板
+     * @param request
+     * @return
+     * @throws IOException
+     * @throws InvalidFormatException
+     */
+    @RequestMapping("/downloadMingdanModel")
+    public ResponseEntity<byte[]> downloadMingdanModel(HttpServletRequest request) throws IOException, InvalidFormatException {
+        String fileName = "学员名单模板.xlsx";
+        FileInputStream fileInputStream=new FileInputStream(new File(request.getServletContext().getRealPath("/WEB-INF/upload/"+fileName)));
+        byte [] bs=new byte[fileInputStream.available()];
+        fileInputStream.read(bs);
+        fileName=new String(fileName.getBytes("gbk"),"iso8859-1");//防止中文乱码
+        HttpHeaders headers=new HttpHeaders();//设置响应头
+        headers.add("Content-Disposition", "attachment;filename="+fileName);
+        HttpStatus statusCode = HttpStatus.OK;//设置响应吗
+        ResponseEntity<byte[]> response=new ResponseEntity<byte[]>(bs, headers, statusCode);
+        return response;
+    }
+    @RequestMapping("/uploadMingdanModel")
+    @ResponseBody
+    public Object uploadMingdanModel(@RequestParam("file") MultipartFile uploadFile,HttpServletRequest request) throws IOException {
+        //文件上传
+        if (!uploadFile.isEmpty()){
+            //文件名
+            String originalFilename = uploadFile.getOriginalFilename();
+            String[] split = originalFilename.split("\\.");
+            if (Ext_Name.contains(split[split.length-1])){
+                //修改文件名
+                String fileName=originalFilename;
+//                String realPath = request.getServletContext().getRealPath("/WEB-INF/upload/" + fileName);
+                String realPath = "F:\\project2\\summarize\\teach\\web\\WEB-INF\\upload\\学员名单模板.xlsx";
+                File file = new File(realPath);
+                //将文件存入服务器
+                uploadFile.transferTo(file);
+//                file
+                userService.insert(file);
+                file.delete();
+                return "The KaoqinId entry success!";
+            }else {
+                return "isn't excel file";
+            }
+        }else {
+            return "the file is nothing";
+        }
+
     }
 }
