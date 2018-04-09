@@ -150,4 +150,9 @@ public class UserServiceImpl implements UserService {
     public UserRole findRoleByName(String loginName) {
         return userMapper.selectRoleByUsername(loginName);
     }
+
+    @Override
+    public List<User> findStuByClassAndName(String name, String id) {
+        return userMapper.selectStuByClassAndName(name, id);
+    }
 }

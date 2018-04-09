@@ -15,17 +15,13 @@
 <div class="row  border-bottom white-bg dashboard-header">
     <div class="text-center">
         <div class="row">
-            <div class="col-sm-1"></div>
-            <div class="col-sm-1 m-b-xs">
-                <select class=" form-control input-s-sm inline text-center">
-                    <option value="0">学号</option>
-                    <option value="1">姓名</option>
-                </select>
+            <div class="col-sm-3 m-b-xs">
+                <div id="pullListTree"></div>
             </div>
-            <div class="col-sm-6 "></div>
+            <div class="col-sm-5"></div>
             <div class="col-sm-3">
                 <div class="input-group">
-                    <input type="text" placeholder="请输入关键词" class="input-sm form-control"> <span
+                    <input type="text" placeholder="请输入关键词" class="input-sm form-control" id="name"> <span
                         class="input-group-btn">
                                         <button type="button" class="btn btn-sm btn-primary" id="soushuo"> 搜索</button> </span>
                 </div>
@@ -61,6 +57,8 @@
 </body>
 </html>
 <script src="/static/js/jquery.min.js?v=2.1.4"></script>
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/pullListTree.js"></script>
 <script src="/static/js/bootstrap.min.js?v=3.3.6"></script>
 <script src="/static/js/content.min.js?v=1.0.0"></script>
 <script src="/static/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
@@ -70,6 +68,12 @@
 <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
 <script>
     $(function () {
+
+        //初始化下拉框插件
+        initPullListTree("/office/getAllArea",3,1,function () {
+
+        });//一个参数 开始的级别  第二参数 有几个下拉框
+
         $.each($("tr:not(':first')"), function () {
             $(this).click(function () {
                 var id = $(this).attr("name");
@@ -78,7 +82,10 @@
         })
 
         $("#soushuo").click(function () {
-            window.location.href="${pageContext.request.contextPath}/user/getClassUser";
+            var cId = $("#pullListTree").data("selectAreaId");
+            var name = $("#name").val();
+            console.info(name);
+            window.location.href="${pageContext.request.contextPath}/user/getClassUser?cId="+cId+"&name="+name;
         })
     })
 
