@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>学分管理</title>
@@ -81,7 +82,7 @@
 
         /*默认*/
 
-        .btn-xs{
+        .btn-xs {
             margin-right: 5px;
         }
     </style>
@@ -93,14 +94,13 @@
 </head>
 <body>
 <div class="Hui-article">
-    <div style="margin-left: 200px;margin-top: 30px"><span><h4>02班</h4></span></div>
+    <%--<div style="margin-left: 200px;margin-top: 30px"><span><h4>02班</h4></span></div>--%>
     <div style="margin-left: 180px">
         <a href="#" id="datadel">批量删除</a>
         <a href="#">批量下载</a>
         <a href="#" class="pingding_piliang">批量评定</a>
     </div>
-    <div class="four steps" style="margin-left: 10%;margin-top: 30px;width: 80%;float: left;margin-right: 10%">
-        <%--<span class="active step" onclick="hidetext()" ondblclick="showtext()">起2月1日至2月7日</span>--%>
+    <%--<div class="four steps" style="margin-left: 10%;margin-top: 30px;width: 80%;float: left;margin-right: 10%">
         <span id="span1" class="active step">起2月1日至2月7日</span>
         <span class="step"></span>
         <span class=" step"></span>
@@ -125,54 +125,10 @@
                             </div>
                         </div>
 
-<%--
-                        <div class="modal-content animated bounceInRight">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">关闭</span>
-                                </button>
-                                <i class="fa fa-laptop modal-icon"></i>
-                                <h4 class="modal-title">窗口标题</h4>
-                                <small class="font-bold">这里可以显示副标题。
-                                </small></div><small class="font-bold">
-                            <div class="modal-body">
-                                <p><strong>H+</strong>
-                                    是一个完全响应式，基于Bootstrap3.3.6最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术，她提供了诸多的强大的可以重新组合的UI组件，并集成了最新的jQuery版本(v2.1.1)，当然，也集成了很多功能强大，用途广泛的jQuery插件，她可以用于所有的Web应用程序，如网站管理后台，网站会员中心，CMS，CRM，OA等等，当然，您也可以对她进行深度定制，以做出更强系统。
-                                </p>
-                                <div class="form-group">
-                                    <label>Email</label>
-                                    <input type="email" placeholder="请输入您的Email" class="form-control">
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
-                                <button type="button" class="btn btn-primary">保存</button>
-                            </div>
-                        </small>
-                        </div>--%>
-
 
                         <div class="ibox-content">
                             <div class="row">
 
-                                <%-- <div class="col-sm-4 m-b-xs">
-                                     <div data-toggle="buttons" class="btn-group">
-                                         <label class="btn btn-sm btn-white active">
-                                             <input type="radio" id="option1" name="options">一班</label>
-                                         <label class="btn btn-sm btn-white ">
-                                             <input type="radio" id="option2" name="options">二班</label>
-                                         <label class="btn btn-sm btn-white">
-                                             <input type="radio" id="option3" name="options">三班</label>
-                                     </div>
-                                 </div>--%>
-                                <%-- <div class="col-sm-5 m-b-xs">
-                                     <select class="input-sm form-control input-s-sm inline"
-                                             style="margin-bottom: 10px;padding-bottom: 5px;height: 37px">
-                                         <option value="0">一组</option>
-                                         <option value="1">二组</option>
-                                         <option value="2">三组</option>
-                                         <option value="3">四组</option>
-                                     </select>
-                                 </div>--%>
 
                                 <div class="col-sm-3">
                                     <div class="input-group">
@@ -196,304 +152,17 @@
                                         <th>成绩评定</th>
                                     </tr>
                                     </thead>
-
-                                    <tbody>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" class="i-checks" name="allChk" id="allChk">
-                                        </td>
-                                        <td id="s1_a1">需求分析<a href="" title="模版下载" style="margin-left: 30px">
-                                            <small>模版下载</small>
-                                        </a></td>
-                                        <td></td>
-                                        <td style="color: lightskyblue">
-                                            <small>规定时间:2018-03-11</small>
-                                        </td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tbody id="s1_t1" style="display: none">
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" class="i-checks" name="subChk">
-                                        </td>
-                                        <td></td>
-                                        <td>一组</td>
-                                        <td>
-                                            <small>2018-03-10<a href="" style="margin-left: 10px">下载</a></small>
-                                        </td>
-                                        <td>张三</td>
-                                        <td class="status"><i class="glyphicon glyphicon-remove text-warning">未阅</i>
-                                        </td>
-                                        <td class="btn-groups">
-                                            <div class="btn-group">
-                                                <button class="btn btn-primary btn-xs " type="button"
-                                                        onClick="dengji_pingding(this,'01')" href="javascript:;">优
-                                                </button>
-                                                <button class="btn btn-success btn-xs " type="button"
-                                                        onClick="dengji_pingding(this,'02')" href="javascript:;">良
-                                                </button>
-                                                <button class="btn btn-info btn-xs " type="button"
-                                                        onClick="dengji_pingding(this,'03')" href="javascript:;">中
-                                                </button>
-                                                <button class="btn btn-warning btn-xs " type="button"
-                                                        onClick="dengji_pingding(this,'04')" href="javascript:;">及格
-                                                </button>
-                                                <button class="btn btn-danger btn-xs " type="button"
-                                                        onClick="dengji_pingding(this,'05')" href="javascript:;">不及格
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" class="i-checks" name="subChk">
-                                        </td>
-                                        <td></td>
-                                        <td>二组</td>
-                                        <td>
-                                            <small>2018-03-10<a href="" style="margin-left: 10px">下载</a></small>
-                                        </td>
-                                        <td>李四</td>
-                                        <td class="status"><i class="glyphicon glyphicon-remove text-warning">未阅</i>
-                                        </td>
-                                        <td class="btn-groups">
-                                            <div class="btn-group">
-                                                <button class="btn btn-primary btn-xs " type="button"
-                                                        onClick="dengji_pingding(this,'01')" href="javascript:;">优
-                                                </button>
-                                                <button class="btn btn-success btn-xs " type="button"
-                                                        onClick="dengji_pingding(this,'02')" href="javascript:;">良
-                                                </button>
-                                                <button class="btn btn-info btn-xs " type="button"
-                                                        onClick="dengji_pingding(this,'03')" href="javascript:;">中
-                                                </button>
-                                                <button class="btn btn-warning btn-xs " type="button"
-                                                        onClick="dengji_pingding(this,'04')" href="javascript:;">及格
-                                                </button>
-                                                <button class="btn btn-danger btn-xs " type="button"
-                                                        onClick="dengji_pingding(this,'05')" href="javascript:;">不及格
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" class="i-checks" name="subChk">
-                                        </td>
-                                        <td></td>
-                                        <td>三组</td>
-                                        <td style="color: red"><small>2018-03-12<a href="" style="margin-left: 10px">下载</a></small></td>
-                                        <td>王五</td>
-                                        <td class="status"><i class="glyphicon glyphicon-remove text-warning">未阅</i>
-                                        </td>
-                                        <td class="btn-groups">
-                                            <div class="btn-group">
-                                                <button class="btn btn-primary btn-xs " type="button"
-                                                        onClick="dengji_pingding(this,'01')" href="javascript:;">优
-                                                </button>
-                                                <button class="btn btn-success btn-xs " type="button"
-                                                        onClick="dengji_pingding(this,'02')" href="javascript:;">良
-                                                </button>
-                                                <button class="btn btn-info btn-xs " type="button"
-                                                        onClick="dengji_pingding(this,'03')" href="javascript:;">中
-                                                </button>
-                                                <button class="btn btn-warning btn-xs " type="button"
-                                                        onClick="dengji_pingding(this,'04')" href="javascript:;">及格
-                                                </button>
-                                                <button class="btn btn-danger btn-xs " type="button"
-                                                        onClick="dengji_pingding(this,'05')" href="javascript:;">不及格
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" class="i-checks" name="subChk">
-                                        </td>
-                                        <td></td>
-                                        <td>四组</td>
-                                        <td><small>2018-03-06<a href="" style="margin-left: 10px">下载</a></small></td>
-                                        <td>赵六</td>
-                                        <td class="status"><i class="glyphicon glyphicon-remove text-warning">未阅</i>
-                                        </td>
-                                        <td class="btn-groups">
-                                            <div class="btn-group">
-                                                <button class="btn btn-primary btn-xs " type="button"
-                                                        onClick="dengji_pingding(this,'01')" href="javascript:;">优
-                                                </button>
-                                                <button class="btn btn-success btn-xs " type="button"
-                                                        onClick="dengji_pingding(this,'02')" href="javascript:;">良
-                                                </button>
-                                                <button class="btn btn-info btn-xs " type="button"
-                                                        onClick="dengji_pingding(this,'03')" href="javascript:;">中
-                                                </button>
-                                                <button class="btn btn-warning btn-xs " type="button"
-                                                        onClick="dengji_pingding(this,'04')" href="javascript:;">及格
-                                                </button>
-                                                <button class="btn btn-danger btn-xs " type="button"
-                                                        onClick="dengji_pingding(this,'05')" href="javascript:;">不及格
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" class="i-checks" name="subChk">
-                                        </td>
-                                        <td></td>
-                                        <td>五组</td>
-                                        <td style="color: red"><small>2018-03-12<a href="" style="margin-left: 10px">下载</a></small></td>
-                                        <td>王八</td>
-                                        <td class="status"><i class="glyphicon glyphicon-remove text-warning">未阅</i>
-                                        </td>
-                                        <td class="btn-groups">
-                                            <div class="btn-group">
-                                                <button class="btn btn-primary btn-xs " type="button"
-                                                        onClick="dengji_pingding(this,'01')" href="javascript:;">优
-                                                </button>
-                                                <button class="btn btn-success btn-xs " type="button"
-                                                        onClick="dengji_pingding(this,'02')" href="javascript:;">良
-                                                </button>
-                                                <button class="btn btn-info btn-xs " type="button"
-                                                        onClick="dengji_pingding(this,'03')" href="javascript:;">中
-                                                </button>
-                                                <button class="btn btn-warning btn-xs " type="button"
-                                                        onClick="dengji_pingding(this,'04')" href="javascript:;">及格
-                                                </button>
-                                                <button class="btn btn-danger btn-xs " type="button"
-                                                        onClick="dengji_pingding(this,'05')" href="javascript:;">不及格
-                                                </button>
-                                            </div>
-                                        </td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" class="i-checks" name="subChk">
-                                        </td>
-                                        <td></td>
-                                        <td>六组</td>
-                                        <td><small>2018-03-09<a href="" style="margin-left: 10px">下载</a></small></td>
-                                        <td>明明</td>
-                                        <td class="status"><i class="glyphicon glyphicon-remove text-warning">未阅</i>
-                                        </td>
-                                        <td class="btn-groups">
-                                            <div class="btn-group">
-                                                <button class="btn btn-primary btn-xs " type="button"
-                                                        onClick="dengji_pingding(this,'01')" href="javascript:;">优
-                                                </button>
-                                                <button class="btn btn-success btn-xs " type="button"
-                                                        onClick="dengji_pingding(this,'02')" href="javascript:;">良
-                                                </button>
-                                                <button class="btn btn-info btn-xs " type="button"
-                                                        onClick="dengji_pingding(this,'03')" href="javascript:;">中
-                                                </button>
-                                                <button class="btn btn-warning btn-xs " type="button"
-                                                        onClick="dengji_pingding(this,'04')" href="javascript:;">及格
-                                                </button>
-                                                <button class="btn btn-danger btn-xs " type="button"
-                                                        onClick="dengji_pingding(this,'05')" href="javascript:;">不及格
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-
-
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" class="i-checks" name="input[]">
-                                        </td>
-                                        <td id="s1_a2">设计原型<a href="" title="模版下载" style="margin-left: 30px">
-                                            <small>模版下载</small>
-                                        </a></td>
-                                        <td></td>
-                                        <td style="color: lightskyblue"><small>规定时间:2018-03-15</small></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-
-                                    <tbody id="s1_t2" style="display: none">
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" class="i-checks" name="input[]">
-                                        </td>
-                                        <td></td>
-                                        <td>一组</td>
-                                        <td>2018-03-10</td>
-                                        <td>张三</td>
-                                        <td><a href="#"><i class="fa fa-check text-navy demo3"></i>已阅</a></td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" class="i-checks" name="input[]">
-                                        <td></td>
-                                        <td>二组</td>
-                                        <td>2018-03-10</td>
-                                        <td>李四</td>
-                                        <td><a href="/page/jiaoan/yemian1"><i
-                                                class="glyphicon glyphicon-remove text-warning">
-                                        </i>未阅</a>
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" class="i-checks" name="input[]">
-                                        </td>
-                                        <td></td>
-                                        <td>三组</td>
-                                        <td style="color: red">2018-03-18</td>
-                                        <td>王五</td>
-                                        <td><a href="#"><i class="fa fa-check text-navy"></i> 通过</a></td>
-                                        <td>C</td>
-                                    </tr>
-                                    </tbody>
-
-
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" class="i-checks" name="input[]">
-                                        </td>
-                                        <td>设计数据库<a href="" title="模版下载" style="margin-left: 30px">
-                                            <small>模版下载</small>
-                                        </a></td>
-                                        <td></td>
-                                        <td style="color: lightskyblue"><small>规定时间:2018-03-20</small></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" class="i-checks" name="input[]">
-                                        </td>
-                                        <td>编程测试<a href="" title="模版下载" style="margin-left: 30px">
-                                            <small>模版下载</small>
-                                        </a></td>
-                                        <td></td>
-                                        <td style="color: lightskyblue"><small>规定时间:2018-03-25</small></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    </tbody>
                                 </table>
                             </div>
 
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
-    </div>
+    </div>--%>
 
-    <div class="four steps" id="twois" style="margin-left: 10%;width: 80%;float: left;margin-right: 10%">
+    <%--<div class="four steps" id="twois" style="margin-left: 10%;width: 80%;float: left;margin-right: 10%">
         <span class="step"></span>
         <span id="span2" class="active step test">起2月8日至2月14日</span>
         <span class=" step"></span>
@@ -996,23 +665,14 @@
 
             </div>
         </div>
-    </div>
+    </div>--%>
     <jsp:include page="common/foot.jsp"/>
     <jsp:include page="common/head.jsp"/>
 
     <script>
-        $(".demo3").click(function () {
-            swal({
-                title: "审阅通过",
-                text: "霸气一点就通过了！！！",
-                type: "success",
-                class: "fa fa-check"
-            })
-        });
-
-    </script>
-    <script>
         $(document).ready(function () {
+
+
             $("#span1").dblclick(
                 function () {
                     if ($("#s1").css("display") == 'none') {
@@ -1046,7 +706,7 @@
                     }
                 });
 
-        })
+        });
 
         /*批量删除*/
         // 全选
@@ -1088,28 +748,15 @@
         });
 
         var aa = true;
-        function dengji_pingding(obj, id) {
-            if (aa){
-                /*if($(obj).parents("div").parents("td").find(":button").hasClass("btn-xs")){
-                    $(obj).parent("div").parents("td").parents("tr").find(".status").find("button").remove();
-                    $(obj).clone().appendTo(".status");
-                }else {*/
-                    var i =$("<i>").addClass("fa fa-check text-navy demo3").html("已阅");
-//                '<i class="fa fa-check text-navy demo3">已阅</i>'
-                   /* $(obj).parents("div").parents("td").parents("tr").find(".status").find("i").remove();
-                    $(obj).parents("div").parents("td").parents("tr").find(".status").append(i);
-                    $(obj).clone().appendTo($(obj).parents("div").parents("td").parents("tr").find(".status"));*/
-//                    console.info($("#id"));
-//                }
 
-//                $(obj).parents("div").find(".btn-group").remove();
-//                aa = false;
-               /* console.info($(obj).parents("div").parents("td").parents("tr").find(".status:eq(0)").find(".btn-xs").html());
-                console.info($(obj).html());*/
-                if ($(obj).parents("div").parents("td").parents("tr").find(".status:eq(0)").find(".btn-xs").length){
-                    if($(obj).parents("div").parents("td").parents("tr").find(".status:eq(0)").find(".btn-xs").html()==($(obj)).html()){
+        function dengji_pingding(obj, id) {
+            if (aa) {
+                var i = $("<i>").addClass("fa fa-check text-navy demo3").html("已阅");
+
+                if ($(obj).parents("div").parents("td").parents("tr").find(".status:eq(0)").find(".btn-xs").length) {
+                    if ($(obj).parents("div").parents("td").parents("tr").find(".status:eq(0)").find(".btn-xs").html() == ($(obj)).html()) {
                         return
-                    }else {
+                    } else {
                         $(obj).parents("div").parents("td").parents("tr").find(".status").find(":button").remove();
                         $(obj).clone().appendTo($(obj).parents("div").parents("td").parents("tr").find(".status"));
                     }
@@ -1117,44 +764,248 @@
                     $(obj).parents("div").parents("td").parents("tr").find(".status").find("i").remove();
                     $(obj).parents("div").parents("td").parents("tr").find(".status").append(i);
                     $(obj).clone().appendTo($(obj).parents("div").parents("td").parents("tr").find(".status"));
-                };
-
-//                return false;
+                }
+                ;
             }
 
 
             layer.open({
                 type: 2,
-                title: '成绩备注'+'&nbsp;&nbsp;&nbsp;&nbsp;'+'成绩为:'+$(obj).clone().html(),
+                title: '成绩备注' + '&nbsp;&nbsp;&nbsp;&nbsp;' + '成绩为:' + $(obj).clone().html(),
                 content: '/beizhu_chengji.jsp',
                 btn: ['确定', '取消'],
-                yes:function (index) {
+                yes: function (index) {
                     layer.close(index);
                 },
-                btn2:function (index) {
+                btn2: function (index) {
                     layer.close(index);
                 },
                 shade: false,
                 area: ['600px', '300px']
             })
         }
-        
+
         $(".pingding_piliang").click(function () {
             layer.open({
                 type: 2,
                 title: '批量评定成绩',
                 content: '/beizhu_chengji_piliang.jsp',
                 btn: ['确定', '取消'],
-                yes:function (index) {
+                yes: function (index) {
                     layer.close(index);
                 },
-                btn2:function (index) {
+                btn2: function (index) {
                     layer.close(index);
                 },
                 shade: false,
                 area: ['600px', '300px']
             })
-        })
+        });
+
+
+        /**
+         * 获取某个人的计划
+         * /page/jiaoan/jiaoxueplan?jihuaId=1&officeName=2
+         * @type {Array}
+         */
+        var url = location.search.split("&", 2);
+        var jihuaId = url[0].substr(9, 1);
+        var officeName = url[1].substr(11);
+        var o2 = decodeURI(officeName);
+        $.get("/teaching/viewJieduanByTeacher", {jihuaId}, function (msg) {
+            console.info(msg['jieduans']);
+            $(".Hui-article").append('<div style="margin-left: 10%;margin-top: 2%" id="banji"><span><h4>' + o2 + '</h4></span></div>');
+            $.each(msg['jieduans'], function (i, each) {
+                if (i === 0) {
+                    $(".Hui-article").append('<div class="four steps" id="' + each['id'] + '" style="margin-left:10%;margin-top: 2%; width: 80%;float: left;margin-right: 10%"></div>');
+                } else {
+                    $(".Hui-article").append('<div class="four steps" id="' + each['id'] + '" style="margin-left:10%;width: 80%;float: left;margin-right: 10%"></div>');
+                }
+                var steps = $(".steps:eq(" + i + ")");
+                for (var j = 0; j < msg['jieduans'].length; j++) {
+                    if (i == j) {
+                        steps.append($("<span>").addClass("active step").html('起' + each['startTime'] + '至' + each['endTime']));
+                    } else {
+                        steps.append($("<span>").addClass("step"));
+                    }
+                }
+                steps.append('<div style="margin-top: 0px;display: none" id="s1">\n' +
+                    '            <div class="row">\n' +
+                    '                <div class="col-sm-12">\n' +
+                    '                    <div class="ibox float-e-margins">\n' +
+                    '                        <div class="ibox-title">\n' +
+                    '                            <h5>学生任务完成状况</h5>\n' +
+                    '                            <div class="ibox-tools">\n' +
+                    '                                <a class="collapse-link">\n' +
+                    '                                    <i class="fa fa-chevron-up"></i>\n' +
+                    '                                </a>\n' +
+                    '                                <a class="dropdown-toggle" data-toggle="dropdown" href="table_basic.html#">\n' +
+                    '                                    <i class="fa fa-wrench"></i>\n' +
+                    '                                </a>\n' +
+                    '\n' +
+                    '                                <a class="close-link">\n' +
+                    '                                    <i class="fa fa-times"></i>\n' +
+                    '                                </a>\n' +
+                    '                            </div>\n' +
+                    '                        </div>\n' +
+                    '\n' +
+                    '\n' +
+                    '                        <div class="ibox-content">\n' +
+                    '                            <div class="row">\n' +
+                    '\n' +
+                    '\n' +
+                    '                                <div class="col-sm-3">\n' +
+                    '                                    <div class="input-group">\n' +
+                    '                                        <input type="text" placeholder="请输入关键词" class="input-sm form-control"> <span\n' +
+                    '                                            class="input-group-btn">\n' +
+                    '                                        <button type="button" class="btn btn-sm btn-primary"> 搜索</button> </span>\n' +
+                    '                                    </div>\n' +
+                    '                                </div>\n' +
+                    '                            </div>\n' +
+                    '                            <div class="table-responsive">\n' +
+                    '                                <table class="table table-striped">\n' +
+                    '                                    <thead>\n' +
+                    '                                    <tr>\n' +
+                    '\n' +
+                    '                                        <th></th>\n' +
+                    '                                        <th>任务名</th>\n' +
+                    '                                        <th>小组</th>\n' +
+                    '                                        <th>提交时间</th>\n' +
+                    '                                        <th>提交人</th>\n' +
+                    '                                        <th>审阅状态</th>\n' +
+                    '                                        <th>成绩评定</th>\n' +
+                    '                                    </tr>\n' +
+                    '                                    </thead>\n' +
+                    '                                    <tbody id="tbody">\n' +
+                    '                                    </tbody>\n' +
+                    '                                </table>\n' +
+                    '                            </div>\n' +
+                    '\n' +
+                    '                        </div>\n' +
+                    '                    </div>\n' +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '        </div>');
+
+
+            });
+
+            /**
+             * 获取每个阶段的双击展开事件
+             */
+            var aa = true;
+            $.each($(".steps"), function () {
+                $(this).dblclick(function () {
+                    if ($(this).find("#s1").css("display") == 'none') {
+                        $(this).find("#s1").slideDown();
+                        var jieduanId = $(this).attr("id");
+                        console.info(jieduanId);
+                        $.get("/teaching/viewRenwu", {jieduanId}, function (renwus) {
+                            console.info(renwus);
+                            $.each(renwus, function (i, each) {
+                                if (aa) {
+                                    $("#tbody").append('<tr>\n' +
+                                        '                                        <td>\n' +
+                                        '                                            <input type="checkbox" class="i-checks" name="allChk" id="allChk">\n' +
+                                        '                                        </td>\n' +
+                                        '                                        <td class="s1_a1">' + each['planname'] + '<a href="" title="模版下载" style="margin-left: 30px">\n' +
+                                        '                                            <small>模版下载</small>\n' +
+                                        '                                        </a></td>\n' +
+                                        '                                        <td></td>\n' +
+                                        '                                        <td style="color: lightskyblue">\n' +
+                                        '                                            <small>规定时间:' + each['endTime'] + '</small>\n' +
+                                        '                                        </td>\n' +
+                                        '                                        <td></td>\n' +
+                                        '                                        <td></td>\n' +
+                                        '                                        <td></td>\n' +
+                                        '                                    </tr>');
+                                }
+                            });
+
+                            /*$.each($(".s1_a1"),function () {
+                                $(this).dblclick(function () {
+                                    if ($(this).find(".s1_t1").css("display") == 'none') {
+                                        $(this).find(".s1_t1").slideDown();
+                                    }
+                                    else {
+                                        $(this).find(".s1_t1").slideUp();
+                                    }
+                                });
+                            });*/
+
+                            $.get("/teaching/viewTaskResultByJieduanId", {jieduanId}, function (msg) {
+                                console.info(msg['taskResults']);
+                                $.each(msg['taskResults'], function (i, each) {
+                                    $("#tbody").after('<tbody class="s1_t1" style="display: none">\n' +
+                                        '                                    <tr>\n' +
+                                        '                                        <td>\n' +
+                                        '                                            <input type="checkbox" class="i-checks" name="subChk">\n' +
+                                        '                                        </td>\n' +
+                                        '                                        <td></td>\n' +
+                                        '                                        <td>' + each['groupName'] + '</td>\n' +
+                                        '                                        <td>\n' +
+                                        '                                            <small>' + each['submitTime'] + '<a href="" style="margin-left: 10px">下载</a></small>\n' +
+                                        '                                        </td>\n' +
+                                        '                                        <td>' + each['userId'] + '</td>\n' +
+                                        '                                    </tr>');
+
+                                    var s1_t1 = $(".s1_t1:eq(" + i + ")");
+                                    if (each['checkStatus'] == 1) {
+                                        s1_t1.append('<td class="status"><i class="glyphicon glyphicon-check text-success">已阅</i></td>');
+                                        var status = $(".status:eq(" + i + ")");
+                                        if (each['checkResult'] == 1) {
+                                            status.append('<button class="btn btn-primary btn-xs " type="button">优 </button>');
+                                        }
+                                        if (each['checkResult'] == 2) {
+                                            status.append('<button class="btn btn-success btn-xs " type="button">良 </button>');
+                                        }
+                                        if (each['checkResult'] == 3) {
+                                            status.append('<button class="btn btn-info btn-xs " type="button">中 </button>');
+                                        }
+                                        if (each['checkResult'] == 4) {
+                                            status.append('<button class="btn btn-warning btn-xs " type="button">及格 </button>');
+                                        }
+                                        if (each['checkResult'] == 5) {
+                                            status.append('<button class="btn btn-danger btn-xs " type="button">不及格 </button>');
+                                        }
+                                    } else if (each['checkStatus'] == 0){
+                                        s1_t1.append('<td class="status"><i class="glyphicon glyphicon-remove text-warning">未阅</i></td>');
+                                    }
+
+                                    s1_t1.append('<td class="btn-groups">\n' +
+                                        '                                            <div class="btn-group">\n' +
+                                        '                                                <button class="btn btn-primary btn-xs " type="button"\n' +
+                                        '                                                        onClick="dengji_pingding(this,\'01\')" href="javascript:;">优\n' +
+                                        '                                                </button>\n' +
+                                        '                                                <button class="btn btn-success btn-xs " type="button"\n' +
+                                        '                                                        onClick="dengji_pingding(this,\'02\')" href="javascript:;">良\n' +
+                                        '                                                </button>\n' +
+                                        '                                                <button class="btn btn-info btn-xs " type="button"\n' +
+                                        '                                                        onClick="dengji_pingding(this,\'03\')" href="javascript:;">中\n' +
+                                        '                                                </button>\n' +
+                                        '                                                <button class="btn btn-warning btn-xs " type="button"\n' +
+                                        '                                                        onClick="dengji_pingding(this,\'04\')" href="javascript:;">及格\n' +
+                                        '                                                </button>\n' +
+                                        '                                                <button class="btn btn-danger btn-xs " type="button"\n' +
+                                        '                                                        onClick="dengji_pingding(this,\'05\')" href="javascript:;">不及格\n' +
+                                        '                                                </button>\n' +
+                                        '                                            </div>\n' +
+                                        '                                        </td>');
+
+                                });
+
+                            });
+
+                        });
+                    } else {
+                        $(this).find("#s1").slideUp();
+                        aa = false;
+                    }
+
+                });
+            });
+
+        });
     </script>
 </div>
 </body>

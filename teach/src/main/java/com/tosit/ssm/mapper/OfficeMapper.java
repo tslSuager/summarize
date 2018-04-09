@@ -130,4 +130,11 @@ public interface OfficeMapper {
      */
     List<Office> selectOfficeByUserId(@Param("userId") String userId);
 
+    /**
+     * 查询某个学生所在的小组
+     * @param userId
+     * @return
+     */
+    List<Office> selectGroupByUserId(@Param("userId")String userId);
+
 }

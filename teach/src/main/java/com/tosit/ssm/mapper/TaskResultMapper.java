@@ -31,4 +31,11 @@ public interface TaskResultMapper {
      * @return
      */
     int updateByPrimaryKey(TaskResult record);
+
+    /**
+     * 查询某个阶段的任务提交结果
+     * @param jieduanId
+     * @return
+     */
+    List<TaskResult> selectTaskResultByJieduanId(@Param("jieduanId")String jieduanId);
 }
