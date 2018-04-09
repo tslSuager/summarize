@@ -1,4 +1,6 @@
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html>
 
@@ -11,8 +13,6 @@
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
     <title>H+ 后台主题UI框架 - 主页</title>
 
-    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
-    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
 
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html"/>
@@ -66,131 +66,155 @@
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level">
-                        <li>
-                            <a class="J_menuItem" href="/page/checking" data-index="0">考勤情況（學生）</a>
-                        </li>
-                        <li>
-                            <a class="J_menuItem" href="/page/calendar">查看考勤情况</a>
-                        </li>
-                        <li>
-                            <a class="J_menuItem" href="/page/kaoqin_rule_detail">考勤规则录入
-                            </a>
-                        </li>
-                        <li>
-                            <a class="J_menuItem" href="/page/entry_kaoqin_info">个人考勤信息录入
-                            </a>
-                        </li>
-                        <li>
-                            <a class="J_menuItem" href="/page/matchStudentAttendance">    考勤规则和個人关联
-                            </a>
-                        </li>
-                        <li>
-                            <a class="J_menuItem" href="/page/kaoqin_rule_display">    查看考勤规则
-                            </a>
-                        </li>
+                        <shiro:hasRole name="instructor">
+                            <li>
+                                <a class="J_menuItem" href="/page/calendar">查看考勤情况</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="/page/kaoqin_rule_detail">考勤规则录入
+                                </a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="/page/entry_kaoqin_info">个人考勤信息录入
+                                </a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="/page/matchStudentAttendance"> 考勤规则和個人关联
+                                </a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="/page/kaoqin_rule_display"> 查看考勤规则
+                                </a>
+                            </li>
+                        </shiro:hasRole>
+                        <shiro:hasRole name="student">
+
+                            <li>
+                                <a class="J_menuItem" href="/page/checking" data-index="0">考勤情況（學生）</a>
+                            </li>
+                        </shiro:hasRole>
                     </ul>
 
                 </li>
                 <li>
                     <a href="#">
                         <i class="fa fa-home"></i>
-                        <span class="nav-label">学生管理</span>
+                        <span class="nav-label">学生</span>
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level">
+                        <shiro:hasRole name="instructor">
+                            <li>
+                                <a class="J_menuItem" href="/page/form_basic_import" data-index="0">录入学生信息</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="/page/index_v1">班級管理</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="/register.html">注册账号</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="/page/qinshifenpei">寝室人员分配和调整</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="/page/shuidianInfo">寝室的水电气录入</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="/page/qinshiInfo_admin">寝室的水电气查看和修改</a>
+                            </li>
 
-                        <li>
-                            <a class="J_menuItem" href="/page/form_basic_import" data-index="0">录入学生信息</a>
-                        </li>
-                        <li>
-                            <a class="J_menuItem" href="/page/index_v1" >班級管理</a>
-                        </li>
-                        <li>
-                            <a class="J_menuItem" href="/page/student_find_jingli">学生经历查询</a>
-                        </li>
-                        <li>
-                            <a class="J_menuItem" href="/register.html">注册账号</a>
-                        </li>
-                        <li>
-                            <a class="J_menuItem" href="/page/profile">学生查看和修改</a>
-                        </li>
-                        <li>
-                            <a class="J_menuItem" href="/page/qinshifenpei">寝室人员分配和调整</a>
-                        </li>
-                        <li>
-                            <a class="J_menuItem" href="/page/shuidianInfo">寝室的水电气录入</a>
-                        </li>
-                        <li>
-                            <a class="J_menuItem" href="/page/qinshiInfo_admin">寝室的水电气查看和修改</a>
-                        </li>
+                            <li>
+                                <a class="J_menuItem" href="/page/materiel_info">寝室的物料查看和修改</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="/page/student_find_jingli">学生经历查询</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="/page/station_set"><i class="fa fa-columns"></i> <span
+                                        class="nav-label">组织建立查看修改</span></a>
+                            </li>
+                        </shiro:hasRole>
+                        <shiro:hasRole name="student">
+                            <li>
+                                <a class="J_menuItem" href="/page/profile">学生查看和修改</a>
+                            </li>
+                        </shiro:hasRole>
 
-                        <li>
-                            <a class="J_menuItem" href="/page/materiel_info">寝室的物料查看和修改</a>
-                        </li>
+
                     </ul>
 
                 </li>
                 <li>
                     <a href="#">
                         <i class="fa fa-home"></i>
-                        <span class="nav-label">教学管理</span>
+                        <span class="nav-label">教学</span>
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level">
-                        <li>
-                            <a class="J_menuItem" href="/page/jiaoan/addplan" data-index="0">发布作业</a>
-                        </li>
-                        <li>
-                            <a class="J_menuItem" href="/page/jiaoan/kaoshiplan">发布考试</a>
-                        </li>
-                        <li>
-                            <a class="J_menuItem" href="/page/jiaoan/jiaoxueplan">教学计划完成状况（教员）</a>
-                        </li>
-
-                        <li>
-                            <a class="J_menuItem" href="/page/jiaoan/jiaoxueplanstu">教学计划完成状况（stu）</a>
-                        </li>
-                        <li>
-                            <a class="J_menuItem" href="${pageContext.request.contextPath}/teaching/viewTeaching">教学计划的录入</a>
-                        </li>
-                        <li>
-                            <a class="J_menuItem" href="/page/jiaoan/zuoye">批改作业（教員）</a>
-                        </li>
-                        <li>
-                            <a href="/page/jiaoan/xiazaiwork" class="J_menuItem">学生考试、作业下载</a>
-                        </li>
-                        <li>
-                            <a href="/student_zuoyedaoru.html" class="J_menuItem">提交作业</a>
-                        </li>
-                        <li>
-                            <a class="J_menuItem" href="/page/jiaoan/submit_plan">提交（教員）（不知道是什么界面）</a>
-                        </li>
+                        <shiro:hasRole name="instructor">
+                            <li>
+                                <a class="J_menuItem" href="/page/jiaoan/addplan" data-index="0">发布作业</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="/page/jiaoan/kaoshiplan">发布考试</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="/page/jiaoan/jiaoxueplan">教学计划完成状况（教员）</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="${pageContext.request.contextPath}/teaching/viewTeaching">教学计划的录入</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="/page/jiaoan/zuoye">批改作业（教員）</a>
+                            </li>
+                            <li>
+                                <a href="/page/jiaoan/xiazaiwork" class="J_menuItem">学生考试、作业下载</a>
+                            </li>
+                            <li>
+                                <a href="/student_zuoyedaoru.html" class="J_menuItem">提交作业</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="/page/jiaoan/submit_plan">提交（教員）（不知道是什么界面）</a>
+                            </li>
+                        </shiro:hasRole>
+                        <shiro:hasRole name="student">
+                            <li>
+                                <a class="J_menuItem" href="/page/jiaoan/jiaoxueplanstu">教学计划完成状况（stu）</a>
+                            </li>
+                        </shiro:hasRole>
                     </ul>
-
                 </li>
                 <li>
                     <a href="#">
                         <i class="fa fa-home"></i>
-                        <span class="nav-label">成绩管理</span>
+                        <span class="nav-label">成绩</span>
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level">
+                        <shiro:hasRole name="instructor">
+                            <li>
+                                <a class="J_menuItem" href="/page/inputScore">成绩规则录入</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="/page/chulishensu_teacher" data-index="0">处理成绩申诉</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="/page/grade_add">录入成绩</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="/daochuchengji.html"><i class="fa fa-columns"></i> <span
+                                        class="nav-label">班级所有文档的导出</span></a>
+                            </li>
+                        </shiro:hasRole>
+                        <shiro:hasRole name="student">
+                            <li>
+                                <a class="J_menuItem" href="/page/student_shensu">成绩申述</a>
+                            </li>
 
-                        <li>
-                            <a class="J_menuItem" href="/page/chulishensu_teacher" data-index="0">处理成绩申诉</a>
-                        </li>
-                        <li>
-                            <a class="J_menuItem" href="/page/student_shensu" >成绩申述</a>
-                        </li>
-                        <li>
-                            <a class="J_menuItem" href="/page/grade_add"  >录入成绩</a>
-                        </li>
-                        <li>
-                            <a class="J_menuItem"  href="/page/grade_show" >查看和修改成绩</a>
-                        </li>
-                        <li>
-                            <a class="J_menuItem"  href="/page/inputScore" >成绩规则录入</a>
-                        </li>
+                            <li>
+                                <a class="J_menuItem" href="/page/grade_show">查看和修改成绩</a>
+                            </li>
+                        </shiro:hasRole>
                     </ul>
 
                 </li>
@@ -202,27 +226,34 @@
                     </a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a class="J_menuItem" href="/page/video/index">    视频展示
+                            <a class="J_menuItem" href="/page/video/index"> 视频展示
                             </a>
                         </li>
                         <li>
-                            <a class="J_menuItem" href="/videoUpdate.html">    视频上传
+                            <a class="J_menuItem" href="/videoUpdate.html"> 视频上传
                             </a>
                         </li>
                     </ul>
                 </li>
-                <li>
-                    <a class="J_menuItem" href="/daochuchengji.html"><i class="fa fa-columns"></i> <span class="nav-label">班级所有文档的导出</span></a>
-                </li>
-                <li>
-                    <a class="J_menuItem" href="/page/login"><i class="fa fa-columns"></i> <span class="nav-label">登陆</span></a>
-                </li>
-                <li>
-                    <a class="J_menuItem" href="/page/dataDictionary" ><i class="fa fa-columns"></i> <span class="nav-label">数据字典录入和修改</span></a>
-                </li>
-                <li>
-                    <a class="J_menuItem"  href="/page/station_set"><i class="fa fa-columns"></i> <span class="nav-label">组织建立查看修改</span></a>
-                </li>
+                <shiro:hasRole name="instructor">
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-home"></i>
+                            <span class="nav-label">系统管理</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a class="J_menuItem" href="/page/dataDictionary"><i class="fa fa-columns"></i> <span
+                                        class="nav-label">数据字典录入和修改</span></a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="javascript:void(0)"><i class="fa fa-columns"></i> <span
+                                        class="nav-label">处理考勤和读取考勤的控制界面</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                </shiro:hasRole>
             </ul>
         </div>
     </nav>
@@ -267,7 +298,7 @@
                     </li>
                 </ul>
             </div>
-            <a href="login.html" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
+            <a href="/user/outLogin" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
         </div>
         <div class="row J_mainContent" id="content-main">
             <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="index_v148b2.html?v=4.0"

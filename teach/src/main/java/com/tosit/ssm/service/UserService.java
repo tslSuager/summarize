@@ -148,4 +148,9 @@ public interface UserService {
      * @param file
      */
     void entryKaoqinId(File file);
+
+    List<UserCkRuleRecord> findAllLeaveByTime(Date time);
+
+
+    UserRole findRoleByName(String loginName);
 }

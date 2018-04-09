@@ -178,4 +178,14 @@ public class UserServiceImpl implements UserService {
         }
 
     }
+
+    @Override
+    public List<UserCkRuleRecord> findAllLeaveByTime(Date time) {
+        return userMapper.selectAllLeaveByTime(time);
+    }
+
+    @Override
+    public UserRole findRoleByName(String loginName) {
+        return userMapper.selectRoleByUsername(loginName);
+    }
 }

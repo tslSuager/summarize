@@ -10,6 +10,8 @@ import com.tosit.ssm.service.OfficeService;
 import com.tosit.ssm.service.UserService;
 import org.apache.ibatis.annotations.Param;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.datetime.DateFormatter;
 import org.springframework.stereotype.Controller;
@@ -97,7 +99,9 @@ public class CheckingController {
     @RequestMapping(value = "/ShowAllRecordsByIdByDate")
     @ResponseBody
     public Object ShowRecords(KaoqinRecords kaoqinRecords){
+        Subject subject = SecurityUtils.getSubject();
         System.out.println(kaoqinRecords);
+        kaoqinRecords.setId((String) subject.getSession().getAttribute("userId"));
         //某个人的表现分的经历
         List<Experience> experiences = userService.selectByIdToType(kaoqinRecords.getUserId());
         JSONModel.put("experiences",experiences);
@@ -217,7 +221,6 @@ public class CheckingController {
     public Object DealKaoqin(String officeId){
         //获取某个班的申诉或请假的考勤结果
         List<KaoqinResultVO> kaoqinResults = checkingService.selectByClass(officeId);
-
 
         JSONModel.put("kaoqinResults",kaoqinResults);
         //修改某人申述请假的状态和回复的字段

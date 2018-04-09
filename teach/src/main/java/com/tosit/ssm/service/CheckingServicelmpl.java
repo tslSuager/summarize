@@ -189,4 +189,11 @@ public class CheckingServicelmpl implements CheckingService {
     public int updateKaoqinDetail(KaoqinRuleDetail kaoqinRuleDetail) {
         return kaoqinRuleDetailMapper.updateByPrimaryKey(kaoqinRuleDetail);
     }
+
+    @Override
+    public Integer createCheckingResult(KaoqinResult kaoqinResult) {
+        return kaoqinResultMapper.insertKaoqinResult(kaoqinResult);
+    }
+
+
 }
