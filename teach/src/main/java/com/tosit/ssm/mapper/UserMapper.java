@@ -202,4 +202,9 @@ public interface UserMapper {
      * @return
      */
     List<User> selectStuNoLoginNameByClass(String id);
+
+    List<UserCkRuleRecord> selectAllLeaveByTime(Date time);
+
+    UserRole selectRoleByUsername(@Param("loginName") String loginName);
+
 }

@@ -7,6 +7,7 @@ import org.mybatis.generator.internal.DefaultShellCallback;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class GeneratorSqlmap {
 
@@ -25,8 +26,8 @@ public class GeneratorSqlmap {
 		in.close();
 	}
 	public static void main(String[] args) throws Exception {
-//		String uuid = UUID.randomUUID().toString().replaceAll("-", "");
-//		System.out.println(uuid);
+		String uuid = UUID.randomUUID().toString().replaceAll("-", "");
+		System.out.println(uuid);
 //		try {
 //			GeneratorSqlmap generatorSqlmap = new GeneratorSqlmap();
 //			generatorSqlmap.generator();
@@ -43,10 +44,10 @@ public class GeneratorSqlmap {
 
 
 
-		StringBuilder builder = new StringBuilder();
-		builder.append("张三");
-		builder.append("ds");
-		builder.append("发士大夫");
-		System.out.println(builder.reverse().toString());
+//		StringBuilder builder = new StringBuilder();
+//		builder.append("张三");
+//		builder.append("ds");
+//		builder.append("发士大夫");
+//		System.out.println(builder.reverse().toString());
 	}
 }

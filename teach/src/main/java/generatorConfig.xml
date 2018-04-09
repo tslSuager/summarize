@@ -51,7 +51,7 @@
 		<!--<table tableName="kaoqin_rule" domainObjectName="KaoqinRule"/>-->
 		<!--<table tableName="kaoqin_rule_detail" domainObjectName="KaoqinRuleDetail"/>-->
 		<!--<table tableName="office" domainObjectName="Office"/>-->
-		<table tableName="user" domainObjectName="User"/>
+		<!--<table tableName="user" domainObjectName="User"/>-->
 		<!--<table tableName="user_office" domainObjectName="UserOffice"/>-->
 		<!--<table tableName="kaoqin_user" domainObjectName="KaoqinUser"/>-->
 		<!--<table tableName="experience" domainObjectName="Experience"/>-->
@@ -60,7 +60,9 @@
 		<!--<table tableName="task_result" domainObjectName="TaskResult"/>-->
 		<!--<table tableName="teaching" domainObjectName="Teaching"/>-->
 		<!--<table tableName="teaching_office" domainObjectName="TeachingOffice"/>-->
-		<table tableName="Dormitory_info" domainObjectName="DormitoryInfo"/>
+		<!--<table tableName="Dormitory_info" domainObjectName="DormitoryInfo"/>-->
+		<table tableName="sysRole_userId" domainObjectName="SysRoleUserId"/>
+		<table tableName="sysRole" domainObjectName="SysRole"/>
 		<!--<table tableName="materiel" domainObjectName="Materiel"/>-->
 		<!--<table tableName="utilttles" domainObjectName="Utilttles"/>-->
 		<!-- 有些表的字段需要指定java类型

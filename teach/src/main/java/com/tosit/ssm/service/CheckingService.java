@@ -109,4 +109,7 @@ public interface CheckingService {
      * @param kaoqinRuleDetail
      */
     int updateKaoqinDetail(KaoqinRuleDetail kaoqinRuleDetail);
+
+
+    Integer createCheckingResult(KaoqinResult kaoqinResult);
 }

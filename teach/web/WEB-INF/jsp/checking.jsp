@@ -82,8 +82,7 @@
 <script>
     $(document).ready(function () {
         //获取页面所有数据
-        $.get("/checking/ShowAllRecordsByIdByDate", {"userId": "u001", "brushtime": new Date()}, function (msg) {
-            $("body").data("userId", "u001");
+        $.get("/checking/ShowAllRecordsByIdByDate", {"brushtime": new Date()}, function (msg) {
             var allmsg = msg['user'];
             var experience = msg['experiences'];
             var result = msg['result'];
@@ -91,13 +90,13 @@
             //个人经历的页面加载
             $("#grade").html('分数：' + allmsg['grade'] + '分');
             if (experience != null) {
-                experience.forEach(function (value) {
-                    $("#ibox-content1").append("<div class='external-event navy-bg aaa'</div>");
-                    $(".aaa").html('扣除：' + allmsg['cutGrade'] + '分');
-                    $("#ibox-content1").append("<div class='external-event navy-bg bbb'</div>");
-                    //这里有个BUG 后面的event会把前面的覆盖  未解决
-                    $(".bbb").html('原因：' + value['event']);
+                $.each(experience,function (i, e) {
+                    $("#ibox-content1").append("<div class='external-event navy-bg sssss'></div>");
+                    $("#ibox-content1").find(".sssss").eq(i*2).html('扣除：' + allmsg['cutGrade'] + '分');
+                    $("#ibox-content1").append("<div class='external-event navy-bg sssss'></div>");
+                    $("#ibox-content1").find(".sssss").eq(i*2+1).html('扣除：' + e['remark'] + '分');
                 })
+
             }
 
 
@@ -257,7 +256,7 @@
                                 }
                                 console.info(type);
                                 $.post("/checking/commitLeave", {
-                                    userId: $("body").data("userId"),
+                                    userId: msg['user'].id,
                                     kaoqinRemarkContent: checkingContent,
                                     kaoqinRemarkType: type,
                                     kaoqinRemarkReqtime: new Date(),
@@ -337,7 +336,7 @@
                                 //ajax 发请求存储 代码写在这
                                 var checkingContent = $($(layero).find("iframe")[0].contentWindow.document.getElementById("tra")).val();
                                 $.post("/checking/commitChecking", {
-                                    userId: $("body").data("userId"),
+                                    userId: msg['user'].id,
                                     data: checkingContent,
                                     kaoqinShenSuReqtime: new Date()
                                 }, function (msg) {
@@ -361,7 +360,7 @@
                                 //ajax 发请求存储 代码写在这
                                 var checkingContent = $($(layero).find("iframe")[0].contentWindow.document.getElementById("tra")).val();
                                 $.post("/checking/commitChecking", {
-                                    userId: $("body").data("userId"),
+                                    userId: msg['user'].id,
                                     data: checkingContent,
                                     kaoqinShenSuReqtime: new Date()
                                 }, function (msg) {
@@ -385,7 +384,7 @@
                                 //ajax 发请求存储 代码写在这
                                 var checkingContent = $($(layero).find("iframe")[0].contentWindow.document.getElementById("tra")).val();
                                 $.post("/checking/commitChecking", {
-                                    userId: $("body").data("userId"),
+                                    userId: msg['user'].id,
                                     data: checkingContent
                                 }, function (msg) {
                                     console.info(msg);

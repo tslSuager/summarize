@@ -45,9 +45,49 @@
   </resultMap>
 
   <resultMap id="VOResultMap" type="com.tosit.ssm.entity.UserVO">
-    <id column="ID" jdbcType="VARCHAR" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result property="GroupId" jdbcType="VARCHAR" column="groupId"/>
+  <id column="ID" jdbcType="VARCHAR" property="id" />
+  <result column="name" jdbcType="VARCHAR" property="name" />
+  <result property="GroupId" jdbcType="VARCHAR" column="groupId"/>
+</resultMap>
+
+
+
+
+
+
+  <resultMap id="UserCkRuleRecordMap" type="com.tosit.ssm.entity.UserCkRuleRecord">
+    <id column="userid" jdbcType="VARCHAR" property="id" />
+    <association property="kaoqinRuleDetails" javaType="com.tosit.ssm.entity.KaoqinRuleDetail">
+      <id column="kaoqin_rule_detail.ID" jdbcType="VARCHAR" property="id" />
+      <result column="kaoqin_rule_id" jdbcType="VARCHAR" property="kaoqinRuleId" />
+      <result column="week_day" jdbcType="INTEGER" property="weekDay" />
+      <result column="date" jdbcType="DATE" property="date" />
+      <result column="brush_startTime1" jdbcType="TIME" property="brushStarttime1" />
+      <result column="brush_endTime1" jdbcType="TIME" property="brushEndtime1" />
+      <result column="time1_wucha" jdbcType="INTEGER" property="time1Wucha" />
+      <result column="brush_startTime2" jdbcType="TIME" property="brushStarttime2" />
+      <result column="brush_endTime2" jdbcType="TIME" property="brushEndtime2" />
+      <result column="time1_wucha2" jdbcType="INTEGER" property="time1Wucha2" />
+      <result column="brush_startTime3" jdbcType="TIME" property="brushStarttime3" />
+      <result column="brush_endTime3" jdbcType="TIME" property="brushEndtime3" />
+      <result column="time1_wucha3" jdbcType="INTEGER" property="time1Wucha3" />
+      <result column="brush_startTime4" jdbcType="TIME" property="brushStarttime4" />
+      <result column="brush_endTime4" jdbcType="TIME" property="brushEndtime4" />
+      <result column="time1_wucha4" jdbcType="INTEGER" property="time1Wucha4" />
+      <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+      <result column="brush_count" jdbcType="INTEGER" property="brushCount" />
+    </association>
+    <collection property="records" ofType="com.tosit.ssm.entity.KaoqinRecords">
+      <result column="kaoqin_records.ID" jdbcType="VARCHAR" property="id" />
+      <result column="key_number" jdbcType="VARCHAR" property="keyNumber" />
+      <result column="name" jdbcType="VARCHAR" property="name" />
+      <result column="sequence_number" jdbcType="INTEGER" property="sequenceNumber" />
+      <result column="brushTime" jdbcType="TIMESTAMP" property="brushtime" />
+      <result column="check_type" jdbcType="VARCHAR" property="checkType" />
+      <result column="machine_number" jdbcType="VARCHAR" property="machineNumber" />
+      <result column="machine_name" jdbcType="VARCHAR" property="machineName" />
+    </collection>
+
   </resultMap>
 
   <sql id="Example_Where_Clause">
@@ -1270,7 +1310,7 @@ WHERE o.parent_id = #{office.id} and o.is_del=1 and u.is_del=1 and uo.is_del=1 A
     FROM user u WHERE u.loginName=#{username}
   </select>
 
-  <select id="selectStuNoLoginNameByClass" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectStuNoLoginNameByClass" parameterType="string" resultMap="BaseResultMap">
     SELECT *
 FROM user u
 JOIN user_office uo
@@ -1278,4 +1318,46 @@ ON u.ID = uo.user_id
 WHERE uo.office_id = #{VALUE } AND u.loginName IS NULL AND u.user_type=4;
   </select>
 
+
+
+  <select id="selectAllLeaveByTime" parameterType="java.util.Date" resultMap="UserCkRuleRecordMap">
+-- 获取昨天要考勤的人和记录
+select u.ID userid,kaoqin_rule_detail.*,kaoqin_records.* from    user u
+JOIN kaoqin_rule ON u.kaoqin_ruleID=kaoqin_rule.ID
+RIGHT JOIN kaoqin_rule_detail ON kaoqin_rule_detail.kaoqin_rule_id=kaoqin_rule.ID
+RIGHT  JOIN kaoqin_records ON u.kaoqin_code=kaoqin_records.key_number
+WHERE
+ ((DATE_FORMAT(kaoqin_rule_detail.date, '%Y-%m-%d')=DATE_FORMAT(#{time}, '%Y-%m-%d'))
+ or
+ (DATE_FORMAT(kaoqin_rule_detail.week_day, '%w')=DATE_FORMAT(#{time}, '%w')))
+AND (DATE_FORMAT(kaoqin_records.brushTime, '%Y-%m-%d')=DATE_FORMAT(#{time}, '%Y-%m-%d'))
+AND u.ID not in(
+-- 获取昨天请假的人
+  SELECT uu.ID FROM user uu JOIN kaoqin_result ON uu.id=kaoqin_result.user_id where
+    (DATE_FORMAT(kaoqin_result.date, '%Y-%m-%d')=DATE_FORMAT(#{time}, '%Y-%m-%d'))
+    AND uu.is_del=1
+    AND  kaoqin_result.kaoqin_remark_status not in (0,1)
+    and  kaoqin_result.kaoqin_remark_type is not NULL
+    )
+AND u.is_del=1
+  </select>
+
+
+
+  <resultMap id="UserRoleMap" type="com.tosit.ssm.entity.UserRole">
+    <id column="userId" jdbcType="VARCHAR" property="id" />
+    <collection property="roles" ofType="com.tosit.ssm.entity.SysRole" column="userId">
+      <id column="sysroleId" jdbcType="VARCHAR" property="id" />
+      <result column="sysroleName" jdbcType="VARCHAR" property="name" />
+    </collection>
+  </resultMap>
+
+  <select id="selectRoleByUsername" resultMap="UserRoleMap">
+    SELECT  user.ID as userId,sysrole.ID AS sysroleId,sysrole.name as sysroleName FROM user
+    JOIN sysrole_userid on user.ID=sysrole_userid.user_id
+    JOIN sysrole ON sysrole.ID=sysrole_userid.role_id
+    WHERE user.loginName = #{loginName}
+    AND sysrole_userid.is_del=1
+    AND  sysrole.is_del=1
+  </select>
 </mapper>
