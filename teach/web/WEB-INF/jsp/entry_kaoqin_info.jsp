@@ -69,9 +69,10 @@
                 </div>
                 <div class="ibox-content">
                        <div id="exampleToolbar" role="group" >
+                           <form action="/checking/downloadKaoqinNUmberFile" id="downForm">
                            <%--<div id="pullListTree" style="display: inline"></div>--%>
                                <label for="class">班级：</label>
-                           <select id="class" class="form-control" style="display: inline;width: 150px">
+                           <select id="class" class="form-control" name="officeId" style="display: inline;width: 150px">
                            </select>
                            <%--<button type="button" id="btn-add" class="btn btn-outline btn-default">
                                <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
@@ -83,10 +84,15 @@
                                <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
                            </button>--%>
                                <span style=" margin-top: 100px;display: inline">
-                                   <i class="iconfont icon-xiazai" style="font-size: 30px;margin-left: 10px;"></i>
-                                   <span class="icon-name" title="下载" p-id="1019"><span p-id="1020"><i class="iconfont icon-shangchuan" style="font-size: 34px"></i></span></span>
+                                        <i class="iconfont icon-xiazai" style="font-size: 30px;margin-left: 10px;" id="download"></i>
+                                        <span class="icon-name" p-id="1019">
+                                            <span p-id="1020">
+                                                <i class="iconfont icon-shangchuan" style="font-size: 34px" id="upload"></i>
+                                                <input type="file" class="form-control" id="file" style="width:150px;display:inline" >
+                                            </span>
+                                        </span>
                                </span>
-
+                               </form>
                        </div>
                        <table id="exampleTableToolbar" data-mobile-responsive="true">
                            <thead>
@@ -233,7 +239,43 @@
         $(".layui-layer-title:eq(0)").html("请输入班级");
 //        $("#table_data").find("tr:eq(0)").hide();
     }));
-
-
+    $(function () {
+        $("#file").hide();
+        downloadClick();
+        uploadClick();
+    })
+    //下载操作
+    function downloadClick() {
+        $("#download").click(function () {
+            $("#downForm").submit();
+        })
+    }
+    //上传操作
+    function uploadClick() {
+        $("#upload").click(function () {
+            $("#file").show();
+            var file = document.getElementById("file").files[0];
+            if (typeof (file) == "undefined" || file.size <= 0) {
+                layer.msg("请选择文件");
+                return;
+            }
+            var formFile = new FormData();
+            formFile.append("action", "/checking/uploadKaoqinNUmberFile");
+            formFile.append("file", file); //加入文件对象
+            $.ajax({
+                url: "/checking/uploadKaoqinNUmberFile",
+                data: formFile,
+                type: "Post",
+                dataType: "json",
+                cache: false,//上传文件无需缓存
+                processData: false,//用于对data参数进行序列化处理 这里必须false
+                contentType: false, //必须
+                success: function (result) {
+                    $("#file").hide();
+                    alert("上传完成!");
+                },
+            })
+        })
+    }
 </script>
 
