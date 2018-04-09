@@ -24,4 +24,9 @@ public class ExperienceServiceImpl implements ExperienceService{
         List<Experience> experiences = experienceMapper.selectById(id);
         return experiences;
     }
+
+    @Override
+    public void addEx(Experience experience) {
+        experienceMapper.insertExperience(experience);
+    }
 }

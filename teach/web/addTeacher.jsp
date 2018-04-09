@@ -23,13 +23,6 @@
                 <div class="row">
                     <div class="col-sm-2"></div>
                     <div class="col-sm-8" id="teachers">
-                       <%-- <button class="btn btn-outline btn-info chooseTeacher btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                        <button class="btn btn-outline btn-info chooseTeacher btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                        <button class="btn btn-outline btn-info chooseTeacher btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                        <button class="btn btn-outline btn-info chooseTeacher btn-xs buttonCss" type="button" name="">即可夜壶</button>
-                        <button class="btn btn-outline btn-info chooseTeacher btn-xs buttonCss" type="button" name="">即夜壶</button>
-                        <button class="btn btn-outline btn-info chooseTeacher btn-xs buttonCss" type="button" name="">即壶</button>
-                        <button class="btn btn-outline btn-info chooseTeacher btn-xs buttonCss" type="button" name="">即可夜壶</button>--%>
                     </div>
                     <div class="col-sm-2"></div>
                 </div>
@@ -45,6 +38,7 @@
 <script src="/static/js/content.min.js"></script>
 <script src="/static/js/welcome.min.js"></script>
 <script type="text/javascript">
+    //选择老师点击事件
     $("body").on("click",".chooseTeacher",function () {
         if ($(this).hasClass("btn-info")){
             $(this).removeClass("btn-info").addClass("btn-warning");
@@ -57,6 +51,7 @@
     var url = location.search;
     var s = url.slice(5);
 
+    //获取未管理该班的老师
     $.get("/user/getAllTeacherNoThisClass",{s},function (msg) {
         var teachers = msg['teachers'];
         $.each(teachers,function (i,each) {

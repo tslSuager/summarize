@@ -149,7 +149,7 @@
                                 <tr class="no-records-found planT" data-toggle="tooltip" data-placement="top" title=""
                                     data-original-title="这里是提示内容">
                                     <td style="text-align: center">${px.count}</td>
-                                    <td style="text-align: center">${t.planname}</td>
+                                    <td class="planname" name="${t.id}" id="${t.officeName}" style="text-align: center">${t.planname}</td>
                                     <td style="text-align: center">${t.officeName}</td>
                                     <td style="text-align: center">${t.startTime}</td>
                                     <td style="text-align: center">${t.endTime}</td>
@@ -209,6 +209,18 @@
                 window.location.href="/jiaoxueplan_addjieduan.jsp?jihuaId="+jihuaId;
 
             });
+        });
+
+        /**
+         * 点击计划名字进入评分界面
+         */
+        $.each($(".planname"),function () {
+            $(this).click(function () {
+                var jihuaId = $(this).attr("name");
+                var officeName = $(this).attr("id");
+                window.location.href="/page/jiaoan/jiaoxueplan?jihuaId="+jihuaId+"&officeName="+officeName;
+            });
+
         });
 
         /**
@@ -293,25 +305,6 @@
             })
         });
 
-        function delete_plan(obj, id) {
-            alert("111");
-            layer.confirm('确认要删除吗？', function (index) {
-                /*$.ajax({
-                    type: 'POST',
-                    url: '',
-                    dataType: 'json',
-                    success: function(data){
-                        $(obj).parents("tr").remove();
-                        layer.msg('已删除!',{icon:1,time:1000});
-                    },
-                    error:function(data) {
-                        console.log(data.msg);
-                    },
-                });*/
-                $(obj).parents("tr").remove();
-                layer.msg('已删除', {icon: 1, time: 1000});
-            });
-        }
 
     });
 

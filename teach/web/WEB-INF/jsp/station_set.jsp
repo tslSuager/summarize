@@ -71,9 +71,7 @@
                 <label class="col-sm-3 control-label">区域：</label>
 
                 <div class="col-sm-8">
-                    <select name="parentId" class="form-control parentId">
-                        <%--<option value="901">901</option>--%>
-                    </select>
+                    <div id="pullListTree"></div>
                 </div>
             </div>
             <div class="form-group  xuexiao">
@@ -119,8 +117,15 @@
 <script src="/static/js/demo/peity-demo.min.js"></script>
 <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
 <script src="/static/js/layer.js"></script>
+<script src="/static/js/pullListTree.js"></script>
 <script>
     $(document).ready(function () {
+
+        //初始化下拉框插件
+        initPullListTree("/office/getAllArea",1, 1,function () {
+
+        });//一个参数 开始的级别  第二参数 有几个下拉框
+
         $(".xuexiao").hide();
         var $checkbox = $(".checkbox-inline .icheckbox_square-green");
         console.info($checkbox.eq(1));

@@ -143,6 +143,7 @@
     var url = location.search;
     var s = url.slice(5);
 
+    //获得该班未分配考勤规则的学生
     $.get("/user/getUserNoRuleByClass",{s},function (msg) {
         var users = msg['users'];
         $.each(users,function (i,each) {
@@ -150,6 +151,7 @@
         })
     });
 
+    //获得所有有效地考勤规则
     $.get("/checking/getAllRule",{},function (msg) {
         var rules= msg['Rules'];
         $.each(rules,function (i,each) {
@@ -160,6 +162,7 @@
         });
     });
 
+    //获得所有分配了考勤规则的学生
     $.get("/user/gerUserWithRuleByClass",{s},function (msg) {
         var users = msg['users'];
         $.each(users,function (i,each) {

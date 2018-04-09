@@ -1,7 +1,9 @@
 package com.tosit.ssm.controller;
 
+import com.tosit.ssm.common.util.SysUtil;
 import com.tosit.ssm.common.util.json.JSONModel;
 import com.tosit.ssm.entity.*;
+import com.tosit.ssm.service.ExperienceService;
 import com.tosit.ssm.service.OfficeService;
 import com.tosit.ssm.service.UserService;
 import org.apache.ibatis.annotations.Param;
@@ -22,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -35,6 +38,8 @@ public class UserController {
     private UserService userService;
     @Autowired
     private OfficeService officeService;
+    @Autowired
+    private ExperienceService experienceService;
 
 
     @ResponseBody
@@ -377,6 +382,11 @@ public class UserController {
         userService.modifyUser(user);
     }
 
+    /**
+     * 为某班没有账号的学生注册账号
+     * @param request
+     * @return
+     */
     @RequestMapping("/createNum")
     @ResponseBody
     public Object createNum(HttpServletRequest request){
@@ -385,25 +395,94 @@ public class UserController {
         System.out.println(id);
         List<User> stuNoLoginNameByClass = userService.findStuNoLoginNameByClass(cid);
         if (stuNoLoginNameByClass.size()>0){
-            if (id=="bySnum"){
+            if (id.equals("按学号")){
                 for (User u:
                         stuNoLoginNameByClass) {
                     u.setLoginname(u.getStuNumber());
-                    u.setPassword("hello123");
+                    String password = "hello123";
+                    u.setPassword(SysUtil.md5(password));
                     userService.modifyUser(u);
                 }
-            }else if (id=="byTnum"){
+                return JSONModel.put("message","success");
+            }else if (id.equals("按手机号")){
                 for (User u:
                         stuNoLoginNameByClass) {
                     u.setLoginname(u.getPhone1());
-                    u.setPassword("hello123");
+                    String password = "hello123";
+                    u.setPassword(SysUtil.md5(password));
                     userService.modifyUser(u);
                 }
+                return JSONModel.put("message","success");
             }
-            return JSONModel.put("message","success");
+            return JSONModel.put("message","OK");
         }else {
             JSONModel.put("message","error");
             return JSONModel.put();
         }
+    }
+
+    /**
+     * 给某班学生初始化表现分
+     * @param user
+     * @param request
+     * @return
+     */
+    @RequestMapping("/InitGrade")
+    @ResponseBody
+    public Object InitGrade(User user,HttpServletRequest request){
+        String Tgrade = request.getParameter("Tgrade");
+        String Cgrade = request.getParameter("Cgrade");
+        String cid = request.getParameter("cid");
+        List<User> users = userService.findUserByOfficeId(cid);
+        List<User> userList = new ArrayList<>();
+        for (User u:
+             users) {
+            if (u.getGrade()==null){
+                System.out.println(u.getGrade());
+                userList.add(u);
+            }
+        }
+        if (userList.size()>0){
+            for (User u:
+                    userList) {
+                u.setGrade(Tgrade);
+                u.setCutGrade(Cgrade);
+                userService.modifyUser(u);
+            }
+            System.out.println("1");
+            return JSONModel.put("message","success");
+        }else {
+            return JSONModel.put("message","error");
+        }
+
+    }
+
+    /**
+     * 给学生扣分
+     * @param request
+     */
+    @RequestMapping("/subGrade")
+    @ResponseBody
+    public void subGrade(HttpServletRequest request){
+        String id = request.getParameter("id");
+        User user = userService.selectByPrimaryKey(id);
+        String subGrade = user.getCutGrade();
+        String tGrabde = user.getGrade();
+        String newGrade = String.valueOf(Integer.parseInt(tGrabde)-Integer.parseInt(subGrade));
+        System.out.println(newGrade);
+        user.setGrade(newGrade);
+        userService.modifyUser(user);
+
+        String msg = request.getParameter("msg");
+        Experience experience = new Experience();
+        experience.setEvent("违反纪律");
+        experience.setRemark(msg);
+        experience.setId(UUID.randomUUID().toString().replaceAll("-",""));
+        experience.setIsDel(1);
+        experience.setType(1);
+        experience.setUserId(id);
+        Date now = new Date();
+        experience.setOccurTime(now);
+        experienceService.addEx(experience);
     }
 }

@@ -170,7 +170,7 @@
                                         <td></td>
                                         &lt;%&ndash;子任务表操作&ndash;%&gt;
                                         <td style="text-align: center">
-                                            <button type="button" class="btn btn-outline btn-default" id="updateleverl" onclick="$('#updatemySonPlanModal').css('display', 'block');">
+                                            <button type="button" class="btn btn-outline btn-default" id="updateleverl" onclick="$('#addmySonPlanModal').css('display', 'block');">
                                                 <i class="glyphicon glyphicon-edit" aria-hidden="true"></i>
                                             </button>
                                             <button type="button" class="btn btn-outline btn-default" id="checkleverl" onclick="$('#checkmySonPlanModal').css('display', 'block');">
@@ -237,13 +237,14 @@
         </div>
     </div>
     <%--添加阶段弹出框结束--%>
+
     <%--添加子任务task表弹出框开始--%>
-    <div class="modal inmodal in" id="updatemySonPlanModal" tabindex="-1" role="dialog" aria-hidden="true"
+    <div class="modal inmodal in" id="addmySonPlanModal" tabindex="-1" role="dialog" aria-hidden="true"
          style="display: none; padding-right: 6px;">
         <div class="modal-dialog">
             <div class="modal-content animated bounceInRight">
                 <div class="modal-header">
-                    <button type="button" class="close_all close" data-dismiss="modal"><span
+                    <button type="button" class="close" data-dismiss="modal"><span
                             aria-hidden="true">×</span><span class="sr-only">关闭</span>
                     </button>
                     <h4 class="modal-title">添加子任务</h4>
@@ -253,20 +254,22 @@
                         <div>
                             <div style="margin-top: 5px">
                                 <label class="col-sm-3 text-center control-label" style="margin-top: 5px">选择文件 :</label>
-                                <input type="file" name="file" class="form-control" style="width: 320px" id="choosefile">
+                                <input type="file" name="file" class="form-control" style="width: 320px"
+                                       id="choosefile">
                             </div>
                         </div>
                         <div>
                             <div style="margin-top: 5px">
                                 <label class="col-sm-3 text-center control-label" style="margin-top: 5px">图标 :</label>
-                                <input type="file" name="" class="form-control" style="width: 320px" id="chooseimg">
+                                <input type="file" name="img" class="form-control" style="width: 320px" id="chooseimg">
                             </div>
                         </div>
                         <div>
                             <div style="margin-top: 5px">
                                 <label class="col-sm-3 text-center control-label" style="margin-top: 5px">文件限定大小(M)
                                     :</label>
-                                <input type="text" class="form-control" style="width: 320px" id="filesize">
+                                <input type="text" name="filesize" class="form-control" style="width: 320px"
+                                       id="filesize" value="5">
                             </div>
                         </div>
                         <div>
@@ -274,11 +277,11 @@
                                 <label class="col-sm-3 text-center control-label" style="margin-top: 5px">是否可提前提交
                                     :</label>
                                 <label>
-                                    <input type="radio" checked="" value="option1" id="updateoptionsRadios11"
+                                    <input type="radio" value="1" id="updateoptionsRadios11"
                                            name="optionsRadios">是</label>
 
                                 <label>
-                                    <input type="radio" value="option2" id="updateoptionsRadios22"
+                                    <input type="radio" value="0" id="updateoptionsRadios22"
                                            name="optionsRadios">否</label>
                             </div>
                         </div>
@@ -287,11 +290,11 @@
                                 <label class="col-sm-3 text-center control-label" style="margin-top: 5px">是否可过时提交
                                     :</label>
                                 <label>
-                                    <input type="radio" checked="" value="option3" id="optionsRadios33"
+                                    <input type="radio" value="1" id="optionsRadios33"
                                            name="optionsRadios1">是</label>
 
                                 <label>
-                                    <input type="radio" value="option4" id="optionsRadios44"
+                                    <input type="radio" value="0" id="optionsRadios44"
                                            name="optionsRadios1">否</label>
                             </div>
                         </div>
@@ -311,7 +314,7 @@
             </div>
         </div>
     </div>
-    <%--修改子任务task表弹出框结束--%>
+    <%--添加子任务task表弹出框结束--%>
 
     <%--添加任务弹出框开始--%>
     <div class="modal inmodal in" id="mySontaskModal" tabindex="-1" role="dialog" aria-hidden="true"
@@ -367,7 +370,7 @@
         <div class="modal-dialog">
             <div class="modal-content animated bounceInRight">
                 <div class="modal-header">
-                    <button type="button" class="close_all close" data-dismiss="modal"><span
+                    <button type="button" class="close" data-dismiss="modal"><span
                             aria-hidden="true">×</span><span class="sr-only">关闭</span>
                     </button>
                     <h4 class="modal-title">修改任务内容</h4>
@@ -420,7 +423,7 @@
         <div class="modal-dialog">
             <div class="modal-content animated bounceInRight">
                 <div class="modal-header">
-                    <button type="button" class="close_all close" data-dismiss="modal"><span
+                    <button type="button" class="close" data-dismiss="modal"><span
                             aria-hidden="true">×</span><span class="sr-only">关闭</span>
                     </button>
                     <h4 class="modal-title">子任务内容</h4>
@@ -584,7 +587,7 @@
                  */
                 var aaa = true;
                 $.each($(".createlevel"), function () {
-                    $(this).click(function () {
+                    $(this).dblclick(function () {
                         if ($(this).find("#s1").css('display') == 'none') {
                             $(this).find("#s1").slideDown();
                             var jieduanId = $(this).attr('name');
@@ -601,7 +604,13 @@
                                 var renwustart = form.find("#renwustart").val();
                                 var renwuend = form.find("#renwuend").val();
                                 var renwuremarks = form.find("#renwuremarks").val();
-                                $.get("/teaching/insertRenwu", {jieduanId,renwuname,renwustart,renwuend,renwuremarks}, function (msg) {
+                                $.get("/teaching/insertRenwu", {
+                                    jieduanId,
+                                    renwuname,
+                                    renwustart,
+                                    renwuend,
+                                    renwuremarks
+                                }, function (msg) {
                                     window.location.href = "/jiaoxueplan_addjieduan.jsp?jihuaId=" + jihuaId;
                                 });
                             });
@@ -621,7 +630,7 @@
                                             '                                        <td>' + each['creatBy'] + '</td>\n' +
                                             '                                        <td>' + each['remarks'] + '</td>\n' +
                                             '                                        <td style="text-align: center">\n' +
-                                            '                                            <button type="button" class="btn btn-outline btn-default" id="updateleverl" onclick="$(\'#updatemySonPlanModal\').css(\'display\', \'block\');">\n' +
+                                            '                                            <button type="button" class="btn btn-outline btn-default updateleverl" name="' + each['id'] + '" onclick="$(\'#addmySonPlanModal\').css(\'display\', \'block\');">\n' +
                                             '                                                <i class="glyphicon glyphicon-edit" aria-hidden="true"></i>\n' +
                                             '                                            </button>\n' +
                                             '                                            <button type="button" class="btn btn-outline btn-default" id="checkleverl" onclick="$(\'#checkmySonPlanModal\').css(\'display\', \'block\');">\n' +
@@ -629,12 +638,17 @@
                                             '                                            </button>\n' +
                                             '                                        </td>\n' +
                                             '                                    </tr>');
+
+
                                     }
-                                })
-                            })
+                                });
+
+                            });
+
+
                         } else {
                             $(this).find("#s1").slideUp();
-//                            aaa = false;
+                            aaa = false;
                         }
                     });
                 });
@@ -645,73 +659,78 @@
             /***********1.关闭所有弹窗*****************************/
             $(".close_all").click(function () {
                 $("#mySonPlanModal").css('display', 'none');
-                $("#updatemySonPlanModal").css('display', 'none');
+                $("#addmySonPlanModal").css('display', 'none');
                 $("#mySontaskModal").css('display', 'none');
                 $("#updatemySontaskModal").css('display', 'none');
                 $("#checkmySonPlanModal").css('display', 'none');
             });
-            /***********2.保存保存阶段弹窗，生成一个新的阶段***************************/
-            var count = 2;
-            var createtableid = null;
-            $(".update_level").click(function () {
-                $("#updatemySonPlanModal").css('display', 'none');
-            });
-            /***********3.关闭添加任务的弹窗***********/
-            $(".update_task").click(function () {
-                $("#updatemySontaskModal").css('display', 'none');
-            });
-            /***********4.关闭保存阶段的弹窗，追加一个新的阶段***********/
-            $(".save_level").click(function () {
-                $("#mySonPlanModal").css('display', 'none');
-                var createid = "阶段" + count;
-                createtableid = "任务" + count;
-                count++;
-                var form = $("form");
-                var planname = form.find("#planName").val();
-                var start = form.find("#start").val();
-                var end = form.find("#end").val();
-                var remarks = form.find("#remarks").val();
 
-                $.get("/teaching/insertJieduan", {jihuaId, planname, start, end, remarks}, function (msg) {
-//                    window.location.href = "/teaching/viewJieduan";
-                    window.location.href = "/jiaoxueplan_addjieduan.jsp?jihuaId=" + jihuaId;
+
+            /***********2.点击任务添加，生成一个新的task任务详情***************************/
+            //此处为添加一条Task任务详情，但放置位置不对，无法运行
+            $.each($(".updateleverl"), function () {
+                $(this).click(function () {
+                    var renwuId = $(this).attr('name');
+                    alert("222");
+                    /***********2.点击任务添加，生成一个新的task任务详情***************************/
+                    $(".update_level").click(function () {
+
+                        /*$("#addmySonPlanModal").css('display', 'none');
+                        var form = $("form");
+                        var choosefile = form.find("#choosefile");
+                        var filepath = choosefile.val().trim().substring(choosefile.val().lastIndexOf("\\") + 1);
+                        var filename = filepath.split(".")[0];  //上传的文件名
+                        var filetype = filepath.split(".")[1];  //上传文件的类型
+                        var chooseimg = form.find("#chooseimg");
+                        var imgpath = chooseimg.val().trim().substring(chooseimg.val().lastIndexOf("\\") + 1);
+                        var imgname = imgpath.split(".")[0];  //上传的图标名
+                        var filelimitsize = form.find("#filesize"); //文件限制大小
+                        var before_submit = form.find("input[name='optionsRadios']:checked").val(); //是否可提前提交
+                        var after_submit = form.find("input[name='optionsRadios1']:checked").val(); //是否可过时提交
+                        var renwudetailremarks = form.find("#renwudetailremarks").val();
+                        $.get("/teaching/insertRenwuDetail?renwuId="+renwuId,{filename,filetype,after_submit,before_submit,filelimitsize,renwudetailremarks},function (msg) {
+                            window.location.href = "/jiaoxueplan_addjieduan.jsp?jihuaId=" + jihuaId;
+                            console.info(msg['task']);
+                        });*/
+
+                    });
                 });
-
             });
 
+        });
 
-            /***********5.关闭保存子任务的弹窗，更新到数据库中***********/
-            $(".save_sonstask").click(function () {
-                $("#checkmySonPlanModal").css('display', 'none');
+
+        /***********3.关闭添加任务的弹窗***********/
+        $(".update_task").click(function () {
+            $("#updatemySontaskModal").css('display', 'none');
+        });
+        /***********4.关闭保存阶段的弹窗，追加一个新的阶段***********/
+        $(".save_level").click(function () {
+            $("#mySonPlanModal").css('display', 'none');
+            var form = $("form");
+            var planname = form.find("#planName").val();
+            var start = form.find("#start").val();
+            var end = form.find("#end").val();
+            var remarks = form.find("#remarks").val();
+
+            $.get("/teaching/insertJieduan", {jihuaId, planname, start, end, remarks}, function (msg) {
+//                    window.location.href = "/teaching/viewJieduan";
+                window.location.href = "/jiaoxueplan_addjieduan.jsp?jihuaId=" + jihuaId;
             });
-            /***********6.关闭保存任务的弹窗，追加一排子任务表格***********/
-//            var taskcount = 2;
+
+        });
 
 
-            $("#addtable").append("<tr>\n" +
-                "                                    <td>\n" +
-                "                                        <input type=\"checkbox\" checked class=\"i-checks\" name=\"input[]\">\n" +
-                "                                    </td>\n" +
-                "                                    <td></td>\n" +
-                "                                    <td></td>\n" +
-                "                                    <td></td>\n" +
-                "                                    <td></td>\n" +
-                "                                    <td></td>\n" +
-                "                                    <td></td>\n" +
-                "                                    <td style=\"text-align: center\">\n" +
-                "                                        <button type=\"button\" class=\"btn btn-outline btn-default\" id=\"updateleverl\" onclick=\"$('#updatemySonPlanModal').css('display', 'block');\">\n" +
-                "                                            <i class=\"glyphicon glyphicon-edit\" aria-hidden=\"true\"></i>\n" +
-                "                                        </button>\n" +
-                "                                        <button type=\"button\" class=\"btn btn-outline btn-default\" id=\"checkleverl\" onclick=\"$('#checkmySonPlanModal').css('display', 'block');\">\n" +
-                "                                            <i class=\"glyphicon glyphicon-check\" aria-hidden=\"true\"></i>\n" +
-                "                                        </button>\n" +
-                "                                    </td>\n" +
-                "                                </tr>");
+        /***********5.关闭保存子任务的弹窗，更新到数据库中***********/
+        $(".save_sonstask").click(function () {
+            $("#checkmySonPlanModal").css('display', 'none');
+        });
+        /***********6.关闭保存任务的弹窗，追加一排子任务表格***********/
 
-            /***********7.新建一个阶段弹窗***********/
-            $("#new_jieduan").click(function () {
-                $("#mySonPlanModal").css('display', 'block');
-            });
+
+        /***********7.新建一个阶段弹窗***********/
+        $("#new_jieduan").click(function () {
+            $("#mySonPlanModal").css('display', 'block');
         });
 
     </script>

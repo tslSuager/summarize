@@ -16,7 +16,7 @@ public class OfficeServiceImpl implements OfficeService{
     }
 
     public List<Office> getArea() {
-        return null;
+        return officeMapper.selectArea();
     }
 
     @Override
@@ -36,6 +36,15 @@ public class OfficeServiceImpl implements OfficeService{
         return officeMapper.selectOfficeByManage(userId);
     }
 
+    @Override
+    public List<Office> selectOfficeByUserId(String userId) {
+        return officeMapper.selectOfficeByUserId(userId);
+    }
+
+    @Override
+    public List<Office> selectGroupByUserId(String userId) {
+        return officeMapper.selectGroupByUserId(userId);
+    }
 
     public List<Office> findClassByTeacherAndSchool(Office office){
         return officeMapper.selectOfficeByMasterAndSchool(office);

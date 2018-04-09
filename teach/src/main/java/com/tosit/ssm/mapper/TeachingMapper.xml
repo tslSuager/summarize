@@ -660,4 +660,5 @@
     FROM teaching WHERE is_del=1 AND parent_id IS NULL AND parent_ids IS NULL ;
   </select>
 
+
 </mapper>

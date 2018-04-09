@@ -27,6 +27,8 @@ public class TaskResult {
 
     private String fileId;
 
+    private Date submitTime;
+
     public String getId() {
         return id;
     }
@@ -121,5 +123,13 @@ public class TaskResult {
 
     public void setFileId(String fileId) {
         this.fileId = fileId == null ? null : fileId.trim();
+    }
+
+    public Date getSubmitTime() {
+        return submitTime;
+    }
+
+    public void setSubmitTime(Date submitTime) {
+        this.submitTime = submitTime;
     }
 }

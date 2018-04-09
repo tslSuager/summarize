@@ -2,11 +2,8 @@ package com.tosit.ssm.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.tosit.ssm.common.util.json.JSONModel;
-import com.tosit.ssm.entity.Teaching;
-import com.tosit.ssm.entity.TeachingOffice;
-import com.tosit.ssm.entity.TeachingVO;
-import com.tosit.ssm.service.TeachingOfficeService;
-import com.tosit.ssm.service.TeachingService;
+import com.tosit.ssm.entity.*;
+import com.tosit.ssm.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +23,11 @@ public class TeachingController {
     private TeachingService teachingService;
     @Autowired
     private TeachingOfficeService teachingOfficeService;
+    @Autowired
+    private TaskService taskService;
+    @Autowired
+    private TaskResultService taskResultService;
+
 
     /**
      * 某个老师插入一条新的教学计划
@@ -84,6 +86,26 @@ public class TeachingController {
         request.setAttribute("teachings", JSON.toJSON(teachings));
         return "/jiaoan/show_plan";
     }
+
+
+    /**
+     * 某个老师查看某一条教学计划各个班的完成情况
+     * @param jihuaId
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/viewJieduanByTeacher")
+    public Object ViewTeachingByTeacher(String jihuaId){
+        List<Teaching> jieduans = teachingService.selectJieduanByTeaching(jihuaId);
+        for (Teaching j:jieduans
+                ) {
+            System.out.println(j);
+        }
+        JSONModel.put("jieduans",jieduans);
+        return JSONModel.put();
+    }
+
+
 
     /**
      * 修改某条计划的内容(可以修改计划名，开始时间，结束时间，备注内容)
@@ -279,18 +301,70 @@ public class TeachingController {
         teachingOfficeService.insertTeachingOffice(teachingOffice);
     }
     /**
-     * 为某个任务添加一个task任务详情
-     * @param renwuId
-     * @param renwuname
-     * @param renwustart
-     * @param renwuend
-     * @param renwuremarks
+     * 为某个任务添加一个task任务详情(未成功实现)
+     * @param filename
+     * @param filetype
+     * @param after_submit
+     * @param before_submit
+     * @param renwudetailremarks
      * @return
      */
     @ResponseBody
     @RequestMapping("/insertRenwuDetail")
-    public Object InsertRenwuDetail(String renwuId, String renwuname, String renwustart, String renwuend, String renwuremarks){
-        return null;
+    public Object InsertRenwuDetail(String renwuId,String filename, String filetype, String after_submit, String before_submit,String filelimitsize,String renwudetailremarks){
+        Task task = new Task();
+        task.setId(UUID.randomUUID().toString().replaceAll("-",""));
+        task.setTeachingId(renwuId);
+        task.setBeforeSubmit(Integer.valueOf(before_submit));
+        task.setAfterSubmit(Integer.valueOf(after_submit));
+        task.setCreateTime(new Date());
+        task.setFiletype(filetype);
+        task.setFilename(filename);
+        task.setLimitSize(Float.valueOf(filelimitsize));
+        task.setRemarks(renwudetailremarks);
+        task.setIsDel(1);
+        taskService.insertTask(task);
+        JSONModel.put("task",task);
+        return task;
     }
+
+
+    /**
+     * 获取某人的所有教学计划和所在班级
+     * @param request
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/viewTeachingByUserId")
+    public Object ViewTeachingByUserId(HttpServletRequest request){
+        String userId = request.getParameter("userId");
+        List<TeachingVO> teachingVOS = teachingService.selectTeachingByUserId(userId);
+        for (TeachingVO t:teachingVOS
+             ) {
+            System.out.println(t);
+        }
+        JSONModel.put("teachingVOS",teachingVOS);
+        return JSONModel.put();
+    }
+
+
+    /**
+     * 查看某个阶段的所有任务和小组名
+     * @param jieduanId
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/viewTaskResultByJieduanId")
+    public Object ViewTaskResultByJieduanId(String jieduanId){
+        List<TaskResult> taskResults = taskResultService.selectTaskResultByJieduanId(jieduanId);
+        for (TaskResult t:taskResults
+                ) {
+            System.out.println(t);
+        }
+        JSONModel.put("taskResults",taskResults);
+        return JSONModel.put();
+    }
+
+
 
 }
