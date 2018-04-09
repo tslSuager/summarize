@@ -4,9 +4,16 @@ import com.tosit.ssm.entity.*;
 import com.tosit.ssm.mapper.ExperienceMapper;
 import com.tosit.ssm.mapper.UserMapper;
 import com.tosit.ssm.mapper.UserOfficeMapper;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.*;
+import java.io.File;
 import java.util.Date;
 import java.util.List;
 
@@ -139,6 +146,35 @@ public class UserServiceImpl implements UserService {
 
     public List<User> findStuNoLoginNameByClass(String id) {
         return userMapper.selectStuNoLoginNameByClass(id);
+    }
+
+    /**
+     * 将考勤工号和用户关联
+     *
+     * @param file
+     */
+    @Override
+    public void entryKaoqinId(File file) {
+        try {
+            FileInputStream fileInputStream = new FileInputStream(file);
+            XSSFWorkbook xssfSheets = new XSSFWorkbook(fileInputStream);
+            XSSFSheet sheet = xssfSheets.getSheetAt(0);
+            int rowNum = sheet.getLastRowNum();
+            for (int i=2;i<=rowNum;i++){
+                XSSFRow row = sheet.getRow(i);
+                String userId = row.getCell(0).getStringCellValue();
+                String kaoqinId = row.getCell(2).getStringCellValue();
+                User user = new User();
+                user.setId(userId);
+                user.setKaoqinCode(kaoqinId);
+                userMapper.updateByPrimaryKey(user);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override

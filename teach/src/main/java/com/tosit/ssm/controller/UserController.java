@@ -86,12 +86,12 @@ public class UserController {
 
     /**
      * 得到指定用户
-     * @param id 用户id
      * @return
      */
     @ResponseBody
     @RequestMapping("/getUserById")
-    public Object getUserById(String id){
+    public Object getUserById(/*String id*/){
+        String id=((User)SecurityUtils.getSubject().getSession().getAttribute("user")).getId();
         User user= userService.getUserById(id);
         return  user;
     }

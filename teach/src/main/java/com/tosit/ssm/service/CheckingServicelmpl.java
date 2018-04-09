@@ -83,8 +83,7 @@ public class CheckingServicelmpl implements CheckingService {
     private KaoqinRuleDetailMapper kaoqinRuleDetailMapper;
     /**
      * 添加考勤规则和规则详情
-     *
-     * @param kaoqinRule     待插入的考情规则
+     * @param kaoqinRule 待插入的考情规则
      * @param kaoqindetailVO 带插入的考勤详情
      * @return
      */
@@ -92,8 +91,9 @@ public class CheckingServicelmpl implements CheckingService {
     public void addKaoQinRule(KaoqinRule kaoqinRule, KaoqindetailVO kaoqindetailVO) {
         String ruleId = UUID.randomUUID().toString().replaceAll("-", "");
         kaoqinRule.setId(ruleId);
+        kaoqinRule.setIsYouXiao(1);
         //首先再考勤规则表插入信息
-        kaoqinRuleMapper.insert(kaoqinRule);
+         kaoqinRuleMapper.insert(kaoqinRule);
         //然后再考勤规则详情中插入详情信息
         List<KaoqinRuleDetail> kaoqinRuleDetails = kaoqindetailVO.getKrd();
         for (/*int i=( kaoqinRuleDetails.get(0).getWeekDay()==null?1:0)*/int i = 0; i < kaoqinRuleDetails.size(); i++) {
@@ -102,6 +102,7 @@ public class CheckingServicelmpl implements CheckingService {
                 continue;
             }
             k.setKaoqinRuleId(ruleId);
+            k.setIsDel(1);
             String detailId = UUID.randomUUID().toString().replaceAll("-", "");
             k.setId(detailId);
             int row = kaoqinRuleDetailMapper.insertKaoqinRuleDetail(k);

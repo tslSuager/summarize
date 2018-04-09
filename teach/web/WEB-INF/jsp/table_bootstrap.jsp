@@ -33,7 +33,7 @@
 				</div>
 				<div class="example-wrap">
 					<h4 class="example-title">待处理信息列表</h4>
-					<h5><small>共有数据：<strong id="zongshu">4</strong> 条,<strong id="shensu">2</strong> 人迟到,<strong id="qingjia">1</strong> 人请假,<strong id="remark">1</strong> 人备注</small></h5>
+					<h5><small>共有数据：<strong id="zongshu">0</strong> 条,<strong id="shensu">0</strong> 人迟到,<strong id="qingjia">0</strong> 人请假,<strong id="remark">0</strong> 人备注</small></h5>
 					<div class="example">
 						<div class="btn-group hidden-xs" id="exampleToolbar" role="group">
 							<button type="button" class="btn btn-outline btn-default">
@@ -368,7 +368,7 @@
 </html>
 <script>
     $(function () {
-        initInfo("001001001");
+        initInfo();
 
     })
     //查询某个班所有的请求信息
@@ -376,7 +376,7 @@
         $(".qinjia:eq(0)").hide();
         $(".shensu:eq(0)").hide();
         $.ajax({
-            url: "/checking/dealKaoqin?officeId="+officeId,
+            url: "/checking/dealKaoqin",
             dataType:"json",
             success: function(json){
 //				console.info(json);
@@ -450,4 +450,5 @@
             }
         });
     }
+
 </script>

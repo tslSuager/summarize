@@ -3,6 +3,9 @@ package com.tosit.ssm.service;
 import com.tosit.ssm.entity.*;
 import org.apache.ibatis.annotations.Param;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.List;
 
 import com.tosit.ssm.entity.User;
@@ -141,6 +144,12 @@ public interface UserService {
      * @return
      */
     List<User> findStuNoLoginNameByClass(String id);
+
+    /**
+     * 将考勤工号和用户关联
+     * @param file
+     */
+    void entryKaoqinId(File file);
 
     List<UserCkRuleRecord> findAllLeaveByTime(Date time);
 

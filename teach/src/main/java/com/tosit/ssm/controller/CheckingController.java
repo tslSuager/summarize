@@ -1,10 +1,15 @@
 package com.tosit.ssm.controller;
 
+import com.google.common.collect.Lists;
+import com.tosit.ssm.common.util.excel.ExportExcel;
 import com.tosit.ssm.common.util.json.JSONModel;
 import com.tosit.ssm.entity.*;
 import com.tosit.ssm.service.CheckingService;
 import com.tosit.ssm.service.CheckingServicelmpl;
+import com.tosit.ssm.service.OfficeService;
 import com.tosit.ssm.service.UserService;
+import org.apache.ibatis.annotations.Param;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +18,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -28,8 +39,10 @@ public class CheckingController {
     private CheckingService checkingService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private OfficeService officeService;
     private SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
-
+    private String Ext_Name = "xls,xlsx";
     /**
      * 提交申诉 请求
      * @param userId 申诉人id
@@ -133,12 +146,13 @@ public class CheckingController {
     /**
      *查找某班今天以前的迟到人员
      * @param officeId 班级id
-     * @param uId 班级名
      * @return
      */
     @RequestMapping("/viewKaoqin")
     @ResponseBody
-    public Object ViewKaoqin(String officeId, String uId, Model model){
+    public Object ViewKaoqin(String officeId,/* String uId,*/ Model model){
+        User u=(User)SecurityUtils.getSubject().getSession().getAttribute("user");
+        String uId = u.getId();
         //查看某个班迟到和旷工的考勤结果
         List<KaoqinResultVO> kaoqinResults = checkingService.selectByClassLate(officeId);
         JSONModel.put("kaoqinResults",kaoqinResults);
@@ -200,12 +214,12 @@ public class CheckingController {
 
     /**
      * 进入处理信息页面
-     * @param officeId 班级ID
      * @return
      */
     @RequestMapping("/dealKaoqin")
     @ResponseBody
-    public Object DealKaoqin(String officeId){
+    public Object DealKaoqin(/*String officeId*/){
+        String officeId=(String)SecurityUtils.getSubject().getSession().getAttribute("officeId");
         //获取某个班的申诉或请假的考勤结果
         List<KaoqinResultVO> kaoqinResults = checkingService.selectByClass(officeId);
 
@@ -261,6 +275,10 @@ public class CheckingController {
         return "success";
     }
 
+    /**
+     * 得到所有的考勤规则
+     * @return
+     */
     @RequestMapping("/getAllRule")
     @ResponseBody
     public Object getAllRule(){
@@ -269,4 +287,81 @@ public class CheckingController {
         JSONModel.put("Rules",kaoqinRules);
         return JSONModel.put();
     }
+
+    /**
+     * 下载未关联考勤工号的名单模板
+     * @param response
+     * @param officeId 班级id
+     */
+    @RequestMapping("/downloadKaoqinNUmberFile")
+    public void downloadKaoqinNUmberFile(HttpServletResponse response, String officeId,HttpServletRequest request) throws UnsupportedEncodingException {
+        String fileName = "mingdan.xls";
+//        String userAgent = request.getHeader("User-Agent");
+        /*String formFileName=fileName;
+        // 针对IE或者以IE为内核的浏览器：
+        if (userAgent.contains("MSIE") || userAgent.contains("Trident")) {
+            formFileName = java.net.URLEncoder.encode(formFileName, "UTF-8");
+        } else {
+            // 非IE浏览器的处理：
+            formFileName = new String(formFileName.getBytes("UTF-8"), "ISO-8859-1");
+        }
+        response.setHeader("Content-disposition",
+                String.format("attachment; filename=\"%s\"", formFileName));
+        response.setContentType("application/vnd.ms-excel;charset=utf-8");
+        response.setCharacterEncoding("UTF-8");*/
+        List<User> users = userService.findUserByClassIdNoKaoqinNum(officeId);
+        List<String> headerList = Lists.newArrayList();
+        headerList.add("学号");
+        headerList.add("姓名");
+        headerList.add("考勤工号");
+        ExportExcel excel = new ExportExcel("未关联考勤工号名单", headerList);
+        for (int i = 0; i < users.size(); i++) {
+            Row row = excel.addRow();
+            excel.addCell(row, 0, users.get(i).getId());
+            excel.addCell(row, 1, users.get(i).getName());
+            excel.addCell(row, 2,"");
+        }
+//        excel.setDataList(users);
+        try {
+            excel.write(response, fileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 上传考勤工号关联文件
+     * @param uploadFile
+     * @param request
+     * @return
+     * @throws IOException
+     */
+    @RequestMapping(value = "/uploadKaoqinNUmberFile",method = RequestMethod.POST)
+    @ResponseBody
+    public Object addTeacher(@RequestParam("file") MultipartFile uploadFile, HttpServletRequest request) throws IOException {
+        //文件上传
+        if (!uploadFile.isEmpty()){
+            //文件名
+            String originalFilename = uploadFile.getOriginalFilename();
+            String[] split = originalFilename.split("\\.");
+            if (Ext_Name.contains(split[split.length-1])){
+                //修改文件名
+                String fileName=originalFilename;
+                String realPath = request.getServletContext().getRealPath("/WEB-INF/upload/" + fileName);
+                File file = new File(realPath);
+                //将文件存入服务器
+                uploadFile.transferTo(file);
+//                file
+                userService.entryKaoqinId(file);
+                file.delete();
+                return "The KaoqinId entry success!";
+            }else {
+                return "isn't excel file";
+            }
+        }else {
+            return "the file is nothing";
+        }
+
+    }
+
 }
