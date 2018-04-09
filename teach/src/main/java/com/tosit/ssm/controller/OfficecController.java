@@ -5,6 +5,7 @@ import com.tosit.ssm.entity.Office;
 import com.tosit.ssm.service.OfficeService;
 import com.tosit.ssm.service.OfficeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -80,5 +81,17 @@ public class OfficecController {
         JSONModel.put("allArea",offices);
         return JSONModel.put();
     }
+
+    /*@RequestMapping("/getOfficeClassByUserId")
+    public Object getOfficeClassByUserId(HttpServletRequest request){
+        String userId = request.getParameter("userId");
+        List<Office> offices = officeService.selectOfficeByUserId(userId);
+        for (Office o:offices
+             ) {
+            System.out.println(o);
+        }
+        request.setAttribute("offices",offices);
+        return "/jiaoan/jiaoxueplanstu";
+    }*/
 
 }

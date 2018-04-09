@@ -14,6 +14,25 @@
     <result column="check_status" jdbcType="INTEGER" property="checkStatus" />
     <result column="is_del" jdbcType="INTEGER" property="isDel" />
     <result column="file_id" jdbcType="VARCHAR" property="fileId" />
+    <result column="submit_time" jdbcType="TIMESTAMP" property="submitTime" />
+  </resultMap>
+  <resultMap id="SecondResultMap" type="com.tosit.ssm.entity.TaskResultVO">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="task_id" jdbcType="VARCHAR" property="taskId" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="office_id" jdbcType="VARCHAR" property="officeId" />
+    <result column="parent_id" jdbcType="VARCHAR" property="parentId" />
+    <result column="check_time" jdbcType="TIMESTAMP" property="checkTime" />
+    <result column="check_by" jdbcType="VARCHAR" property="checkBy" />
+    <result column="check_result" jdbcType="INTEGER" property="checkResult" />
+    <result column="check_marks2" jdbcType="VARCHAR" property="checkMarks2" />
+    <result column="check_status" jdbcType="INTEGER" property="checkStatus" />
+    <result column="is_del" jdbcType="INTEGER" property="isDel" />
+    <result column="file_id" jdbcType="VARCHAR" property="fileId" />
+    <result column="submit_time" jdbcType="TIMESTAMP" property="submitTime" />
+    <result column="taskcreatetime" jdbcType="TIMESTAMP" property="taskCreateTime"/>
+    <result column="groupname" jdbcType="VARCHAR" property="groupName"/>
+    <result column="renwuname" jdbcType="VARCHAR" property="renwuName"/>
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -348,6 +367,9 @@
       <if test="fileId != null">
         file_id,
       </if>
+      <if test="submitTime != null">
+        submitTime,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -427,7 +449,17 @@
       <if test="record.fileId != null">
         file_id = #{record.fileId,jdbcType=VARCHAR},
       </if>
+      <if test="record.submitTime != null">
+        file_id = #{record.submitTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  <select id="selectTaskResultByJieduanId" parameterType="string" resultMap="SecondResultMap">
+    SELECT ta.create_time'taskcreatetime',o.name'groupname',t.planName'renwuname',tr.*
+    FROM teaching t LEFT JOIN task ta ON t.id = ta.teaching_id RIGHT JOIN task_result tr ON ta.id = tr.task_id LEFT JOIN office o ON tr.office_id = o.id
+    WHERE ta.teaching_id IN
+    (SELECT t3.id FROM teaching t3 LEFT JOIN teaching t2 ON t3.parent_id = t2.id WHERE t2.id = #{jieduanId} AND t2.type = 2 AND t3.type = 3)
+    AND t.is_del = 1 AND ta.is_del = 1 AND tr.is_del = 1 AND o.is_del = 1 AND o.office_type = 4 AND t.type = 3
+  </select>
 </mapper>

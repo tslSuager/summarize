@@ -18,4 +18,18 @@ public interface OfficeService {
      * @return
      */
     List<Office> selectOfficeByManage(@Param("userId")String userId);
+
+    /**
+     * 查询某个学生所在的班级
+     * @param userId 学生id
+     * @return 返回满足条件的班级
+     */
+    List<Office> selectOfficeByUserId(@Param("userId") String userId);
+
+    /**
+     * 查询某个学生所在的小组
+     * @param userId
+     * @return
+     */
+    List<Office> selectGroupByUserId(@Param("userId")String userId);
 }
