@@ -157,4 +157,12 @@ public interface UserService {
     UserRole findRoleByName(String loginName);
 
     void insert(File file);
+
+    /**
+     * 通过名字和班级查找学生
+     * @param name
+     * @param id
+     * @return
+     */
+    List<User> findStuByClassAndName(String name,String id);
 }

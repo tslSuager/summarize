@@ -128,11 +128,17 @@ public class UserController {
      */
     @RequestMapping("/getClassUser")
     public String getClassUser(HttpServletRequest request){
-        //获取班级id  -----未实现
-        String officeId;
-        officeId="001001001";//-------模拟一个班级数据
-        List<User> classUser = userService.findClassUser(officeId);
-        System.out.println(classUser.size());
+        String officeId = request.getParameter("cId");
+        String name = request.getParameter("name");
+        System.out.println(officeId);
+        System.out.println(name.length());
+        List<User> classUser = new ArrayList<>();
+        if (name.length()==0){
+            classUser = userService.findClassUser(officeId);
+
+        }else {
+            classUser = userService.findStuByClassAndName(name,officeId);
+        }
         request.setAttribute("users",classUser);
         return "student_find_jingli";
     }

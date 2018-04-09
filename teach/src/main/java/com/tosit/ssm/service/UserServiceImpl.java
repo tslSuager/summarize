@@ -233,4 +233,9 @@ public class UserServiceImpl implements UserService {
         return userMapper.selectRoleByUsername(loginName);
     }
 
+
+    @Override
+    public List<User> findStuByClassAndName(String name, String id) {
+        return userMapper.selectStuByClassAndName(name, id);
+    }
 }

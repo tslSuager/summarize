@@ -1360,4 +1360,12 @@ AND u.is_del=1
     AND sysrole_userid.is_del=1
     AND  sysrole.is_del=1
   </select>
+
+  <select id="selectStuByClassAndName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM user u JOIN user_office uo
+    ON u.ID = uo.user_id WHERE uo.office_id=#{id} AND u.name = #{name};
+  </select>
+
 </mapper>

@@ -4,7 +4,9 @@ import com.tosit.ssm.entity.TaskResult;
 import com.tosit.ssm.entity.TaskResultExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface TaskResultMapper {
     long countByExample(TaskResultExample example);
     int deleteByExample(TaskResultExample example);
