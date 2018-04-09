@@ -146,12 +146,13 @@ public class CheckingController {
     /**
      *查找某班今天以前的迟到人员
      * @param officeId 班级id
-     * @param uId 班级名
      * @return
      */
     @RequestMapping("/viewKaoqin")
     @ResponseBody
-    public Object ViewKaoqin(String officeId, String uId, Model model){
+    public Object ViewKaoqin(String officeId,/* String uId,*/ Model model){
+        User u=(User)SecurityUtils.getSubject().getSession().getAttribute("user");
+        String uId = u.getId();
         //查看某个班迟到和旷工的考勤结果
         List<KaoqinResultVO> kaoqinResults = checkingService.selectByClassLate(officeId);
         JSONModel.put("kaoqinResults",kaoqinResults);
@@ -213,12 +214,12 @@ public class CheckingController {
 
     /**
      * 进入处理信息页面
-     * @param officeId 班级ID
      * @return
      */
     @RequestMapping("/dealKaoqin")
     @ResponseBody
-    public Object DealKaoqin(String officeId){
+    public Object DealKaoqin(/*String officeId*/){
+        String officeId=(String)SecurityUtils.getSubject().getSession().getAttribute("officeId");
         //获取某个班的申诉或请假的考勤结果
         List<KaoqinResultVO> kaoqinResults = checkingService.selectByClass(officeId);
 
@@ -328,6 +329,13 @@ public class CheckingController {
         }
     }
 
+    /**
+     * 上传考勤工号关联文件
+     * @param uploadFile
+     * @param request
+     * @return
+     * @throws IOException
+     */
     @RequestMapping(value = "/uploadKaoqinNUmberFile",method = RequestMethod.POST)
     @ResponseBody
     public Object addTeacher(@RequestParam("file") MultipartFile uploadFile, HttpServletRequest request) throws IOException {
@@ -345,6 +353,7 @@ public class CheckingController {
                 uploadFile.transferTo(file);
 //                file
                 userService.entryKaoqinId(file);
+                file.delete();
                 return "The KaoqinId entry success!";
             }else {
                 return "isn't excel file";

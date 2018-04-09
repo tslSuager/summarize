@@ -91,6 +91,7 @@ public class CheckingServicelmpl implements CheckingService {
     public void addKaoQinRule(KaoqinRule kaoqinRule, KaoqindetailVO kaoqindetailVO) {
         String ruleId = UUID.randomUUID().toString().replaceAll("-", "");
         kaoqinRule.setId(ruleId);
+        kaoqinRule.setIsYouXiao(1);
         //首先再考勤规则表插入信息
          kaoqinRuleMapper.insert(kaoqinRule);
         //然后再考勤规则详情中插入详情信息
@@ -101,6 +102,7 @@ public class CheckingServicelmpl implements CheckingService {
                 continue;
             }
             k.setKaoqinRuleId(ruleId);
+            k.setIsDel(1);
             String detailId = UUID.randomUUID().toString().replaceAll("-", "");
             k.setId(detailId);
             int row = kaoqinRuleDetailMapper.insertKaoqinRuleDetail(k);

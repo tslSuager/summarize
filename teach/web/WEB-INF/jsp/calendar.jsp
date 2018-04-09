@@ -34,7 +34,7 @@
                     </select>
                     <div class="ibox-tools">
                         <a class="dropdown-toggle count-info" href="/page/table_bootstrap" style="text-decoration:none">
-                            <i class="fa fa-envelope"></i><span class="badge badge-danger">4</span>
+                            <i class="fa fa-envelope"></i><span class="badge badge-danger">${counts}</span>
                         </a>
                         <span class="label label-danger radius" style="display: none" id="chulixinxi">未处理信息</span>
                     </div>
@@ -58,7 +58,7 @@
 <script>
 
     $(document).ready(function () {
-        initdata("001001001","u007");
+        initdata();
 //        initPullListTree(3,1);
         $(".fa-envelope").mousemove(function () {
             $("#chulixinxi").show();
@@ -150,26 +150,33 @@
             ]
         })*/
     });
-
+    /*
+    * 改变处理请求的路径
+    * */
+    function setClass() {
+        $(".count-info:eq(0)").attr("href","/page/saveOfficeId/table_bootstrap?officeId="+$("#sel").val())
+    }
     /**
      * 初始话页面的班级列表和查找某班今天以前的迟到人员
      * @param officeId  班级id
      * @param uId  教员id
      */
-    function initdata(officeId,uId) {
+    function initdata() {
         $.ajax({
-            url: "/checking/viewKaoqin?officeId="+officeId+"&uId="+uId,
+            url: "/checking/viewKaoqin?",
             dataType:"json",
             success: function(json){
                 var offices = json["offices"];
                 var sel = $("#sel");
+                $(".count-info:eq(0)").attr("href","/page/saveOfficeId/table_bootstrap?officeId="+offices[0].id);
                 for (var i=0;i<offices.length;i++){
                     sel.append($("<option>").html(offices[i].name).val(offices[i].id));
                 }
                 //定义选择好了班级之后的事件
                 sel.change(function () {
                     var officeId = $(this).val();
-                    var  uId="u007";//!!!!!!!!!!!!!!!!!!!!!至于老师的ID 到时候应该是从Session里面取
+                    //设置处理请求的路径
+                    setClass();
                     $.ajax({
                         url: "/checking/viewKaoqin?officeId="+officeId,
                         dataType:"json",

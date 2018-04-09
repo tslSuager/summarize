@@ -4,6 +4,8 @@ import com.tosit.ssm.entity.*;
 import org.apache.ibatis.annotations.Param;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.List;
 
 import com.tosit.ssm.entity.User;

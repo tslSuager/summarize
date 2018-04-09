@@ -365,6 +365,9 @@
       <if test="updateBy != null">
         update_by,
       </if>
+      <if test="isYouXiao != null">
+        is_youxiao,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -393,6 +396,9 @@
       </if>
       <if test="updateBy != null">
         #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="isYouXiao != null">
+        #{isYouXiao,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
