@@ -221,16 +221,22 @@
         $("body").on("click","#subGrade",function () {
             var stus = $("#left").find(".btn-warning");
             var num = stus.length;
-            if (num>0){
-                for (var i = 0;i<num;i++){
-                    var id = stus[i].id;
-                    $.get("/user/subGrade",{id},function (msg) {
-                    });
+            layer.prompt(function(value, index, elem){
+                var msg = value; //得到value
+                if (num>0){
+                    for (var i = 0;i<num;i++){
+                        var id = stus[i].id;
+                        $.get("/user/subGrade",{id,msg},function (msg) {
+                        });
+                    }
+                    layer.msg("已扣分");
+                }else {
+                    layer.msg("请选中学生");
                 }
-                layer.msg("已扣分");
-            }else {
-                layer.msg("请选中学生");
-            }
+                layer.close(index);
+            });
+            /*
+            */
         });
 </script>
 </body>

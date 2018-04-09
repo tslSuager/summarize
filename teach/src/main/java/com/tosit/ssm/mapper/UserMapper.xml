@@ -1259,7 +1259,7 @@ WHERE o.parent_id = #{office.id} and o.is_del=1 and u.is_del=1 and uo.is_del=1 A
   <select id="selectAllTeacherNoThisClass" parameterType="com.tosit.ssm.entity.Office" resultMap="BaseResultMap">
     SELECT
     <include refid="Base_Column_List"/>
-    FROM user u WHERE u.user_type=3 AND u.is_del=1 AND u.ID NOT IN (
+    FROM user u WHERE u.user_type=2 AND u.is_del=1 AND u.ID NOT IN (
     SELECT uo.user_id FROM user_office uo WHERE uo.office_id = #{office.id}
 );
   </select>
@@ -1275,7 +1275,7 @@ WHERE o.parent_id = #{office.id} and o.is_del=1 and u.is_del=1 and uo.is_del=1 A
 FROM user u
 JOIN user_office uo
 ON u.ID = uo.user_id
-WHERE uo.office_id = #{VALUE } AND u.loginName IS NULL ;
+WHERE uo.office_id = #{VALUE } AND u.loginName IS NULL AND u.user_type=4;
   </select>
 
 </mapper>

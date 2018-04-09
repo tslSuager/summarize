@@ -11,4 +11,10 @@ public interface ExperienceService {
      * @return
      */
     List<Experience> allUserExperience(String id);
+
+    /**
+     * 添加一个经历
+     * @param experience
+     */
+    void addEx(Experience experience);
 }

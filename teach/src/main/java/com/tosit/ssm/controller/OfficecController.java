@@ -111,6 +111,12 @@ public class OfficecController {
         office.setCreateTime(date1);
         office.setUpdateTime(date2);
         List<Office> classes = officeService.findClassByTeacherAndDate(office);
+        for (Office o:
+             classes) {
+            String parentId = o.getParentId();
+            String parentName = officeService.findOfficeById(parentId).getName();
+            o.setParentId(parentName);
+        }
         JSONModel.put("classes",classes);
         return JSONModel.put();
     }
@@ -170,7 +176,6 @@ public class OfficecController {
     @ResponseBody
     public void addClass(Office office,HttpServletRequest request){
         office.setId(UUID.randomUUID().toString().replaceAll("-",""));
-        office.setMaster("何团");
         String name = request.getParameter("name");
         String school = request.getParameter("school");
         office.setParentId(school);
@@ -178,6 +183,13 @@ public class OfficecController {
         office.setIsDel(1);
         office.setOfficeType(3);
         officeService.addOffice(office);
+
+        UserOffice userOffice = new UserOffice();
+        userOffice.setId(UUID.randomUUID().toString().replaceAll("-",""));
+        userOffice.setUserId("u016");
+        userOffice.setOfficeId(office.getId());
+        userOffice.setIsDel(1);
+        userService.insertUserOfficeByGroup(userOffice);
         System.out.println("OK");
     }
 
@@ -319,6 +331,11 @@ public class OfficecController {
         return JSONModel.put();
     }
 
+    /**
+     * 修改班级名称
+     * @param office
+     * @param request
+     */
     @RequestMapping("/reviseClassName")
     @ResponseBody
     public void reviseClassName(Office office,HttpServletRequest request){

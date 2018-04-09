@@ -1,10 +1,9 @@
 package com.tosit.ssm.controller;
 
+import com.tosit.ssm.common.util.SysUtil;
 import com.tosit.ssm.common.util.json.JSONModel;
-import com.tosit.ssm.entity.Office;
-import com.tosit.ssm.entity.User;
-import com.tosit.ssm.entity.UserOffice;
-import com.tosit.ssm.entity.UserVO;
+import com.tosit.ssm.entity.*;
+import com.tosit.ssm.service.ExperienceService;
 import com.tosit.ssm.service.OfficeService;
 import com.tosit.ssm.service.UserService;
 import org.apache.shiro.SecurityUtils;
@@ -36,6 +35,8 @@ public class UserController {
     private UserService userService;
     @Autowired
     private OfficeService officeService;
+    @Autowired
+    private ExperienceService experienceService;
 
 
     @ResponseBody
@@ -385,18 +386,20 @@ public class UserController {
                 for (User u:
                         stuNoLoginNameByClass) {
                     u.setLoginname(u.getStuNumber());
-                    u.setPassword("hello123");
+                    String password = "hello123";
+                    u.setPassword(SysUtil.md5(password));
                     userService.modifyUser(u);
-                    return JSONModel.put("message","success");
                 }
+                return JSONModel.put("message","success");
             }else if (id.equals("按手机号")){
                 for (User u:
                         stuNoLoginNameByClass) {
                     u.setLoginname(u.getPhone1());
-                    u.setPassword("hello123");
+                    String password = "hello123";
+                    u.setPassword(SysUtil.md5(password));
                     userService.modifyUser(u);
-                    return JSONModel.put("message","success");
                 }
+                return JSONModel.put("message","success");
             }
             return JSONModel.put("message","OK");
         }else {
@@ -447,5 +450,17 @@ public class UserController {
         System.out.println(newGrade);
         user.setGrade(newGrade);
         userService.modifyUser(user);
+
+        String msg = request.getParameter("msg");
+        Experience experience = new Experience();
+        experience.setEvent("违反纪律");
+        experience.setRemark(msg);
+        experience.setId(UUID.randomUUID().toString().replaceAll("-",""));
+        experience.setIsDel(1);
+        experience.setType(1);
+        experience.setUserId(id);
+        Date now = new Date();
+        experience.setOccurTime(now);
+        experienceService.addEx(experience);
     }
 }
