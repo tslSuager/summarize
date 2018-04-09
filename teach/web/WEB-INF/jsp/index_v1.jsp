@@ -23,7 +23,7 @@
     <link href="/static/css/plugins/cropper/cropper.min.css" rel="stylesheet">
     <link href="/static/css/plugins/switchery/switchery.css" rel="stylesheet">
     <link href="/static/css/plugins/jasny/jasny-bootstrap.min.css" rel="stylesheet">
-    <%--<link href="/static/css/plugins/nouslider/jquery.nouislider.css" rel="stylesheet">--%>
+    <link href="/static/css/plugins/nouslider/jquery.nouislider.css" rel="stylesheet">
     <link href="/static/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
     <link href="/static/css/plugins/ionRangeSlider/ion.rangeSlider.css" rel="stylesheet">
     <link href="/static/css/plugins/ionRangeSlider/ion.rangeSlider.skinFlat.css" rel="stylesheet">
@@ -634,7 +634,7 @@
 <script src="/static/js/plugins/jasny/jasny-bootstrap.min.js"></script>
 <script src="/static/js/plugins/datapicker/bootstrap-datepicker.js"></script>
 <script src="/static/js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
-<%--<script src="/static/js/plugins/nouslider/jquery.nouislider.min.js"></script>--%>
+<script src="/static/js/plugins/nouslider/jquery.nouislider.min.js"></script>
 <script src="/static/js/plugins/switchery/switchery.js"></script>
 <script src="/static/js/plugins/ionRangeSlider/ion.rangeSlider.min.js"></script>
 <script src="/static/js/plugins/iCheck/icheck.min.js"></script>
@@ -642,7 +642,7 @@
 <script src="/static/js/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
 <script src="/static/js/plugins/clockpicker/clockpicker.js"></script>
 <script src="/static/js/plugins/cropper/cropper.min.js"></script>
-<%--<script src="/static/js/demo/form-advanced-demo.min.js"></script>--%>
+<script src="/static/js/demo/form-advanced-demo.min.js"></script>
 
 
 </body>

@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -433,18 +434,27 @@ public class UserController {
         String Cgrade = request.getParameter("Cgrade");
         String cid = request.getParameter("cid");
         List<User> users = userService.findUserByOfficeId(cid);
-        if (users.get(0).getGrade()!=null){
-            return JSONModel.put("message","error");
+        List<User> userList = new ArrayList<>();
+        for (User u:
+             users) {
+            if (u.getGrade()==null){
+                System.out.println(u.getGrade());
+                userList.add(u);
+            }
         }
-        else {
+        if (userList.size()>0){
             for (User u:
-                    users) {
+                    userList) {
                 u.setGrade(Tgrade);
                 u.setCutGrade(Cgrade);
                 userService.modifyUser(u);
             }
+            System.out.println("1");
             return JSONModel.put("message","success");
+        }else {
+            return JSONModel.put("message","error");
         }
+
     }
 
     /**
