@@ -141,4 +141,9 @@ public interface UserService {
      * @return
      */
     List<User> findStuNoLoginNameByClass(String id);
+
+    List<UserCkRuleRecord> findAllLeaveByTime(Date time);
+
+
+    UserRole findRoleByName(String loginName);
 }

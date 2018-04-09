@@ -18,10 +18,12 @@ public class JSONModel{
     }
 
     public static Object getMap() {
-        return threadLocal.get();
+        Map<String, Object> map = threadLocal.get();
+        threadLocal.set(null);
+        return map;
     }
 
-    public static Object put() {
+   public static Object put() {
         return JSONModel.getMap();
     }
 

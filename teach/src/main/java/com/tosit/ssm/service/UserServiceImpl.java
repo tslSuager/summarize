@@ -140,4 +140,14 @@ public class UserServiceImpl implements UserService {
     public List<User> findStuNoLoginNameByClass(String id) {
         return userMapper.selectStuNoLoginNameByClass(id);
     }
+
+    @Override
+    public List<UserCkRuleRecord> findAllLeaveByTime(Date time) {
+        return userMapper.selectAllLeaveByTime(time);
+    }
+
+    @Override
+    public UserRole findRoleByName(String loginName) {
+        return userMapper.selectRoleByUsername(loginName);
+    }
 }

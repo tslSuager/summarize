@@ -1,12 +1,10 @@
 package com.tosit.ssm.controller;
 
 import com.tosit.ssm.common.util.json.JSONModel;
-import com.tosit.ssm.entity.Office;
-import com.tosit.ssm.entity.User;
-import com.tosit.ssm.entity.UserOffice;
-import com.tosit.ssm.entity.UserVO;
+import com.tosit.ssm.entity.*;
 import com.tosit.ssm.service.OfficeService;
 import com.tosit.ssm.service.UserService;
+import org.apache.ibatis.annotations.Param;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -16,6 +14,7 @@ import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -44,11 +43,12 @@ public class UserController {
 //        List<User> users= userService.getUsers();
         return  null;
     }
-    @RequestMapping("/login")
-    public String login(String username, String password, HttpSession session) {
+    @RequestMapping(value = "/login")
+    public String login (String username,String password, HttpSession session) {
         System.out.println("开始登陆");
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+        token.setRememberMe(true);
         try {
             //执行认证提交
             subject.login(token);
@@ -63,11 +63,20 @@ public class UserController {
             }
         }
         //是否认证通过
-        boolean isAuthenticated =  subject.isAuthenticated();
-        System.out.println("是否认证通过：" + isAuthenticated);
+        boolean  isAuthenticated=  subject.isAuthenticated();
+        if (isAuthenticated) {
+            User user = userService.findsUserByUserName(username);
+            subject.getSession().setAttribute("user",user);
+            System.out.println("是否认证通过：" + isAuthenticated);
+        }
         return "center";
     }
 
+    @RequestMapping(value = "/outLogin")
+    public void outLogin (String username,String password, HttpSession session) {
+        Subject subject = SecurityUtils.getSubject();
+        subject.logout();
+    }
 
 
     /**
