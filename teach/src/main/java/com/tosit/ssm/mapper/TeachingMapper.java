@@ -4,9 +4,11 @@ import com.tosit.ssm.entity.Teaching;
 import com.tosit.ssm.entity.TeachingExample;
 import com.tosit.ssm.entity.TeachingVO;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface TeachingMapper {
     long countByExample(TeachingExample example);
     int deleteByExample(TeachingExample example);
@@ -75,6 +77,12 @@ public interface TeachingMapper {
      * @return 返回多个任务
      */
     List<Teaching> selectRenwuByUserIdByJieduan(@Param("userId")String userId);
+
+    /**
+     * 查询所有的教学计划
+     * @return
+     */
+    List<Teaching> selectAllTeaching();
 
 
 

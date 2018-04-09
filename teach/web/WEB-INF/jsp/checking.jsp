@@ -82,24 +82,21 @@
 <script>
     $(document).ready(function () {
         //获取页面所有数据
-        $.get("/checking/ShowAllRecordsByIdByDate", {"userId": "u001","brushtime":new Date()}, function (msg) {
-
+        $.get("/checking/ShowAllRecordsByIdByDate", {"brushtime": new Date()}, function (msg) {
             var allmsg = msg['user'];
             var experience = msg['experiences'];
             var result = msg['result'];
             var records = msg['records'];
-            console.info(records);
-
             //个人经历的页面加载
             $("#grade").html('分数：' + allmsg['grade'] + '分');
             if (experience != null) {
-                experience.forEach(function (value) {
-                    $("#ibox-content1").append("<div class='external-event navy-bg aaa'</div>");
-                    $(".aaa").html('扣除：' + allmsg['cutGrade'] + '分');
-                    $("#ibox-content1").append("<div class='external-event navy-bg bbb'</div>");
-                    //这里有个BUG 后面的event会把前面的覆盖  未解决
-                    $(".bbb").html('原因：' + value['event']);
+                $.each(experience,function (i, e) {
+                    $("#ibox-content1").append("<div class='external-event navy-bg sssss'></div>");
+                    $("#ibox-content1").find(".sssss").eq(i*2).html('扣除：' + allmsg['cutGrade'] + '分');
+                    $("#ibox-content1").append("<div class='external-event navy-bg sssss'></div>");
+                    $("#ibox-content1").find(".sssss").eq(i*2+1).html('扣除：' + e['remark'] + '分');
                 })
+
             }
 
 
@@ -108,7 +105,7 @@
             $.each(result, function (i, e) {
                 if (e.kaoqinRemarkReqtime != null) {  //处理请假的数据（备注，请假）
                     dataevents[i] = new Object();
-                    dataevents[i].start = e.kaoqinRemarkReqtime;
+                    dataevents[i].start = e.date;
                     e.kaoqinRemarkReqtime = e.kaoqinRemarkReqtime.split(" ")[1];
                     if (e.kaoqinRemarkType == 1) {
                         if (e.kaoqinRemarkStatus == 0) {
@@ -206,12 +203,12 @@
             });
 
             //当天考情记录的数据处理
-            $.each(records, function (i,e) {
-                var current=i + dataevents.length - 1;
+            $.each(records, function (i, e) {
+                var current = i + dataevents.length - 1;
                 dataevents[current] = new Object();
                 dataevents[current].borderColor = "grey";
                 dataevents[current].start = e.brushtime;
-                dataevents[current].title = "打卡时间：" + e.brushtime.split(" ")[1] ;
+                dataevents[current].title = "打卡时间：" + e.brushtime.split(" ")[1];
             });
 
             //考勤页面的数据加载
@@ -238,19 +235,42 @@
                 drop: function (g, h) {
                     var f = $(this).data("eventObject");
                     var e = $.extend({}, f);//事件就是一个{}
-                    if (g >= new Date()) {
+                    console.info(g);
+                    console.info(addDate(g,1));
+
+                    if (g >= new Date()||(g <= new Date()&&addDate(g,1)>=new Date()&&f.title=="备注")) {
                         layer.open({
                             type: 2,
-                            title: "申述内容",
+                            title: f.title + "理由",
                             area: ['500px', '300px'],
                             btn: ['提交', '算了'],
                             content: "/textarea.html",
                             yes: function (index, layero) {
                                 e.start = g;
                                 e.allDay = h;
-                                $("#calendar").fullCalendar("renderEvent", e, true);
                                 //ajax 发请求存储 代码写在这
-                                layer.close(index);
+                                var checkingContent = $($(layero).find("iframe")[0].contentWindow.document.getElementById("tra")).val();
+                                var type = 2;
+                                if (f.title == "请假") {
+                                    type = 1;
+                                }
+                                console.info(type);
+                                $.post("/checking/commitLeave", {
+                                    userId: msg['user'].id,
+                                    kaoqinRemarkContent: checkingContent,
+                                    kaoqinRemarkType: type,
+                                    kaoqinRemarkReqtime: new Date(),
+                                    date: g
+                                }, function (msg) {
+                                    e.type = "备注0";
+                                    if (f.title == "请假") {
+                                        e.type = "请假0";
+                                    }
+                                    e.content = checkingContent;
+                                    console.info(msg);
+                                    layer.close(index);
+                                }, "json");
+                                $("#calendar").fullCalendar("renderEvent", e, true);
                             },
                             btn2: function (index, layero) {
                                 layer.close(index);
@@ -267,7 +287,7 @@
                             area: ['500px', '300px'],
                             btn: ['关闭'],
                             content: e.content,
-                            yes: function (index, layero) {
+                            btn1: function (index, layero) {
                                 layer.close(index);
                             }
                         });
@@ -278,7 +298,7 @@
                             area: ['500px', '300px'],
                             btn: ['关闭'],
                             content: e.content,
-                            yes: function (index, layero) {
+                            btn1: function (index, layero) {
                                 layer.close(index);
                             }
                         });
@@ -289,7 +309,7 @@
                             area: ['500px', '300px'],
                             btn: ['关闭'],
                             content: e.content,
-                            yes: function (index, layero) {
+                            btn1: function (index, layero) {
                                 layer.close(index);
                             }
                         });
@@ -300,7 +320,7 @@
                             area: ['500px', '300px'],
                             btn: ['关闭'],
                             content: e.content,
-                            yes: function (index, layero) {
+                            btn1: function (index, layero) {
                                 layer.close(index);
                             }
                         });
@@ -312,24 +332,16 @@
                             btn: ['继续申诉', '算了'],
                             content: e.content,
                             yes: function (index, layero) {
-                                layer.open({
-                                    type: 2,
-                                    title: "申述内容",
-                                    area: ['500px', '300px'],
-                                    btn: ['提交', '算了'],
-                                    content: "/textarea.html",
-                                    yes: function (index, layero) {
-                                        //console.info($($(layero).find("iframe")[0].contentWindow.document.getElementById("tra")).val());
-                                        //ajax 发请求存储 代码写在这
-
-
-                                        layer.close(index);
-                                    },
-                                    btn2: function (index, layero) {
-                                        layer.close(index);
-                                    }
+                                //console.info();
+                                //ajax 发请求存储 代码写在这
+                                var checkingContent = $($(layero).find("iframe")[0].contentWindow.document.getElementById("tra")).val();
+                                $.post("/checking/commitChecking", {
+                                    userId: msg['user'].id,
+                                    data: checkingContent,
+                                    kaoqinShenSuReqtime: new Date()
+                                }, function (msg) {
+                                    layer.close(index);
                                 });
-                                layer.close(index);
                             },
                             btn2: function (index, layero) {
                                 layer.close(index);
@@ -339,11 +351,47 @@
                     } else if (e.type == "申诉0") {
                         parent.layer.open({
                             type: 1,
-                            title: "申诉理由",
+                            title: "申诉内容",
                             area: ['500px', '300px'],
-                            btn: ['关闭'],
+                            btn: ['申诉', '算了'],
                             content: e.content,
                             yes: function (index, layero) {
+                                //console.info();
+                                //ajax 发请求存储 代码写在这
+                                var checkingContent = $($(layero).find("iframe")[0].contentWindow.document.getElementById("tra")).val();
+                                $.post("/checking/commitChecking", {
+                                    userId: msg['user'].id,
+                                    data: checkingContent,
+                                    kaoqinShenSuReqtime: new Date()
+                                }, function (msg) {
+                                    layer.close(index);
+                                });
+                            },
+                            btn2: function (index, layero) {
+                                layer.close(index);
+                            }
+                        });
+
+                    } else if (e.type == "申诉1") {
+                        parent.layer.open({
+                            type: 1,
+                            title: "申诉内容",
+                            area: ['500px', '300px'],
+                            btn: ['提交', '算了'],
+                            content: e.content,
+                            yes: function (index, layero) {
+                                //console.info();
+                                //ajax 发请求存储 代码写在这
+                                var checkingContent = $($(layero).find("iframe")[0].contentWindow.document.getElementById("tra")).val();
+                                $.post("/checking/commitChecking", {
+                                    userId: msg['user'].id,
+                                    data: checkingContent
+                                }, function (msg) {
+                                    console.info(msg);
+                                    layer.close(index);
+                                });
+                            },
+                            btn2: function (index, layero) {
                                 layer.close(index);
                             }
                         });
@@ -354,9 +402,15 @@
             })
 
         }, "json");
+        function addDate(date, days) {
+            if (days == undefined || days == '') {
+                days = 1;
+            }
+            var date = new Date(date);
+            date.setDate(date.getDate() + days);
+            return date;
+        }
     });
-
-
 </script>
 <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
 </body>

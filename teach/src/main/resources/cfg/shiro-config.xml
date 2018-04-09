@@ -23,10 +23,22 @@
 		<property name="loginUrl" value="/page/login" />
 		<property name="filterChainDefinitions">
 			<value>
-				<!--/static/**= anon-->
-				<!--/user/login=anon-->
-
-				/**=anon
+				/static/**= anon
+				/user/login=anon
+				/page/index_v1=roles[instructor]
+				/page/form_basic_import=roles[instructor]
+				/register.html=roles[instructor]
+				/page/qinshifenpei=roles[instructor]
+				/page/shuidianInfo=roles[instructor]
+				/page/qinshiInfo_admin=roles[instructor]
+				/page/calendar=roles[instructor]
+				/page/materiel_info=roles[instructor]
+				/page/entry_kaoqin_info=roles[instructor]
+				/page/matchStudentAttendance=roles[instructor]
+				/page/kaoqin_rule_display=roles[instructor]
+				/page/jiaoan/**=roles[instructor]
+				/page/checking=roles[student]
+				/**=authc
 			</value>
 		</property>
 	</bean>

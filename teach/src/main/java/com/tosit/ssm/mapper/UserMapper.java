@@ -1,5 +1,6 @@
 package com.tosit.ssm.mapper;
 
+import com.tosit.ssm.entity.*;
 import com.tosit.ssm.entity.KaoqinRule;
 import com.tosit.ssm.entity.Office;
 import com.tosit.ssm.entity.User;
@@ -119,7 +120,7 @@ public interface UserMapper {
      * @param office 包括班级id的office对象
      * @return
      */
-    List<User> selectByClassChecking(Office office);
+    List<User> selectByClassChecking(@Param("office") Office office);
 
 
 
@@ -144,7 +145,8 @@ public interface UserMapper {
      * @param office 包括学校id的office对象
      * @return
      */
-    List<User> selectByTimeAreaNClass(Date startDate, Date endDate, Office office);
+    List<User> selectByTimeAreaNClass(@Param("startDate") Date startDate, @Param("endDate") Date endDate,@Param("office") Office office);
+
 
 
 
@@ -154,7 +156,7 @@ public interface UserMapper {
      * @param office 包括学校id的office对象
      * @return
      */
-    List<User> selectByClassGroup(Office office);
+    List<User> selectByClassGroup(@Param("office") Office office);
 
 
     /**
@@ -180,4 +182,29 @@ public interface UserMapper {
      * @return 返回用户集合
      */
     User selectByUsername(String username);
+
+    /**
+     * 获取某个班的学生包括组号
+     * @param office
+     * @return
+     */
+    List<UserVO> selectUsersWithGroup(@Param("office") Office office);
+
+    /**
+     * 获取没有与某班级关联的教员
+     * @return
+     */
+    List<User> selectAllTeacherNoThisClass(@Param("office") Office office);
+
+    /**
+     * 获取某班没有生成账号的学生
+     * @param id
+     * @return
+     */
+    List<User> selectStuNoLoginNameByClass(String id);
+
+    List<UserCkRuleRecord> selectAllLeaveByTime(Date time);
+
+    UserRole selectRoleByUsername(@Param("loginName") String loginName);
+
 }

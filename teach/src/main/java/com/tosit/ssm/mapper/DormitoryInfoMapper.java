@@ -3,8 +3,12 @@ package com.tosit.ssm.mapper;
 import com.tosit.ssm.entity.DormitoryInfo;
 import com.tosit.ssm.entity.DormitoryInfoExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import com.tosit.ssm.entity.DormitoryInfoVO;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
+
+@Repository
 public interface DormitoryInfoMapper {
     long countByExample(DormitoryInfoExample example);
     int deleteByExample(DormitoryInfoExample example);
@@ -29,4 +33,17 @@ public interface DormitoryInfoMapper {
      * @return
      */
     int updateByPrimaryKey(DormitoryInfo record);
+
+    /**
+     * 获取某个寝室的物料详情
+     * @param id 寝室id
+     * @return
+     */
+    List<DormitoryInfoVO> selectDormitoryInfoById(String id);
+
+    /**
+     * 获取所有寝室的物料详情
+     * @return
+     */
+    List<DormitoryInfoVO> selectDormitorys();
 }

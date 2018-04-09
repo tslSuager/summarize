@@ -74,6 +74,17 @@ public interface CheckingService {
      */
     public void addKaoQinRule(KaoqinRule kaoqinRule, KaoqindetailVO kaoqindetailVO);
 
+    String modifyChecking(KaoqinResult data);
+
+    String createLeave(KaoqinResult kaoqinResult);
+
+    /**
+     * 查找所有有效地考勤规则
+     * @param id
+     * @return
+     */
+    List<KaoqinRule> selectAllRule(String id);
+
     /**
      * 获取某个班的申述或请假记录的集合
      * @param officeId
@@ -98,4 +109,7 @@ public interface CheckingService {
      * @param kaoqinRuleDetail
      */
     int updateKaoqinDetail(KaoqinRuleDetail kaoqinRuleDetail);
+
+
+    Integer createCheckingResult(KaoqinResult kaoqinResult);
 }

@@ -1,5 +1,6 @@
 package com.tosit.ssm.mapper;
 
+import com.tosit.ssm.entity.Office;
 import com.tosit.ssm.entity.User;
 import com.tosit.ssm.entity.UserOffice;
 import com.tosit.ssm.entity.UserOfficeExample;
@@ -46,6 +47,20 @@ public interface UserOfficeMapper {
      * @param record 具有修改字段和修改id的用户区域关联对象
      * @return
      */
-    int updateByPrimaryKey(UserOffice record);
+    int updateByPrimaryKey(@Param("record") UserOffice record);
+
+    /**
+     * 通过学生id和office id查找关联表id
+     * @param userOffice
+     * @return
+     */
+    UserOffice selectIdByUidAndOid(@Param("userOffice") UserOffice userOffice);
+
+    /**
+     * 查找某组织的所有关联表
+     * @param office
+     * @return
+     */
+    List<UserOffice> selectIdByOid(@Param("office") Office office);
 
 }

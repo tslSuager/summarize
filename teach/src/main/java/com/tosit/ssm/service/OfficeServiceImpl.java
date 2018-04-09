@@ -15,7 +15,6 @@ public class OfficeServiceImpl implements OfficeService{
         officeMapper.insertOffice(office);
     }
 
-    @Override
     public List<Office> getArea() {
         return null;
     }
@@ -29,6 +28,9 @@ public class OfficeServiceImpl implements OfficeService{
         return  officeMapper.selectAllArea();
     }
 
+    public List<Office> findClassByTeacherAndDate(Office office){
+        return officeMapper.selectOfficeByMasterAndDate(office);
+    }
     @Override
     public List<Office> selectOfficeByManage(String userId) {
         return officeMapper.selectOfficeByManage(userId);
@@ -44,5 +46,27 @@ public class OfficeServiceImpl implements OfficeService{
         return officeMapper.selectGroupByUserId(userId);
     }
 
+    public List<Office> findClassByTeacherAndSchool(Office office){
+        return officeMapper.selectOfficeByMasterAndSchool(office);
+    }
 
+    public void addOffice(Office office) {
+        officeMapper.insertOffice(office);
+    }
+
+    public List<Office> findGroupByClassId(String id) {
+        return officeMapper.selectGroupByClassId(id);
+    }
+
+    public int deleteOffice(Office office) {
+        return officeMapper.updateByPrimaryKey(office);
+    }
+
+    public Office findOfficeById(String id) {
+        return officeMapper.selectByPrimaryKey(id);
+    }
+
+    public List<Office> findIdByParent(Office office) {
+        return officeMapper.selectIdByParent(office);
+    }
 }
