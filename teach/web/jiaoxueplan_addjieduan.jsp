@@ -212,11 +212,11 @@
                         <div class="" id="data_5" style="margin: 10px auto;width: 600px;">
                             <div class="input-daterange input-group" id="datepicker">
                                 <label class="col-sm-3 text-center control-label" style="margin-top: 5px">开始时间 :</label>
-                                <input type="text" class="form-control" name="start" value="2017-11-11"
+                                <input type="text" class="form-control" name="start" value="2018-03-01"
                                        style="width: 320px" id="start"/>
                                 <label class="col-sm-3 text-center control-label" style="margin-top: 15px">结束时间
                                     :</label>
-                                <input type="text" class="form-control" name="end" value="2017-11-17"
+                                <input type="text" class="form-control" name="end" value="2018-03-01"
                                        style="width: 320px;margin-top: 10px" id="end"/>
                             </div>
                         </div>
@@ -239,7 +239,7 @@
     <%--添加阶段弹出框结束--%>
 
     <%--添加子任务task表弹出框开始--%>
-    <div class="modal inmodal in" id="addmySonPlanModal" tabindex="-1" role="dialog" aria-hidden="true"
+    <%--<div class="modal inmodal in" id="addmySonPlanModal" tabindex="-1" role="dialog" aria-hidden="true"
          style="display: none; padding-right: 6px;">
         <div class="modal-dialog">
             <div class="modal-content animated bounceInRight">
@@ -313,7 +313,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>--%>
     <%--添加子任务task表弹出框结束--%>
 
     <%--添加任务弹出框开始--%>
@@ -339,11 +339,11 @@
                         <div class="" id="data_5" style="margin: 10px auto;width: 600px;">
                             <div class="input-daterange input-group" id="datepicker">
                                 <label class="col-sm-3 text-center control-label" style="margin-top: 5px">开始时间 :</label>
-                                <input type="text" class="form-control" name="start" value="2017-11-11"
+                                <input type="text" class="form-control" name="start" value="2018-03-01"
                                        style="width: 320px" id="renwustart"/>
                                 <label class="col-sm-3 text-center control-label" style="margin-top: 15px">结束时间
                                     :</label>
-                                <input type="text" class="form-control" name="end" value="2017-11-17"
+                                <input type="text" class="form-control" name="end" value="2018-03-01"
                                        style="width: 320px;margin-top: 10px" id="renwuend"/>
                             </div>
                         </div>
@@ -521,7 +521,7 @@
                 console.info(msg['jieduans']);
                 $.each(msg['jieduans'], function (i, each) {
                     $("#createlevelbtn").append('<div class="four steps createlevel" name="' + each['id'] + '" style="margin-left: 10%;width: 80%;float: left;margin-right: 10%">\n' +
-                        '        <span id="span_dbclick" class="active step">阶段' + (i + 1) + ':' + each['planname'] + '</span>\n' +
+                        '        <span id="span_dbclick" class="active step">起' + each['startTime'] + '至' + each['endTime'] + '&nbsp;&nbsp;' + each['planname'] + '</span>\n' +
                         '        <div style="margin-top: 0px;display: none" id="s1">\n' +
                         '            <div class="row">\n' +
                         '                <div class="col-sm-12">\n' +
@@ -530,7 +530,7 @@
                         '                            <h5>任务</h5>\n' +
                         '                            <div class="ibox-tools">\n' +
                         '                                <%--添加一个任务--%>\n' +
-                        '                                <button type="button" id="new_task' + each['id'] + '" class="btn btn-outline btn-default" onclick="$(\'#mySontaskModal\').css(\'display\', \'block\');">\n' +
+                        '                                <button type="button" id="new_task" class="btn btn-outline btn-default" onclick="$(\'#mySontaskModal\').css(\'display\', \'block\');">\n' +
                         '                                    <i class="fa fa-plus"></i>\n' +
                         '                                </button>\n' +
                         '                                <%--修改任务内容--%>\n' +
@@ -561,7 +561,7 @@
                         '                                        <th>任务描述</th>\n' +
                         '                                        <th>开始时间</th>\n' +
                         '                                        <th>结束时间</th>\n' +
-                        '                                        <th>文件名</th>\n' +
+                        '                                        <th>创建时间</th>\n' +
                         '                                        <th>创建人</th>\n' +
                         '                                        <th>备注说明</th>\n' +
                         '                                        <th style="text-align: center">操作</th>\n' +
@@ -578,12 +578,14 @@
                         '                </div>\n' +
                         '            </div>\n' +
                         '        </div>\n' +
-                        '    </div>')
+                        '    </div>');
+
+
                 });
 
                 /**
                  * 双击阶段展开阶段，查看详细任务
-                 * 这里查看任务有个BUG，会不断追加重复的任务，未解决
+                 * 这里查看任务有个BUG，只能先双击打开查看，不能关闭，否则下个阶段的内容会无法加载出来；可以把所有阶段的任务都打开，这样再关闭就没问题
                  */
                 var aaa = true;
                 $.each($(".createlevel"), function () {
@@ -595,7 +597,7 @@
                             var anniu = $(this);    //anniu表示获取的当前点击事件的div
 
                             /**
-                             * 此处添加一个新的子任务
+                             * 此处添加一个新的子任务  （这里有个BUG：在给一个阶段添加任务时，当有n个阶段时，任务会添加n次。。通过阶段id指定解决也不行，因为添加界面表格用的是同一个，因此保存键绑定的都是同一个）
                              */
                             $(".save_task").click(function () {
                                 $("#mySontaskModal").css('display', 'none');
@@ -626,14 +628,14 @@
                                             '                                        <td>' + each['planname'] + '</td>\n' +
                                             '                                        <td>' + each['startTime'] + '</td>\n' +
                                             '                                        <td>' + each['endTime'] + '</td>\n' +
-                                            '                                        <td>' + each['creatTime'] + '</td>\n' +
-                                            '                                        <td>' + each['creatBy'] + '</td>\n' +
+                                            '                                        <td>' + each['createTime'] + '</td>\n' +
+                                            '                                        <td>' + each['createBy'] + '</td>\n' +
                                             '                                        <td>' + each['remarks'] + '</td>\n' +
                                             '                                        <td style="text-align: center">\n' +
-                                            '                                            <button type="button" class="btn btn-outline btn-default updateleverl" name="' + each['id'] + '" onclick="$(\'#addmySonPlanModal\').css(\'display\', \'block\');">\n' +
+                                            '                                            <button type="button" class="btn btn-outline btn-default updateleverl" name="' + each['id'] + '">\n' +
                                             '                                                <i class="glyphicon glyphicon-edit" aria-hidden="true"></i>\n' +
                                             '                                            </button>\n' +
-                                            '                                            <button type="button" class="btn btn-outline btn-default" id="checkleverl" onclick="$(\'#checkmySonPlanModal\').css(\'display\', \'block\');">\n' +
+                                            '                                            <button type="button" class="btn btn-outline btn-default checkleverl" name="' + each['id'] + '">\n' +
                                             '                                                <i class="glyphicon glyphicon-check" aria-hidden="true"></i>\n' +
                                             '                                            </button>\n' +
                                             '                                        </td>\n' +
@@ -641,6 +643,80 @@
 
 
                                     }
+                                });
+
+                                /***********2.点击任务添加，生成一个新的task任务详情***************************/
+                                $.each($(".updateleverl"), function () {
+                                    $(this).click(function () {
+                                        var renwuId = $(this).attr('name');
+                                        layer.open({
+                                            type: 2,
+                                            title: '新建任务详情',
+                                            shadeClose: true,
+                                            shade: 0.8,
+                                            area: ['50%', '80%'],
+                                            content: '/insertTask.jsp?renwuId=' + renwuId,
+                                            btn: ['确认添加', '算了'],
+                                            yes: function (index, layero) {
+                                                layer.confirm('确定添加吗', {
+                                                    btn: ['确定', '再想想']
+                                                }, function () {
+                                                    var body = layer.getChildFrame('body', index);
+                                                    var choosefile = body.find("#choosefile");
+                                                    var filepath = choosefile.val().trim().substring(choosefile.val().lastIndexOf("\\") + 1);
+                                                    var filename = filepath.split(".")[0];  //上传的文件名
+                                                    var filetype = filepath.split(".")[1];  //上传文件的类型
+                                                    var filelimitsize = body.find("#filesize").val(); //文件限制大小
+                                                    var before_submit = body.find("input[name='optionsRadios']:checked").val(); //是否可提前提交
+                                                    var after_submit = body.find("input[name='optionsRadios1']:checked").val(); //是否可过时提交
+                                                    var renwudetailremarks = body.find("#renwudetailremarks").val();
+                                                    if(isNaN(filelimitsize)){
+                                                        alert("文件限制大小不符合规范");
+                                                        return false;
+                                                    }
+                                                    $.get("/teaching/insertRenwuDetail", {
+                                                        renwuId,
+                                                        filename,
+                                                        filetype,
+                                                        filelimitsize,
+                                                        before_submit,
+                                                        after_submit,
+                                                        renwudetailremarks
+                                                    }, function () {
+                                                    });
+                                                    layer.close(index);
+                                                    layer.msg('添加成功');
+                                                }, function () {
+                                                    layer.msg('好好想想');
+                                                });
+                                            },
+                                            btn2: function (index, layero) {
+                                                layer.close(index);
+                                            }
+                                        });
+                                    });
+                                });
+
+                                /***********3.点击任务查看，弹出task任务详情***************************/
+                                $.each($(".checkleverl"), function () {
+                                    $(this).click(function () {
+                                        var renwuId = $(this).attr('name');
+                                        layer.open({
+                                            type: 2,
+                                            title: '查看任务详情',
+                                            shadeClose: true,
+                                            shade: 0.8,
+                                            area: ['50%', '80%'],
+                                            content: '/viewTask.jsp?renwuId=' + renwuId,
+                                            btn: ['确认', '取消'],
+                                            yes: function (index, layero) {
+                                                layer.close(index);
+                                            },
+                                            btn2: function (index, layero) {
+                                                layer.close(index);
+                                            }
+                                        });
+                                    });
                                 });
 
                             });
@@ -666,35 +742,21 @@
             });
 
 
-            /***********2.点击任务添加，生成一个新的task任务详情***************************/
-            //此处为添加一条Task任务详情，但放置位置不对，无法运行
-            $.each($(".updateleverl"), function () {
-                $(this).click(function () {
-                    var renwuId = $(this).attr('name');
-                    alert("222");
-                    /***********2.点击任务添加，生成一个新的task任务详情***************************/
-                    $(".update_level").click(function () {
+            /***********4.关闭保存阶段的弹窗，追加一个新的阶段***********/
 
-                        /*$("#addmySonPlanModal").css('display', 'none');
-                        var form = $("form");
-                        var choosefile = form.find("#choosefile");
-                        var filepath = choosefile.val().trim().substring(choosefile.val().lastIndexOf("\\") + 1);
-                        var filename = filepath.split(".")[0];  //上传的文件名
-                        var filetype = filepath.split(".")[1];  //上传文件的类型
-                        var chooseimg = form.find("#chooseimg");
-                        var imgpath = chooseimg.val().trim().substring(chooseimg.val().lastIndexOf("\\") + 1);
-                        var imgname = imgpath.split(".")[0];  //上传的图标名
-                        var filelimitsize = form.find("#filesize"); //文件限制大小
-                        var before_submit = form.find("input[name='optionsRadios']:checked").val(); //是否可提前提交
-                        var after_submit = form.find("input[name='optionsRadios1']:checked").val(); //是否可过时提交
-                        var renwudetailremarks = form.find("#renwudetailremarks").val();
-                        $.get("/teaching/insertRenwuDetail?renwuId="+renwuId,{filename,filetype,after_submit,before_submit,filelimitsize,renwudetailremarks},function (msg) {
-                            window.location.href = "/jiaoxueplan_addjieduan.jsp?jihuaId=" + jihuaId;
-                            console.info(msg['task']);
-                        });*/
+            $(".save_level").click(function () {
+                $("#mySonPlanModal").css('display', 'none');
+                var form = $("form");
+                var planname = form.find("#planName").val();
+                var start = form.find("#start").val();
+                var end = form.find("#end").val();
+                var remarks = form.find("#remarks").val();
 
-                    });
+                $.get("/teaching/insertJieduan", {jihuaId, planname, start, end, remarks}, function (msg) {
+//                    window.location.href = "/teaching/viewJieduan";
+                    window.location.href = "/jiaoxueplan_addjieduan.jsp?jihuaId=" + jihuaId;
                 });
+
             });
 
         });
@@ -703,21 +765,6 @@
         /***********3.关闭添加任务的弹窗***********/
         $(".update_task").click(function () {
             $("#updatemySontaskModal").css('display', 'none');
-        });
-        /***********4.关闭保存阶段的弹窗，追加一个新的阶段***********/
-        $(".save_level").click(function () {
-            $("#mySonPlanModal").css('display', 'none');
-            var form = $("form");
-            var planname = form.find("#planName").val();
-            var start = form.find("#start").val();
-            var end = form.find("#end").val();
-            var remarks = form.find("#remarks").val();
-
-            $.get("/teaching/insertJieduan", {jihuaId, planname, start, end, remarks}, function (msg) {
-//                    window.location.href = "/teaching/viewJieduan";
-                window.location.href = "/jiaoxueplan_addjieduan.jsp?jihuaId=" + jihuaId;
-            });
-
         });
 
 

@@ -61,7 +61,7 @@
                         '                                </td>\n' +
                         '                                <td>\n' +
                         '                                    <button class="btn btn-outline btn-success matchTeachingPlan btn-xs" type="button" style="margin-right: 10px; ">匹配教学计划</button>\n' +
-                        '                                    <button class="btn btn-outline btn-success createTeachingPlan btn-xs" type="button"><a href="/page/jiaoan/show_plan">新建教学计划</a></button></td>\n' +
+                        '                                    <button class="btn btn-outline btn-success createTeachingPlan btn-xs" type="button">新建教学计划</button></td>\n' +
                         '                                </td>\n' +
                         '                                <td>\n' +
                         '                                    <div class="col-sm-6">\n' +
@@ -105,7 +105,7 @@
                             '                                </td>\n' +
                             '                                <td>\n' +
                             '                                    <button class="btn btn-outline btn-success matchTeachingPlan btn-xs" type="button" style="margin-right: 10px; ">匹配教学计划</button>\n' +
-                            '                                    <button class="btn btn-outline btn-success createTeachingPlan btn-xs" type="button"><a href="/page/jiaoan/show_plan">新建教学计划</a></button></td>\n' +
+                            '                                    <button class="btn btn-outline btn-success createTeachingPlan btn-xs" type="button">新建教学计划</button></td>\n' +
                             '                                </td>\n' +
                             '                                <td>\n' +
                             '                                    <div class="col-sm-6">\n' +
@@ -149,7 +149,7 @@
                            '                                </td>\n' +
                            '                                <td>\n' +
                            '                                    <button class="btn btn-outline btn-success matchTeachingPlan btn-xs" type="button" style="margin-right: 10px; ">匹配教学计划</button>\n' +
-                           '                                    <button class="btn btn-outline btn-success createTeachingPlan btn-xs" type="button"><a href="/page/jiaoan/show_plan">新建教学计划</a></button></td>\n' +
+                           '                                    <button class="btn btn-outline btn-success createTeachingPlan btn-xs" type="button">新建教学计划</button></td>\n' +
                            '                                </td>\n' +
                            '                                <td>\n' +
                            '                                    <div class="col-sm-6">\n' +
@@ -234,7 +234,7 @@
                                 '                                </td>\n' +
                                 '                                <td>\n' +
                                 '                                    <button class="btn btn-outline btn-success matchTeachingPlan btn-xs" type="button" style="margin-right: 10px; ">匹配教学计划</button>\n' +
-                                '                                    <button class="btn btn-outline btn-success createTeachingPlan btn-xs" type="button"><a href="/page/jiaoan/show_plan">新建教学计划</a></button></td>\n' +
+                                '                                    <button class="btn btn-outline btn-success createTeachingPlan btn-xs" type="button">新建教学计划</button></td>\n' +
                                 '                                </td>\n' +
                                 '                                <td>\n' +
                                 '                                    <div class="col-sm-6">\n' +
@@ -469,6 +469,42 @@
                                 layer.msg('好好想想');
                             });
                         },
+                    btn2:function (index,layero) {
+                        layer.close(index);
+                    }
+                });
+            });
+
+            /**
+             * 点击新建教学计划按钮，跳转页面，可为该班级新建教学计划
+             */
+            $("body").on("click",".createTeachingPlan",function () {
+                var cid = $(this).parent().parent().attr("id");
+                layer.open({
+                    type: 2,
+                    title: '新建教学计划',
+                    shadeClose: true,
+                    shade: 0.8,
+                    area: ['50%', '80%'],
+                    content: '/insertTeachingPlanToClass.jsp?cid='+cid,
+                    btn:['确认添加','算了'],
+                    yes:function (index,layero) {
+                        var body = layer.getChildFrame('body', index);
+                        var planname = body.find("#planName").val();
+                        var start = body.find("#start").val();
+                        var end = body.find("#end").val();
+                        var remarks = body.find("#remarks").val();
+                        layer.confirm('确定添加吗',{
+                            btn:['确定','再想想']
+                        },function () {
+                            $.get("/teaching/insertTeachingToClass",{cid,planname,start,end,remarks},function () {
+                            });
+                            layer.close(index);
+                            layer.msg('绑定成功');
+                        },function () {
+                            layer.msg('好好想想');
+                        });
+                    },
                     btn2:function (index,layero) {
                         layer.close(index);
                     }

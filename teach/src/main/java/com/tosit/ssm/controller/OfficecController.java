@@ -3,10 +3,13 @@ package com.tosit.ssm.controller;
 import com.tosit.ssm.common.util.json.JSONModel;
 import com.tosit.ssm.common.util.json.JSONUtil;
 import com.tosit.ssm.entity.Office;
+import com.tosit.ssm.entity.User;
 import com.tosit.ssm.entity.UserOffice;
 import com.tosit.ssm.service.OfficeService;
 import com.tosit.ssm.service.OfficeServiceImpl;
 import com.tosit.ssm.service.UserService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpRequest;
@@ -311,7 +314,9 @@ public class OfficecController {
     @GetMapping("/getAllOffice")
     @ResponseBody
     public Object getAllOffice(HttpServletRequest request) {
-        String userId = request.getParameter("userId");
+        Subject subject = SecurityUtils.getSubject();
+        User user = (User) subject.getSession().getAttribute("user");
+        String userId = user.getId();
         List<Office> offices = officeService.selectOfficeByManage(userId);
         for (Office classes:offices
              ) {

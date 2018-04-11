@@ -4,12 +4,15 @@ import com.alibaba.fastjson.JSON;
 import com.tosit.ssm.common.util.json.JSONModel;
 import com.tosit.ssm.entity.*;
 import com.tosit.ssm.service.*;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,7 +33,7 @@ public class TeachingController {
 
 
     /**
-     * 某个老师插入一条新的教学计划
+     * 某个老师插入一条新的教学计划(教学计划录入页面的新建计划)
      * @param planName
      * @param start
      * @param banji
@@ -40,12 +43,14 @@ public class TeachingController {
      */
     @RequestMapping("/insertTeaching")
     public String insertTeaching(String planName, String start,String banji,String end,String remarks){
+        Subject subject = SecurityUtils.getSubject();
+        User user = (User) subject.getSession().getAttribute("user");
         Teaching teaching = new Teaching();
+        String id = UUID.randomUUID().toString().replaceAll("-","");
         //新增TeachingOffice的记录，让班级属性添加进去
         TeachingOffice teachingOffice = new TeachingOffice();
         teachingOffice.setId(UUID.randomUUID().toString().replaceAll("-",""));
         teachingOffice.setIsDel(1);
-        String id = UUID.randomUUID().toString().replaceAll("-","");
         teachingOffice.setTeachingId(id);
         teachingOffice.setOfficeId(banji);
         teachingOfficeService.insertTeachingOffice(teachingOffice);
@@ -53,6 +58,7 @@ public class TeachingController {
         teaching.setId(id);
         teaching.setType(1);
         teaching.setIsDel(1);
+        teaching.setCreateBy(user.getName());
         teaching.setPlanname(planName);
         teaching.setCreateTime(new Date());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -70,15 +76,56 @@ public class TeachingController {
     }
 
     /**
+     * 给某个班新建教学计划(班级管理页面的新建计划)
+     * @param planname
+     * @param start
+     * @param end
+     * @param remarks
+     * @return
+     */
+    @RequestMapping("/insertTeachingToClass")
+    public void insertTeachingToClass(String planname, String start,String end,String remarks,String cid){
+        Subject subject = SecurityUtils.getSubject();
+        User user = (User) subject.getSession().getAttribute("user");
+        Teaching teaching = new Teaching();
+        String id = UUID.randomUUID().toString().replaceAll("-","");
+        teaching.setId(id);
+        teaching.setCreateBy(user.getName());
+        teaching.setCreateTime(new Date());
+        teaching.setIsDel(1);
+        teaching.setPlanname(planname);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date startTime = (simpleDateFormat.parse(start));
+            teaching.setStartTime(startTime);
+            Date endTime = (simpleDateFormat.parse(end));
+            teaching.setEndTime(endTime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        teaching.setRemarks(remarks);
+        teaching.setType(1);
+        teachingService.insertTeaching(teaching);
+        TeachingOffice teachingOffice = new TeachingOffice();
+        teachingOffice.setId(UUID.randomUUID().toString().replaceAll("-",""));
+        teachingOffice.setIsDel(1);
+        teachingOffice.setTeachingId(id);
+        teachingOffice.setOfficeId(cid);
+        teachingOfficeService.insertTeachingOffice(teachingOffice);
+
+    }
+
+    /**
      * 某个老师查看所有教学计划
      * @param request
      * @return
      */
     @RequestMapping("/viewTeaching")
     public String ViewTeaching(HttpServletRequest request){
-//        String userId = request.getParameter("userId");
-        //获取用户id
-        List<TeachingVO> teachings = teachingService.selectTeachingByUserId("u013");
+        Subject subject = SecurityUtils.getSubject();
+        User user = (User) subject.getSession().getAttribute("user");
+        String userId = user.getId();
+        List<TeachingVO> teachings = teachingService.selectTeachingByUserId(userId);
         for (Teaching t:teachings
              ) {
             System.out.println(t);
@@ -171,6 +218,8 @@ public class TeachingController {
     @ResponseBody
     @RequestMapping("/insertJieduan")
     public Object InsertJieduan(String jihuaId, String planname, String start, String end, String remarks){
+        Subject subject = SecurityUtils.getSubject();
+        User user = (User) subject.getSession().getAttribute("user");
         Teaching teaching = new Teaching();
         teaching.setParentId(jihuaId);
         String jieduanId = UUID.randomUUID().toString().replaceAll("-","");
@@ -189,6 +238,7 @@ public class TeachingController {
         teaching.setRemarks(remarks);
         teaching.setIsDel(1);
         teaching.setType(2);
+        teaching.setCreateBy(user.getName());
         teachingService.insertTeaching(teaching);
         JSONModel.put("newjieduan",teaching);
         return JSONModel.put();
@@ -221,9 +271,10 @@ public class TeachingController {
      * @param renwuremarks
      * @return
      */
-    @ResponseBody
     @RequestMapping("/insertRenwu")
-    public Object InsertRenwu(String jieduanId, String renwuname, String renwustart, String renwuend, String renwuremarks){
+    public void InsertRenwu(String jieduanId, String renwuname, String renwustart, String renwuend, String renwuremarks){
+        Subject subject = SecurityUtils.getSubject();
+        User user = (User) subject.getSession().getAttribute("user");
         Teaching teaching = new Teaching();
         teaching.setId(UUID.randomUUID().toString().replaceAll("-",""));
         teaching.setParentId(jieduanId);
@@ -241,9 +292,8 @@ public class TeachingController {
         }
         teaching.setIsDel(1);
         teaching.setRemarks(renwuremarks);
+        teaching.setCreateBy(user.getName());
         teachingService.insertTeaching(teaching);
-        JSONModel.put("newrenwu",teaching);
-        return JSONModel.put();
     }
 
     /**
@@ -301,7 +351,7 @@ public class TeachingController {
         teachingOfficeService.insertTeachingOffice(teachingOffice);
     }
     /**
-     * 为某个任务添加一个task任务详情(未成功实现)
+     * 为某个任务添加一个task任务详情
      * @param filename
      * @param filetype
      * @param after_submit
@@ -309,9 +359,8 @@ public class TeachingController {
      * @param renwudetailremarks
      * @return
      */
-    @ResponseBody
     @RequestMapping("/insertRenwuDetail")
-    public Object InsertRenwuDetail(String renwuId,String filename, String filetype, String after_submit, String before_submit,String filelimitsize,String renwudetailremarks){
+    public void InsertRenwuDetail(String renwuId,String filename, String filetype, String after_submit, String before_submit,String filelimitsize,String renwudetailremarks){
         Task task = new Task();
         task.setId(UUID.randomUUID().toString().replaceAll("-",""));
         task.setTeachingId(renwuId);
@@ -324,20 +373,32 @@ public class TeachingController {
         task.setRemarks(renwudetailremarks);
         task.setIsDel(1);
         taskService.insertTask(task);
+    }
+
+    /**
+     * 通过任务id获取Task详情
+     * @param renwuId
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/viewTaskByRenwuId")
+    public Object ViewTaskByRenwuId(String renwuId){
+        List<Task> task = taskService.selectTaskByRenwuId(renwuId);
         JSONModel.put("task",task);
-        return task;
+        return JSONModel.put();
     }
 
 
     /**
      * 获取某人的所有教学计划和所在班级
-     * @param request
      * @return
      */
     @ResponseBody
     @RequestMapping("/viewTeachingByUserId")
-    public Object ViewTeachingByUserId(HttpServletRequest request){
-        String userId = request.getParameter("userId");
+    public Object ViewTeachingByUserId(){
+        Subject subject = SecurityUtils.getSubject();
+        User user = (User) subject.getSession().getAttribute("user");
+        String userId = user.getId();
         List<TeachingVO> teachingVOS = teachingService.selectTeachingByUserId(userId);
         for (TeachingVO t:teachingVOS
              ) {

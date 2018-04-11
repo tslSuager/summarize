@@ -520,5 +520,11 @@
     </set>
     where ID = #{id,jdbcType=VARCHAR}
   </update>
+  <select id="selectTaskByRenwuId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    ta.*
+    from task ta LEFT JOIN teaching t ON ta.teaching_id = t.id
+    where t.id = #{renwuId} AND t.type = 3 AND t.is_del = 1 AND ta.is_del = 1
+  </select>
 
 </mapper>

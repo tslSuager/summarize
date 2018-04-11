@@ -805,11 +805,11 @@
 
         /**
          * 获取某个人的计划
-         * /page/jiaoan/jiaoxueplan?jihuaId=1&officeName=2
+         * /page/jiaoan/jiaoxueplan?jihuaId=...&officeName=...
          * @type {Array}
          */
         var url = location.search.split("&", 2);
-        var jihuaId = url[0].substr(9, 1);
+        var jihuaId = url[0].substr(9);
         var officeName = url[1].substr(11);
         var o2 = decodeURI(officeName);
         $.get("/teaching/viewJieduanByTeacher", {jihuaId}, function (msg) {

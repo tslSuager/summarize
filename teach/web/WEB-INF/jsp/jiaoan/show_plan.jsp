@@ -278,10 +278,7 @@
                 type: 2,
                 title: '新建计划',
                 content: '/plan_new.jsp',
-                btn: [/*'添加阶段',*/'完成', '取消'],
-                /*yes:function (index) {
-                    window.location.href = "/page/jiaoan/jiaoxueplan_addjieduan";
-                },*/
+                btn: ['完成', '取消'],
                 yes: function (index) {
                     /**
                      *点击“完成”按钮，为某个班级添加一条新的教学计划

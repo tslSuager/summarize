@@ -31,34 +31,33 @@
 <link href="/static/css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
 <body>
 
-<div class="modal-dialog">
-    <div class="modal-header">
-        <h2 class="modal-title" style="text-align: center">新建计划</h2>
-    </div>
-    <form style="margin-left: 80px;margin-top: 50px">
-        <small class="font-bold">
-            <%--id="pullListTree" style="display: inline;margin-left: 30px;width: 320px"--%>
-            <div style="margin-top: 5px;margin-left: 45px;width: 1400px" id="pullListTree" class="">
+<div class="row">
+    <div class="form-group draggable">
+        <div class="col-sm-9" id="teaching" style="margin-left: 150px;margin-top: 70px">
 
+            <div>
+                <div style="margin-top: 5px">
+                    <label class="col-sm-3 text-center control-label" style="margin-top: -10px;margin-right: 13px">班级名:</label>
+                    <span class="officeId"></span>
+                </div>
             </div>
-
             <%--计划名--%>
             <div>
                 <div style="margin-top: 5px">
-                    <label class="col-sm-3 text-center control-label" style="margin-top: 8px;margin-left: 10px">计划名
-                        :</label>
+                    <label class="col-sm-3 text-center control-label"
+                           style="margin-top: 5px;margin-right: 13px">计划名:</label>
                     <input type="text" name="planName" class="form-control" style="width: 320px" id="planName">
                 </div>
             </div>
 
             <%--开始结束时间--%>
-            <div class="form-group" id="data_5" style="margin: 10px auto;width: 600px;">
+            <div class="form-group" id="data_5" style="margin: 20px auto;width: 600px;">
                 <div class="input-daterange input-group" id="datepicker">
-                    <label class="col-sm-3 text-center control-label" style="margin-top: 5px">开始时间 :</label>
+                    <label class="col-sm-3 text-center control-label" style="margin-top: 10px">开始时间 :</label>
                     <input type="text" class="input-sm form-control" name="start" value="2018-03-01"
                            style="width: 320px" id="start"/>
-                    <label class="col-sm-3 text-center control-label" style="margin-top: 15px">结束时间 :</label>
-                    <input type="text" class="input-sm form-control" name="end"  value="2018-03-01"
+                    <label class="col-sm-3 text-center control-label" style="margin-top: 10px">结束时间 :</label>
+                    <input type="text" class="input-sm form-control" name="end" value="2018-03-01"
                            style="width: 320px;margin-top: 10px" id="end"/>
                 </div>
             </div>
@@ -67,12 +66,13 @@
             <div>
                 <div style="margin-top: 5px">
                     <label class="col-sm-3 text-center control-label" style="margin-top: 5px">备注说明 :</label>
-                    <textarea class="form-control layer-date" name="remarks" style="width: 320px" rows="5" id="remarks"></textarea>
+                    <textarea class="form-control layer-date" name="remarks" style="width: 320px" rows="5"
+                              id="remarks"></textarea>
                 </div>
             </div>
-
-        </small>
-    </form>
+        </div>
+    </div>
+</div>
 
 </div>
 <small class="font-bold">
@@ -95,14 +95,13 @@
 
 
 <script>
+
+    //获取从父页面传来的班级id
+    var url = location.search;
+    var s = url.slice(5);
+    console.info(s);
     $(function () {
-        initPullListTree("/office/getAllOffice",3, 1,function (oneself) {
-//            console.info(oneself);
-        });//一个参数 开始的级别  第二参数 有几个下拉框
-//        $("#pullListTree").data("selectAreaId")
-        $("#dddd").click(function () {
-            alert($("#pullListTree").data("selectArea"));
-        });
+        $(".officeId").append(''+s+'');
 
 
     });

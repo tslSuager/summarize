@@ -43,4 +43,10 @@ public interface TaskMapper {
      */
     int updateByPrimaryKey(Task record);
 
+    /**
+     * 通过任务id获取task详情
+     * @param renwuId
+     * @return
+     */
+    List<Task> selectTaskByRenwuId(@Param("renwuId")String renwuId);
 }

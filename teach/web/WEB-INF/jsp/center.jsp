@@ -159,7 +159,7 @@
                                 <a class="J_menuItem" href="/page/jiaoan/kaoshiplan">发布考试</a>
                             </li>
                             <li>
-                                <a class="J_menuItem" href="${pageContext.request.contextPath}/page/jiaoan/jiaoxueplan?userId=u013">教学计划完成状况（教员）</a>
+                                <a class="J_menuItem" href="${pageContext.request.contextPath}/teaching/viewTeaching">教学计划完成状况（教员）</a>
                             </li>
                             <li>
                                 <a class="J_menuItem" href="${pageContext.request.contextPath}/teaching/viewTeaching">教学计划的录入</a>
@@ -179,7 +179,7 @@
                         </shiro:hasRole>
                         <shiro:hasRole name="student">
                             <li>
-                                <a class="J_menuItem" href="${pageContext.request.contextPath}/page/jiaoan/jiaoxueplanstu?userId=u014">教学计划完成状况（stu）</a>
+                                <a class="J_menuItem" href="${pageContext.request.contextPath}/page/jiaoan/jiaoxueplanstu"}>教学计划完成状况（stu）</a>
                             </li>
                         </shiro:hasRole>
                     </ul>

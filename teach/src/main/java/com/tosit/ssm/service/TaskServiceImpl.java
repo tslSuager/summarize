@@ -17,4 +17,9 @@ public class TaskServiceImpl implements TaskService {
         return taskMapper.insertTask(record);
     }
 
+    @Override
+    public List<Task> selectTaskByRenwuId(String renwuId) {
+        return taskMapper.selectTaskByRenwuId(renwuId);
+    }
+
 }

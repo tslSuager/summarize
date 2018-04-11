@@ -390,10 +390,10 @@
              * 获取某个人的计划
              * @type {Array}
              */
-            var url = location.search.split("userId=", 2);
+            /*var url = location.search.split("userId=", 2);
             var userId = url[1];
-            console.info(userId);
-            $.get("/teaching/viewTeachingByUserId", {userId}, function (msg) {
+            console.info(userId);*/
+            $.get("/teaching/viewTeachingByUserId", {/*userId*/}, function (msg) {
                 console.info(msg['teachingVOS']);
                 $.each(msg['teachingVOS'], function (i, each) {
                     $(".Hui-article").append('<div style="margin-left: 10%;margin-top: 2%" class="' + each['id'] + '" id="banji"><span><h4>' + each['officeName'] + '</h4></span></div>');
