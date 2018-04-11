@@ -764,8 +764,7 @@
                     $(obj).parents("div").parents("td").parents("tr").find(".status").find("i").remove();
                     $(obj).parents("div").parents("td").parents("tr").find(".status").append(i);
                     $(obj).clone().appendTo($(obj).parents("div").parents("td").parents("tr").find(".status"));
-                }
-                ;
+                };
             }
 
 
@@ -803,6 +802,7 @@
         });
 
 
+//        -------------------------------------------- 分界线(上面为静态页面的jquery)     此页面未完成-------------------------------------------- ---------------------------------------
         /**
          * 获取某个人的计划
          * /page/jiaoan/jiaoxueplan?jihuaId=...&officeName=...
@@ -933,6 +933,9 @@
                                 });
                             });*/
 
+                            /**
+                             * 根据阶段id查看学生提交的task_Result结果(未完全实现)
+                             */
                             $.get("/teaching/viewTaskResultByJieduanId", {jieduanId}, function (msg) {
                                 console.info(msg['taskResults']);
                                 $.each(msg['taskResults'], function (i, each) {
@@ -968,7 +971,7 @@
                                         if (each['checkResult'] == 5) {
                                             status.append('<button class="btn btn-danger btn-xs " type="button">不及格 </button>');
                                         }
-                                    } else if (each['checkStatus'] == 0){
+                                    } else if (each['checkStatus'] == 0||each['checkStatus'] == null){
                                         s1_t1.append('<td class="status"><i class="glyphicon glyphicon-remove text-warning">未阅</i></td>');
                                     }
 

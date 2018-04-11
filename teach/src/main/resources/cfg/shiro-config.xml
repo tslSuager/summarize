@@ -36,6 +36,7 @@
 				/page/entry_kaoqin_info=roles[instructor]
 				/page/matchStudentAttendance=roles[instructor]
 				/page/kaoqin_rule_display=roles[instructor]
+				/page/jiaoan/jiaoxueplanstu=roles[student]
 				/page/jiaoan/**=roles[instructor]
 				/page/checking=roles[student]
 				/**=authc

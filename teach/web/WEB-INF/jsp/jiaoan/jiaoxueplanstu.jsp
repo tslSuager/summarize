@@ -515,7 +515,7 @@
                                                     status.append('<button class="btn btn-danger btn-xs " type="button">不及格 </button>');
                                                 }
                                             }
-                                            if (each['checkStatus'] == 0) {
+                                            if (each['checkStatus'] == 0||each['checkStatus']==null) {
                                                 addtd.append('<td>' + each['userId'] + '</td><td>' + each['submitTime'] + '</td><td class="status"><i class="glyphicon glyphicon-remove text-warning">未阅</i></td>');
                                             }
                                             addtd.find(".btn-xs").click(function () {

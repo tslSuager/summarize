@@ -117,7 +117,7 @@
 
                                 </th>
                                 <th style="text-align: center" data-field="name" tabindex="0">
-                                    <div class="th-inner ">计划名</div>
+                                    <div class="th-inner ">计划名(点击计划名可进入评分界面，未完全实现)</div>
 
                                 </th>
                                 <th style="text-align: center" data-field="name" tabindex="0">

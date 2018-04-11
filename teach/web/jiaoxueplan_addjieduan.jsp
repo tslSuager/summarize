@@ -617,7 +617,9 @@
                                 });
                             });
 
-
+                            /**
+                             * 通过阶段id查看该阶段下的所有任务
+                             */
                             $.get("/teaching/viewRenwu", {jieduanId}, function (msg) {
                                 $.each(msg, function (i, each) {
                                     if (aaa) {
