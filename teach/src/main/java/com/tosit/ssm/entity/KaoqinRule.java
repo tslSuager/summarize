@@ -26,6 +26,7 @@ public class KaoqinRule {
 
     private String updateBy;
 
+    private Integer isYouXiao;
     //HRQ 添加
     private List<KaoqinRuleDetail> kaoqinRuleDetails;
     public KaoqinRule() {
@@ -135,6 +136,14 @@ public class KaoqinRule {
 
     public void setKaoqinRuleDetails(List<KaoqinRuleDetail> kaoqinRuleDetails) {
         this.kaoqinRuleDetails = kaoqinRuleDetails;
+    }
+
+    public Integer getIsYouXiao() {
+        return isYouXiao;
+    }
+
+    public void setIsYouXiao(Integer isYouXiao) {
+        this.isYouXiao = isYouXiao;
     }
 
     @Override

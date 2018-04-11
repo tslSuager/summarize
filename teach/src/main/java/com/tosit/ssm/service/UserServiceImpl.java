@@ -4,11 +4,19 @@ import com.tosit.ssm.entity.*;
 import com.tosit.ssm.mapper.ExperienceMapper;
 import com.tosit.ssm.mapper.UserMapper;
 import com.tosit.ssm.mapper.UserOfficeMapper;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.*;
+import java.io.File;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -141,6 +149,80 @@ public class UserServiceImpl implements UserService {
         return userMapper.selectStuNoLoginNameByClass(id);
     }
 
+    /**
+     * 将考勤工号和用户关联
+     *
+     * @param file
+     */
+    @Override
+    public void entryKaoqinId(File file) {
+        try {
+            FileInputStream fileInputStream = new FileInputStream(file);
+            XSSFWorkbook xssfSheets = new XSSFWorkbook(fileInputStream);
+            XSSFSheet sheet = xssfSheets.getSheetAt(0);
+            int rowNum = sheet.getLastRowNum();
+            for (int i=2;i<=rowNum;i++){
+                XSSFRow row = sheet.getRow(i);
+                String userId = row.getCell(0).getStringCellValue();
+                String kaoqinId = row.getCell(2).getStringCellValue();
+                User user = new User();
+                user.setId(userId);
+                user.setKaoqinCode(kaoqinId);
+                userMapper.updateByPrimaryKey(user);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void insert(File file) {
+        try {
+            FileInputStream fileInputStream = new FileInputStream(file);
+            XSSFWorkbook xssfSheets = new XSSFWorkbook(fileInputStream);
+            XSSFSheet sheet = xssfSheets.getSheetAt(0);
+            int rowNum = sheet.getLastRowNum();
+            for (int i=1;i<=rowNum;i++){
+                XSSFRow row = sheet.getRow(i);
+//                String kaoqinId = row.getCell(2).getStringCellValue();
+                User user = new User();
+                user.setId( UUID.randomUUID().toString());
+                row.getCell(0).setCellType(Cell.CELL_TYPE_STRING);
+                user.setLoginname(row.getCell(0).getStringCellValue());
+                user.setPassword("123");
+                row.getCell(1).setCellType(Cell.CELL_TYPE_STRING);
+                user.setName(row.getCell(1).getStringCellValue());
+                row.getCell(2).setCellType(Cell.CELL_TYPE_STRING);
+                user.setSex(row.getCell(2).getStringCellValue());
+                row.getCell(3).setCellType(Cell.CELL_TYPE_STRING);
+                user.setPersonno(row.getCell(3).getStringCellValue());
+                row.getCell(4).setCellType(Cell.CELL_TYPE_STRING);
+                user.setDaxue(row.getCell(4).getStringCellValue());
+                row.getCell(5).setCellType(Cell.CELL_TYPE_STRING);
+                user.setHomeAddress(row.getCell(5).getStringCellValue());
+                row.getCell(6).setCellType(Cell.CELL_TYPE_STRING);
+                user.setQq(row.getCell(6).getStringCellValue());
+                row.getCell(7).setCellType(Cell.CELL_TYPE_STRING);
+                user.setEmail(row.getCell(7).getStringCellValue());
+                row.getCell(8).setCellType(Cell.CELL_TYPE_STRING);
+                user.setPhone1(row.getCell(8).getStringCellValue());
+                row.getCell(9).setCellType(Cell.CELL_TYPE_STRING);
+                user.setDaxueZhuanye(row.getCell(9).getStringCellValue());
+                row.getCell(10).setCellType(Cell.CELL_TYPE_STRING);
+                user.setShixunZhuanye(row.getCell(10).getStringCellValue());
+                row.getCell(11).setCellType(Cell.CELL_TYPE_STRING);
+                user.setPeixunZhuanye(row.getCell(11).getStringCellValue());
+                userMapper.insert(user);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     @Override
     public List<UserCkRuleRecord> findAllLeaveByTime(Date time) {
         return userMapper.selectAllLeaveByTime(time);
@@ -149,5 +231,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserRole findRoleByName(String loginName) {
         return userMapper.selectRoleByUsername(loginName);
+    }
+
+
+    @Override
+    public List<User> findStuByClassAndName(String name, String id) {
+        return userMapper.selectStuByClassAndName(name, id);
     }
 }

@@ -207,4 +207,11 @@ public interface UserMapper {
 
     UserRole selectRoleByUsername(@Param("loginName") String loginName);
 
+    /**
+     * 查询某班的某人
+     * @param name
+     * @param id
+     * @return
+     */
+    List<User> selectStuByClassAndName(@Param("name") String name,@Param("id") String id);
 }

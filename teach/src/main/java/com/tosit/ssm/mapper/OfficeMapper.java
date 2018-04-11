@@ -48,8 +48,8 @@ public interface OfficeMapper {
     void insertOffice(Office office);
 
     /**
-     *  查询所有的区域和学校（未测试）
-     * @return  返回所有的学校和区域，后续要区分学校和区域通过office_type属性进行标识
+     *  查询所有的一级区域
+     * @return
      */
     List<Office> selectArea();
 

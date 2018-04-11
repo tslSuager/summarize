@@ -16,7 +16,7 @@ public class OfficeServiceImpl implements OfficeService{
     }
 
     public List<Office> getArea() {
-        return null;
+        return officeMapper.selectArea();
     }
 
     @Override

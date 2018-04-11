@@ -22,13 +22,13 @@
     <div class="form-group">
         <label class="col-sm-3 control-label">初始分数:</label>
         <div class="col-sm-8">
-            <input type="text" placeholder="分数" class="form-control" name="initScore">
+            <input type="text" placeholder="分数" class="form-control initScore" name="initScore">
         </div>
     </div>
     <div class="form-group">
         <label class="col-sm-3 control-label">一次扣分数:</label>
         <div class="col-sm-8">
-            <input type="text" placeholder="分数" class="form-control" name="subScore">
+            <input type="text" placeholder="分数" class="form-control subScore" name="subScore">
         </div>
     </div>
 </div>

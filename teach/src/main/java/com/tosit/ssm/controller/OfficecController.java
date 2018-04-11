@@ -1,12 +1,10 @@
 package com.tosit.ssm.controller;
 
 import com.tosit.ssm.common.util.json.JSONModel;
-import com.tosit.ssm.common.util.json.JSONUtil;
 import com.tosit.ssm.entity.Office;
 import com.tosit.ssm.entity.User;
 import com.tosit.ssm.entity.UserOffice;
 import com.tosit.ssm.service.OfficeService;
-import com.tosit.ssm.service.OfficeServiceImpl;
 import com.tosit.ssm.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
@@ -22,6 +20,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+
+import static org.apache.shiro.web.filter.mgt.DefaultFilter.user;
 
 @Controller
 @RequestMapping("/office")
@@ -82,6 +82,9 @@ public class OfficecController {
     @RequestMapping("/getAllClassByTeacherAndDate")
     @ResponseBody
     public Object getClassByTeacherAndDate(Office office){
+        Subject subject = SecurityUtils.getSubject();
+        User u = (User) subject.getSession().getAttribute("user");
+        String id = u.getId();
         Calendar cale1 = null;
         Calendar cale2 = null;
         Date date1 = null;
@@ -111,11 +114,16 @@ public class OfficecController {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        //System.out.println("本月第一天和最后一天分别是 ： " + date1 + " and " + date2);
-        office.setMaster("u016");
+        office.setMaster(id);
         office.setCreateTime(date1);
         office.setUpdateTime(date2);
         List<Office> classes = officeService.findClassByTeacherAndDate(office);
+        for (Office o:
+             classes) {
+            String parentId = o.getParentId();
+            String parentName = officeService.findOfficeById(parentId).getName();
+            o.setParentId(parentName);
+        }
         JSONModel.put("classes",classes);
         return JSONModel.put();
     }
@@ -129,6 +137,9 @@ public class OfficecController {
     @RequestMapping("/getAllClassByTeacherByDate")
     @ResponseBody
     public Object getClassByTeacherByDate(Office office,HttpServletRequest request){
+        Subject subject = SecurityUtils.getSubject();
+        User u = (User) subject.getSession().getAttribute("user");
+        String id = u.getId();
         Date startDate = null;
         Date endDate = null;
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -140,10 +151,16 @@ public class OfficecController {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        office.setMaster("u016");
+        office.setMaster(id);
         office.setCreateTime(startDate);
         office.setUpdateTime(endDate);
         List<Office> classes = officeService.findClassByTeacherAndDate(office);
+        for (Office o:
+                classes) {
+            String parentId = o.getParentId();
+            String parentName = officeService.findOfficeById(parentId).getName();
+            o.setParentId(parentName);
+        }
         JSONModel.put("classes",classes);
         return JSONModel.put();
     }
@@ -157,11 +174,20 @@ public class OfficecController {
     @RequestMapping("/getClassByTeacherByArea")
     @ResponseBody
     public Object getClassByTeacherByArea(Office office,HttpServletRequest request){
+        Subject subject = SecurityUtils.getSubject();
+        User u = (User) subject.getSession().getAttribute("user");
+        String id = u.getId();
         String pId = request.getParameter("pId");
         System.out.println(pId);
         office.setId(pId);
-        office.setMaster("u016");
+        office.setMaster(id);
         List<Office> classes = officeService.findClassByTeacherAndSchool(office);
+        for (Office o:
+                classes) {
+            String parentId = o.getParentId();
+            String parentName = officeService.findOfficeById(parentId).getName();
+            o.setParentId(parentName);
+        }
         JSONModel.put("classes",classes);
         return JSONModel.put();
     }
@@ -174,8 +200,10 @@ public class OfficecController {
     @RequestMapping("/addClass")
     @ResponseBody
     public void addClass(Office office,HttpServletRequest request){
+        Subject subject = SecurityUtils.getSubject();
+        User u = (User) subject.getSession().getAttribute("user");
+        String id = u.getId();
         office.setId(UUID.randomUUID().toString().replaceAll("-",""));
-        office.setMaster("何团");
         String name = request.getParameter("name");
         String school = request.getParameter("school");
         office.setParentId(school);
@@ -183,6 +211,13 @@ public class OfficecController {
         office.setIsDel(1);
         office.setOfficeType(3);
         officeService.addOffice(office);
+
+        UserOffice userOffice = new UserOffice();
+        userOffice.setId(UUID.randomUUID().toString().replaceAll("-",""));
+        userOffice.setUserId(id);
+        userOffice.setOfficeId(office.getId());
+        userOffice.setIsDel(1);
+        userService.insertUserOfficeByGroup(userOffice);
         System.out.println("OK");
     }
 
@@ -326,6 +361,11 @@ public class OfficecController {
         return JSONModel.put();
     }
 
+    /**
+     * 修改班级名称
+     * @param office
+     * @param request
+     */
     @RequestMapping("/reviseClassName")
     @ResponseBody
     public void reviseClassName(Office office,HttpServletRequest request){

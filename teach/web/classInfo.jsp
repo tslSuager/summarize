@@ -60,7 +60,7 @@
                             </div>
                             <div>
                                 <div class="col-sm-8"></div>
-                                <button class="btn btn-outline btn-warning btn-xs buttonCss" type="button" name="">扣他分</button>
+                                <button class="btn btn-info btn-arrow-left" type="button" name="" id="subGrade">扣他分</button>
                             </div>
                         </div>
                     </div>
@@ -148,6 +148,7 @@
 
         });//一个参数 开始的级别  第二参数 有几个下拉框
 
+        //选择学生点击事件
         $("body").on("click",".chooseStu",function () {
             if ($(this).hasClass("btn-info")){
                 $(this).removeClass("btn-info").addClass("btn-warning");
@@ -155,6 +156,8 @@
                 $(this).removeClass("btn-warning").addClass("btn-info").removeAttr("id");
             }
         });
+
+        //添加与删除点击事件
         $("#addStu").click(function () {
             $("#left").find(".btn-warning").removeClass("btn-warning").addClass("btn-info");
             $("#right").find(".btn-warning").clone().appendTo("#left");
@@ -168,6 +171,7 @@
             $("#left").find(".btn-warning").remove();
         });
 
+        //点击搜索按照事件与区域搜索未分班的学生
         $("#select").click(function () {
             var startDate = $("#startDate").val();
             var endDate = $("#endDate").val();
@@ -191,22 +195,48 @@
         var startDate = $("#startDate").val();
         var endDate = $("#endDate").val();
 
+        //获得班级ID
         var url = location.search;
         var s = url.slice(5);
-        console.info(s);
 
         var pId = $("#pullListTree").data("selectAreaId");
+        //获得未分班的学生（初始页面时）
         $.get("/user/getUserByDateAreaNoClass",{startDate,endDate,s},function (msg) {
             var users = msg['users'];
             $.each(users,function (i,each) {
                 $("#right").append('<button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="" id="'+each['id']+'">'+each['name']+'</button>');
             });
         });
+        //获得某班的学生
         $.get("/user/getUserByClassId",{s},function (msg) {
             var users = msg['users'];
             $.each(users,function (i,each) {
                 $("#left").append('<button class="btn btn-outline btn-info chooseStu btn-xs buttonCss" type="button" name="" id="'+each['id']+'">'+each['name']+'</button>');
             })
+        });
+
+        /**
+         * 对选中的学生进行扣分
+         */
+        $("body").on("click","#subGrade",function () {
+            var stus = $("#left").find(".btn-warning");
+            var num = stus.length;
+            layer.prompt(function(value, index, elem){
+                var msg = value; //得到value
+                if (num>0){
+                    for (var i = 0;i<num;i++){
+                        var id = stus[i].id;
+                        $.get("/user/subGrade",{id,msg},function (msg) {
+                        });
+                    }
+                    layer.msg("已扣分");
+                }else {
+                    layer.msg("请选中学生");
+                }
+                layer.close(index);
+            });
+            /*
+            */
         });
 </script>
 </body>
